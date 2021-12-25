@@ -1,0 +1,13 @@
+#!/usr/bin/env rc
+
+networkmanager=()
+color=(libgusb colord)
+gnome_settings_daemon=(geocode-glib libgweather geoclue gnome-settings-daemon)
+plank=(gnome-common libgtop bamf gnome-menus granite plank)
+clutter=(cogl clutter)
+mutter=(zenity mutter)
+optional=(gnome-backgrounds accountsservice)
+
+slackage $* $color $gnome_settings_daemon $plank $mutter gala
+
+/usr/slackage/misc/fix.rc

@@ -1,0 +1,15 @@
+#!/usr/bin/env rc
+
+# RUST
+######
+# 1.57.0 or nightly
+# rust packages can be used without rust itself
+# only require rust to build
+rust='src=static.rust-lang.org/dist/%s-nightly-x86_64-unknown-linux-gnu.tar.gz mk=λ; fn λ { ./install.sh --prefix=$PREFIX --destdir=$destdir}'
+rg='src=gh:BurntSushi/ripgrep mk=Cargo'
+sk='src=gh:lotabout/skim mk=Cargo'
+tealdeer='src=gh:dbrgn/tealdeer mk=Cargo'
+exa='src=gh:ogham/%s mk=Cargo'
+lsd='src=gh:peltoche/%s mk=Cargo'
+vaultwarden='src=gh:dani-garcia/%s mk=Cargo flags=(sqlite)'
+fd='src=gh:sharkdp/%s mk=Cargo'

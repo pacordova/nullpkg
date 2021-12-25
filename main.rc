@@ -1,0 +1,45 @@
+#!/usr/bin/env rc
+
+. /usr/slackage/functions.rc
+cd /usr/slackage
+
+switch($1){
+    case emerge
+        shift
+        for(p in $*)
+            Purge $p && Snarf $p && Emerge $p
+    case emerge!
+        shift
+        for(p in $*)
+            Emerge $p
+    case purge
+        shift
+        for(p in $*)
+            Purge $p
+    case snarf
+        shift
+        for(p in $*)
+            Snarf $p
+    case snarf!
+        shift
+        rm -rf /usr/slackage/packages
+        mkdir -p /usr/slackage/packages
+
+        packages=`{
+            cat $db \
+            | grep -v -e Installpkg -e '^#' \
+            | awk -F= '{print $1}'
+        }
+
+        for(p in $packages){
+            printf 'Downloading %s...' $p
+            Snarf $p
+            wait
+        }
+    case install
+        shift
+        for(p in $*)
+            Install $p
+    case *
+        printf 'usage: slackage emerge|purge|snarf|install foo'
+}

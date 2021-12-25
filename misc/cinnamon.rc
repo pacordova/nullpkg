@@ -1,0 +1,13 @@
+#!/usr/bin/env rc
+
+# note: order based on cinnamon-slackbuilds
+pkgarr=(libcroco gnome-common libdbusmenu libtimezonemap cjs cinnamon-desktop #pangox-compat
+    libgnomekbd xapp cinnamon-session libgusb colord cinnamon-settings-daemon gnome-menus
+    cinnamon-menus cinnamon-control-center zenity cogl clutter clutter-gtk muffin
+    libgee caribou metacity cinnamon-translations nemo python3-xapp
+    cinnamon-screensaver #mint-y-icons #mint-themes
+    cinnamon)
+pyarr=(pytz tinycss setproctitle ptyprocess python-pam pexpect polib psutil)
+
+if(test $1 = emerge) for(pkg in $pyarr) pip install $pkg
+for(pkg in $pkgarr) slackage $1 $pkg

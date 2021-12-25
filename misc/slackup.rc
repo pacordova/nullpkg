@@ -1,0 +1,38 @@
+#!/usr/bin/env rc
+
+cd /
+
+# cleanup directories
+ifs=$ifs(3) for(f in `{du -ax >[2]/dev/null | grep -e '__pycache__' -e '\.new$' -e '\.orig$' | awk '{print $2}'}){ rm $f  >[2] /dev/null }
+rm /root/.xauth* >[2] /dev/null
+rm /root/.python_history >[2] /dev/null
+rm -rf /root/.cache >[2] /dev/null
+rm -rf /root/.cargo >[2] /dev/null
+rm -rf /var/log /var/cache
+fc-cache
+ldconfig
+
+rm -rf /usr/slackage/packages >[2] /dev/null
+mkdir -p /usr/slackage/packages
+for(d in `{du -x | awk '{print $2}'}) rmdir $d >[2] /dev/null
+mkdir -p /var/log # breaks xorg if this doesn't exist
+mkdir -p /var/lock # breaks slackpkg if this doesn't exist
+ln -sf /var/lib/pkgtools/packages /var/log/packages # for slackpkg
+
+# we include boot but exclude home in tarball
+cp -R /boot /boot.bak
+umount /boot
+rm -rf /boot
+mv /boot.bak /boot
+
+# do the backup
+backup=slackup`{date +'%Y%m%d'}^.tar.xz
+tar \
+    -c \
+    -I'xz -9 -T0' \
+    -f $backup \
+    --exclude=/$backup \
+    --exclude=/mnt \
+    --exclude=/home \
+    --exclude=/root \
+    --one-file-system /

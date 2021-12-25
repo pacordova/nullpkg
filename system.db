@@ -1,0 +1,119 @@
+#!/usr/bin/env rc
+
+# rc <-> slackage
+_rc='src=gh:rakitzis/rc mk=Autotools flags=with-^(edit=readline history)'
+
+# connman <-> Internet
+# connman <- libtinfo
+_connman='src=git.kernel.org/pub/scm/network/connman/connman CFLAGS=($CFLAGS -lncurses) mk=Autotools flags=(sysconfdir=/etc with-firewall=nftables with-curses with-gnu-ld with-systemdunitdir=no with-tmpfilesdir=no)'
+libtinfo='tag=14.2 src=%s AlienBob'
+
+
+#busybox='src=git.busybox.net/%s mk=Make'
+vim='src=gh:vim/%s mk=Configure flags=(enable-gui=no with-x=no)'
+tmux='src=gh:tmux/%s mk=Autotools'
+lua='src=www.lua.org/ftp/lua-5.4.3.tar.gz mk=Make'
+ruby='src=cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.3.tar.gz mk=Configure'
+
+# make clean breaks the perl build
+# and it uses a weird config script
+# so we just have the whole script here basically
+perl='src=www.cpan.org/src/5.0/perl-5.34.0.tar.gz mk=λ; fn λ { ./Configure -des -Dprefix=$PREFIX && make $MAKEOPTS && make install DESTDIR=$destdir && Package perl }'
+
+# python and stuff
+python='tag=3.10 src=gh:python/cpython mk=Configure flags=(enable-shared with-system-expat with-system-ffi with-ensurepip=no)'
+setuptools='src=gh:pypa/%s mk=Python'
+pip='src=gh:pypa/%s mk=Python'
+meson='src=gh:mesonbuild/meson mk=Python'
+
+# R <- openblas lapack pcre2
+R='src=cran.rstudio.com/src/base/R-4/R-4.1.2.tar.gz mk=Configure flags=(with-^(blas lapack recommended-packages=no) enable-^(R-shlib java=no))'
+openblas='tag=v0.3.18 src=gh:xianyi/%s mk=Make'
+lapack='tag=v3.10.0 src=gh:reference-lapack/%s mk=CMake'
+pcre2='tag=pcre2-10.39 src=gh:philiphazel/pcre2 mk=CMake flags=(BUILD_SHARED_LIBS=ON)'
+
+# bcachefs <- liburcu py:docutils (libscrypt <- libsodium) zstd lz4 | keyutils libaio
+bcachefs='src=evilpiepirate.org/git/%s-tools mk=Make'
+zstd='src=gh:facebook/%s mk=Make'
+lz4='src=gh:lz4/%s mk=Make'
+liburcu='src=gh:urcu/userspace-rcu mk=Autotools'
+libscrypt='src=gh:technion/%s CFLAGS=($CFLAGS -fPIC -shared) mk=Make'
+libsodium='src=download.libsodium.org/libsodium/releases/LATEST.tar.gz mk=Configure'
+
+cmake='src=gh:kitware/%s mk=λ; fn λ {./bootstrap --prefix=$PREFIX && Make}'
+ninja='tag=release src=gh:ninja-build/%s mk=CMake'
+
+# Misc
+######
+openssh='tag=V_8_8 src=gh:openssh/%s-portable mk=Autotools'
+file-roller='tag=3.40.0 src=gnome:%s mk=Meson'
+sdl='tag=release-2.0.16 src=gh:libsdl-org/%s mk=CMake'
+sdl-image='tag=release-2.0.5 src=gh:libsdl-org/sdl_image mk=Autotools'
+qemu='src=download.qemu.org/%s-6.1.0.tar.xz mk=Configure'
+ghostscript='src=gh:ArtifexSoftware/ghostpdl mk=Autotools'
+firejail='tag=0.9.66 src=gh:netblue30/%s mk=Configure'
+
+# gstreamer <- libtiff
+gstreamer='src=gh:GStreamer/gst-build mk=Meson'
+libtiff='tag=v4.3.0 src=gl:%s/%s mk=Autotools'
+
+# ffmpeg <- v4l libvpx
+ffmpeg='tag=n4.3 src=gh:%s/%s mk=Configure flags=(extra-cflags=$CFLAGS extra-cxxflags=$CXXFLAGS enable-^(opengl opencl gpl libdrm vulkan libmp3lame shared small))'
+
+# mpv <- libass | lame libXscrnsaver
+mpv='src=gh:mpv-player/%s mk=Meson flags=((x11 gl)^=enabled)'
+libass='src=gh:%s/%s mk=Autotools'
+
+# picom <- uthash libev
+# jonaburg fork
+picom='src=gh:jonaburg/%s mk=Meson flags=(regex=false)'
+uthash='src=gh:troydhanson/%s mk=Headers'#; fn λ {mv src/* $destdir/usr/include}'
+libev='src=dist.schmorp.de/%s/%s-4.33.tar.gz mk=Autotools'
+
+#important gnome libs
+pipewire='tag=0.3.39 src=freedesktop:%s/%s mk=Meson'
+adwaita-icon-theme='tag=41.0 src=gnome:%s mk=Autotools'
+adwaita-qt='src=gh:fedoraqt/%s mk=CMake'
+gtk3='tag=gtk-3-24 src=gnome:gtk mk=Meson flags=((introspection tests)^=false)'
+libxml2='tag=v2.9.12 src=gnome:%s mk=Autotools'
+elogind='tag=v246.10 src=gh:%s/%s mk=Meson'
+glib='tag=2.70.2 src=gnome:%s mk=Meson flags=(iconv=external)'
+mm-common='tag=1.0.3 src=gnome:%s mk=Meson flags=(use-network=true)'
+glibmm='tag=2.66.2 src=gnome:%s mk=Meson flags=(build-documentation=false build-examples=false)'
+dbus-glib='tag=dbus-glib-0.112 src=freedesktop:dbus/%s mk=Autotools'
+json-glib='tag=1.6.6 src=gnome:%s mk=Meson'
+glib-networking='tag=2.70.0 src=gnome:%s mk=Meson'
+gegl='src=gnome:%s mk=Meson'
+cairo='src=freedesktop:cairo/%s mk=Meson flags=(spectre=disabled)'
+pango='tag=1.48.10 src=gnome:%s mk=Meson'
+
+# gimp <- appstream-glib mypaint-brushes libmypaint poppler-data | gegl exiv2 gexiv2
+gimp='tag=gimp-2-10 src=gnome:%s mk=Autotools flags=(enable-python=no) GIO_EXTRA_MODULES=/usr/lib/gio/modules'
+appstream-glib='src=gh:hughsie/%s mk=Meson flags=((rpm stemmer introspection)^=false)'
+mypaint-brushes='tag=v1.3.x src=gh:mypaint/%s mk=Autotools'
+libmypaint='tag=v1.6.0 src=gh:mypaint/%s mk=Autotools'
+poppler-data='tag=POPPLER_DATA_0_4_10 src=freedesktop:poppler/%s mk=CMake'
+
+# evince <- poppler libhandy
+evince='src=gnome:%s mk=Meson flags=(thumbnailer nautilus gtk_doc user_doc introspection)^=false'
+libhandy='tag=1.4.0 src=gnome:%s mk=Meson flags=(introspection=disabled)'
+poppler='tag=poppler-21.10.0 src=freedesktop:poppler/%s mk=CMake'
+
+# ahoviewer <- libconfig | libsigc libzip gdkpixbuff
+ahoviewer='src=gh:ahodesuka/%s mk=Meson'
+libconfig='src=gh:hyperrealm/%s mk=Autotools'
+
+# Binary
+########
+tinytex='src=yihui.org/tinytex/TinyTeX-1.tar.gz mk=λ; fn λ {mkdir -p $destdir/usr/tinytex; mv * $destdir/usr/tinytex >[2] /dev/null}'
+#chromium='src=%s AlienBob'
+chromium-widevine-plugin='src=%s AlienBob'
+#libreoffice='src=%s AlienBob'
+openconnect='src=%s AlienBob'
+
+chromium='src=download.opensuse.org/repositories/home:/ungoogled_chromium/Fedora_35/x86_64/ungoogled-chromium-96.0.4664.110-1.1.x86_64.rpm mk=true'
+libreoffice='www.libreoffice.org/donate/dl/rpm-x86_64/7.2.4/en-US/LibreOffice_7.2.4_Linux_x86-64_rpm.tar.gz mk=Rpm'
+
+# we use rg and qbittorrent
+# can uninstall rust and boost, respectively, afterwards to save space
+# only needed to make (not runtime dependencies)

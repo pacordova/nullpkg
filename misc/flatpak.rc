@@ -1,0 +1,7 @@
+#!/usr/bin/env rc
+
+pylist=(pyparsing pygments)
+plist=(ostree libseccomp gobject-introspection bubblewrap libportal geoclue xdg-desktop-portal gsettings-desktop-schemas xdg-desktop-portal-gtk flatpak)
+
+for(p in $plist)
+    slackage $* $p

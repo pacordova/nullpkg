@@ -1,0 +1,2 @@
+#!/usr/bin/env rc
+grep UNCOMPRESSED /var/log/packages/* | awk -F: '{print $3,$1}' | sort -rh |less

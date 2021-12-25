@@ -1,0 +1,53 @@
+#!/usr/bin/env rc
+
+#vala
+graphviz='tag=2.49.2 src=gl:%s/%s mk=CMake'
+vala='src=download.gnome.org/sources/vala/0.54/vala-0.54.2.tar.xz mk=CFG'
+
+# GALA STUFF
+############
+#optional?
+accountsservice='tag=0.6.55 src=freedesktop:%s/%s deps=(elogind) mk=Meson flags=(elogind=true systemdsystemunitdir=no)'
+gnome-backgrounds='tag=41.0 src=gnome:%s mk=Meson'
+#gnome-session='tag=40.1.1 src=gnome:%s mk=Meson flags=((systemd systemd_journal docbook man)^=false systemd_session=disable)'
+#gnome-color-manager='src=gnome:%s mk=Meson flags=(tests=false)'
+#stylesheet='tag=6.1.0 src=gh:elementary/%s mk=Meson'
+#clutter-gtk='tag=1.8.4 src=gnome:%s mk=Meson'
+#clutter-gst='tag=3.0.27 src=gnome:%s mk=AG'
+
+#colors (hard req according to lfs)
+libgusb='tag=0.3.7 src=gh:hughsie/%s mk=Meson'
+colord='tag=1.4.5 src=gh:hughsie/%s deps=(libgusb) mk=Meson flags=((systemd argyllcms_sensor man tests docs)^=false vapi=true)'
+
+#gnome-settings-daemon
+geocode-glib='tag=3.26.2 src=gnome:%s mk=Meson'
+libgweather='tag=40.0 src=gnome:%s mk=Meson'
+geoclue='tag=2.5.7 src=freedesktop:%s/%s mk=Meson flags=(gtk-doc 3g-source cdma-source modem-gps-source demo-agent nmea-source)^=false'
+gnome-settings-daemon='tag=41.0 src=gnome:%s mk=Meson flags=(systemd cups wwan)^=false'
+
+#plank
+gnome-common='tag=3.18.0 src=gnome:%s mk=AG'
+libgtop='src=gnome:%s mk=AG flags=(disable-gtk-doc without-examples)'
+bamf='tag=0.5.5 src=git.launchpad.net/%s deps=(py:lxml) mk=AG'
+gnome-menus='tag=3.36.0 src=gnome:%s mk=AG'
+granite='tag=6.1.2 src=gh:elementary/%s deps=(libgee) mk=Meson'
+plank='src=gh:elementary/dock mk=Meson flags=(enable-apport=false enable-dbusmenu=no)'
+#plank='tag=0.11.89 src=git.launchpad.net/plank mk=AG flags=(disable-nls)'
+
+#clutter
+#cogl='tag=1.22.8 src=gnome:%s mk=AG flags=(enable-wayland-egl-platform=yes)'
+#clutter='tag=1.26.4 src=gnome:%s mk=Meson'
+
+#mutter
+zenity='tag=3.41.0 src=gnome:%s deps=(sl:itstool) mk=Meson'
+mutter='tag=40.4 src=gnome:%s deps=(elogind) mk=Meson CFLAGS=($CFLAGS -Wno-error=empty-body) flags=(systemd installed_test tests profiler native_tests core_tests clutter_tests cogl_tests)^=false'
+
+#gala
+gala='buildtype=debug src=gh:elementary/%s mk=Meson flags=(systemd=false)' #9eca0bd release segfaults
+
+#bug?
+cairo='src=freedesktop:%s/%s mk=Meson flags=(spectre=disabled)'
+pango='tag=1.48.10 src=gnome:%s mk=Meson'
+#libspectre='tag=0.2.9 src=freedesktop:%s/%s mk=AG'
+libwnck='tag=40.0 src=gnome:%s mk=Meson'
+catts='src=gh:small-tech/catts mk=CMake'

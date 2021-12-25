@@ -1,0 +1,383 @@
+#!/usr/bin/env rc
+
+. /usr/slackage/mk.conf
+
+fn cd
+fn rm { { /usr/bin/rm $* || /usr/bin/rmdir $* } >[2] /dev/null }
+fn printf { /usr/bin/printf $* >[2] /dev/null }
+fn tar { /usr/bin/tar $* >/dev/null >[2=1] }
+
+fn Package {
+    if(~ $#1 0)
+        printf 'error: arg' && exit
+    if(~ $#destdir 0)
+        printf 'error: bad destdir' && exit
+
+    # strip binaries if not debugging
+    if(~ $buildtype release) {
+        strip -S $destdir/usr/lib/*
+        strip -s $destdir/usr/bin/* $destdir/bin/*
+    }
+
+    # zip the man pages
+    gzip -9 $destdir/usr/man/man?/*.?
+    gzip -9 $destdir/usr/share/man/man?/*.?
+
+    # use lib64 for slackware by default
+    # NOT PORTABLE, CHANGE LATER (use ld.conf.so?)
+    mkdir -p $destdir/usr/lib64
+    mv $destdir/usr/lib/* $destdir/usr/lib64/
+
+    # make vanilla tarball with index file
+    tar \
+        -C $destdir \
+        -cvzf /usr/slackage/zzz/$1-slackage.tar.gz \
+        --transform 's,^\./,/,' \
+        .
+
+    Install $1
+}
+
+fn Install {
+    # need -h flag to follow symlinks
+    # need -v to generate index file
+    tar \
+        -C / \
+        -xvhf /usr/slackage/zzz/$1-slackage.tar.gz \
+        --index-file=/usr/slackage/index/$1.txt
+
+    ldconfig
+}
+
+# legacy slackware makepkg and install
+fn Slackware {
+    cd $destdir
+    makepkg -l y -c n /usr/slackage/zzz/$1-slackage.tar.gz
+    installpkg /usr/slackage/zzz/$1-slackage.tar.gz
+    ldconfig
+}
+
+# NOTE: DO NOT INJECT CFLAGS DIRECTLY
+# Most vanilla make programs have a "EXTRA_CFLAGS" variable or something similar
+# look for that, and add it to the list if its not there
+# e.g. lua uses "MYCFLAGS", bcachefs uses "EXTRA_CFLAGS", libscrypt uses "CFLAGS_EXTRA"
+fn Make{
+    # override flags variable to use for packages that use vanilla make
+    # also set the destdir as some vanilla make packages use weird variables
+    flags=(
+        MYCFLAGS
+        EXTRA_CFLAGS
+        CFLAGS_EXTRA
+    )
+    destdirs=(
+        (DESTDIR INSTALL_ROOT)^=$destdir
+        (INSTALL_TOP)^=$destdir/$PREFIX
+    )
+
+    # do the build
+    make clean
+    make $MAKEOPTS $flags^=$CFLAGS
+    make PREFIX=$PREFIX $destdirs install
+}
+
+# Configure scripts generated from Autoreconf use environment variables
+# custom script can vary - some you need to pass in the `flags' argument of slackage.
+fn Configure {
+    if(! ~ $#flags 0)
+        flags=--$flags
+
+    ./configure \
+        --prefix=$PREFIX \
+        $flags
+
+    Make
+}
+
+fn Autotools {
+    if(test -f autogen.sh)
+        ./autogen.sh
+    if not
+        autoreconf -fi
+    Configure
+}
+
+# we pass the CFLAGS directly to meson just in case
+fn Meson {
+    if(! ~ $#flags 0)
+        flags=-D^$flags
+
+    rm -rf build
+
+    CFLAGS=$CFLAGS CXXFLAGS=$CXXFLAGS meson build \
+        --buildtype=$buildtype \
+        --prefix=$PREFIX $flags
+
+    if(test ! -f build/build.ninja) {
+        printf \
+            'error: Meson: see %s/build/meson-logs/meson-log.txt\n' \
+            `{pwd} \
+        && exit
+    }
+
+    Ninja
+}
+
+# cmake uses env for CFLAGS
+fn CMakeNinja {
+    if(! ~ $#flags 0)
+        flags=-D$flags
+
+    rm -rf build
+    mkdir build
+    cd build
+
+    cmake -GNinja .. \
+        -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+        -DCMAKE_BUILD_TYPE=$buildtype \
+        $flags
+
+    cd ..
+
+    Ninja
+}
+
+fn CMake {
+    if(! ~ $#flags 0)
+        flags=-D$flags
+
+    mkdir build
+    cd build
+
+    cmake .. \
+        -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+        -DCMAKE_BUILD_TYPE=$buildtype \
+        $flags
+
+    Make
+}
+
+fn Scons {
+    scons -c
+    scons prefix=$PREFIX DESTDIR=$destdir install
+}
+
+fn Ninja { DESTDIR=$destdir ninja -C build install }
+
+fn Cargo {
+    CARGO_HOME=/tmp/.cargo
+
+    if(! ~ $#flags 0)
+        flags=(--features $"flags)
+
+    cargo install \
+        --path . \
+        --root $destdir/usr \
+        --target x86_64-unknown-linux-gnu \
+        $flags
+}
+
+fn Python {
+    python3 -m ensurepip
+    pip3 install . --root=$destdir
+}
+
+# qmake uses default flags used to build Qt
+# probably best to keep it like this, but might be
+# overridable with: qmake -makefile 'QMAKE_CXXFLAGS=$CXXFLAGS'
+# note: Qt doesn't inherit CFLAGS - so it's just built with opimize-size
+fn QMake { qmake -makefile && Make }
+
+fn Headers {
+    mkdir -p $destdir/usr/include
+    cp -r include/* $destdir/usr/include/
+}
+
+# need to use a custom rpm2cpio...
+# wip
+fn Rpm {
+    if(~ $#* 0)
+        *=(`{basename `{pwd}} *.rpm)
+
+    rpm2targz $2
+    mv `{basename $2 .rpm}^.tar.gz /usr/slackage/zzz/$1-slackage.tar.gz
+    Install $1 && exit
+}
+
+fn AlienBob {
+    if(~ $#tag 0)
+        tag=current
+
+    src='http://www.slackware.com/~alien/slackbuilds/'$src'/pkg64/'$tag
+    ifs='"' {
+        f=`{
+            curl -s $src/ \
+            | grep 't.z"'
+        }
+    }
+
+    curl --anyauth -O $src/$f(8)
+
+    installpkg *txz *tgz
+    mv *txz *tgz /usr/slackage/zzz/
+
+    exit
+}
+
+fn Git {
+    if(~ $#tag 1)
+        tag='-b'^$tag
+
+    git clone \
+        --recurse-submodules \
+        --depth=1 \
+        $MAKEOPTS \
+        $tag \
+        $src \
+        /usr/slackage/packages/$1
+
+    if(! test -d /usr/slackage/packages/$1)
+        printf 'error: Git\n' && exit
+}
+
+fn Curl {
+    f=/tmp/`{basename $src}
+    ifs='.' { t=`{ printf $"src } }
+
+    cd /tmp
+    mkdir /usr/slackage/packages/$1
+    curl --anyauth -L -O $src
+
+    switch($t($#t)) {
+        case zip
+            unzip \
+                -d /usr/slackage/packages/$1 \
+                $f
+        case gz xz bz tgz txz bzip tbz bz2
+            tar \
+                -C /usr/slackage/packages/$1 \
+                -xf $f \
+                --strip-components=1
+        case py
+            chmod +x $f
+            mv $f /usr/slackage/packages/$1/
+        case rpm
+            Rpm $1 $f
+        # if none of the above, assume shell script/executable
+        case *
+            chmod +x $f && $f
+    }
+
+    if(! test -d /usr/slackage/packages/$1)
+        printf 'error: Curl\n' && exit
+}
+
+fn Snarf {
+    Query $1
+
+    # fresh download
+    if(~ $#1 1)
+        rm -rf /usr/slackage/packages/$1
+
+    src=`{
+        printf $"src \
+        | sed '
+            s|gnu:'$1'|mirrors.kernel.org/gnu/'$1'/'$1'-'$tag'|g;
+            s|boost:boost-|gh:boostorg/|g;
+            s|gh:|github.com/|g;
+            s|gl:|gitlab.com/|g;
+            s|gnome:|gitlab.gnome.org/gnome/|g;
+            s|freedesktop:|gitlab.freedesktop.org/|g;
+            s|kde:|invent.kde.org/|g;
+            s|qt:|github.com/qt/|g;
+            s|^|http://|g'
+    }
+
+    if(~ $src *git*)
+        Git $1
+    if not
+        Curl $1
+
+    # needed to fix some things in chroot
+    chown -R `{whoami} /usr/slackage/packages/$1
+}
+
+fn Clean {
+    destdir=()
+    deps=()
+    flags=()
+    tag=()
+    mk=()
+    src=()
+}
+
+fn Query {
+    # ensure input isn't borked
+    if(~ $#1 0)
+        printf 'error: Query: arg\n' && exit
+
+    # clean env
+    Clean
+
+    # ensure packages directory isn't deleted
+    mkdir -p /usr/slackage/packages/$1
+
+    # we use lowercase destdir
+    # to avoid Makefile conflicts
+    # change to a unique name if problems persist
+    destdir=/tmp/$1-slackage
+    rm -rf $destdir
+    mkdir -p $destdir/$PREFIX/^(lib lib64 bin include share man doc etc)
+
+    # eval from db
+    eval `{ cat $db | grep '^'$1 }
+    eval $$1
+
+    if(~ $#src 0)
+        printf 'error: Query: src\n' && exit
+    if not
+        src=`{printf $"src $1}
+
+    # modify cflags if debugging
+    # run after eval to allow db to specify
+    if(~ $buildtype 'debug') {
+        CFLAGS=(-march=x86-64 -pipe -Og)
+    }
+
+    # reduce list to string
+    CFLAGS=$"CFLAGS
+    CXXFLAGS=$"CFLAGS^' '^$"CXXFLAGS
+    RUSTFLAGS=$"RUSTFLAGS
+}
+
+fn Emerge {
+    # set the env
+    Query $1
+
+    # make and install
+    cd /usr/slackage/packages/$1
+    $mk || exit
+    Package $1 >[2] /dev/null
+
+    # cleanup env
+    Clean
+}
+
+fn Purge {
+    if(~ $#1 0)
+        printf 'error: Purge: arg' && exit
+
+    # delete the file index
+    # using tac ensures empty dirs get deleted
+    if(test -f /usr/slackage/index/$1.txt) {
+        cd /
+        tac /usr/slackage/index/$1.txt \
+            | sed 's|^|rm |g' \
+            | rc
+    }
+
+    # delete source files
+    rm -rf /usr/slackage/packages/$1
+    rm -rf /tmp/$1-slackage
+    rm /usr/slackage/index/$1.txt
+    true
+}

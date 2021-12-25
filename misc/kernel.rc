@@ -1,0 +1,11 @@
+#!/usr/bin/env rc
+
+mount /dev/nvme0n1p1 /boot >[2] /dev/null
+cd /usr/src/linux
+#git pull
+make clean
+make -j5 bzImage modules
+cp .config /boot/config
+cp System.map /boot/System.map
+cp arch/x86/boot/bzImage /boot/vmlinuz
+make modules_install

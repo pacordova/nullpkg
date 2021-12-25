@@ -1,0 +1,4 @@
+#!/usr/bin/env rc
+
+glib-compile-schemas /usr/share/glib-2.0/schemas >[2] /dev/null
+chmod +x /usr/libexec/dbus-daemon-launch-helper >[2] /dev/null

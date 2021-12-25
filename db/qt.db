@@ -1,0 +1,32 @@
+#!/usr/bin/env rc
+
+# Qt base
+#########
+# we use the KDE fork since upstream Qt doesn't support GCC11
+# (on either 5.12 LTS or the last 5.15)
+qtbase='tag=kde/5.15 src=kde:qt/qt/%s.git mk=Configure flags=(opensource confirm-license optimize-size)'
+qtsvg='tag=kde/5.15 src=kde:qt/qt/%s.git mk=QMake'
+qttools='tag=kde/5.15 src=kde:qt/qt/%s.git mk=QMake'
+qtx11extras='tag=kde/5.15 src=kde:qt/qt/%s.git mk=QMake'
+#qtdeclarative='tag=kde/5.15 src=kde:qt/qt/%s.git mk=QMake'
+
+# qbitorrent <- libtorrent <- boost
+qbittorrent='src=gh:qbittorrent/%s mk=Configure'
+#libtorrent='src=gh:rakshasa/libtorrent mk=Autotools'
+libtorrent='src=gh:arvidn/%s mk=CMakeNinja'
+boost='src=boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2 flags=(--prefix=$destdir/$PREFIX --build-type=minimal debug-symbols=off threading=multi runtime-link=shared link=shared toolset=gcc variant=$buildtype optimization=space cxxflags=$"CXXFLAGS cflags=$"CFLAGS) mk=λ; fn λ {./bootstrap.sh --with-toolset=gcc --with-libraries=system && ./b2 $flags install}'
+
+# keepassxc <- libqrencode botan double-conversion
+keepassxc='tag=2.6.6 src=gh:keepassxreboot/%s mk=CMake flags=(WITH_XC_DOCS=OFF)'
+double-conversion='src=gh:google/%s mk=CMake flags=(BUILD_SHARED_LIBS=ON)'
+libqrencode='src=gh:fukuchi/%s mk=CMake flags=(BUILD_SHARED_LIBS=YES)'
+botan='tag=release-2 src=gh:randombit/%s mk=λ; fn λ { ./configure.py --extra-cxxflags=$CXXFLAGS --prefix=$PREFIX; Make}'
+
+# Misc
+######
+qtpass='src=gh:ijhack/%s mk=Desktop; fn Desktop{Qmake; mkdir -p $DESTDIR/usr/share/^(icons applications); cp artwork/icon.png $DESTDIR/usr/share/icons/qtpass-icon.png; cp qtpass.desktop $DESTDIR/usr/share/applications/}'
+strawberry='src=gh:strawberrymusicplayer/%s mk=CMake'
+
+# okular <- extra-cmake-modules kf5
+okular='src=gh:kde/%s mk=CMake'
+extra-cmake-modules='src=gh:kde/%s mk=CMake'

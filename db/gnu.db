@@ -1,0 +1,32 @@
+#!/usr/bin/env rc
+
+# GNU STUFF IN USE
+##################
+gdb='tag=11.1 src=gnu:%s.tar.xz mk=Configure flags=(with-^(guile=no system-readline python=no))'
+gnutls='src=www.gnupg.org/ftp/gcrypt/gnutls/v3.6/%s-3.6.16.tar.xz mk=Configure flags=(with-included-libtasn1)'
+
+# make <-> make -> autoconf, automake
+_make='src=mirrors.kernel.org/gnu/make/make-4.3.tar.gz mk=Configure flags=(with-guile=no enable-nls=no)'
+
+# BUILD TOOLS
+#############
+m4='tag=latest src=gnu:%s.tar.gz mk=Configure'
+autoconf='tag=latest src=gnu:%s.tar.gz mk=Configure'
+automake='tag=1.16.5 src=gnu:%s.tar.gz mk=Configure'
+help2man='tag=1.48.5 src=gnu:%s.tar.xz mk=Configure'
+texinfo='tag=6.8 src=gnu:%s.tar.gz mk=Configure'
+libiconv='tag=1.16 src=gnu:%s.tar.gz mk=Configure'
+
+# MISC
+######
+glibc='tag=2.34 src=gnu:%s.tar.gz mk=Configure'
+gcc='tag=11.2.0 src=gnu:%s.tar.gz flags=(enable-multilib=no) mk=Configure'
+binutils='tag=2.37 src=gnu:%s.tar.gz mk=Configure'
+bash='tag=5.1.8 src=gnu:%s.tar.gz mk=Configure'
+gperf='tag=3.1 src=gnu:%s.tar.gz mk=Configure'
+gawk='tag=5.1.1 src=gnu:%s.tar.gz mk=Configure'
+guile='src=gnu:%s.tar.gz tag=3.0.7 mk=Configure'
+autobuild='src=download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz mk=Configure'
+libtool='tag=2.4.6 src=gnu:%s.tar.gz mk=λ; fn λ { ./bootstrap --force && Configure }'
+gmp='tag=6.2.1 src=gnu:%s.tar.xz mk=Configure'
+nettle='tag=3.7 src=gnu:%s.tar.gz mk=Configure flags=(enable-shared)'

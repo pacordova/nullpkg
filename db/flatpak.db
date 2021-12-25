@@ -1,0 +1,18 @@
+#!/usr/bin/env rc
+
+# flatpak <- ostree libseccomp gobject-introspection py:pyparsing
+# BUG pyparsing must be 2.4.7 for now
+# https://github.com/flatpak/flatpak/issues/4534
+flatpak='src=gh:flatpak/%s mk=Autotools'
+##
+xdg-desktop-portal-gtk='src=gh:flatpak/%s mk=Autotools'
+gsettings-desktop-schemas='tag=40.0 src=gnome:%s mk=Meson flags=(introspection=false)'
+xdg-desktop-portal='src=gh:flatpak/%s mk=Autotools'
+geoclue='tag=2.5.7 src=freedesktop:%s/%s mk=Meson flags=(gtk-doc 3g-source cdma-source modem-gps-source demo-agent nmea-source)^=false'
+# py:pygments
+libportal='tag=0.4 src=gh:flatpak/%s mk=Meson'
+##
+bubblewrap='tag=v0.5.0 src=gh:containers/%s mk=Autotools'
+gobject-introspection='tag=1.70.0 src=gnome:%s mk=Meson'
+libseccomp='tag=v2.5.2 src=gh:seccomp/%s mk=Autotools'
+ostree='src=gh:ostreedev/%s mk=Autotools'

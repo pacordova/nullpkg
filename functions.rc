@@ -35,7 +35,7 @@ fn Package {
         --transform 's,^\./,/,' \
         .
 
-    Install $1
+    Install /usr/slackage/zzz/$1-slackage.tar.gz
 }
 
 fn Install {
@@ -43,8 +43,8 @@ fn Install {
     # need -v to generate index file
     tar \
         -C / \
-        -xvhf /usr/slackage/zzz/$1-slackage.tar.gz \
-        --index-file=/usr/slackage/index/$1.txt
+        -xvhf $1 \
+        --index-file=/usr/slackage/index/`{basename $1 -slackage.tar.gz}^.txt
 
     ldconfig
 }
@@ -98,6 +98,7 @@ fn Autotools {
         ./autogen.sh
     if not
         autoreconf -fi
+
     Configure
 }
 
@@ -112,7 +113,7 @@ fn Meson {
         --buildtype=$buildtype \
         --prefix=$PREFIX $flags
 
-    if(test ! -f build/build.ninja) {
+    if(! test -f build/build.ninja) {
         printf \
             'error: Meson: see %s/build/meson-logs/meson-log.txt\n' \
             `{pwd} \
@@ -164,12 +165,10 @@ fn Scons {
 fn Ninja { DESTDIR=$destdir ninja -C build install }
 
 fn Cargo {
-    CARGO_HOME=/tmp/.cargo
-
     if(! ~ $#flags 0)
         flags=(--features $"flags)
 
-    cargo install \
+    CARGO_HOME=/tmp/.cargo cargo install \
         --path . \
         --root $destdir/usr \
         --target x86_64-unknown-linux-gnu \
@@ -209,13 +208,13 @@ fn AlienBob {
 
     src='http://www.slackware.com/~alien/slackbuilds/'$src'/pkg64/'$tag
     ifs='"' {
-        f=`{
+        *=`{
             curl -s $src/ \
             | grep 't.z"'
         }
     }
 
-    curl --anyauth -O $src/$f(8)
+    curl --anyauth -O $src/$8
 
     installpkg *txz *tgz
     mv *txz *tgz /usr/slackage/zzz/
@@ -240,7 +239,9 @@ fn Git {
 }
 
 fn Curl {
-    f=/tmp/`{basename $src}
+    # cache filename as local var
+    *=($* /tmp/`{basename $src})
+
     ifs='.' { t=`{ printf $"src } }
 
     cd /tmp
@@ -251,20 +252,20 @@ fn Curl {
         case zip
             unzip \
                 -d /usr/slackage/packages/$1 \
-                $f
+                $2
         case gz xz bz tgz txz bzip tbz bz2
             tar \
                 -C /usr/slackage/packages/$1 \
-                -xf $f \
+                -xf $2 \
                 --strip-components=1
         case py
-            chmod +x $f
-            mv $f /usr/slackage/packages/$1/
+            chmod +x $2
+            mv $2 /usr/slackage/packages/$1/
         case rpm
-            Rpm $1 $f
+            Rpm $1 $2
         # if none of the above, assume shell script/executable
         case *
-            chmod +x $f && $f
+            chmod +x $2 && $2
     }
 
     if(! test -d /usr/slackage/packages/$1)
@@ -285,9 +286,10 @@ fn Snarf {
             s|boost:boost-|gh:boostorg/|g;
             s|gh:|github.com/|g;
             s|gl:|gitlab.com/|g;
+            s|xfce:'$1'|archive.xfce.org/xfce/4.12/src/'$1'-'$tag'.tar.bz2|g;
             s|gnome:|gitlab.gnome.org/gnome/|g;
-            s|freedesktop:|gitlab.freedesktop.org/|g;
             s|kde:|invent.kde.org/|g;
+            s|freedesktop:|gitlab.freedesktop.org/|g;
             s|qt:|github.com/qt/|g;
             s|^|http://|g'
     }
@@ -302,6 +304,7 @@ fn Snarf {
 }
 
 fn Clean {
+    buildtype=()
     destdir=()
     deps=()
     flags=()
@@ -339,9 +342,8 @@ fn Query {
 
     # modify cflags if debugging
     # run after eval to allow db to specify
-    if(~ $buildtype 'debug') {
+    if(~ $buildtype 'debug')
         CFLAGS=(-march=x86-64 -pipe -Og)
-    }
 
     # reduce list to string
     CFLAGS=$"CFLAGS

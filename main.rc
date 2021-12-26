@@ -1,7 +1,6 @@
 #!/usr/bin/env rc
 
 . /usr/slackage/functions.rc
-cd /usr/slackage
 
 switch($1){
     case emerge
@@ -38,8 +37,13 @@ switch($1){
         }
     case install
         shift
-        for(p in $*)
+        for(p in $*) {
+            if(! test -f $p)
+                p=/usr/slackage/zzz/$p-slackage.tar.gz
+            if(! test -f $p)
+                printf 'error: binary cache not found\n'
             Install $p
+        }
     case *
         printf 'usage: slackage emerge|purge|snarf|install foo'
 }

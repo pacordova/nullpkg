@@ -1,0 +1,17 @@
+#!/usr/bin/env rc
+
+libxfce4util='tag=4.12.1 src=xfce:%s mk=Configure'
+xfconf='tag=4.12.0 src=xfce:%s mk=Configure'
+libxfce4ui='tag=4.12.0 src=xfce:%s mk=Configure'
+exo='tag=0.10.3 src=xfce:%s mk=Configure'
+garcon='tag=0.4.0 src=xfce:%s mk=Configure'
+Thunar='tag=1.6.6 src=xfce:%s mk=Configure'
+thunar-volman='tag=0.8.1 src=xfce:%s mk=Configure'
+tumbler='tag=0.1.31 src=xfce:%s mk=Configure'
+xfce4-appfinder='tag=4.12.0 src=xfce:%s mk=Configure'
+xfce4-panel='tag=4.12.0 src=xfce:%s mk=Configure'
+xfce4-power-manager='tag=1.4.3 src=xfce:%s mk=Configure'
+xfce4-settings='tag=4.12.0 src=xfce:%s mk=Configure'
+xfdesktop='tag=4.12.0 src=xfce:%s mk=Configure'
+xfwm4='tag=4.12.0 src=xfce:%s mk=Configure'
+xfce4-session='tag=4.12.0 src=xfce:%s mk=Configure'

@@ -6,7 +6,7 @@ _rc='src=gh:rakitzis/rc mk=Autotools flags=with-^(edit=readline history)'
 # connman <-> Internet
 # connman <- libtinfo
 _connman='src=git.kernel.org/pub/scm/network/connman/connman CFLAGS=($CFLAGS -lncurses) mk=Autotools flags=(sysconfdir=/etc with-firewall=nftables with-curses with-gnu-ld with-systemdunitdir=no with-tmpfilesdir=no)'
-libtinfo='tag=14.2 src=%s AlienBob'
+libtinfo='tag=14.2 AlienBob $1'
 
 
 #busybox='src=git.busybox.net/%s mk=Make'
@@ -74,6 +74,7 @@ libev='src=dist.schmorp.de/%s/%s-4.33.tar.gz mk=Autotools'
 pipewire='tag=0.3.39 src=freedesktop:%s/%s mk=Meson'
 adwaita-icon-theme='tag=41.0 src=gnome:%s mk=Autotools'
 adwaita-qt='src=gh:fedoraqt/%s mk=CMake'
+gnome-themes-extra='src=gnome:%s mk=Autotools'
 gtk3='tag=gtk-3-24 src=gnome:gtk mk=Meson flags=((introspection tests)^=false)'
 libxml2='tag=v2.9.12 src=gnome:%s mk=Autotools'
 elogind='tag=v246.10 src=gh:%s/%s mk=Meson'
@@ -106,12 +107,12 @@ libconfig='src=gh:hyperrealm/%s mk=Autotools'
 # Binary
 ########
 tinytex='src=yihui.org/tinytex/TinyTeX-1.tar.gz mk=λ; fn λ {mkdir -p $destdir/usr/tinytex; mv * $destdir/usr/tinytex >[2] /dev/null}'
-#chromium='src=%s AlienBob'
-chromium-widevine-plugin='src=%s AlienBob'
-#libreoffice='src=%s AlienBob'
-openconnect='src=%s AlienBob'
+chromium='AlienBob $1'
+chromium-widevine-plugin='AlienBob $1'
+#libreoffice='AlienBob $1'
+openconnect='AlienBob $1'
 
-chromium='src=download.opensuse.org/repositories/home:/ungoogled_chromium/Fedora_35/x86_64/ungoogled-chromium-96.0.4664.110-1.1.x86_64.rpm mk=true'
+#chromium='src=download.opensuse.org/repositories/home:/ungoogled_chromium/Fedora_35/x86_64/ungoogled-chromium-96.0.4664.110-1.1.x86_64.rpm mk=true'
 libreoffice='www.libreoffice.org/donate/dl/rpm-x86_64/7.2.4/en-US/LibreOffice_7.2.4_Linux_x86-64_rpm.tar.gz mk=Rpm'
 
 # we use rg and qbittorrent

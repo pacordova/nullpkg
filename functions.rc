@@ -206,15 +206,15 @@ fn AlienBob {
     if(~ $#tag 0)
         tag=current
 
-    src='http://www.slackware.com/~alien/slackbuilds/'$src'/pkg64/'$tag
+    *='http://www.slackware.com/~alien/slackbuilds/'^$*^'/pkg64/'^$tag^'/'
     ifs='"' {
-        *=`{
-            curl -s $src/ \
+        *=$*^`{
+            curl -s $* \
             | grep 't.z"'
         }
     }
 
-    curl --anyauth -O $src/$8
+    curl --anyauth -O $8
 
     installpkg *txz *tgz
     mv *txz *tgz /usr/slackage/zzz/

@@ -51,6 +51,7 @@ sdl-image='tag=release-2.0.5 src=gh:libsdl-org/sdl_image mk=Autotools'
 qemu='src=download.qemu.org/%s-6.1.0.tar.xz mk=Configure'
 ghostscript='src=gh:ArtifexSoftware/ghostpdl mk=Autotools'
 firejail='tag=0.9.66 src=gh:netblue30/%s mk=Configure'
+tinytex='src=yihui.org/tinytex/TinyTeX-1.tar.gz mk=λ; fn λ {mkdir -p /usr/tinytex; mv * /usr/tinytex >[2] /dev/null}'
 
 # boost needed by a few packages, inc libreoffice, qbittorrent
 boost='src=boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.bz2 flags=(--prefix=$destdir/$PREFIX --build-type=minimal debug-symbols=off threading=multi runtime-link=shared link=shared toolset=gcc variant=$buildtype optimization=space cxxflags=$"CXXFLAGS cflags=$"CFLAGS) mk=λ; fn λ {./bootstrap.sh --with-toolset=gcc --with-libraries=system,locale,iostreams,filesystem && ./b2 $flags install}'
@@ -105,9 +106,3 @@ poppler='tag=poppler-21.10.0 src=freedesktop:poppler/%s mk=CMake'
 # ahoviewer <- libconfig | libsigc libzip gdkpixbuff
 ahoviewer='src=gh:ahodesuka/%s mk=Meson'
 libconfig='src=gh:hyperrealm/%s mk=Autotools'
-
-# Binary
-########
-tinytex='src=yihui.org/tinytex/TinyTeX-1.tar.gz mk=λ; fn λ {mkdir -p /usr/tinytex; mv * /usr/tinytex >[2] /dev/null}'
-chromium='src=gh:scheib/%s-latest-linux mk=λ; fn λ {./update.sh && mkdir -p /usr/chromium && mv ./latest/* /usr/chromium/ && ln -sf /usr/chromium/chrome /usr/bin/chromium && exit}'
-libreoffice='tag=current src=alienbob:'

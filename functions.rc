@@ -219,7 +219,6 @@ fn Curl {
     ifs='.' { *=($* `{ printf $"src }) }
 
     cd /tmp
-    mkdir /usr/slackage/packages/$1
     curl --anyauth -L -O $src
 
     switch($*($#*)) {
@@ -235,10 +234,6 @@ fn Curl {
         case py
             chmod +x $2
             mv $2 /usr/slackage/packages/$1/
-        case rpm
-            rpm2cpio <$2 | cpio -id -D $destdir
-            Package $1
-            exit
         # if none of the above, assume shell script/executable
         case *
             chmod +x $2 && $2

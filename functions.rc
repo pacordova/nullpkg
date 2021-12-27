@@ -51,9 +51,6 @@ fn Install {
 
     cd /
 
-    rm -rf install/
-    rm -rf lost+found/
-
     ldconfig
 }
 
@@ -285,7 +282,7 @@ fn Snarf {
         case *alien*slackbuilds*
             ifs='"' {*=($1 `{ curl -s $src | grep 't.z"' })}
             src=$src^$9
-            Curl $1 && Install /tmp/$9 && exit
+            Curl $1 && installpkg /tmp/$9 && exit
         case *
             Curl $1
     }

@@ -8,7 +8,6 @@ _rc='src=gh:rakitzis/rc mk=Autotools flags=with-^(edit=readline history)'
 _connman='src=git.kernel.org/pub/scm/network/connman/connman CFLAGS=($CFLAGS -lncurses) mk=Autotools flags=(sysconfdir=/etc with-firewall=nftables with-curses with-gnu-ld with-systemdunitdir=no with-tmpfilesdir=no)'
 libtinfo='tag=14.2 AlienBob $1'
 
-
 #busybox='src=git.busybox.net/%s mk=Make'
 vim='src=gh:vim/%s mk=Configure flags=(enable-gui=no with-x=no)'
 tmux='src=gh:tmux/%s mk=Autotools'
@@ -52,6 +51,9 @@ sdl-image='tag=release-2.0.5 src=gh:libsdl-org/sdl_image mk=Autotools'
 qemu='src=download.qemu.org/%s-6.1.0.tar.xz mk=Configure'
 ghostscript='src=gh:ArtifexSoftware/ghostpdl mk=Autotools'
 firejail='tag=0.9.66 src=gh:netblue30/%s mk=Configure'
+
+# boost needed by a few packages, inc libreoffice, qbittorrent
+boost='src=boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.bz2 flags=(--prefix=$destdir/$PREFIX --build-type=minimal debug-symbols=off threading=multi runtime-link=shared link=shared toolset=gcc variant=$buildtype optimization=space cxxflags=$"CXXFLAGS cflags=$"CFLAGS) mk=λ; fn λ {./bootstrap.sh --with-toolset=gcc --with-libraries=system,locale,iostreams,filesystem && ./b2 $flags install}'
 
 # gstreamer <- libtiff
 gstreamer='src=gh:GStreamer/gst-build mk=Meson'
@@ -106,16 +108,6 @@ libconfig='src=gh:hyperrealm/%s mk=Autotools'
 
 # Binary
 ########
-tinytex='src=yihui.org/tinytex/TinyTeX-1.tar.gz mk=λ; fn λ {mkdir -p $destdir/usr/tinytex; mv * $destdir/usr/tinytex >[2] /dev/null}'
-
-rpm2cpio='src=gh:ruda/%s mk=Make'
-#libreoffice='src=obs:openSUSE:/Factory/standard/x86_64/'
-#chromium='src=obs:home:/ungoogled_chromium/Fedora_35/x86_64/'
-
-chromium='tag=current src=alienbob:'
-chromium-ungoogled='tag=current src=alienbob:'
-chromium-widevine-plugin='tag=current src=alienbob:'
+tinytex='src=yihui.org/tinytex/TinyTeX-1.tar.gz mk=λ; fn λ {mkdir -p /usr/tinytex; mv * /usr/tinytex >[2] /dev/null}'
+chromium='src=gh:scheib/%s-latest-linux mk=λ; fn λ {./update.sh && mkdir -p /usr/chromium && mv ./latest/* /usr/chromium/ && ln -sf /usr/chromium/chrome /usr/bin/chromium && exit}'
 libreoffice='tag=current src=alienbob:'
-openconnect='tag=current src=alienbob:'
-
-boost='src=boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2 flags=(--prefix=$destdir/$PREFIX --build-type=minimal debug-symbols=off threading=multi runtime-link=shared link=shared toolset=gcc variant=$buildtype optimization=space cxxflags=$"CXXFLAGS cflags=$"CFLAGS) mk=λ; fn λ {./bootstrap.sh --with-toolset=gcc --with-libraries=system,locale && ./b2 $flags install}'

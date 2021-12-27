@@ -25,7 +25,10 @@ fn Package {
 
     # use lib64 for slackware by default
     # NOT PORTABLE, CHANGE LATER (use ld.conf.so?)
+    rm $destdir/install.sh
     mkdir -p $destdir/usr/lib64
+    mv $destdir/lib/* $destdir/usr/lib64/
+    mv $destdir/lib64/* $destdir/usr/lib64/
     mv $destdir/usr/lib/* $destdir/usr/lib64/
 
     # make vanilla tarball with index file
@@ -45,6 +48,11 @@ fn Install {
         -C / \
         -xvhf $1 \
         --index-file=/usr/slackage/index/`{basename $1 -slackage.tar.gz}^.txt
+
+    cd /
+
+    rm -rf install/
+    rm -rf lost+found/
 
     ldconfig
 }
@@ -191,37 +199,6 @@ fn Headers {
     cp -r include/* $destdir/usr/include/
 }
 
-# need to use a custom rpm2cpio...
-# wip
-fn Rpm {
-    if(~ $#* 0)
-        *=(`{basename `{pwd}} *.rpm)
-
-    rpm2targz $2
-    mv `{basename $2 .rpm}^.tar.gz /usr/slackage/zzz/$1-slackage.tar.gz
-    Install $1 && exit
-}
-
-fn AlienBob {
-    if(~ $#tag 0)
-        tag=current
-
-    *='http://www.slackware.com/~alien/slackbuilds/'^$*^'/pkg64/'^$tag^'/'
-    ifs='"' {
-        *=$*^`{
-            curl -s $* \
-            | grep 't.z"'
-        }
-    }
-
-    curl --anyauth -O $8
-
-    installpkg *txz *tgz
-    mv *txz *tgz /usr/slackage/zzz/
-
-    exit
-}
-
 fn Git {
     if(~ $#tag 1)
         tag='-b'^$tag
@@ -242,13 +219,13 @@ fn Curl {
     # cache filename as local var
     *=($* /tmp/`{basename $src})
 
-    ifs='.' { t=`{ printf $"src } }
+    ifs='.' { *=($* `{ printf $"src }) }
 
     cd /tmp
     mkdir /usr/slackage/packages/$1
     curl --anyauth -L -O $src
 
-    switch($t($#t)) {
+    switch($*($#*)) {
         case zip
             unzip \
                 -d /usr/slackage/packages/$1 \
@@ -262,7 +239,9 @@ fn Curl {
             chmod +x $2
             mv $2 /usr/slackage/packages/$1/
         case rpm
-            Rpm $1 $2
+            rpm2cpio <$2 | cpio -id -D $destdir
+            Package $1
+            exit
         # if none of the above, assume shell script/executable
         case *
             chmod +x $2 && $2
@@ -280,7 +259,7 @@ fn Snarf {
         rm -rf /usr/slackage/packages/$1
 
     src=`{
-        printf $"src \
+        printf $"src $1 \
         | sed '
             s|gnu:'$1'|mirrors.kernel.org/gnu/'$1'/'$1'-'$tag'|g;
             s|boost:boost-|gh:boostorg/|g;
@@ -291,13 +270,25 @@ fn Snarf {
             s|kde:|invent.kde.org/|g;
             s|freedesktop:|gitlab.freedesktop.org/|g;
             s|qt:|github.com/qt/|g;
+            s|obs:|download.opensuse.org/repositories/|g;
+            s|alienbob:|www.slackware.com/~alien/slackbuilds/'^$1^'/pkg64/'^$tag^'/|g;
             s|^|http://|g'
     }
 
-    if(~ $src *git*)
-        Git $1
-    if not
-        Curl $1
+    switch($src) {
+        case *git*
+            Git $1
+        case *opensuse*
+            ifs='"' {*=($1 `{ curl -s $src | grep 'rpm"' })}
+            src=$src^$5
+            Curl $1
+        case *alien*slackbuilds*
+            ifs='"' {*=($1 `{ curl -s $src | grep 't.z"' })}
+            src=$src^$9
+            Curl $1 && Install /tmp/$9 && exit
+        case *
+            Curl $1
+    }
 
     # needed to fix some things in chroot
     chown -R `{whoami} /usr/slackage/packages/$1
@@ -336,8 +327,6 @@ fn Query {
 
     if(~ $#src 0)
         printf 'error: Query: src\n' && exit
-    if not
-        src=`{printf $"src $1}
 
     # modify cflags if debugging
     # run after eval to allow db to specify

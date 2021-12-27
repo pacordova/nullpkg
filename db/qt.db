@@ -14,7 +14,6 @@ qtx11extras='tag=kde/5.15 src=kde:qt/qt/%s.git mk=QMake'
 qbittorrent='src=gh:qbittorrent/%s mk=Configure'
 #libtorrent='src=gh:rakshasa/libtorrent mk=Autotools'
 libtorrent='src=gh:arvidn/%s mk=CMakeNinja'
-boost='src=boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2 flags=(--prefix=$destdir/$PREFIX --build-type=minimal debug-symbols=off threading=multi runtime-link=shared link=shared toolset=gcc variant=$buildtype optimization=space cxxflags=$"CXXFLAGS cflags=$"CFLAGS) mk=λ; fn λ {./bootstrap.sh --with-toolset=gcc --with-libraries=system && ./b2 $flags install}'
 
 # keepassxc <- libqrencode botan double-conversion
 keepassxc='tag=2.6.6 src=gh:keepassxreboot/%s mk=CMake flags=(WITH_XC_DOCS=OFF)'

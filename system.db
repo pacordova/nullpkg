@@ -20,7 +20,7 @@ ruby='src=cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.3.tar.gz mk=Configure'
 perl='src=www.cpan.org/src/5.0/perl-5.34.0.tar.gz mk=λ; fn λ { ./Configure -des -Dprefix=$PREFIX && make $MAKEOPTS && make install DESTDIR=$destdir && Package perl }'
 
 # python and stuff
-python='tag=3.10 src=gh:python/cpython mk=Configure flags=(enable-shared with-system-expat with-system-ffi with-ensurepip=no)'
+python='tag=v3.9.9 src=gh:python/cpython mk=Configure flags=(enable-shared with-system-expat with-system-ffi with-ensurepip=no)'
 setuptools='src=gh:pypa/%s mk=Python'
 pip='src=gh:pypa/%s mk=Python'
 meson='src=gh:mesonbuild/meson mk=Python'

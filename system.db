@@ -21,9 +21,9 @@ perl='src=www.cpan.org/src/5.0/perl-5.34.0.tar.gz mk=λ; fn λ { ./Configure -de
 
 # python and stuff
 python='tag=v3.9.9 src=gh:python/cpython mk=Configure flags=(enable-shared with-system-expat with-system-ffi with-ensurepip=no)'
-setuptools='src=gh:pypa/%s mk=Python'
-pip='src=gh:pypa/%s mk=Python'
-meson='src=gh:mesonbuild/meson mk=Python'
+python-setuptools='src=gh:pypa/setuptools mk=Python'
+python-pip='src=gh:pypa/setuptools mk=Python'
+meson='src=gh:mesonbuild/%s mk=Python'
 
 # R <- openblas lapack pcre2
 R='src=cran.rstudio.com/src/base/R-4/R-4.1.2.tar.gz mk=Configure flags=(with-^(blas lapack recommended-packages=no) enable-^(R-shlib java=no))'

@@ -218,6 +218,7 @@ fn Curl {
 
     ifs='.' { *=($* `{ printf $"src }) }
 
+    mkdir /usr/slackage/packages/$1
     cd /tmp
     curl --anyauth -L -O $src
 
@@ -238,9 +239,6 @@ fn Curl {
         case *
             chmod +x $2 && $2
     }
-
-    if(! test -d /usr/slackage/packages/$1)
-        printf 'error: Curl\n' && exit
 }
 
 fn Snarf {
@@ -281,9 +279,8 @@ fn Snarf {
         case *
             Curl $1
     }
-
-    # needed to fix some things in chroot
-    chown -R `{whoami} /usr/slackage/packages/$1
+    # fix chroot permissions
+    chmod -R 777 /usr/slackage/packages/$1
 }
 
 fn Clean {

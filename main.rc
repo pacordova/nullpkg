@@ -45,5 +45,5 @@ switch($1){
             Install $p
         }
     case *
-        printf 'usage: slackage emerge|purge|snarf|install foo'
+        printf 'usage: slackage emerge|purge|snarf|install foo\n'
 }

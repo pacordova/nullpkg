@@ -12,16 +12,17 @@ texinfo='tag=6.8 src=gnu:%s.tar.gz mk=Configure'
 libiconv='tag=1.16 src=gnu:%s.tar.gz mk=Configure'
 gettext='tag=0.21 src=gnu:%s.tar.xz mk=Configure'
 
-
 #for kernel
 bison='tag=3.8.2 src=gnu:%s.tar.gz mk=Configure'
 bc='tag=1.07 src=gnu:%s.tar.gz mk=Configure'
 
+#utils
 binutils='tag=2.37 src=gnu:%s.tar.gz mk=Configure'
 coreutils='tag=9.0 src=gnu:%s.tar.gz mk=Configure'
 diffutils='tag=3.8 src=gnu:%s.tar.xz mk=Configure'
 findutils='tag=4.8.0 src=gnu:%s.tar.xz mk=Configure'
 
+#toolchain
 grep='tag=3.7 src=gnu:%s.tar.xz mk=Configure'
 bash='tag=5.1.8 src=gnu:%s.tar.gz mk=Configure'
 gawk='tag=5.1.1 src=gnu:%s.tar.gz mk=Configure'
@@ -34,14 +35,14 @@ sed='tag=4.8 src=gnu:%s.tar.gz mk=Configure'
 ncurses='tag=6.3 src=gnu:%s.tar.gz mk=Configure'
 readline='tag=8.0 src=gnu:%s.tar.gz mk=Configure'
 
-
+#debugger
 gdb='tag=11.1 src=gnu:%s.tar.xz mk=Configure flags=(with-^(guile=no system-readline python=no))'
 
 #big kahuna
 glibc='tag=2.34 src=gnu:%s.tar.gz mk=Configure'
 gcc='tag=11.2.0 src=gnu:%s.tar.gz flags=(enable-multilib=no) mk=Configure'
 
-#impossible to build...
+#impossible to build libtool and deps...
 help2man='tag=1.48.5 src=gnu:%s.tar.xz mk=Configure'
 autobuild='src=download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz mk=Configure'
 libtool='tag=2.4.6 src=gnu:%s.tar.gz mk=λ;fn λ{sed -i configure.ac -e ''s|2.62|[2.64]|'';./bootstrap --force;Configure}'

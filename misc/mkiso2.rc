@@ -50,6 +50,7 @@ slackages=(
     cmake                                           #buildtools
     binutils coreutils findutils diffutils          #rebuild toolchain
     grep bash gawk gzip tar patch sed               #rebuild toolchain
+    ncurses readline                                #rebuild toolchain
     zlib python python-setuptools python-pip meson  #python
     vim firejail ninja                              #other
     #openconnect glib connman

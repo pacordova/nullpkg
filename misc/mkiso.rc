@@ -29,7 +29,7 @@ base=(
     binutils ncurses bash coreutils diffutils findutils     #toolchain
     gawk grep gzip patch sed tar xz flex readline make      #toolchain
     openssl curl git                                        #toolchain
-    #rc
+    rc
 )
 
 extras=(

@@ -8,6 +8,10 @@ _rc='src=gh:rakitzis/rc mk=Autotools flags=with-^(edit=readline history)'
 _connman='src=git.kernel.org/pub/scm/network/connman/connman CFLAGS=($CFLAGS -lncurses) mk=Autotools flags=(sysconfdir=/etc with-firewall=nftables with-curses with-gnu-ld with-systemdunitdir=no with-tmpfilesdir=no)'
 libtinfo='tag=14.2 AlienBob $1'
 
+# minimal curl, git install
+_curl='tag=curl-7_80_0 src=gh:curl/curl mk=Autotools flags=(disable-static with-openssl enable-threaded-resolver with-ca-path=/etc/ssl/certs without-nghttp2 without-brotli)'
+_git='tag=v2.34.1 src=gh:git/git mk=Autotools flags=(with-gitconfig=/etc/gitconfig)'
+
 #busybox='src=git.busybox.net/%s mk=Make'
 vim='src=gh:vim/%s mk=Configure flags=(enable-gui=no with-x=no)'
 tmux='src=gh:tmux/%s mk=Autotools'

@@ -21,7 +21,8 @@ ruby='src=cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.3.tar.gz mk=Configure'
 # make clean breaks the perl build
 # and it uses a weird config script
 # so we just have the whole script here basically
-perl='tag=v5.34.0 src=gh:perl/perl5 mk=λ; fn λ { ./Configure -des -Dprefix=$PREFIX && make $MAKEOPTS && make install DESTDIR=$destdir }'
+# also need sed to force lib64
+perl='tag=v5.34.0 src=gh:perl/perl5 mk=λ; fn λ { sed -i ./Configure -e ''s|/lib/|/lib64/|g'';./Configure -des -Dprefix=$PREFIX;make $MAKEOPTS;make install DESTDIR=$destdir }'
 
 # python and stuff
 python='tag=v3.9.9 src=gh:python/cpython mk=Configure flags=(enable-shared with-system-expat with-system-ffi with-ensurepip=no)'

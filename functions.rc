@@ -220,7 +220,7 @@ fn Curl {
 
     mkdir /usr/slackage/packages/$1
     cd /tmp
-    curl --anyauth -L -O $src
+    curl --anyauth -LkO $src
 
     switch($*($#*)) {
         case zip
@@ -266,6 +266,8 @@ fn Snarf {
     }
 
     switch($src) {
+        case *release*
+            Curl $1
         case *git*
             Git $1
         case *opensuse*

@@ -21,13 +21,14 @@ slackware=(
     aaa_base aaa_glibc-solibs aaa_libraries aaa_terminfo    #aaa
     glibc-^(2 solibs zoneinfo i18n profile)                 #glibc
     gcc-^(11 g++ gfortran go) libmpc                        #gcc
-    kernel-headers openssl-^(1 solibs)                       #libs
-    #libunistring libffi gc-8 readline                       #rc
+    kernel-headers                                          #libs
+    #libunistring libffi gc-8                               #rc
 )
 
-min=(
+base=(
     binutils ncurses bash coreutils diffutils findutils     #toolchain
     gawk grep gzip patch sed tar xz flex readline make      #toolchain
+    openssl curl git                                        #toolchain
     #rc
 )
 
@@ -36,7 +37,7 @@ extras=(
     bison texinfo gettext bc
     cmake
     zlib #python python-setuptools python-pip meson
-    vim firejail ninja
+    vim firejail ninja less
 )
 
     #shadow
@@ -61,12 +62,12 @@ fn make-tar {
     rm -rf $isolinux
     mkdir -p $isolinux
 
-    for(p in $plist)
+    for(p in $slackware)
         installpkg --root $isolinux `{fp $p}
 
     # binaries with minimal deps
-    for(p in (make rc git curl))
-        tar -C $isolinux -xvhf /usr/slackage/zzz/_^$p^-slackage.tar.gz
+    for(p in ($base $extras))
+        tar -C $isolinux -xvhf /usr/slackage/zzz/thecache/$p^-slackage.tar.gz
 
     tar -c -I^'xz -9 -T0' -f $isolinux^.tar.xz -C $isolinux .
 }

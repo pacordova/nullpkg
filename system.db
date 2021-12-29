@@ -16,6 +16,9 @@ xz='tag=v5.2.5 src=gh:xz-mirror/%s mk=CMake'
 flex='src=gh:westes/%s/releases/download/v2.6.4/flex-2.6.4.tar.gz mk=Configure'
 zlib='tag=v1.2.11 src=gh:madler/zlib mk=Configure'
 
+# openssl <- perl zlib
+openssl='tag=OpenSSL_1_1_1l src=gh:openssl/%s mk=λ;fn λ{./config --prefix=/usr --openssldir=/etc/ssl --libdir=lib64 shared zlib-dynamic;Make}
+
 vim='src=gh:vim/%s mk=Configure flags=(enable-gui=no with-x=no)'
 tmux='src=gh:tmux/%s mk=Autotools'
 lua='src=www.lua.org/ftp/lua-5.4.3.tar.gz mk=Make'

@@ -34,9 +34,14 @@ sed='tag=4.8 src=gnu:%s.tar.gz mk=Configure'
 #termstuff
 ncurses='tag=6.3 src=gnu:%s.tar.gz mk=Configure'
 readline='tag=8.0 src=gnu:%s.tar.gz mk=Configure'
+less='tag=590 src=gnu:%s.tar.gz mk=Configure'
 
 #debugger
 gdb='tag=11.1 src=gnu:%s.tar.xz mk=Configure flags=(with-^(guile=no system-readline python=no))'
+
+#mpc for gcc
+#gmp='tag=6.2.1 src=gnu:%s.tar.xz mk=Configure'
+#mpc='tag=1.2.1 src=gnu:%s.tar.gz mk=Configure'
 
 #big kahuna
 glibc='tag=2.34 src=gnu:%s.tar.gz mk=Configure'

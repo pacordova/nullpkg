@@ -30,3 +30,7 @@ autobuild='src=download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz
 libtool='tag=2.4.6 src=gnu:%s.tar.gz mk=λ; fn λ { ./bootstrap --force && Configure }'
 gmp='tag=6.2.1 src=gnu:%s.tar.xz mk=Configure'
 nettle='tag=3.7 src=gnu:%s.tar.gz mk=Configure flags=(enable-shared)'
+
+
+bison='tag=3.8.2 src=gnu:%s.tar.gz mk=Configure'
+bc='tag=1.07 src=gnu:%s.tar.gz mk=Configure'

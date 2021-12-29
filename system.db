@@ -12,7 +12,6 @@ libtinfo='tag=14.2 AlienBob $1'
 _curl='tag=curl-7_80_0 src=gh:curl/curl mk=Autotools flags=(disable-static with-openssl enable-threaded-resolver with-ca-path=/etc/ssl/certs without-nghttp2 without-brotli)'
 _git='tag=v2.34.1 src=gh:git/git mk=Autotools flags=(with-gitconfig=/etc/gitconfig)'
 
-#busybox='src=git.busybox.net/%s mk=Make'
 vim='src=gh:vim/%s mk=Configure flags=(enable-gui=no with-x=no)'
 tmux='src=gh:tmux/%s mk=Autotools'
 lua='src=www.lua.org/ftp/lua-5.4.3.tar.gz mk=Make'
@@ -22,7 +21,8 @@ ruby='src=cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.3.tar.gz mk=Configure'
 # and it uses a weird config script
 # so we just have the whole script here basically
 # also need sed to force lib64
-perl='tag=v5.34.0 src=gh:perl/perl5 mk=λ; fn λ { sed -i ./Configure -e ''s|/lib/|/lib64/|g'';./Configure -des -Dprefix=$PREFIX;make $MAKEOPTS;make install DESTDIR=$destdir }'
+perl='tag=v5.34.0 src=gh:perl/perl5 mk=λ;fn λ{./Configure -des -Dprefix=$PREFIX;make $MAKEOPTS;make install DESTDIR=$destdir}'
+
 
 # python and stuff
 python='tag=v3.9.9 src=gh:python/cpython mk=Configure flags=(enable-shared with-system-expat with-system-ffi with-ensurepip=no)'

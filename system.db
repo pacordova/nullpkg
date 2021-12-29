@@ -21,7 +21,7 @@ ruby='src=cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.3.tar.gz mk=Configure'
 # and it uses a weird config script
 # so we just have the whole script here basically
 # also need sed to force lib64
-perl='tag=v5.34.0 src=gh:perl/perl5 mk=λ;fn λ{./Configure -des -Dprefix=$PREFIX;make $MAKEOPTS;make install DESTDIR=$destdir}'
+perl='tag=v5.34.0 src=gh:perl/perl5 mk=λ;fn λ{sed -i ./Configure -e ''s|\([ /]\)lib/|\1lib64/|g'';./Configure -des -Dprefix=$PREFIX;make $MAKEOPTS;make install DESTDIR=$destdir}'
 
 
 # python and stuff

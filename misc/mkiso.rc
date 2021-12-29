@@ -33,7 +33,7 @@ base=(
 )
 
 extras=(
-    m4 libiconv perl autoconf automake
+    m4 libiconv autoconf automake #perl
     bison texinfo gettext bc
     cmake
     zlib #python python-setuptools python-pip meson
@@ -79,7 +79,10 @@ fn copy-slackage {
     tar -C $isolinux -xvhf $isolinux^.tar.xz
 
     cp -r /usr/slackage $isolinux/usr/slackage
-    ln -s /usr/slackage/main.rc $isolinux/usr/bin/slackage
+    ln -sf /usr/slackage/main.rc $isolinux/usr/bin/slackage
+    ln -sf ../usr/bin/bash $isolinux/bin/sh
+    ln -sf ../usr/bin/bash $isolinux/bin/bash
+    ln -sf vim $isolinux/usr/bin/vi
 }
 
 fn emerge-packages {

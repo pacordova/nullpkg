@@ -33,7 +33,7 @@ sed='tag=4.8 src=gnu:%s.tar.gz mk=Configure'
 
 #termstuff
 ncurses='tag=6.3 src=gnu:%s.tar.gz mk=Configure'
-readline='tag=8.0 src=gnu:%s.tar.gz mk=Configure'
+readline='tag=8.0 src=gnu:%s.tar.gz mk=Configure flags=(with-curses)'
 less='tag=590 src=gnu:%s.tar.gz mk=Configure'
 
 #debugger

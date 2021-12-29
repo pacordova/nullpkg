@@ -9,10 +9,10 @@ connman='src=git.kernel.org/pub/scm/network/connman/connman CFLAGS=($CFLAGS -lnc
 libtinfo='tag=14.2 AlienBob $1'
 
 # minimal curl, git install
-curl='tag=curl-7_80_0 src=gh:curl/curl mk=Autotools flags=(disable-static with-openssl enable-threaded-resolver with-ca-path=/etc/ssl/certs without-nghttp2 without-brotli)'
+curl='tag=curl-7_80_0 src=gh:curl/curl mk=CMake flags=(ENABLE_THREADED_RESOLVER=ON)'
 git='tag=v2.34.1 src=gh:git/git mk=Autotools flags=(with-gitconfig=/etc/gitconfig)'
 
-xz='src=gh:xz-mirror/%s/releases/download/v5.2.2/xz-5.2.2.tar.gz mk=Configure'
+xz='tag=v5.2.5 src=gh:xz-mirror/%s mk=CMake'
 flex='src=gh:westes/%s/releases/download/v2.6.4/flex-2.6.4.tar.gz mk=Configure'
 zlib='tag=v1.2.11 src=gh:madler/zlib mk=Configure'
 

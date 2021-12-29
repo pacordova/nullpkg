@@ -2,123 +2,110 @@
 
 # base dir to make the iso
 isolinux=/mnt/isolinux
-pkgcache=/usr/slackage/zzz/14.2
 
 # download a slackware iso
-# mount it with `-o loop'
-# copy the contents to the mirror dir
-mirror=/mnt/slackware-64
+# mount it with `-o loop' to mirror dir
+mirror=/mnt/mirror
 
-# base pkgs
-base=(
-    openssl
-    zoo xz util-linux utemter usb upower unarj udisks which
-    time tar sysvinit sysklogd sysfsutils splitvt smartmontools slocate sharutils
-    shadow sed sdparm rpm2tgz quota procps pkgtools pcmciautils pciutils
-    patch ntfs ncompress mtx mt-st mkinitrd minicom mdadm mcelog
-    lrzip logrotate libgudev libcgroup lha less kmod kbd inotify-tools infozip
-    hwdata hdparm gzip grep gptfdisk gpm glibc getty gettext genpower gawk
-    findutils file eudev etc efibootmgr ed dosfstools dialog devs dcron dbus
-    cryptsetup cpufrequtils cpio coreutils bzip bin bash attr acpid acl aaa
-    #lvm2 os-prober floppy eject
-)
-
-# additional pkgs
-morepkg = (
-    # for completeness
-    cdrtools
-    # bison gpg wget
-    bison elfutils /bc # needed for kernel
-    zlib # very important
-    sasl # for curl
-    ncurses libunistring libffi /l/gc-7 readline # for rc
-    pkg-config diffutils flex headers libmpc binutils /glibc-2 /gcc-5 /gcc-g+ libtool # build tools
-    openssl-1
-    /curl /git # internet
-    perl # because can't build it (only perl can parse perl?)
-    pcre # annoying to install
-    gnutls libidn tasn gmp nettle p11 # gnutls for connman
-    nftables libmnl libnftnl #with nftables instead of iptables
-    keyutils libaio # for bcache
-)
-
-
-# find the package by name
-fn findpkg {
-    du -a $mirror | grep $1 | grep -E 'txz$|tgz$' | awk '{print $2}'
+# finds packages
+fn fp {
+    *=`{du -a $mirror | grep $1 | grep -E 'txz$|tgz$'}
+    if(! ~ $#* 2)
+        printf 'ERROR #MATCHES NOT EQUAL TO ONE\n'
+    if not
+        printf '%s' $2
 }
 
+# need to copy over rc and make
+slackware=(
+    aaa_base aaa_glibc-solibs aaa_libraries aaa_terminfo    #aaa
+    glibc-^(2 solibs zoneinfo i18n profile)                 #glibc
+    gcc-^(11 g++ gfortran go) libmpc                        #gcc
+    kernel-headers openssl-^(1 solibs)                       #libs
+    #libunistring libffi gc-8 readline                       #rc
+)
 
+min=(
+    binutils ncurses bash coreutils diffutils findutils     #toolchain
+    gawk grep gzip patch sed tar xz flex readline make      #toolchain
+    #rc
+)
 
-# some custom packages pre-built and in the cache:
-# make - no guile dependence
-# rc - so slackage will work
-fn Snarf {
-    # copy the base system
-    for(pkg in $base){
-        cp $mirror/a/$pkg^*txz $mirror/a/$pkg*tgz $pkgcache
-    }
-    # additional pkgs
-    for(pkg in $morepkg){
-        cp `{findpkg $pkg} $pkgcache
-    }
+extras=(
+    m4 libiconv perl autoconf automake
+    bison texinfo gettext bc
+    cmake
+    zlib #python python-setuptools python-pip meson
+    vim firejail ninja
+)
 
-}
+    #shadow
+    #gnutls libidn tasn gmp nettle p11 nftables libmnl libnftnl
+    #elfutils
+    #keyutils libaio
 
+slackages=(
+    m4 libiconv perl autoconf automake              #gnu buildtools
+    bison texinfo gettext bc                        #gnu buildtools
+    cmake                                           #buildtools
+    binutils coreutils findutils diffutils          #rebuild toolchain
+    grep bash gawk gzip tar patch sed               #rebuild toolchain
+    ncurses readline                                #rebuild toolchain
+    zlib python python-setuptools python-pip meson  #python
+    vim firejail ninja                              #other
+    #openconnect glib connman
+    #lz4 zstd bcachefs
+)
 
-#install the pkgcache and some additional bootstrapping
-fn Emerge {
-    # clean build
+fn make-tar {
     rm -rf $isolinux
     mkdir -p $isolinux
 
-    # doinstall
-    installpkg --root $isolinux /usr/slackage/zzz/14.2/*
-    rm -rf /usr/slackage/packages/*
+    for(p in $plist)
+        installpkg --root $isolinux `{fp $p}
+
+    # binaries with minimal deps
+    for(p in (make rc git curl))
+        tar -C $isolinux -xvhf /usr/slackage/zzz/_^$p^-slackage.tar.gz
+
+    tar -c -I^'xz -9 -T0' -f $isolinux^.tar.xz -C $isolinux .
+}
+
+fn copy-slackage {
+    rm -rf $isolinux
+    mkdir -p $isolinux
+
+    tar -C $isolinux -xvhf $isolinux^.tar.xz
+
     cp -r /usr/slackage $isolinux/usr/slackage
     ln -s /usr/slackage/main.rc $isolinux/usr/bin/slackage
-    rm $isolinux/usr/slackage/zzz && mkdir $isolinux/usr/slackage/zzz
 }
 
-# run this from a firejail jail/chroot
-# you can use an alias for firejail:
-# fn chroot { firejail --chroot=$isolinux --shell=/bin/sh }
-fn Chroot {
-    # just do both because why not
-    git config --global http.sslVerify false
-    curl -k https://curl.se/ca/cacert.pem -o /usr/share/curl/ca-bundle.crt
+fn emerge-packages {
+    #fix libs
     ldconfig
-    # always have to build python as pip doesn't automatically go to DESTDIR...
-    slackage emerge python
-    pip3 install --upgrade pip
-    pip3 install --upgrade setuptools
-    pip3 install --upgrade wheel
-    pip3 install --upgrade meson
-    ln -sf /usr/bin/pip3 /usr/bin/pip
-    ln -sf /usr/bin/vim /usr/bin/vi
 
+    #fix git
+    git config --global http.sslVerify false
 
-    # slackages
-    # slackage emerge m4 autoconf automake
-    # slackage emerge vim
-    # slackage emerge firejail
-    # slackage emerge openconnect
-    # slackage emerge cmake ninja
-    # slackage emerge python
-    # pip3 install --upgrade pip
-    # pip3 install --upgrade setuptools
-    # pip3 install --upgrade wheel
-    # pip3 install --upgrade meson
-    # pip3 install --upgrade doctools
-    # slackage emerge glib connman
-    # slackage emerge lz4 zstd bcachefs
+    #curl certs
+    mkdir -p /usr/share/curl
+    curl -k https://curl.se/ca/cacert.pem -o /usr/share/curl/ca-bundle.crt
+
+    #install packages
+    #slackage emerge $slackages
 }
 
-switch($*) {
-    case snarf
-        Snarf
-    case emerge
-        Emerge
-    case emerge!
-        Chroot
+switch($1) {
+    case tar
+        make-tar
+    case slackage
+        copy-slackage
+    case chroot
+        emerge-packages
+    case *
+        printf 'USAGE: ./mkiso2.rc tar|slackage|chroot\n'
+        printf '* tar: creates a minimal tarball image\n'
+        printf '* slackage: extracts tar and copies slackage to the directory\n'
+        printf '* chroot: emerges packages from within chroot\n'
 }

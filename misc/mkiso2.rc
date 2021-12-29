@@ -1,0 +1,110 @@
+#!/usr/bin/env rc
+
+# base dir to make the iso
+isolinux=/mnt/isolinux
+
+# download a slackware iso
+# mount it with `-o loop' to mirror dir
+mirror=/mnt/mirror
+
+# finds packages
+fn fp {
+    *=`{du -a $mirror | grep $1 | grep -E 'txz$|tgz$'}
+    if(! ~ $#* 2)
+        printf 'ERROR #MATCHES NOT EQUAL TO ONE\n'
+    if not
+        printf '%s' $2
+}
+
+# need to copy over rc and make
+plist=(
+    aaa_base aaa_glibc-solibs aaa_libraries aaa_terminfo       #aaa
+    glibc-^(2 solibs zoneinfo i18n profile)                    #glibc
+    gcc-^(11 g++ gfortran go) libmpc                           #gcc
+    binutils kernel-headers ncurses bash-5 coreutils diffutils #toolchain
+    findutils gawk grep gzip patch-2 sed /tar /xz flex         #toolchain2
+    #e2fsprogs perl-5                                          #toolchain3
+    openssl-^(1 solibs)                                        #internet
+    libunistring libffi gc-8 readline                          #rc
+)
+
+    #root user
+    #shadow
+
+    #connman stuff
+    #gnutls libidn tasn gmp nettle p11
+    #nftables libmnl libnftnl
+
+    #kernel stuff
+    #bison elfutils /bc
+
+    #needed ???
+    #zlib
+
+    #bcachefs
+    #keyutils libaio
+
+slackages=(
+    m4 libiconv perl autoconf automake              #gnu buildtools
+    bison texinfo gettext bc                        #gnu buildtools
+    cmake                                           #buildtools
+    binutils coreutils findutils diffutils          #rebuild toolchain
+    grep bash gawk gzip tar patch sed               #rebuild toolchain
+    zlib python python-setuptools python-pip meson  #python
+    vim firejail ninja                              #other
+    #openconnect glib connman
+    #lz4 zstd bcachefs
+)
+
+fn make-tar {
+    rm -rf $isolinux
+    mkdir -p $isolinux
+
+    for(p in $plist)
+        installpkg --root $isolinux `{fp $p}
+
+    # binaries with minimal deps
+    for(p in (make rc git curl))
+        tar -C $isolinux -xvhf /usr/slackage/zzz/_^$p^-slackage.tar.gz
+
+    tar -c -I^'xz -9 -T0' -f $isolinux^.tar.xz -C $isolinux .
+}
+
+fn copy-slackage {
+    rm -rf $isolinux
+    mkdir -p $isolinux
+
+    tar -C $isolinux -xvhf $isolinux^.tar.xz
+
+    cp -r /usr/slackage $isolinux/usr/slackage
+    ln -s /usr/slackage/main.rc $isolinux/usr/bin/slackage
+}
+
+fn emerge-packages {
+    #fix libs
+    ldconfig
+
+    #fix git
+    git config --global http.sslVerify false
+
+    #curl certs
+    mkdir -p /usr/share/curl
+    curl -k https://curl.se/ca/cacert.pem -o /usr/share/curl/ca-bundle.crt
+
+    #install packages
+    #slackage emerge $slackages
+}
+
+switch($1) {
+    case tar
+        make-tar
+    case slackage
+        copy-slackage
+    case chroot
+        emerge-packages
+    case *
+        printf 'USAGE: ./mkiso2.rc tar|slackage|chroot\n'
+        printf '* tar: creates a minimal tarball image\n'
+        printf '* slackage: extracts tar and copies slackage to the directory\n'
+        printf '* chroot: emerges packages from within chroot\n'
+}

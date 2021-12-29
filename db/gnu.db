@@ -32,8 +32,7 @@ patch='tag=2.7.6 src=gnu:%s.tar.gz mk=Configure'
 sed='tag=4.8 src=gnu:%s.tar.gz mk=Configure'
 
 #termstuff
-#ncurses='tag=6.3 src=gnu:%s.tar.gz mk=λ;fn λ{mkdir build;cd build;./configure .. --prefix=usr --with-shared;Make}'
-ncurses='tag=v6.2 src=gh:mirror/ncurses mk=Autotools'
+ncurses='tag=6.0 src=gnu:%s.tar.gz mk=Configure flags=(with-shared with-cxx=no)'
 readline='tag=8.0 src=gnu:%s.tar.gz mk=Configure flags=(with-curses)'
 less='tag=590 src=gnu:%s.tar.gz mk=Configure'
 

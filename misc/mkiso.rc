@@ -78,7 +78,7 @@ fn copy-slackage {
 
     tar -C $isolinux -xvhf $isolinux^.tar.xz
 
-    git clone /usr/slackage $isolinux/usr/slackage --depth=1
+    git clone /usr/slackage $isolinux/usr/slackage
     ln -sf /usr/slackage/main.rc $isolinux/usr/bin/slackage
     ln -sf ../usr/bin/bash $isolinux/bin/sh
     ln -sf ../usr/bin/bash $isolinux/bin/bash

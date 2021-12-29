@@ -1,16 +1,16 @@
 #!/usr/bin/env rc
 
 # rc <-> slackage
-_rc='src=gh:rakitzis/rc mk=Autotools flags=with-^(edit=readline history)'
+rc='src=gh:rakitzis/rc mk=Autotools flags=with-^(edit=readline history)'
 
 # connman <-> Internet
 # connman <- libtinfo
-_connman='src=git.kernel.org/pub/scm/network/connman/connman CFLAGS=($CFLAGS -lncurses) mk=Autotools flags=(sysconfdir=/etc with-firewall=nftables with-curses with-gnu-ld with-systemdunitdir=no with-tmpfilesdir=no)'
+connman='src=git.kernel.org/pub/scm/network/connman/connman CFLAGS=($CFLAGS -lncurses) mk=Autotools flags=(sysconfdir=/etc with-firewall=nftables with-curses with-gnu-ld with-systemdunitdir=no with-tmpfilesdir=no)'
 libtinfo='tag=14.2 AlienBob $1'
 
 # minimal curl, git install
-_curl='tag=curl-7_80_0 src=gh:curl/curl mk=Autotools flags=(disable-static with-openssl enable-threaded-resolver with-ca-path=/etc/ssl/certs without-nghttp2 without-brotli)'
-_git='tag=v2.34.1 src=gh:git/git mk=Autotools flags=(with-gitconfig=/etc/gitconfig)'
+curl='tag=curl-7_80_0 src=gh:curl/curl mk=Autotools flags=(disable-static with-openssl enable-threaded-resolver with-ca-path=/etc/ssl/certs without-nghttp2 without-brotli)'
+git='tag=v2.34.1 src=gh:git/git mk=Autotools flags=(with-gitconfig=/etc/gitconfig)'
 
 xz='src=gh:xz-mirror/%s/releases/download/v5.2.2/xz-5.2.2.tar.gz mk=Configure'
 flex='src=gh:westes/%s/releases/download/v2.6.4/flex-2.6.4.tar.gz mk=Configure'

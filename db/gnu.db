@@ -1,7 +1,7 @@
 #!/usr/bin/env rc
 
 # make <-> make -> autoconf, automake
-_make='src=mirrors.kernel.org/gnu/make/make-4.3.tar.gz mk=Configure flags=(with-guile=no enable-nls=no)'
+make='src=mirrors.kernel.org/gnu/make/make-4.3.tar.gz mk=Configure flags=(with-guile=no enable-nls=no)'
 
 #build before rebuilding reset of system
 m4='tag=1.4.19 src=gnu:%s.tar.gz mk=Configure'

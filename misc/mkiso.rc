@@ -32,9 +32,9 @@ toolchain=(
     binutils make bash tar xz gzip flex                     #essential
     bash ncurses                                            #essential
     coreutils diffutils findutils gawk grep patch sed       #9base?
-    curl openssl                                            #dltools
-    git gettext libiconv zlib                               #dltools
-    rc readline                                             #rc
+    libiconv gettext zlib openssl                           #dltools
+    curl git                                                #dltools
+    readline rc                                             #rc
 )
 
 buildtools=(

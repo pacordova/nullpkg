@@ -29,7 +29,7 @@ slackware=(
 
 #precompiled tarball for toolchain
 toolchain=(
-    binutils make bash tar xz gzip flex                     #essential
+    binutils make tar xz gzip flex                          #essential
     bash ncurses                                            #essential
     coreutils diffutils findutils gawk grep patch sed       #9base?
     libiconv gettext zlib openssl                           #dltools
@@ -83,10 +83,8 @@ fn bootstrap {
     #curl -k https://curl.se/ca/cacert.pem -o /usr/share/curl/ca-bundle.crt
 
     plist=($buildtools $toolchain)
-    for(p in $plist) {
-        slackage snarf $p || exit
-        slackage emerge! $p || exit
-    }
+    slackage snarf $plist
+    slackage emerge! $plist
 }
 
 switch($1) {

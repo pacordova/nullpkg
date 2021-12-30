@@ -26,17 +26,17 @@ slackware=(
 
 #precompiled tarball for toolchain
 toolchain=(
-    binutils make bash tar xz flex curl git                 #essential
+    binutils make bash tar xz gzip flex curl git            #essential
     ncurses readline openssl                                #libs
     coreutils diffutils findutils gawk grep patch sed rc    #9base?
 )
 
 extras=(
-    m4 libiconv autoconf automake #perl
+    m4 libiconv perl autoconf automake
     bison texinfo gettext bc
     cmake
     zlib #python python-setuptools python-pip meson
-    vim firejail ninja less
+    vim less #firejail ninja
 )
 
     #shadow
@@ -49,7 +49,7 @@ slackages=(
     bison texinfo gettext bc                        #gnu buildtools
     cmake                                           #buildtools
     binutils coreutils findutils diffutils          #rebuild toolchain
-    grep bash gawk gzip tar patch sed               #rebuild toolchain
+    grep bash gawk tar patch sed gzip               #rebuild toolchain
     ncurses readline                                #rebuild toolchain
     zlib python python-setuptools python-pip meson  #python
     vim firejail ninja                              #other

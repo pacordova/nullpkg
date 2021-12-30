@@ -30,7 +30,7 @@ slackware=(
 #precompiled tarball for toolchain
 toolchain=(
     binutils make bash tar xz gzip flex curl git            #essential
-    ncurses readline openssl                                #libs
+    ncurses #readline openssl                                #libs
     coreutils diffutils findutils gawk grep patch sed rc    #9base?
 )
 
@@ -75,7 +75,7 @@ fn make-tar {
 
     # bootstrap rest of toolchain
     # add vim and less for qol
-    for(p in ($toolchain vim less))
+    for(p in ($toolchain))
         tar -C $isolinux -xvhf $pcache/$p^-slackage.tar.gz --index-file=$isolinux/usr/slackage/index/$p.txt
 
     ln -sf /usr/slackage/main.rc $isolinux/usr/bin/slackage

@@ -16,7 +16,7 @@ texinfo='tag=6.8 src=gnu:%s.tar.gz mk=Configure'
 
 #for kernel
 bison='tag=3.8.2 src=gnu:%s.tar.gz mk=Configure'
-bc='tag=1.07 src=gnu:%s.tar.gz mk=Configure'
+bc='tag=1.06 src=gnu:%s.tar.gz mk=Configure'
 
 #utils
 binutils='tag=2.37 src=gnu:%s.tar.gz mk=Configure'

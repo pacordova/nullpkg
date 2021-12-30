@@ -31,7 +31,7 @@ switch($1){
         }
 
         for(p in $packages){
-            printf 'Downloading %s...' $p
+            echo DOWNLOADING: $p
             Snarf $p
             wait
         }
@@ -41,9 +41,10 @@ switch($1){
             if(! test -f $p)
                 p=/usr/slackage/zzz/$p-slackage.tar.gz
             if(! test -f $p)
-                printf 'error: binary cache not found\n'
+                echo ERROR: NO TAR BINARY CACHE
+                echo $p
             Install $p
         }
     case *
-        printf 'usage: slackage emerge|purge|snarf|install foo\n'
+        echo 'USAGE: slackage emerge|purge|snarf|install foo'
 }

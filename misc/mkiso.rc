@@ -14,9 +14,9 @@ pcache=/usr/slackage/zzz/pcache
 fn fp {
     *=`{du -a $mirror | grep $1 | grep -E 'txz$|tgz$'}
     if(! ~ $#* 2)
-        printf 'ERROR #MATCHES NOT EQUAL TO ONE\n'
+        echo 'ERROR #MATCHES NOT EQUAL TO ONE'
     if not
-        printf '%s' $2
+        echo $2
 }
 
 #slackware toolchain for gcc and glibc and base libs
@@ -93,7 +93,7 @@ switch($1) {
     case bootstrap
         bootstrap
     case *
-        printf 'USAGE: ./mkiso2.rc tar|slackage|chroot\n'
-        printf '* tar: creates a minimal tarball image\n'
-        printf '* bootstrap: emerges packages from within chroot\n'
+        echo 'USAGE: ./mkiso2.rc tar|slackage|chroot'
+        echo '* tar: creates a minimal tarball image'
+        echo '* bootstrap: emerges packages from within chroot'
 }

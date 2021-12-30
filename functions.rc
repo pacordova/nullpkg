@@ -4,14 +4,13 @@
 
 fn cd
 fn rm { { /usr/bin/rm $* || /usr/bin/rmdir $* } >[2] /dev/null }
-fn printf { /usr/bin/printf $* >[2] /dev/null }
 fn tar { /usr/bin/tar $* >/dev/null >[2=1] }
 
 fn Package {
     if(~ $#1 0)
-        printf 'error: arg' && exit
+        echo ERROR: Package: NO ARGS && exit
     if(~ $#destdir 0)
-        printf 'error: bad destdir' && exit
+        echo ERROR: Package: NO destdir && exit
 
     # strip binaries if not debugging
     if(~ $buildtype release) {
@@ -114,12 +113,8 @@ fn Meson {
         '--buildtype='$buildtype \
         '--prefix='$PREFIX $flags
 
-    if(! test -f build/build.ninja) {
-        printf \
-            'error: Meson: see %s/build/meson-logs/meson-log.txt\n' \
-            `{pwd} \
-        && exit
-    }
+    if(! test -f build/build.ninja)
+        echo ERROR: Meson: build.ninja NOT CREATED && exit
 
     Ninja
 }
@@ -205,14 +200,14 @@ fn Git {
         /usr/slackage/packages/$1
 
     if(! test -d /usr/slackage/packages/$1)
-        printf 'error: Git\n' && exit
+        echo ERROR: Git: REPO NOT CLONED && exit
 }
 
 fn Curl {
     # cache filename as local var
     *=($* /tmp/`{basename $src})
 
-    ifs='.' { *=($* `{ printf $"src }) }
+    ifs='.' { *=($* `{ echo $"src }) }
 
     mkdir /usr/slackage/packages/$1
     cd /tmp
@@ -245,8 +240,8 @@ fn Snarf {
         rm -rf /usr/slackage/packages/$1
 
     src=`{
-        printf $"src $1 \
-        | sed '
+        echo $src |
+        sed 's|%s|'$1'|;
             s|gnu:'$1'|mirrors.kernel.org/gnu/'$1'/'$1'-'$tag'|g;
             s|boost:boost-|gh:boostorg/|g;
             s|gh:|github.com/|g;
@@ -293,7 +288,7 @@ fn Clean {
 fn Query {
     # ensure input isn't borked
     if(~ $#1 0)
-        printf 'error: Query: arg\n' && exit
+        echo ERROR: Query: NO ARGS && exit
 
     # clean env
     Clean
@@ -313,7 +308,7 @@ fn Query {
     eval $$1
 
     if(~ $#src 0)
-        printf 'error: Query: src\n' && exit
+        echo ERROR: Query: MISSING src && exit
 
     # modify cflags if debugging
     # run after eval to allow db to specify
@@ -344,7 +339,7 @@ fn Emerge {
 
 fn Purge {
     if(~ $#1 0)
-        printf 'error: Purge: arg' && exit
+        echo ERROR: Purge: NO ARGS && exit
 
     # delete the file index
     # using tac ensures empty dirs get deleted

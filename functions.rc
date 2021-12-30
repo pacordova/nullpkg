@@ -81,7 +81,7 @@ fn Make{
 
     # do the build
     make clean
-    make $MAKEOPTS $flags^=$CFLAGS
+    make PREFIX=$PREFIX $MAKEOPTS $flags^=$CFLAGS
     make PREFIX=$PREFIX $destdirs install
 }
 

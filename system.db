@@ -11,6 +11,7 @@ libtinfo='tag=14.2 AlienBob $1'
 # minimal curl, git install
 curl='tag=curl-7_80_0 src=gh:curl/curl mk=CMake flags=(ENABLE_THREADED_RESOLVER=ON)'
 git='tag=v2.34.1 src=gh:git/git mk=Autotools flags=(with-gitconfig=/etc/gitconfig)'
+9base='src=git.suckless.org/9base mk=Make CFLAGS=($CFLAGS -fcommon)'
 
 xz='tag=v5.2.5 src=gh:xz-mirror/%s mk=CMake'
 flex='src=gh:westes/%s/releases/download/v2.6.4/flex-2.6.4.tar.gz mk=Configure'

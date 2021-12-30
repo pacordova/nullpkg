@@ -65,7 +65,10 @@ slackages=(
 
 fn make-tar {
     rm -rf $isolinux
-    mkdir -p $isolinux
+    mkdir -p $isolinux/usr
+    git clone /usr/slackage $isolinux/usr/slackage
+    mkdir $isolinux/usr/slackage/zzz
+    mkdir $isolinux/usr/slackage/index
 
     for(p in $slackware)
         installpkg --root $isolinux `{fp $p}
@@ -73,11 +76,8 @@ fn make-tar {
     # bootstrap rest of toolchain
     # add vim and less for qol
     for(p in ($toolchain vim less))
-        tar -C $isolinux -xvhf $pcache/$p^-slackage.tar.gz
+        tar -C $isolinux -xvhf $pcache/$p^-slackage.tar.gz --index-file=$isolinux/usr/slackage/index/$p.txt
 
-    git clone /usr/slackage $isolinux/usr/slackage
-    mkdir $isolinux/usr/slackage/zzz
-    mkdir $isolinux/usr/slackage/index
     ln -sf /usr/slackage/main.rc $isolinux/usr/bin/slackage
     ln -sf ../usr/bin/bash $isolinux/bin/sh
     ln -sf ../usr/bin/bash $isolinux/bin/bash

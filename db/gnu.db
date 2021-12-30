@@ -8,10 +8,10 @@ m4='tag=1.4.19 src=gnu:%s.tar.gz mk=Configure'
 autoconf='tag=2.71 src=gnu:%s.tar.gz mk=Configure'
 automake='tag=1.16.5 src=gnu:%s.tar.gz mk=Configure'
 texinfo='tag=6.8 src=gnu:%s.tar.gz mk=Configure'
-gettext='tag=0.21 src=gnu:%s.tar.xz mk=Configure'
 
-#iconv infects everything... try to avoid
-#libiconv='tag=1.16 src=gnu:%s.tar.gz mk=Configure'
+# no shared libs so they don't become hard deps
+gettext='tag=0.21 src=gnu:%s.tar.xz mk=Configure flags=(enable-shared=no)'
+libiconv='tag=1.16 src=gnu:%s.tar.gz mk=Configure flags=(enable-shared=no)'
 
 #for kernel
 bison='tag=3.8.2 src=gnu:%s.tar.gz mk=Configure'

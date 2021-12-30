@@ -25,7 +25,7 @@ findutils='tag=4.8.0 src=gnu:%s.tar.xz mk=Configure'
 #toolchain
 grep='tag=3.7 src=gnu:%s.tar.xz mk=Configure'
 bash='tag=5.1.8 src=gnu:%s.tar.gz mk=Configure'
-gawk='tag=5.1.1 src=gnu:%s.tar.gz mk=Configure'
+gawk='tag=5.1.1 src=gnu:%s.tar.gz mk=Configure flags=(with-readline=no)'
 gzip='tag=1.11 src=gnu:%s.tar.gz mk=Configure'
 tar='tag=1.34 src=gnu:%s.tar.gz mk=Configure'
 patch='tag=2.7.6 src=gnu:%s.tar.gz mk=Configure'

@@ -38,33 +38,21 @@ toolchain=(
 )
 
 buildtools=(
-    m4 libiconv perl autoconf automake
-    bison texinfo gettext bc
+    m4 perl autoconf automake
+    vim less
+    bison texinfo bc
     cmake
 )
 
 # more stuff to bootstrap later:
-#zlib python python-setuptools python-pip meson     #python
+#python python-setuptools python-pip meson          #python
 #shadow                                             #login
 #gnutls libidn tasn gmp nettle                      #networking
 #p11 nftables libmnl libnftnl                       #networking
-#connman                                            #networking
+#connman openconnect? glib                          #networking
 #elfutils                                           #for kernel?
-#keyutils libaio                                    #bcachfs
-
-
-slackages=(
-    m4 libiconv perl autoconf automake              #gnu buildtools
-    bison texinfo gettext bc                        #gnu buildtools
-    cmake                                           #buildtools
-    binutils coreutils findutils diffutils          #rebuild toolchain
-    grep bash gawk tar patch sed gzip               #rebuild toolchain
-    ncurses readline                                #rebuild toolchain
-    zlib python python-setuptools python-pip meson  #python
-    vim firejail ninja                              #other
-    #openconnect glib connman
-    #lz4 zstd bcachefs
-)
+#bcachefs lz4 zstd keyutils libaio                  #bcachfs
+#firejail ninja                                     #misc
 
 fn make-tar {
     rm -rf $isolinux
@@ -89,35 +77,22 @@ fn make-tar {
     tar -c -I^'xz -9 -T0' -f $isolinux^.tar.xz -C $isolinux .
 }
 
-fn copy-slackage {
-    cp $pcache/* $isolinux/usr/slackage/zzz/
-}
-
-fn emerge-packages {
-    #fix libs
+fn bootstrap {
     ldconfig
-
-    #fix git
     git config --global http.sslVerify false
+    #curl -k https://curl.se/ca/cacert.pem -o /usr/share/curl/ca-bundle.crt
 
-    #curl certs
-    mkdir -p /usr/share/curl
-    curl -k https://curl.se/ca/cacert.pem -o /usr/share/curl/ca-bundle.crt
-
-    #install packages
-    #slackage emerge $slackages
+    plist=($buildtools $toolchain)
+    slackage emerge $plist
 }
 
 switch($1) {
     case tar
         make-tar
-    case slackage
-        copy-slackage
-    case chroot
-        emerge-packages
+    case bootstrap
+        bootstrap
     case *
         printf 'USAGE: ./mkiso2.rc tar|slackage|chroot\n'
         printf '* tar: creates a minimal tarball image\n'
-        printf '* slackage: extracts tar and copies slackage to the directory\n'
-        printf '* chroot: emerges packages from within chroot\n'
+        printf '* bootstrap: emerges packages from within chroot\n'
 }

@@ -27,7 +27,7 @@ switch($1){
         packages=`{
             cat $db \
             | grep -v -e Installpkg -e '^#' \
-            | awk -F= '{print $1}'
+            | awk '-F=' '{print $1}'
         }
 
         for(p in $packages){

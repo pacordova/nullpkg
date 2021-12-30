@@ -47,7 +47,7 @@ fn Install {
     tar \
         -C / \
         -xvhf $1 \
-        --index-file=/usr/slackage/index/`{basename $1 -slackage.tar.gz}^.txt
+        '--index-file=/usr/slackage/index/'`{basename $1 -slackage.tar.gz}^.txt
 
     cd /
 
@@ -69,20 +69,16 @@ fn Slackware {
 fn Make{
     # override flags variable to use for packages that use vanilla make
     # also set the destdir as some vanilla make packages use weird variables
-    flags=(
-        MYCFLAGS
-        EXTRA_CFLAGS
-        CFLAGS_EXTRA
-    )
-    destdirs=(
-        (DESTDIR INSTALL_ROOT)^=$destdir
-        (INSTALL_TOP)^=$destdir/$PREFIX
+    flags=('MYCFLAGS=' 'EXTRA_CFLAGS=' 'CFLAGS_EXTRA=')^$CFLAGS
+    destdirs=( \
+        ('DESTDIR=' 'INSTALL_ROOT=')^$destdir \
+        ('INSTALL_TOP=')^$destdir/$PREFIX \
     )
 
     # do the build
     make clean
-    make PREFIX=$PREFIX $MAKEOPTS $flags^=$CFLAGS
-    make PREFIX=$PREFIX $destdirs install
+    make 'PREFIX='$PREFIX $MAKEOPTS $flags
+    make 'PREFIX='$PREFIX $destdirs install
 }
 
 # Configure scripts generated from Autoreconf use environment variables
@@ -92,7 +88,7 @@ fn Configure {
         flags=--$flags
 
     ./configure \
-        --prefix=$PREFIX \
+        '--prefix='$PREFIX \
         $flags
 
     Make
@@ -110,13 +106,13 @@ fn Autotools {
 # we pass the CFLAGS directly to meson just in case
 fn Meson {
     if(! ~ $#flags 0)
-        flags=-D^$flags
+        flags=-D$flags
 
     rm -rf build
 
     CFLAGS=$CFLAGS CXXFLAGS=$CXXFLAGS meson build \
-        --buildtype=$buildtype \
-        --prefix=$PREFIX $flags
+        '--buildtype='$buildtype \
+        '--prefix='$PREFIX $flags
 
     if(! test -f build/build.ninja) {
         printf \
@@ -138,8 +134,8 @@ fn CMakeNinja {
     cd build
 
     cmake -GNinja .. \
-        -DCMAKE_INSTALL_PREFIX:PATH=/usr \
-        -DCMAKE_BUILD_TYPE=$buildtype \
+        '-DCMAKE_INSTALL_PREFIX:PATH='/usr \
+        '-DCMAKE_BUILD_TYPE='$buildtype \
         $flags
 
     cd ..
@@ -155,8 +151,8 @@ fn CMake {
     cd build
 
     cmake .. \
-        -DCMAKE_INSTALL_PREFIX:PATH=/usr \
-        -DCMAKE_BUILD_TYPE=$buildtype \
+        '-DCMAKE_INSTALL_PREFIX:PATH='/usr \
+        '-DCMAKE_BUILD_TYPE='$buildtype \
         $flags
 
     Make
@@ -164,7 +160,7 @@ fn CMake {
 
 fn Scons {
     scons -c
-    scons prefix=$PREFIX DESTDIR=$destdir install
+    scons 'prefix='$PREFIX 'DESTDIR='$destdir install
 }
 
 fn Ninja { DESTDIR=$destdir ninja -C build install }
@@ -182,7 +178,7 @@ fn Cargo {
 
 fn Python {
     python3 -m ensurepip
-    pip3 install . --root=$destdir
+    pip3 install . '--root='$destdir
 }
 
 # qmake uses default flags used to build Qt
@@ -202,7 +198,7 @@ fn Git {
 
     git clone \
         --recurse-submodules \
-        --depth=1 \
+        '--depth='1 \
         $MAKEOPTS \
         $tag \
         $src \
@@ -231,7 +227,7 @@ fn Curl {
             tar \
                 -C /usr/slackage/packages/$1 \
                 -xf $2 \
-                --strip-components=1
+                '--strip-components=1'
         case py
             chmod +x $2
             mv $2 /usr/slackage/packages/$1/
@@ -272,11 +268,11 @@ fn Snarf {
             Git $1
         case *opensuse*
             ifs='"' {*=($1 `{ curl -s $src | grep 'rpm"' })}
-            src=$src^$5
+            src=$src$5
             Curl $1
         case *alien*slackbuilds*
             ifs='"' {*=($1 `{ curl -s $src | grep 't.z"' })}
-            src=$src^$9
+            src=$src$9
             Curl $1 && installpkg /tmp/$9 && exit
         case *
             Curl $1
@@ -322,11 +318,14 @@ fn Query {
     # modify cflags if debugging
     # run after eval to allow db to specify
     if(~ $buildtype 'debug')
-        CFLAGS=(-march=x86-64 -pipe -Og)
+        CFLAGS=('-march=x86-64' '-pipe' '-Og')
+
+    # do the cxxflags
+    CXXFLAGS=($CFLAGS $CXXFLAGS)
 
     # reduce list to string
     CFLAGS=$"CFLAGS
-    CXXFLAGS=$"CFLAGS^' '^$"CXXFLAGS
+    CXXFLAGS=$"CXXFLAGS
     RUSTFLAGS=$"RUSTFLAGS
 }
 

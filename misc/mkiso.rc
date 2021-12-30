@@ -16,20 +16,19 @@ fn fp {
         printf '%s' $2
 }
 
-# need to copy over rc and make
+#slackware toolchain for gcc and glibc and base libs
 slackware=(
     aaa_base aaa_glibc-solibs aaa_libraries aaa_terminfo    #aaa
     glibc-^(2 solibs zoneinfo i18n profile)                 #glibc
     gcc-^(11 g++ gfortran go) libmpc                        #gcc
     kernel-headers                                          #libs
-    #libunistring libffi gc-8                               #rc
 )
 
-base=(
-    binutils ncurses bash coreutils diffutils findutils     #toolchain
-    gawk grep gzip patch sed tar xz flex readline make      #toolchain
-    openssl curl git                                        #toolchain
-    rc
+#precompiled tarball for toolchain
+toolchain=(
+    binutils make bash tar xz flex curl git                 #essential
+    ncurses readline openssl                                #libs
+    coreutils diffutils findutils gawk grep patch sed rc    #9base?
 )
 
 extras=(
@@ -66,7 +65,7 @@ fn make-tar {
         installpkg --root $isolinux `{fp $p}
 
     # binaries with minimal deps
-    for(p in ($base $extras))
+    for(p in ($toolchain $extras))
         tar -C $isolinux -xvhf /usr/slackage/zzz/thecache/$p^-slackage.tar.gz
 
     tar -c -I^'xz -9 -T0' -f $isolinux^.tar.xz -C $isolinux .

@@ -7,6 +7,9 @@ isolinux=/mnt/isolinux
 # mount it with `-o loop' to mirror dir
 mirror=/mnt/mirror
 
+#package cache
+pcache=/usr/slackage/zzz/pcache
+
 # finds packages
 fn fp {
     *=`{du -a $mirror | grep $1 | grep -E 'txz$|tgz$'}
@@ -31,18 +34,21 @@ toolchain=(
     coreutils diffutils findutils gawk grep patch sed rc    #9base?
 )
 
-extras=(
+buildtools=(
     m4 libiconv perl autoconf automake
     bison texinfo gettext bc
     cmake
-    zlib #python python-setuptools python-pip meson
-    vim less #firejail ninja
 )
 
-    #shadow
-    #gnutls libidn tasn gmp nettle p11 nftables libmnl libnftnl
-    #elfutils
-    #keyutils libaio
+# more stuff to bootstrap later:
+#zlib python python-setuptools python-pip meson     #python
+#shadow                                             #login
+#gnutls libidn tasn gmp nettle                      #networking
+#p11 nftables libmnl libnftnl                       #networking
+#connman                                            #networking
+#elfutils                                           #for kernel?
+#keyutils libaio                                    #bcachfs
+
 
 slackages=(
     m4 libiconv perl autoconf automake              #gnu buildtools
@@ -64,18 +70,10 @@ fn make-tar {
     for(p in $slackware)
         installpkg --root $isolinux `{fp $p}
 
-    # binaries with minimal deps
-    for(p in ($toolchain $extras))
-        tar -C $isolinux -xvhf /usr/slackage/zzz/thecache/$p^-slackage.tar.gz
-
-    tar -c -I^'xz -9 -T0' -f $isolinux^.tar.xz -C $isolinux .
-}
-
-fn copy-slackage {
-    rm -rf $isolinux
-    mkdir -p $isolinux
-
-    tar -C $isolinux -xvhf $isolinux^.tar.xz
+    # bootstrap rest of toolchain
+    # add vim and less for qol
+    for(p in ($toolchain vim less))
+        tar -C $isolinux -xvhf $pcache/$p^-slackage.tar.gz
 
     git clone /usr/slackage $isolinux/usr/slackage
     mkdir $isolinux/usr/slackage/zzz
@@ -84,6 +82,12 @@ fn copy-slackage {
     ln -sf ../usr/bin/bash $isolinux/bin/sh
     ln -sf ../usr/bin/bash $isolinux/bin/bash
     ln -sf vim $isolinux/usr/bin/vi
+
+    tar -c -I^'xz -9 -T0' -f $isolinux^.tar.xz -C $isolinux .
+}
+
+fn copy-slackage {
+    cp $pcache/* $isolinux/usr/slackage/zzz/
 }
 
 fn emerge-packages {

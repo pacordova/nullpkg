@@ -83,7 +83,10 @@ fn bootstrap {
     #curl -k https://curl.se/ca/cacert.pem -o /usr/share/curl/ca-bundle.crt
 
     plist=($buildtools $toolchain)
-    slackage emerge $plist
+    for(p in $plist) {
+        slackage snarf $p || exit
+        slackage emerge! $p || exit
+    }
 }
 
 switch($1) {

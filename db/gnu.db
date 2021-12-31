@@ -52,7 +52,7 @@ gcc(){tag=11.2.0 src=gnu:%s.tar.gz flags=('enable-multilib=no') μ=Configure λ}
 #impossible to build libtool and deps...
 help2man(){tag=1.48.5 src=gnu:%s.tar.xz μ=Configure λ}
 autobuild(){src=download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz μ=Configure λ}
-libtool(){tag=2.4.6 src=gnu:%s.tar.gz;fn μ{sed -i configure.ac -e ''s|2.62|[2.64]|'';./bootstrap --force;Configure} λ}
+libtool(){tag=2.4.6 src=gnu:%s.tar.gz;fn μ{sed -i configure.ac -e 's|2.62|[2.64]|';./bootstrap --force;Configure} λ}
 
 # misc
 gperf(){tag=3.1 src=gnu:%s.tar.gz μ=Configure λ}

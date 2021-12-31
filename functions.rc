@@ -8,9 +8,9 @@ fn tar{ /usr/bin/tar $* >/dev/null >[2=1] }
 
 fn Package {
     if(~ $#1 0)
-        echo ERROR: Package: NO ARGS && exit
+        echo error: Package: arglist is empty && exit
     if(~ $#destdir 0)
-        echo ERROR: Package: NO destdir && exit
+        echo error: Package: '$'destdir is not defined && exit
 
     # strip binaries if not debugging
     if(~ $buildtype release) {
@@ -114,7 +114,7 @@ fn Meson {
         '--prefix='$PREFIX $flags
 
     if(! test -f build/build.ninja)
-        echo ERROR: Meson: build.ninja NOT CREATED && exit
+        echo error: Meson: build.ninja does not exist && exit
 
     Ninja
 }
@@ -189,18 +189,18 @@ fn Headers {
 
 fn Git {
     if(~ $#tag 1)
-        tag='-b'^$tag
+        tag='-b'$tag
 
     git clone \
         --recurse-submodules \
-        '--depth='1 \
+        '--depth=1' \
         $MAKEOPTS \
         $tag \
         $src \
         /usr/slackage/packages/$1
 
     if(! test -d /usr/slackage/packages/$1)
-        echo ERROR: Git: REPO NOT CLONED && exit
+        echo error: Git: clone failed && exit
 }
 
 fn Curl {
@@ -243,17 +243,17 @@ fn Snarf {
     src=`{
         echo $src |
         sed 's|%s|'$1'|;
-            s|gnu:'$1'|mirrors.kernel.org/gnu/'$1'/'$1'-'$tag'|g;
+            s|gnu:'$1'|mirrors.kernel.org/gnu/'$1'/'$1'-'$"tag'|g;
             s|boost:boost-|gh:boostorg/|g;
             s|gh:|github.com/|g;
             s|gl:|gitlab.com/|g;
-            s|xfce:'$1'|archive.xfce.org/xfce/4.12/src/'$1'-'$tag'.tar.bz2|g;
+            s|xfce:'$1'|archive.xfce.org/xfce/4.12/src/'$1'-'$"tag'.tar.bz2|g;
             s|gnome:|gitlab.gnome.org/gnome/|g;
             s|kde:|invent.kde.org/|g;
             s|freedesktop:|gitlab.freedesktop.org/|g;
             s|qt:|github.com/qt/|g;
             s|obs:|download.opensuse.org/repositories/|g;
-            s|alienbob:|www.slackware.com/~alien/slackbuilds/'$1'/pkg64/'$tag'/|g;
+            s|alienbob:|www.slackware.com/~alien/slackbuilds/'$1'/pkg64/'$"tag'/|g;
             s|^|http://|g'
     }
 
@@ -281,14 +281,14 @@ fn Clean {
     destdir=()
     deps=()
     flags=()
-    tag=''
+    tag=()
     src=()
 }
 
 fn Query {
     # ensure input isn't borked
     if(~ $#1 0)
-        echo ERROR: Query: NO ARGS && exit
+        echo error: Query: arglist is empty && exit
 
     # clean env
     Clean
@@ -307,7 +307,7 @@ fn Query {
     eval `{ cat $db | grep '^'$1 }
 
     if(~ $#src 0)
-        echo ERROR: Query: MISSING src && exit
+        echo error: Query: '$'src is not defined && exit
 
     # modify cflags if debugging
     # run after eval to allow db to specify
@@ -324,15 +324,11 @@ fn Query {
 
 fn Emerge {
     # set the env
-    echo emerge
-    echo query
     Query $1
 
     # make and install
     cd /usr/slackage/packages/$1
-    echo make
     $μ || exit
-    echo package
     Package $1 >[2] /dev/null
 
     # cleanup env
@@ -341,7 +337,7 @@ fn Emerge {
 
 fn Purge {
     if(~ $#1 0)
-        echo ERROR: Purge: NO ARGS && exit
+        echo error: Purge: arglist is empty && exit
 
     # delete the file index
     # using tac ensures empty dirs get deleted

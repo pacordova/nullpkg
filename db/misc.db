@@ -2,98 +2,98 @@
 
 # GNOME
 #######
-gjs(){src=gnome:%s μ=Meson}
-pygobject(){tag=3.42.0 src=gnome:%s μ=Meson}
-gsettings-desktop-schemas(){tag=40.0 src=gnome:%s μ=Meson flags=('introspection=false')}
-gobject-introspection(){tag=1.70.0 src=gnome:%s μ=Meson}
-libgee(){tag=meson src=gnome:%s μ=Meson}
-gnome-tweaks(){src=gnome:%s μ=Meson}
+gjs=(){src=gnome:%s μ=Meson}
+pygobject=(){tag=3.42.0 src=gnome:%s μ=Meson}
+gsettings-desktop-schemas=(){tag=40.0 src=gnome:%s μ=Meson flags=('introspection=false')}
+gobject-introspection=(){tag=1.70.0 src=gnome:%s μ=Meson}
+libgee=(){tag=meson src=gnome:%s μ=Meson}
+gnome-tweaks=(){src=gnome:%s μ=Meson}
 
 # BOOST
 #######
-boost-b2(){src=gh:boostorg/build tag=boost-1.77.0 μ=λ; fn λ {./bootstrap.sh '--cxxflags='$CXXFLAGS; ./b2 install --prefix=$DESTDIR/usr}}
-boost-install(){src=gh:boostorg/boost_install tag=boost-1.77.0 μ=B2}
-boost-system(){src=gh:boostorg/system tag=boost-1.77.0 μ=B2}
+boost-b2=(){src=gh:boostorg/build tag=boost-1.77.0 μ=λ; fn λ {./bootstrap.sh '--cxxflags='$CXXFLAGS; ./b2 install --prefix=$DESTDIR/usr}}
+boost-install=(){src=gh:boostorg/boost_install tag=boost-1.77.0 μ=B2}
+boost-system=(){src=gh:boostorg/system tag=boost-1.77.0 μ=B2}
 
 # MISCELLANEOUS STUFF
 # MIGHT NOT WORK/INCOMPLETE
 ###########################
-pcre(){src=ftp.pcre.org/pub/pcre/pcre-8.45.tar.gz μ=Configure flags=('enable-unicode-properties')}
-perl(){tag=v5.34.0 src=gh:perl/perl5 μ=λ; fn λ {sh Configure -des -Doptimize=$"CFLAGS -Dprefix=$DESTDIR/$PREFIX && make install}}
-openssl(){tag=OpenSSL_1_1_1-stable src=gh:%s/%s μ=(Configure config)}
-pkg-config(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools}
-ghc(){src=gitlab.haskell.org/%s/%s tag=ghc-8.10.7-release μ=Autotools}
-compiz(){src=gh:compiz-reloaded/%s μ=Autotools}
-optipng(){src=prdownloads.sourceforge.net/%s/%s-0.7.7.tar.gz μ=Autotools}
-pass(){src=git.zx2c4.com/password-store μ=MK}
-tinyproxy(){src=gh:tinyproxy/tinyproxy μ=Autotools}
-xarchiver(){src=gh:ib/xarchiver μ=Autotools}
-ucl(){src=www.oberhumer.com/opensource/%s/download/%s-1.03.tar.gz CFLAGS=($CFLAGS -ansi) μ=Configure}
-upx(){src=gh:%s/%s CFLAGS=($CFLAGS -ansi) target=all μ=Makeout; fn Makeout {MK; cp src/upx.out $DESTDIR/usr/bin/upx}}
-lzop(){src=www.lzop.org/download/%s-1.04.tar.gz μ=Configure}
-wine(){src=gh:wine-mirror/%s μ=Autotools flags=('enable-win64')}
-fontforge(){src=gh:fontforge/%s μ=CMakeNinja flags=('CMAKE_INSTALL_PREFIX:PATH=/usr' 'ENABLE_DOCS=OFF' 'ENABLE_LIBSPIRO=OFF')}
+pcre=(){src=ftp.pcre.org/pub/pcre/pcre-8.45.tar.gz μ=Configure flags=('enable-unicode-properties')}
+perl=(){tag=v5.34.0 src=gh:perl/perl5 μ=λ; fn λ {sh Configure -des -Doptimize=$"CFLAGS -Dprefix=$DESTDIR/$PREFIX && make install}}
+openssl=(){tag=OpenSSL_1_1_1-stable src=gh:%s/%s μ=(Configure config)}
+pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools}
+ghc=(){src=gitlab.haskell.org/%s/%s tag=ghc-8.10.7-release μ=Autotools}
+compiz=(){src=gh:compiz-reloaded/%s μ=Autotools}
+optipng=(){src=prdownloads.sourceforge.net/%s/%s-0.7.7.tar.gz μ=Autotools}
+pass=(){src=git.zx2c4.com/password-store μ=MK}
+tinyproxy=(){src=gh:tinyproxy/tinyproxy μ=Autotools}
+xarchiver=(){src=gh:ib/xarchiver μ=Autotools}
+ucl=(){src=www.oberhumer.com/opensource/%s/download/%s-1.03.tar.gz CFLAGS=($CFLAGS -ansi) μ=Configure}
+upx=(){src=gh:%s/%s CFLAGS=($CFLAGS -ansi) target=all μ=Makeout; fn Makeout {MK; cp src/upx.out $DESTDIR/usr/bin/upx}}
+lzop=(){src=www.lzop.org/download/%s-1.04.tar.gz μ=Configure}
+wine=(){src=gh:wine-mirror/%s μ=Autotools flags=('enable-win64')}
+fontforge=(){src=gh:fontforge/%s μ=CMakeNinja flags=('CMAKE_INSTALL_PREFIX:PATH=/usr' 'ENABLE_DOCS=OFF' 'ENABLE_LIBSPIRO=OFF')}
 
 # ag <- pcre2 (fork)
-ag(){src=gh:aswild/the_silver_searcher μ=Autotools}
+ag=(){src=gh:aswild/the_silver_searcher μ=Autotools}
 
 # python won't support libressl?
-libressl(){src=gh:libressl-portable/portable μ=Autotools}
+libressl=(){src=gh:libressl-portable/portable μ=Autotools}
 
 # azpainter <- libwebp
-azpainter(){src=gl:azelpg/azpainter μ=Configure}
+azpainter=(){src=gl:azelpg/azpainter μ=Configure}
 
 # gedit <- gtksourceview libpeas
-gedit(){src=gnome:%s tag=gnome-3-38 μ=Meson flags=('spell=disabled' 'user_documentation=false' 'plugin_externaltools=false')}
-gtksourceview(){src=gnome:%s tag=gtksourceview-4-8 μ=Meson}
-libpeas(){src=gnome:%s μ=Meson}
+gedit=(){src=gnome:%s tag=gnome-3-38 μ=Meson flags=('spell=disabled' 'user_documentation=false' 'plugin_externaltools=false')}
+gtksourceview=(){src=gnome:%s tag=gtksourceview-4-8 μ=Meson}
+libpeas=(){src=gnome:%s μ=Meson}
 
 # feh <- imlib2
-feh(){src=gh:derf/%s μ=MK}
-imlib2(){src=git.enlightenment.org/legacy/%s μ=Autotools}
+feh=(){src=gh:derf/%s μ=MK}
+imlib2=(){src=git.enlightenment.org/legacy/%s μ=Autotools}
 
 # lollypop <- totem-pl-parser | libsoup pygobject3 libhandy py:Pillow py:pylast libsecret gstreamer
-lollypop(){src=gitlab.gnome.org/World/%s μ=Meson}
-totem-pl-parser(){src=gnome:%s μ=Meson}
+lollypop=(){src=gitlab.gnome.org/World/%s μ=Meson}
+totem-pl-parser=(){src=gnome:%s μ=Meson}
 
 # deadbeef <- faad2 | llvm jansson gettext gettext-tools intltool
-faad2(){src=gh:knik0/%s μ=Autotools}
-deadbeef(){src=gh:deadbeef-player/%s tag=1.8.4 μ=Autotools flags=('disable-'^('ffmpeg' 'psf'))}
+faad2=(){src=gh:knik0/%s μ=Autotools}
+deadbeef=(){src=gh:deadbeef-player/%s tag=1.8.4 μ=Autotools flags=('disable-'^('ffmpeg' 'psf'))}
 
 # network manager <- ppp libndp
-networkmanager(){src=gh:%s/%s μ=Meson flags=('qt=false' 'nmtui=false' 'modem_manager=false' 'session_tracking=no' 'systemd_journal=false' 'libaudit=no' 'selinux=false' 'systemdsystemunitdir=no')}
-ppp(){src=gh:ppp-project/%s μ=Autotools}
-libndp(){src=gh:jpirko/%s μ=Autotools}
+networkmanager=(){src=gh:%s/%s μ=Meson flags=('qt=false' 'nmtui=false' 'modem_manager=false' 'session_tracking=no' 'systemd_journal=false' 'libaudit=no' 'selinux=false' 'systemdsystemunitdir=no')}
+ppp=(){src=gh:ppp-project/%s μ=Autotools}
+libndp=(){src=gh:jpirko/%s μ=Autotools}
 
 # avahi <- libdaemon
-avahi(){src=gh:lathiat/avahi μ=Autotools flags='disable-'^('mono' 'monodoc' 'manpages')}
-libdaemon(){src=0pointer.de/lennart/projects/libdaemon/libdaemon-0.14.tar.gz μ=Configure}
+avahi=(){src=gh:lathiat/avahi μ=Autotools flags='disable-'^('mono' 'monodoc' 'manpages')}
+libdaemon=(){src=0pointer.de/lennart/projects/libdaemon/libdaemon-0.14.tar.gz μ=Configure}
 
 # inkscape <- double-conversion potrace lib2geom
-inkscape(){src=gl:%s/%s}
-lib2geom(){src=gl:inkscape/%s μ=CMake flags=('2GEOM_TESTING=FALSE' '2GEOM_BUILD_SHARED=ON')}
-potrace(){src=sourceforge.net/projects/potrace/files/latest/download μ=Autotools flags=('with-libpotrace')}
-double-conversion(){src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
+inkscape=(){src=gl:%s/%s}
+lib2geom=(){src=gl:inkscape/%s μ=CMake flags=('2GEOM_TESTING=FALSE' '2GEOM_BUILD_SHARED=ON')}
+potrace=(){src=sourceforge.net/projects/potrace/files/latest/download μ=Autotools flags=('with-libpotrace')}
+double-conversion=(){src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
 
 # nautilus <- tracker gnome-desktop bubblewrap libseccomp gnome-autoar
-nautilus(){tag=40.2 src=gnome:%s μ=Meson flags=('libportal' 'extensions')^'=false'}
-tracker(){src=gnome:%s μ=Meson flags=('systemd_user_services' 'man' 'docs')^'=false'}
-gnome-desktop(){tag=40.4 src=gnome:%s μ=Meson flags=(('desktop_docs' 'debug_tools' 'gtk_doc' 'packagekit')^'=false' 'tests=none')}
-bubblewrap(){tag=v0.5.0 src=gh:containers/%s μ=Autotools}
-libseccomp(){tag=v2.5.2 src=gh:seccomp/%s μ=Autotools}
-gnome-autoar(){src=gnome:%s μ=Meson}
+nautilus=(){tag=40.2 src=gnome:%s μ=Meson flags=('libportal' 'extensions')^'=false'}
+tracker=(){src=gnome:%s μ=Meson flags=('systemd_user_services' 'man' 'docs')^'=false'}
+gnome-desktop=(){tag=40.4 src=gnome:%s μ=Meson flags=(('desktop_docs' 'debug_tools' 'gtk_doc' 'packagekit')^'=false' 'tests=none')}
+bubblewrap=(){tag=v0.5.0 src=gh:containers/%s μ=Autotools}
+libseccomp=(){tag=v2.5.2 src=gh:seccomp/%s μ=Autotools}
+gnome-autoar=(){src=gnome:%s μ=Meson}
 
 
 # messing around
 # vala <- graphviz
-vala(){src=download.gnome.org/sources/vala/0.54/vala-0.54.2.tar.xz μ=Configure}
-graphviz(){tag=2.49.2 src=gl:%s/%s μ=CMake}
+vala=(){src=download.gnome.org/sources/vala/0.54/vala-0.54.2.tar.xz μ=Configure}
+graphviz=(){tag=2.49.2 src=gl:%s/%s μ=CMake}
 
 # torrential <- libgee granite transmission ...
-torrential(){src=gh:davidmhewitt/torrential μ=Meson}
-granite(){tag=6.1.2 src=gh:elementary/%s μ=Meson flags=('introspection=false')}
-libgee(){tag=meson src=gnome:%s μ=Meson}
+torrential=(){src=gh:davidmhewitt/torrential μ=Meson}
+granite=(){tag=6.1.2 src=gh:elementary/%s μ=Meson flags=('introspection=false')}
+libgee=(){tag=meson src=gnome:%s μ=Meson}
 
-deluge(){src=ftp.osuosl.org/pub/deluge/source/2.0/deluge-2.0.4.tar.xz μ=Python}
-secrets(){src=gitlab.gnome.org/world/secrets μ=Meson}
-fragments(){tag=1.5 src=gitlab.gnome.org/world/fragments μ=Meson}
+deluge=(){src=ftp.osuosl.org/pub/deluge/source/2.0/deluge-2.0.4.tar.xz μ=Python}
+secrets=(){src=gitlab.gnome.org/world/secrets μ=Meson}
+fragments=(){tag=1.5 src=gitlab.gnome.org/world/fragments μ=Meson}

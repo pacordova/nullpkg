@@ -5,11 +5,11 @@
 # 1.57.0 or nightly
 # rust packages can be used without rust itself
 # only require rust to build
-rust(){src=static.rust-lang.org/dist/%s-nightly-x86_64-unknown-linux-gnu.tar.gz; fn μ{./install.sh --prefix=$PREFIX --destdir=$destdir} λ}
-rg(){src=gh:BurntSushi/ripgrep μ=Cargo λ}
-sk(){src=gh:lotabout/skim μ=Cargo λ}
-tealdeer(){src=gh:dbrgn/tealdeer μ=Cargo λ}
-exa(){src=gh:ogham/%s μ=Cargo λ}
-lsd(){src=gh:peltoche/%s μ=Cargo λ}
-vaultwarden(){src=gh:dani-garcia/%s μ=Cargo flags=('sqlite') λ}
-fd(){src=gh:sharkdp/%s μ=Cargo λ}
+rust(){src=static.rust-lang.org/dist/%s-nightly-x86_64-unknown-linux-gnu.tar.gz; fn μ{./install.sh --prefix=$PREFIX --destdir=$destdir}}
+rg(){src=gh:BurntSushi/ripgrep μ=Cargo}
+sk(){src=gh:lotabout/skim μ=Cargo}
+tealdeer(){src=gh:dbrgn/tealdeer μ=Cargo}
+exa(){src=gh:ogham/%s μ=Cargo}
+lsd(){src=gh:peltoche/%s μ=Cargo}
+vaultwarden(){src=gh:dani-garcia/%s μ=Cargo flags=('sqlite')}
+fd(){src=gh:sharkdp/%s μ=Cargo}

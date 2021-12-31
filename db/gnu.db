@@ -1,62 +1,62 @@
 #!/usr/bin/env rc
 
 # make <-> make -> autoconf, automake
-make(){src=mirrors.kernel.org/gnu/make/make-4.3.tar.gz μ=Configure flags=('with-guile=no') λ}
+make(){src=mirrors.kernel.org/gnu/make/make-4.3.tar.gz μ=Configure flags=('with-guile=no')}
 
 #build before rebuilding reset of system
-m4(){tag=1.4.19 src=gnu:%s.tar.gz μ=Configure λ}
-autoconf(){tag=2.71 src=gnu:%s.tar.gz μ=Configure λ}
-automake(){tag=1.16.5 src=gnu:%s.tar.gz μ=Configure λ}
+m4(){tag=1.4.19 src=gnu:%s.tar.gz μ=Configure}
+autoconf(){tag=2.71 src=gnu:%s.tar.gz μ=Configure}
+automake(){tag=1.16.5 src=gnu:%s.tar.gz μ=Configure}
 
 #intl stuff
-libiconv(){tag=1.16 src=gnu:%s.tar.gz μ=Configure λ}
-gettext(){tag=0.21 src=gnu:%s.tar.xz μ=Configure λ}
-texinfo(){tag=6.8 src=gnu:%s.tar.gz μ=Configure λ}
+libiconv(){tag=1.16 src=gnu:%s.tar.gz μ=Configure}
+gettext(){tag=0.21 src=gnu:%s.tar.xz μ=Configure}
+texinfo(){tag=6.8 src=gnu:%s.tar.gz μ=Configure}
 
 
 #for kernel
-bison(){tag=3.8.2 src=gnu:%s.tar.gz μ=Configure λ}
-bc(){tag=1.06 src=gnu:%s.tar.gz μ=Configure λ}
+bison(){tag=3.8.2 src=gnu:%s.tar.gz μ=Configure}
+bc(){tag=1.06 src=gnu:%s.tar.gz μ=Configure}
 
 #utils
-binutils(){tag=2.37 src=gnu:%s.tar.gz μ=Configure λ}
-coreutils(){tag=9.0 src=gnu:%s.tar.gz μ=Configure λ}
-diffutils(){tag=3.8 src=gnu:%s.tar.xz μ=Configure λ}
-findutils(){tag=4.8.0 src=gnu:%s.tar.xz μ=Configure λ}
+binutils(){tag=2.37 src=gnu:%s.tar.gz μ=Configure}
+coreutils(){tag=9.0 src=gnu:%s.tar.gz μ=Configure}
+diffutils(){tag=3.8 src=gnu:%s.tar.xz μ=Configure}
+findutils(){tag=4.8.0 src=gnu:%s.tar.xz μ=Configure}
 
 #toolchain
-grep(){tag=3.7 src=gnu:%s.tar.xz μ=Configure λ}
-bash(){tag=5.1.8 src=gnu:%s.tar.gz μ=Configure flags=('with-bash-malloc=no' 'enable-readline=no') λ}
-gawk(){tag=5.1.1 src=gnu:%s.tar.gz μ=Configure flags=('with-readline=no') λ}
-gzip(){tag=1.11 src=gnu:%s.tar.gz μ=Configure λ}
-tar(){tag=1.34 src=gnu:%s.tar.gz μ=Configure λ}
-patch(){tag=2.7.6 src=gnu:%s.tar.gz μ=Configure λ}
-sed(){tag=4.8 src=gnu:%s.tar.gz μ=Configure λ}
+grep(){tag=3.7 src=gnu:%s.tar.xz μ=Configure}
+bash(){tag=5.1.8 src=gnu:%s.tar.gz μ=Configure flags=('with-bash-malloc=no' 'enable-readline=no')}
+gawk(){tag=5.1.1 src=gnu:%s.tar.gz μ=Configure flags=('with-readline=no')}
+gzip(){tag=1.11 src=gnu:%s.tar.gz μ=Configure}
+tar(){tag=1.34 src=gnu:%s.tar.gz μ=Configure}
+patch(){tag=2.7.6 src=gnu:%s.tar.gz μ=Configure}
+sed(){tag=4.8 src=gnu:%s.tar.gz μ=Configure}
 
 #termstuff
-ncurses(){tag=6.0 src=gnu:%s.tar.gz μ=Configure flags=('with-shared' 'with-cxx=no') λ}
-readline(){tag=8.0 src=gnu:%s.tar.gz μ=Configure CFLAGS=($CFLAGS -lncurses) flags=('with-curses' 'disable-static') λ}
-less(){tag=590 src=gnu:%s.tar.gz μ=Configure λ}
+ncurses(){tag=6.0 src=gnu:%s.tar.gz μ=Configure flags=('with-shared' 'with-cxx=no')}
+readline(){tag=8.0 src=gnu:%s.tar.gz μ=Configure CFLAGS=($CFLAGS -lncurses) flags=('with-curses' 'disable-static')}
+less(){tag=590 src=gnu:%s.tar.gz μ=Configure}
 
 #debugger
-gdb(){tag=11.1 src=gnu:%s.tar.xz μ=Configure flags=('with-'^('guile=no' 'system-readline' 'python=no')) λ}
+gdb(){tag=11.1 src=gnu:%s.tar.xz μ=Configure flags=('with-'^('guile=no' 'system-readline' 'python=no'))}
 
 #mpc for gcc
-#gmp(){tag=6.2.1 src=gnu:%s.tar.xz μ=Configure λ}
-#mpc(){tag=1.2.1 src=gnu:%s.tar.gz μ=Configure λ}
+#gmp(){tag=6.2.1 src=gnu:%s.tar.xz μ=Configure}
+#mpc(){tag=1.2.1 src=gnu:%s.tar.gz μ=Configure}
 
 #big kahuna
-glibc(){tag=2.34 src=gnu:%s.tar.gz μ=Configure λ}
-gcc(){tag=11.2.0 src=gnu:%s.tar.gz flags=('enable-multilib=no') μ=Configure λ}
+glibc(){tag=2.34 src=gnu:%s.tar.gz μ=Configure}
+gcc(){tag=11.2.0 src=gnu:%s.tar.gz flags=('enable-multilib=no') μ=Configure}
 
 #impossible to build libtool and deps...
-help2man(){tag=1.48.5 src=gnu:%s.tar.xz μ=Configure λ}
-autobuild(){src=download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz μ=Configure λ}
-libtool(){tag=2.4.6 src=gnu:%s.tar.gz;fn μ{sed -i configure.ac -e 's|2.62|[2.64]|';./bootstrap --force;Configure} λ}
+help2man(){tag=1.48.5 src=gnu:%s.tar.xz μ=Configure}
+autobuild(){src=download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz μ=Configure}
+libtool(){tag=2.4.6 src=gnu:%s.tar.gz;fn μ{sed -i configure.ac -e 's|2.62|[2.64]|';./bootstrap --force;Configure}}
 
 # misc
-gperf(){tag=3.1 src=gnu:%s.tar.gz μ=Configure λ}
-guile(){src=gnu:%s.tar.gz tag=3.0.7 μ=Configure λ}
-gmp(){tag=6.2.1 src=gnu:%s.tar.xz μ=Configure λ}
-nettle(){tag=3.7 src=gnu:%s.tar.gz μ=Configure flags=('enable-shared') λ}
-gnutls(){src=www.gnupg.org/ftp/gcrypt/gnutls/v3.6/%s-3.6.16.tar.xz μ=Configure flags=('with-included-libtasn1') λ}
+gperf(){tag=3.1 src=gnu:%s.tar.gz μ=Configure}
+guile(){src=gnu:%s.tar.gz tag=3.0.7 μ=Configure}
+gmp(){tag=6.2.1 src=gnu:%s.tar.xz μ=Configure}
+nettle(){tag=3.7 src=gnu:%s.tar.gz μ=Configure flags=('enable-shared')}
+gnutls(){src=www.gnupg.org/ftp/gcrypt/gnutls/v3.6/%s-3.6.16.tar.xz μ=Configure flags=('with-included-libtasn1')}

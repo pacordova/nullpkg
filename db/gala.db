@@ -1,54 +1,54 @@
 #!/usr/bin/env rc
 
 #vala
-graphviz(){tag=2.49.2 src=gl:%s/%s μ=CMake λ}
-vala(){src=download.gnome.org/sources/vala/0.54/vala-0.54.2.tar.xz μ=Configure λ}
+graphviz(){tag=2.49.2 src=gl:%s/%s μ=CMake}
+vala(){src=download.gnome.org/sources/vala/0.54/vala-0.54.2.tar.xz μ=Configure}
 
 # GALA STUFF
 ############
 #optional?
-accountsservice(){tag=0.6.55 src=freedesktop:accountsservice/%s λ}
-gnome-backgrounds(){tag=41.0 src=gnome:%s μ=Meson λ}
-#gnome-session(){tag=40.1.1 src=gnome:%s μ=Meson flags=(('systemd' 'systemd_journal' 'docbook' 'man')^'=false' 'systemd_session=disable') λ}
-#gnome-color-manager(){src=gnome:%s μ=Meson flags=('tests=false') λ}
-#stylesheet(){tag=6.1.0 src=gh:elementary/%s μ=Meson λ}
-#clutter-gtk(){tag=1.8.4 src=gnome:%s μ=Meson λ}
-#clutter-gst(){tag=3.0.27 src=gnome:%s μ=Autotools λ}
+accountsservice(){tag=0.6.55 src=freedesktop:accountsservice/%s}
+gnome-backgrounds(){tag=41.0 src=gnome:%s μ=Meson}
+#gnome-session(){tag=40.1.1 src=gnome:%s μ=Meson flags=(('systemd' 'systemd_journal' 'docbook' 'man')^'=false' 'systemd_session=disable')}
+#gnome-color-manager(){src=gnome:%s μ=Meson flags=('tests=false')}
+#stylesheet(){tag=6.1.0 src=gh:elementary/%s μ=Meson}
+#clutter-gtk(){tag=1.8.4 src=gnome:%s μ=Meson}
+#clutter-gst(){tag=3.0.27 src=gnome:%s μ=Autotools}
 
 #colors (hard req according to lfs)
-libgusb(){tag=0.3.7 src=gh:hughsie/%s μ=Meson λ}
-colord(){tag=1.4.5 src=gh:hughsie/%s λ}
+libgusb(){tag=0.3.7 src=gh:hughsie/%s μ=Meson}
+colord(){tag=1.4.5 src=gh:hughsie/%s}
 
 #gnome-settings-daemon
-geocode-glib(){tag=3.26.2 src=gnome:%s μ=Meson λ}
-libgweather(){tag=40.0 src=gnome:%s μ=Meson λ}
-geoclue(){tag=2.5.7 src=freedesktop:%s/%s μ=Meson flags=('gtk-doc' '3g-source' 'cdma-source' 'modem-gps-source' 'demo-agent' 'nmea-source')^'=false' λ}
-gnome-settings-daemon(){tag=41.0 src=gnome:%s μ=Meson flags=('systemd' 'cups' 'wwan')^'=false' λ}
+geocode-glib(){tag=3.26.2 src=gnome:%s μ=Meson}
+libgweather(){tag=40.0 src=gnome:%s μ=Meson}
+geoclue(){tag=2.5.7 src=freedesktop:%s/%s μ=Meson flags=('gtk-doc' '3g-source' 'cdma-source' 'modem-gps-source' 'demo-agent' 'nmea-source')^'=false'}
+gnome-settings-daemon(){tag=41.0 src=gnome:%s μ=Meson flags=('systemd' 'cups' 'wwan')^'=false'}
 
 #plank
-gnome-common(){tag=3.18.0 src=gnome:%s μ=Autotools λ}
-libgtop(){src=gnome:%s μ=Autotools flags=('disable-gtk-doc' 'without-examples') λ}
-bamf(){tag=0.5.5 src=git.launchpad.net/%s μ=Autotools λ}
-gnome-menus(){tag=3.36.0 src=gnome:%s μ=Autotools λ}
-granite(){tag=6.1.2 src=gh:elementary/%s μ=Meson λ}
-plank(){src=gh:elementary/dock μ=Meson flags=('enable-apport=false' 'enable-dbusmenu=no') λ}
-#plank(){tag=0.11.89 src=git.launchpad.net/plank μ=Autotools flags=('disable-nls') λ}
+gnome-common(){tag=3.18.0 src=gnome:%s μ=Autotools}
+libgtop(){src=gnome:%s μ=Autotools flags=('disable-gtk-doc' 'without-examples')}
+bamf(){tag=0.5.5 src=git.launchpad.net/%s μ=Autotools}
+gnome-menus(){tag=3.36.0 src=gnome:%s μ=Autotools}
+granite(){tag=6.1.2 src=gh:elementary/%s μ=Meson}
+plank(){src=gh:elementary/dock μ=Meson flags=('enable-apport=false' 'enable-dbusmenu=no')}
+#plank(){tag=0.11.89 src=git.launchpad.net/plank μ=Autotools flags=('disable-nls')}
 
 #clutter
-#cogl(){tag=1.22.8 src=gnome:%s μ=Autotools flags=('enable-wayland-egl-platform=yes') λ}
-#clutter(){tag=1.26.4 src=gnome:%s μ=Meson λ}
+#cogl(){tag=1.22.8 src=gnome:%s μ=Autotools flags=('enable-wayland-egl-platform=yes')}
+#clutter(){tag=1.26.4 src=gnome:%s μ=Meson}
 
 #mutter
-zenity(){tag=3.41.0 src=gnome:%s μ=Meson λ}
-mutter(){tag=40.4 src=gnome:%s ^=false λ}
+zenity(){tag=3.41.0 src=gnome:%s μ=Meson}
+mutter(){tag=40.4 src=gnome:%s ^=false}
 
 #gala
 #9eca0bd release segfaults
 gala(){buildtype=debug src=gh:elementary/%s μ=Meson flags=('systemd=false')'
 
 #bug?
-cairo(){src=freedesktop:%s/%s μ=Meson flags=('spectre=disabled') λ}
-pango(){tag=1.48.10 src=gnome:%s μ=Meson λ}
-#libspectre(){tag=0.2.9 src=freedesktop:%s/%s μ=Autotools λ}
-libwnck(){tag=40.0 src=gnome:%s μ=Meson λ}
-catts(){src=gh:small-tech/catts μ=CMake λ}
+cairo(){src=freedesktop:%s/%s μ=Meson flags=('spectre=disabled')}
+pango(){tag=1.48.10 src=gnome:%s μ=Meson}
+#libspectre(){tag=0.2.9 src=freedesktop:%s/%s μ=Autotools}
+libwnck(){tag=40.0 src=gnome:%s μ=Meson}
+catts(){src=gh:small-tech/catts μ=CMake}

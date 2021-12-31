@@ -3,16 +3,16 @@
 # flatpak <- ostree libseccomp gobject-introspection py:pyparsing
 # BUG pyparsing must be 2.4.7 for now
 # https://github.com/flatpak/flatpak/issues/4534
-flatpak(){src=gh:flatpak/%s μ=Autotools λ}
+flatpak(){src=gh:flatpak/%s μ=Autotools}
 ##
-xdg-desktop-portal-gtk(){src=gh:flatpak/%s μ=Autotools λ}
-gsettings-desktop-schemas(){tag=40.0 src=gnome:%s μ=Meson flags=('introspection=false') λ}
-xdg-desktop-portal(){src=gh:flatpak/%s μ=Autotools λ}
-geoclue(){tag=2.5.7 src=freedesktop:%s/%s μ=Meson flags=('gtk-doc' '3g-source' 'cdma-source' 'modem-gps-source' 'demo-agent' 'nmea-source')^'=false' λ}
+xdg-desktop-portal-gtk(){src=gh:flatpak/%s μ=Autotools}
+gsettings-desktop-schemas(){tag=40.0 src=gnome:%s μ=Meson flags=('introspection=false')}
+xdg-desktop-portal(){src=gh:flatpak/%s μ=Autotools}
+geoclue(){tag=2.5.7 src=freedesktop:%s/%s μ=Meson flags=('gtk-doc' '3g-source' 'cdma-source' 'modem-gps-source' 'demo-agent' 'nmea-source')^'=false'}
 # py:pygments
-libportal(){tag=0.4 src=gh:flatpak/%s μ=Meson λ}
+libportal(){tag=0.4 src=gh:flatpak/%s μ=Meson}
 ##
-bubblewrap(){tag=v0.5.0 src=gh:containers/%s μ=Autotools λ}
-gobject-introspection(){tag=1.70.0 src=gnome:%s μ=Meson λ}
-libseccomp(){tag=v2.5.2 src=gh:seccomp/%s μ=Autotools λ}
-ostree(){src=gh:ostreedev/%s μ=Autotools λ}
+bubblewrap(){tag=v0.5.0 src=gh:containers/%s μ=Autotools}
+gobject-introspection(){tag=1.70.0 src=gnome:%s μ=Meson}
+libseccomp(){tag=v2.5.2 src=gh:seccomp/%s μ=Autotools}
+ostree(){src=gh:ostreedev/%s μ=Autotools}

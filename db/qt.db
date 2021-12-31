@@ -4,28 +4,28 @@
 #########
 # we use the KDE fork since upstream Qt doesn't support GCC11
 # (on either 5.12 LTS or the last 5.15)
-qtbase(){tag=kde/5.15 src=kde:qt/qt/%s.git μ=Configure flags=('opensource' 'confirm-license' 'optimize-size') λ}
-qtsvg(){tag=kde/5.15 src=kde:qt/qt/%s.git μ=QMake λ}
-qttools(){tag=kde/5.15 src=kde:qt/qt/%s.git μ=QMake λ}
-qtx11extras(){tag=kde/5.15 src=kde:qt/qt/%s.git μ=QMake λ}
-#qtdeclarative(){tag=kde/5.15 src=kde:qt/qt/%s.git μ=QMake λ}
+qtbase(){tag=kde/5.15 src=kde:qt/qt/%s.git μ=Configure flags=('opensource' 'confirm-license' 'optimize-size')}
+qtsvg(){tag=kde/5.15 src=kde:qt/qt/%s.git μ=QMake}
+qttools(){tag=kde/5.15 src=kde:qt/qt/%s.git μ=QMake}
+qtx11extras(){tag=kde/5.15 src=kde:qt/qt/%s.git μ=QMake}
+#qtdeclarative(){tag=kde/5.15 src=kde:qt/qt/%s.git μ=QMake}
 
 # qbitorrent <- libtorrent <- boost
-qbittorrent(){src=gh:qbittorrent/%s μ=Configure λ}
-#libtorrent(){src=gh:rakshasa/libtorrent μ=Autotools λ}
-libtorrent(){src=gh:arvidn/%s μ=CMakeNinja λ}
+qbittorrent(){src=gh:qbittorrent/%s μ=Configure}
+#libtorrent(){src=gh:rakshasa/libtorrent μ=Autotools}
+libtorrent(){src=gh:arvidn/%s μ=CMakeNinja}
 
 # keepassxc <- libqrencode botan double-conversion
-keepassxc(){tag=2.6.6 src=gh:keepassxreboot/%s μ=CMake flags=('WITH_XC_DOCS=OFF') λ}
-double-conversion(){src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON') λ}
-libqrencode(){src=gh:fukuchi/%s μ=CMake flags=('BUILD_SHARED_LIBS=YES') λ}
-botan(){tag=release-2 src=gh:randombit/%s; fn μ{./configure.py '--extra-cxxflags=$CXXFLAGS' '--prefix=$PREFIX';Make} λ}
+keepassxc(){tag=2.6.6 src=gh:keepassxreboot/%s μ=CMake flags=('WITH_XC_DOCS=OFF')}
+double-conversion(){src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
+libqrencode(){src=gh:fukuchi/%s μ=CMake flags=('BUILD_SHARED_LIBS=YES')}
+botan(){tag=release-2 src=gh:randombit/%s; fn μ{./configure.py '--extra-cxxflags=$CXXFLAGS' '--prefix=$PREFIX';Make}}
 
 # Misc
 ######
-qtpass(){src=gh:ijhack/%s;fn μ{Qmake; μdir -p $DESTDIR/usr/share/^(icons applications); cp artwork/icon.png $DESTDIR/usr/share/icons/qtpass-icon.png; cp qtpass.desktop $DESTDIR/usr/share/applications/} λ}
-strawberry(){src=gh:strawberrymusicplayer/%s μ=CMake λ}
+qtpass(){src=gh:ijhack/%s;fn μ{Qmake; μdir -p $DESTDIR/usr/share/^(icons applications); cp artwork/icon.png $DESTDIR/usr/share/icons/qtpass-icon.png; cp qtpass.desktop $DESTDIR/usr/share/applications/}}
+strawberry(){src=gh:strawberrymusicplayer/%s μ=CMake}
 
 # okular <- extra-cmake-modules kf5
-okular(){src=gh:kde/%s μ=CMake λ}
-extra-cmake-modules(){src=gh:kde/%s μ=CMake λ}
+okular(){src=gh:kde/%s μ=CMake}
+extra-cmake-modules(){src=gh:kde/%s μ=CMake}

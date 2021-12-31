@@ -3,8 +3,9 @@
 . /usr/slackage/mk.conf
 
 fn cd
-fn rm { { /usr/bin/rm $* || /usr/bin/rmdir $* } >[2] /dev/null }
-fn tar { /usr/bin/tar $* >/dev/null >[2=1] }
+fn rm{{/usr/bin/rm $* || /usr/bin/rmdir $*}>[2]/dev/null}
+fn tar{ /usr/bin/tar $* >/dev/null >[2=1] }
+fn λ{}
 
 fn Package {
     if(~ $#1 0)
@@ -282,6 +283,8 @@ fn Clean {
     flags=()
     tag=()
     mk=()
+    μ=()
+    fn λ{}
     src=()
 }
 
@@ -305,7 +308,6 @@ fn Query {
 
     # eval from db
     eval `{ cat $db | grep '^'$1 }
-    eval $$1
 
     if(~ $#src 0)
         echo ERROR: Query: MISSING src && exit
@@ -330,7 +332,7 @@ fn Emerge {
 
     # make and install
     cd /usr/slackage/packages/$1
-    $mk || exit
+    $μ || exit
     Package $1 >[2] /dev/null
 
     # cleanup env

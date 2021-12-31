@@ -2,28 +2,28 @@
 
 # CINNAMON
 #########
-libcroco='src=gl:inkscape/%s mk=AG'
-libdbusmenu='src=git.launchpad.net/ubuntu/+source/%s mk=AG'
-libtimezonemap='src=git.launchpad.net/ubuntu/+source/%s deps=(gnome-common) mk=AG'
-cjs='src=gh:linuxmint/%s mk=Meson'
-cinnamon-desktop='src=gh:linuxmint/%s mk=Meson'
-pangox-compat='src=download.gnome.org/sources/pangox-compat/0.0/pangox-compat-0.0.2.tar.xz mk=AG'
-libgnomekbd='src=gnome:%s mk=AG'
-xapp='src=gh:linuxmint/%s deps=(libgnomekbd) mk=Meson'
-cinnamon-session='src=gh:linuxmint/%s deps=(xapp sl:linuxdoc-tools) mk=Meson'
-cinnamon-settings-daemon='src=gh:linuxmint/%s mk=Meson flags=(use_cups)^=disabled'
-cinnamon-menus='src=gh:linuxmint/%s mk=Meson'
-cinnamon-control-center='src=gh:linuxmint/%s mk=Meson flags=(networkmanager modemmanager onlineaccounts)^=false'
+libcroco(){src=gl:inkscape/%s μ=Autotools λ}
+libdbusmenu(){src=git.launchpad.net/ubuntu/+source/%s μ=Autotools λ}
+libtimezonemap(){src=git.launchpad.net/ubuntu/+source/%s μ=Autotools λ}
+cjs(){src=gh:linuxmint/%s μ=Meson λ}
+cinnamon-desktop(){src=gh:linuxmint/%s μ=Meson λ}
+pangox-compat(){src=download.gnome.org/sources/pangox-compat/0.0/pangox-compat-0.0.2.tar.xz μ=Autotools λ}
+libgnomekbd(){src=gnome:%s μ=Autotools λ}
+xapp(){src=gh:linuxmint/%s μ=Meson λ}
+cinnamon-session(){src=gh:linuxmint/%s μ=Meson λ}
+cinnamon-settings-daemon(){src=gh:linuxmint/%s μ=Meson flags=('use_cups')^'=disabled' λ}
+cinnamon-menus(){src=gh:linuxmint/%s μ=Meson λ}
+cinnamon-control-center(){src=gh:linuxmint/%s μ=Meson flags=('networkmanager' 'modemmanager' 'onlineaccounts')^'=false' λ}
 
-muffin='src=gh:linuxmint/%s deps=(zenity sl:linuxdoc-tools) mk=AG flags=(disable-gtk-doc)'
+muffin(){src=gh:linuxmint/%s λ}
 ##########
-caribou='src=gnome:%s mk=AG'
-metacity='src=gnome:%s mk=AG'
-cinnamon-translations='src=gh:linuxmint/%s mk=A; fn A{make && mv usr PACKAGE}'
-nemo='src=gh:linuxmint/%s mk=Meson flags=(xmp=false)'
-python3-xapp='src=gh:linuxmint/%s mk=Python'
-cinnamon-screensaver='src=gh:linuxmint/%s mk=Meson'
-#mint-y-icons=''
-#mint-themes=''
-cinnamon='src=gh:linuxmint/%s mk=Meson flags=(disable_networkmanager=true)'
+caribou(){src=gnome:%s μ=Autotools λ}
+metacity(){src=gnome:%s μ=Autotools λ}
+cinnamon-translations(){src=gh:linuxmint/%s μ=A; fn A{make && mv usr PACKAGE} λ}
+nemo(){src=gh:linuxmint/%s μ=Meson flags=('xmp=false') λ}
+python3-xapp(){src=gh:linuxmint/%s μ=Python λ}
+cinnamon-screensaver(){src=gh:linuxmint/%s μ=Meson λ}
+#mint-y-icons(){ λ}
+#mint-themes(){ λ}
+cinnamon(){src=gh:linuxmint/%s μ=Meson flags=('disable_networkmanager=true') λ}
 

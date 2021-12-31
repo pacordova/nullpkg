@@ -5,7 +5,6 @@
 fn cd
 fn rm{{/usr/bin/rm $* || /usr/bin/rmdir $*}>[2]/dev/null}
 fn tar{ /usr/bin/tar $* >/dev/null >[2=1] }
-fn λ{}
 
 fn Package {
     if(~ $#1 0)
@@ -210,6 +209,7 @@ fn Curl {
 
     ifs='.' { *=($* `{ echo $"src }) }
 
+
     mkdir /usr/slackage/packages/$1
     cd /tmp
     curl --anyauth -LkO $src
@@ -219,7 +219,7 @@ fn Curl {
             unzip \
                 -d /usr/slackage/packages/$1 \
                 $2
-        case gz xz bz tgz txz bzip tbz bz2
+        case *xz* *bz* *tgz* *txz* *bzip* *tbz* *gz* *bz2*
             tar \
                 -C /usr/slackage/packages/$1 \
                 -xf $2 \
@@ -253,7 +253,7 @@ fn Snarf {
             s|freedesktop:|gitlab.freedesktop.org/|g;
             s|qt:|github.com/qt/|g;
             s|obs:|download.opensuse.org/repositories/|g;
-            s|alienbob:|www.slackware.com/~alien/slackbuilds/'^$1^'/pkg64/'^$tag^'/|g;
+            s|alienbob:|www.slackware.com/~alien/slackbuilds/'$1'/pkg64/'$tag'/|g;
             s|^|http://|g'
     }
 
@@ -281,10 +281,7 @@ fn Clean {
     destdir=()
     deps=()
     flags=()
-    tag=()
-    mk=()
-    μ=()
-    fn λ{}
+    tag=''
     src=()
 }
 
@@ -317,7 +314,6 @@ fn Query {
     if(~ $buildtype 'debug')
         CFLAGS=('-march=x86-64' '-pipe' '-Og')
 
-    # do the cxxflags
     CXXFLAGS=($CFLAGS $CXXFLAGS)
 
     # reduce list to string
@@ -328,11 +324,15 @@ fn Query {
 
 fn Emerge {
     # set the env
+    echo emerge
+    echo query
     Query $1
 
     # make and install
     cd /usr/slackage/packages/$1
+    echo make
     $μ || exit
+    echo package
     Package $1 >[2] /dev/null
 
     # cleanup env

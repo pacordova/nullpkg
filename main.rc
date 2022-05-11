@@ -16,7 +16,7 @@ while(~ $#1 1) {
         case chroot
             _chroot $1
         case backup
-            /usr/nullpkg/misc/slackup.rc
+            /usr/nullpkg/misc/backup.rc
         case -h *
             echo 'Usage: nullpkg [-S|-i|-h|emerge|purge|snarf] arg ...'
     }

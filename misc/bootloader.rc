@@ -1,0 +1,3 @@
+#!/bin/rc
+
+efibootmgr -c -d /dev/sda -p 1 -L 'SLACKWARE' -l '\vmlinuz' -u 'root=/dev/sda4 rw mitigations=off'

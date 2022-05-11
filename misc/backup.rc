@@ -1,0 +1,57 @@
+#!/bin/rc
+
+cd /
+
+# delete pyc files
+>[2=] \
+ifs=$ifs(3) \
+pyclist=`{
+    >[2=] du -ax \
+    | grep -e '__pycache__' -e '\.new$' -e '\.orig$' \
+    | awk '{print $2}'
+} \
+for(f in $pyclist)
+    rm $f
+
+# remove other stuff
+>[2=] {
+    rm /root/.xauth*
+    rm /root/.python_history
+    rm -rf /root/.cache
+    rm -rf /root/.cargo
+    rm -rf /var/log /var/cache
+    rm -rf /usr/nullpkg/packages
+    # removes empty dirs
+    for(d in `{du -x | awk '{print $2}'})
+        rmdir $d
+}
+
+fc-cache
+ldconfig
+
+# recreate needed dirs
+mkdir -p /usr/nullpkg/packages
+mkdir -p /var/log # breaks xorg if this doesn't exist
+mkdir -p /var/lock # breaks slackpkg if this doesn't exist
+
+# relink for slackpkg
+ln -sf /var/lib/pkgtools/packages /var/log/packages
+
+# we include boot but exclude home in tarball
+tar -C /boot -czf /home/boot.tar.gz .
+umount /boot
+tar -C /boot -xhf /home/boot.tar.gz
+rm /home/boot.tar.gz
+# do the backup
+f=/home/slackup`{date +'%Y%m%d'}^.tar
+tar \
+    '--exclude=/mnt' \
+    '--exclude=/home' \
+    '--exclude=/root' \
+    '--exclude=/usr/nullpkg/archive' \
+    '--exclude=/usr/local' \
+    '--exclude=/usr/nullpkg/cache' \
+    '--exclude=/app' \
+    '--one-file-system' \
+    -cf $f /
+xz -T0 $f

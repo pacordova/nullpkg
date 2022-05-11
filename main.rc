@@ -1,0 +1,24 @@
+#!/bin/rc
+
+. /usr/nullpkg/functions.rc
+
+λ=$1;shift
+while(~ $#1 1) {
+    switch($λ){
+        case emerge purge snarf
+            $(λ) $(1)
+        case -S
+            purge $1 && snarf $1 && emerge $1
+        case -i
+            _install $1
+        case makepkg
+            _makepkg $1
+        case chroot
+            _chroot $1
+        case backup
+            /usr/nullpkg/misc/slackup.rc
+        case -h *
+            echo 'Usage: nullpkg [-S|-i|-h|emerge|purge|snarf] arg ...'
+    }
+    shift
+}

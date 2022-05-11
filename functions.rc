@@ -1,0 +1,246 @@
+#!/bin/rc
+
+. /etc/make.conf
+
+###############
+# Environment #
+###############
+path=(/usr/sbin /usr/bin /sbin /bin)
+CXXFLAGS=$CFLAGS
+SOURCE_DATE_EPOCH=1000000000
+KBUILD_BUILD_TIMESTAMP=1000000000
+
+##################
+# Build Routines #
+##################
+fn GMake {
+    *=($MAKEOPTS 'PREFIX='$PREFIX $*)
+    make $* &&
+    make install $* 'DESTDIR='$destdir
+}
+
+fn Configure {
+    *=('prefix='$PREFIX $*)
+    sh configure --$* &&
+    GMake
+}
+
+fn Autotools {
+    *=($dirflags $*)
+    >[2=] {sh autogen.sh || autoreconf -fi} &&
+    Configure $*
+}
+
+fn CMake {
+    *=( \
+        'CMAKE_INSTALL_PREFIX:PATH='$PREFIX \
+        'CMAKE_BUILD_TYPE=Release' \
+        'WITH_TESTS=OFF' \
+        'BUILD_SHARED_LIBS=ON' \
+        'BUILD_SHARED_LIBS=YES' \
+        'ENABLE_STATIC=FALSE' \
+        $* \
+    )
+
+    cmake . -B build -D$* &&
+    GMake -C build
+}
+
+fn Meson {
+    *=( \
+       'strip=true' \
+       'debug=false' \
+       'optimization=s' \
+       'prefix='$PREFIX \
+       $* \
+    )
+
+    meson build -D$* &&
+    DESTDIR=$destdir ninja -C build install
+}
+
+fn Scons {
+    *=('prefix='$PREFIX 'DESTDIR='$destdir $*)
+    scons -c &&
+    scons $* install
+}
+
+fn Python {
+    *=(--root $destdir --prefix $PREFIX)
+    python3 setup.py install $*
+}
+
+fn Cargo {
+    CARGO_HOME=./.cargo \
+    cargo install --path . \
+        --root $destdir/usr \
+        --features $*
+}
+
+fn QMake{
+    *=('INSTALL_ROOT='$destdir $*)
+    qmake -makefile &&
+    GMake $*
+}
+
+fn Headers{
+    *=($destdir/$PREFIX/include)
+    mkdir -p $* &&
+    install -D include/* $*
+}
+
+
+###############################
+# Package Managment Functions #
+###############################
+fn _makepkg {
+    # remove slash from arg
+    *=`{echo $1 | sed 's|/$||g'}
+
+    # strip binaries & gzip manpages
+    >[2=] {
+    strip -S $1/usr/lib*/*
+    strip -s $1/usr/bin/* $1/bin/*
+    gzip -n $1/usr/man/man?/*.? $1/usr/share/man/man?/*.?
+    }
+
+    tar -C $1 \
+    --transform 's,^\./,/,' \
+    --mtime '1970-01-01 00:00' \
+    -cf $1.tar .
+
+    xz -f -T0 $1.tar
+}
+
+fn _install {
+    if(! test -f $1)
+        *=/usr/nullpkg/cache/$1.tar.xz
+
+    tar -C / \
+        --index-file /usr/nullpkg/index/`{basename $1 .tar.xz}.txt \
+        -xvhf $1
+
+    ldconfig
+}
+
+fn _git {
+    git clone \
+        -b $tag \
+        --depth 1\
+        --recurse-submodules \
+        --shallow-submodules \
+        $MAKEOPTS \
+        $src @$1
+}
+
+fn _curl {
+    curl --anyauth -LOk $src
+
+    tar -C @$1 \
+        --strip-components 1 \
+        -xf `{basename $src} &&
+    rm `{basename $src}
+}
+
+fn _query {
+    tag=() src=() μ=() flags=()
+    destdir=/usr/nullpkg/cache/@$1/@root
+
+    eval `{cat $db | grep '^'$1=}
+    if(~ $#src 0)
+        echo 'Error: $src is not defined' && exit
+}
+
+fn snarf {
+    builtin cd /usr/nullpkg/cache
+
+    _query $1
+
+    rm -rf @$1 && mkdir -p @$1
+
+    src=`{
+        echo $src |
+        sed '
+            s|%s|'$1'|g;
+            s|gnu:|http://mirrors.kernel.org/gnu/'$1'/|g;
+            s|gpg:|http://gnupg.org/ftp/gcrypt/'$1'/|g;
+            s|kernel:|http://git.kernel.org/pub/scm/|g;
+            s|gh:|http://github.com/|g;
+            s|gitlab:|http://gitlab.com/|g;
+            s|freedesktop:|http://gitlab.freedesktop.org/|g;
+            s|gpg:|http://gnupg.org/ftp/gcrypt/'$1'/|g;
+            s|netfilter:|http://www.netfilter.org/pub/|g;
+            s|qt:|http://invent.kde.org/qt/qt/|g;
+            s|gnome:|http://gitlab.gnome.org/gnome/|g'
+
+    }
+    switch($src) {
+        case *release*
+            _curl $1
+        case *git*
+            _git $1
+        case *
+            _curl $1
+    }
+
+    chown -R root:root @$1
+
+    true
+}
+
+fn emerge {
+    builtin cd /usr/nullpkg/cache/@$1
+
+    _query $1
+
+    rm -rf $destdir &&
+    mkdir -p $destdir
+
+    $(μ) $(flags) || exit
+
+    _makepkg $destdir &&
+    mv $destdir.tar.xz ../$1.tar.xz &&
+    _install ../$1.tar.xz
+}
+
+fn purge {
+    builtin cd /usr/nullpkg
+
+    if(~ $#1 0)
+        echo 'Error: purge: missing arg' && exit
+
+    >[2=] {
+        sort -r index/$1.txt | sed 's|^|rm -d ''|;s|$|''|g' | rc
+        rm -rf cache/@$1 index/$1.txt
+    }
+
+    true
+}
+
+
+#########
+# Extra #
+#########
+fn _chroot {
+    builtin cd /
+
+    >[2=] {
+        mkdir -p $1/dev $1/boot
+        for(m in (dev boot sys proc)) {
+            mount -o ro --rbind $m $1/$m
+        }
+    }
+
+    chroot '--user=root' $1
+}
+
+fn _timesync {
+    >[2=] >[1=] {
+        date +'%y-%m-%d %H:%M:%S' \
+            -u -s `{
+                nc time.nist.gov 13 |
+                awk 'NR>1 {print $2 " " $3}'
+            }
+        hwclock --systohc
+    }
+}

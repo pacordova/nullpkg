@@ -1,0 +1,14 @@
+#!/bin/rc
+
+. ../*.conf
+
+cd /usr/src/linux
+
+# for reproducible builds
+make mrproper && cp KCONFIG .config
+
+make clean
+make -j5 bzImage modules
+make modules_install
+
+cp arch/x86/boot/bzImage /boot/vmlinuz

@@ -1,0 +1,287 @@
+#!/bin/rc
+
+###########################################################################
+# This file contains old db entries that might not work with changes to   #
+# functions.rc, or may be incomplete or not in use.                       #
+# Can be useful for reference.                                            #
+###########################################################################
+
+###########
+# flatpak #
+###########
+# < ostree libseccomp gobject-introspection geoclue libportal bubblewrap
+# < xdg-desktop-portal-gtk < xdg-desktop-portal
+# < python-pyparsing-2.4.7 python-pygments
+flatpak=(){src=gh:flatpak/%s μ=Autotools}
+ostree=(){src=gh:ostreedev/%s μ=Autotools}
+libseccomp=(){tag=v2.5.2 src=gh:seccomp/%s μ=Autotools}
+gobject-introspection=(){tag=1.70.0 src=gnome:%s μ=Meson}
+xdg-desktop-portal-gtk=(){src=gh:flatpak/%s μ=Autotools}
+xdg-desktop-portal=(){src=gh:flatpak/%s μ=Autotools}
+geoclue=(){tag=2.5.7 src=freedesktop:%s/%s μ=Meson flags=('gtk-doc' '3g-source' 'cdma-source' 'modem-gps-source' 'demo-agent' 'nmea-source')^'=false'}
+libportal=(){tag=0.4 src=gh:flatpak/%s μ=Meson}
+bubblewrap=(){tag=v0.5.0 src=gh:containers/%s μ=Autotools}
+
+########
+# gala #
+########
+# gala
+# < vala < graphviz
+# < accountsservice < gnome-backgrounds
+# < colord < libgusb
+# < plank < granite bamf
+# < clutter < cogl
+# < libgtop gnome-common gnome-settings-daemon geoclue libgweather geocode-glib
+# < mutter < zenity
+# - gnome-session gnome-color-manager stylesheet clutter-gtk
+gala=(){tag=9eca0bd buildtype=debug src=gh:elementary/%s μ=Meson flags=('systemd=false')}
+zenity=(){tag=3.41.0 src=gnome:%s μ=Meson}
+mutter=(){tag=40.4 src=gnome:%s ^=false}
+cogl=(){tag=1.22.8 src=gnome:%s μ=Autotools flags=('enable-wayland-egl-platform=yes')}
+clutter=(){tag=1.26.4 src=gnome:%s μ=Meson}
+geocode-glib=(){tag=3.26.2 src=gnome:%s μ=Meson}
+libgweather=(){tag=40.0 src=gnome:%s μ=Meson}
+geoclue=(){tag=2.5.7 src=freedesktop:%s/%s μ=Meson flags=('gtk-doc' '3g-source' 'cdma-source' 'modem-gps-source' 'demo-agent' 'nmea-source')^'=false'}
+gnome-settings-daemon=(){tag=41.0 src=gnome:%s μ=Meson flags=('systemd' 'cups' 'wwan')^'=false'}
+gnome-common=(){tag=3.18.0 src=gnome:%s μ=Autotools}
+libgtop=(){src=gnome:%s μ=Autotools flags=('disable-gtk-doc' 'without-examples')}
+bamf=(){tag=0.5.5 src=git.launchpad.net/%s μ=Autotools}
+gnome-menus=(){tag=3.36.0 src=gnome:%s μ=Autotools}
+granite=(){tag=6.1.2 src=gh:elementary/%s μ=Meson flags=('introspection=false')}
+plank=(){src=gh:elementary/dock μ=Meson flags=('enable-apport=false' 'enable-dbusmenu=no')}
+libgusb=(){tag=0.3.7 src=gh:hughsie/%s μ=Meson}
+colord=(){tag=1.4.5 src=gh:hughsie/%s}
+vala=(){src=download.gnome.org/sources/vala/0.54/vala-0.54.2.tar.xz μ=Configure}
+graphviz=(){tag=2.49.2 src=gl:%s/%s μ=CMake}
+gnome-backgrounds=(){tag=41.0 src=gnome:%s μ=Meson}
+accountsservice=(){tag=0.6.55 src=freedesktop:accountsservice/%s}
+clutter-gtk=(){tag=1.8.4 src=gnome:%s μ=Meson} clutter-gst=(){tag=3.0.27 src=gnome:%s μ=Autotools}
+stylesheet=(){tag=6.1.0 src=gh:elementary/%s μ=Meson}
+gnome-color-manager=(){src=gnome:%s μ=Meson flags=('tests=false')}
+gnome-session=(){tag=40.1.1 src=gnome:%s μ=Meson flags=('systemd_session=disable' ('systemd' 'systemd_journal' 'docbook' 'man')^'=false')}
+
+
+############
+# Cinnamon #
+############
+cinnamon=(){src=gh:linuxmint/%s μ=Meson flags=('disable_networkmanager=true')}
+cinnamon-screensaver=(){src=gh:linuxmint/%s μ=Meson}
+python3-xapp=(){src=gh:linuxmint/%s μ=Python}
+nemo=(){src=gh:linuxmint/%s μ=Meson flags=('xmp=false')}
+cinnamon-translations=(){src=gh:linuxmint/%s μ=(eval 'make && mv usr PACKAGE')}
+metacity=(){src=gnome:%s μ=Autotools}
+caribou=(){src=gnome:%s μ=Autotools}
+muffin=(){src=gh:linuxmint/%s}
+cinnamon-control-center=(){src=gh:linuxmint/%s μ=Meson flags=('networkmanager' 'modemmanager' 'onlineaccounts')^'=false'}
+cinnamon-menus=(){src=gh:linuxmint/%s μ=Meson}
+cinnamon-settings-daemon=(){src=gh:linuxmint/%s μ=Meson flags=('use_cups')^'=disabled'}
+cinnamon-session=(){src=gh:linuxmint/%s μ=Meson}
+xapp=(){src=gh:linuxmint/%s μ=Meson}
+libgnomekbd=(){src=gnome:%s μ=Autotools}
+pangox-compat=(){src=download.gnome.org/sources/pangox-compat/0.0/pangox-compat-0.0.2.tar.xz μ=Autotools}
+cinnamon-desktop=(){src=gh:linuxmint/%s μ=Meson}
+cjs=(){src=gh:linuxmint/%s μ=Meson}
+libtimezonemap=(){src=git.launchpad.net/ubuntu/+source/%s μ=Autotools}
+libdbusmenu=(){src=git.launchpad.net/ubuntu/+source/%s μ=Autotools}
+libcroco=(){src=gl:inkscape/%s μ=Autotools}
+
+
+########
+# XFCE #
+########
+ristretto=(){src='http://archive.xfce.org/src/apps/ristretto/0.8/ristretto-0.8.1.tar.bz2' μ=Configure}
+xfce4-pulseaudio-plugin=(){src='http://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.1/xfce4-pulseaudio-plugin-0.1.0.tar.bz2' μ=Configure}
+
+# mousepad < gtksourceview < gnome-common
+mousepad=(){src='https://archive.xfce.org/src/apps/mousepad/0.4/mousepad-0.4.2.tar.bz2' μ=Configure}
+gtksourceview2=(){tag=gnome-2-30 src=gnome:gtksourceview μ=Autotools}
+
+
+###########
+# Haskell #
+###########
+ghc=(){tag=8.10.7 src=http://downloads.haskell.org/~%s/$tag/%s-$tag-src.tar.xz μ=Autotools}
+cabal=(){tag=3.6.2.0 src=https://downloads.haskell.org/~%s/%s-install-$tag/cabal-install-$tag.tar.gz μ=Cabal}
+xmonad=(){tag=v0.17.0 src=gh:%s/%s}
+
+
+##########
+# Python #
+##########
+cython=(){tag=0.29.28 src=gh:%s/%s μ=Python} # working
+python-lxml=(){tag=lxml-4.8.0 src=gh:lxml/lxml μ=Python} # not working
+itstool=(){tag=2.0.7 src='http://files.itstool.org/itstool/itstool-2.0.7.tar.bz2' μ=Configure}
+
+
+########
+# Libs #
+########
+botan=(){tag=2.19.1 src=gh:randombit/%s μ=(eval './configure.py $flags;Make') flags=('--extra-cxxflags='$CFLAGS '--prefix='$PREFIX)}
+boost=(){tag=boost-1.78.0 src=gh:boostorg/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
+
+
+
+##################
+# gnome packages #
+##################
+# avahi <- libdaemon
+avahi=(){src=gh:lathiat/avahi μ=Autotools flags='disable-'^('mono' 'monodoc' 'manpages')}
+libdaemon=(){src=0pointer.de/lennart/projects/libdaemon/libdaemon-0.14.tar.gz μ=Configure}
+
+# nautilus < tracker gnome-autoar
+# < gnome-desktop < gobject-introspeciton
+# < bubblewrap < libseccomp
+nautilus=(){tag=40.2 src=gnome:%s μ=Meson flags=('libportal' 'extensions')^'=false'}
+tracker=(){src=gnome:%s μ=Meson flags=('systemd_user_services' 'man' 'docs')^'=false'}
+
+gnome-desktop=(){tag=40.7 src=gnome:%s μ=Meson flags=('desktop_docs' 'debug_tools')^'=false'}
+bubblewrap=(){tag=v0.5.0 src=gh:containers/%s μ=Autotools}
+libseccomp=(){tag=v2.5.2 src=gh:seccomp/%s μ=Autotools}
+gnome-autoar=(){tag=0.4.3 src=gnome:%s μ=Meson}
+
+# colord < libgusb
+colord=(){tag=1.4.5 src=gh:hughsie/%s μ=Meson flags=('systemd' 'bash_completion')^'=false'}
+libgusb=(){tag=0.3.7 src=gh:hughsie/%s μ=Meson flags=('introspection' 'tests' 'vapi' 'docs')^'=false'}
+
+# misc
+zenity=(){tag=3.41.0 src=gnome:%s μ=Meson}
+gjs=(){src=gnome:%s μ=Meson}
+pygobject=(){tag=3.42.0 src=gnome:%s μ=Meson}
+libgee=(){tag=meson src=gnome:%s μ=Meson}
+gnome-tweaks=(){src=gnome:%s μ=Meson}
+libgxps=(){tag=0.3.2 src=gnome:%s μ=Meson}
+
+
+
+#################
+# rust packages #
+#################
+rust=(){tag=1.57.0 src=static.rust-lang.org/dist/%s-$tag-x86_64-unknown-linux-gnu.tar.gz μ=(./install.sh '--prefix='$PREFIX '--destdir='$destdir)}
+rg=(){tag=13.0.0 src=gh:BurntSushi/ripgrep μ=Cargo}
+sk=(){src=gh:lotabout/skim μ=Cargo}
+tealdeer=(){src=gh:dbrgn/%s μ=Cargo}
+exa=(){src=gh:ogham/%s μ=Cargo}
+lsd=(){src=gh:peltoche/%s μ=Cargo}
+vaultwarden=(){src=gh:dani-garcia/%s μ=Cargo flags=('sqlite')}
+fd=(){src=gh:sharkdp/%s μ=Cargo}
+czkawka=(){tag=3.3.1 src=gh:qarmin/%s μ=Cargo}
+
+
+
+###############
+# Qt packages #
+###############
+# qbitorrent <- libtorrent <- boost
+qbittorrent=(){tag=release-4.4.0 src=gh:%s/%s μ=CMake}
+libtorrent=(){tag=v1.2.15 src=gh:arvidn/%s μ=CMake}
+
+# okular <- extra-cmake-modules kf5
+okular=(){src=gh:kde/%s μ=CMake}
+extra-cmake-modules=(){src=gh:kde/%s μ=CMake}
+
+# misc
+qtpass=(){src=gh:ijhack/%s μ=(eval 'Qmake;mkdir -p $DESTDIR/usr/share/^(icons applications);cp artwork/icon.png $DESTDIR/usr/share/icons/qtpass-icon.png;cp qtpass.desktop $DESTDIR/usr/share/applications/')}
+strawberry=(){src=gh:strawberrymusicplayer/%s μ=CMake}
+vlc=(){tag=3.0.17 src=gh:videolan/%s μ=Autotools flags=('without-lua')}
+
+
+
+########
+# Misc #
+########
+openresolv=(){tag=openresolv-3.12.0 src=gh:NetworkConfiguration/%s μ=Configure}
+compiz=(){src=gh:compiz-reloaded/%s μ=Autotools}
+optipng=(){src=prdownloads.sourceforge.net/%s/%s-0.7.7.tar.gz μ=Autotools}
+pass=(){src=git.zx2c4.com/password-store μ=GMake}
+tinyproxy=(){src=gh:tinyproxy/tinyproxy μ=Autotools}
+xarchiver=(){src=gh:ib/xarchiver μ=Autotools}
+ucl=(){src=www.oberhumer.com/opensource/%s/download/%s-1.03.tar.gz CFLAGS=($CFLAGS -ansi) μ=Configure}
+upx=(){src=gh:%s/%s CFLAGS=($CFLAGS -ansi) target=all μ=(eval 'Make;cp src/upx.out $DESTDIR/usr/bin/upx')}
+lzop=(){src=www.lzop.org/download/%s-1.04.tar.gz μ=Configure}
+wine=(){src=gh:wine-mirror/%s μ=Autotools flags=('enable-win64')}
+fontforge=(){src=gh:fontforge/%s μ=CMake flags=('CMAKE_INSTALL_PREFIX:PATH=/usr' 'ENABLE_DOCS=OFF' 'ENABLE_LIBSPIRO=OFF')}
+nitrogen=(){tag=1.6.1 src=gh:l3ib/%s μ=Autotools}
+libressl=(){src=gh:libressl-portable/portable μ=Autotools}
+deluge=(){src=ftp.osuosl.org/pub/deluge/source/2.0/deluge-2.0.4.tar.xz μ=Python}
+secrets=(){src=gitlab.gnome.org/world/secrets μ=Meson}
+fragments=(){tag=1.5 src=gitlab.gnome.org/world/fragments μ=Meson}
+elementary-gtk=(){tag=5.4.2 src=gh:elementary/stylesheet μ=Meson}
+tinytex=(){src='http://yihui.org/tinytex/TinyTeX-1.tar.gz' μ=(eval '>[2=]{mkdir -p /usr/tinytex;mv * /usr/tinytex}')}
+ruby=(){src='http://cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.3.tar.gz' μ=Configure}
+editline=(){tag=1.17.1 src=gh:troglobit/%s μ=Autotools}
+libedit=(){tag=20210910-3.1 src=www.thrysoee.dk/editline/%s-$tag.tar.gz μ=Configure}
+gnutls=(){src='http://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz' μ=Configure flags=('with-included-libtasn1')}
+pnmixer=(){tag=master src=gh:nicklan/%s μ=CMake flags=('WITH_GTK3=OFF')}
+runit=(){src=gh:void-linux/runit μ=GMake}
+
+# torrential <- libgee granite transmission ...
+torrential=(){src=gh:davidmhewitt/torrential μ=Meson}
+
+# inkscape <- double-conversion potrace lib2geom
+inkscape=(){src=gl:%s/%s}
+lib2geom=(){src=gl:inkscape/%s μ=CMake flags=('2GEOM_TESTING=FALSE' '2GEOM_BUILD_SHARED=ON')}
+potrace=(){src=sourceforge.net/projects/potrace/files/latest/download μ=Autotools flags=('with-libpotrace')}
+double-conversion=(){src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
+
+# deadbeef <- faad2 | llvm jansson gettext gettext-tools intltool
+deadbeef=(){src=gh:deadbeef-player/%s tag=1.8.4 μ=Autotools flags=('disable-'^('ffmpeg' 'psf'))}
+faad2=(){src=gh:knik0/%s μ=Autotools}
+
+# azpainter <- libwebp
+azpainter=(){src=gl:azelpg/azpainter μ=Configure}
+
+# network manager <- ppp libndp
+networkmanager=(){src=gh:%s/%s μ=Meson flags=('qt=false' 'nmtui=false' 'modem_manager=false' 'session_tracking=no' 'systemd_journal=false' 'libaudit=no' 'selinux=false' 'systemdsystemunitdir=no')}
+ppp=(){src=gh:ppp-project/%s μ=Autotools}
+libndp=(){src=gh:jpirko/%s μ=Autotools}
+
+# gedit <- gtksourceview libpeas
+gedit=(){src=gnome:%s tag=gnome-3-38 μ=Meson flags=('spell=disabled' 'user_documentation=false' 'plugin_externaltools=false')}
+gtksourceview=(){src=gnome:%s tag=gtksourceview-4-8 μ=Meson}
+libpeas=(){src=gnome:%s μ=Meson}
+
+# i3 < xcb-util-xrm yajl pcre2
+i3=(){tag=next src=gh:%s/%s μ=Meson}
+yajl=(){tag=2.1.0 src=gh:lloyd/%s μ=CMake}
+xcb-util-xrm=(){tag=v1.3 src=gh:Airblader/%s μ=Autotools}
+xfce4-i3-workspaces-plugin=(){tag=1.4.0 src=denesb/%s μ=Autotools}
+
+# bcachefs < liburcu py:docutils (libscrypt < libsodium) zstd lz4 | keyutils libaio
+bcachefs=(){src=evilpiepirate.org/git/%s-tools μ=GMake}
+zstd=(){src=gh:facebook/%s μ=GMake}
+lz4=(){src=gh:lz4/%s μ=GMake}
+liburcu=(){src=gh:urcu/userspace-rcu μ=Autotools}
+libscrypt=(){src=gh:technion/%s CFLAGS=($CFLAGS -fPIC -shared) μ=GMake}
+libsodium=(){tag=1.0.18 src=gh:jedisct1/%s μ=Autotools}
+
+# catts < libwnck
+catts=(){src=gh:small-tech/catts μ=CMake}
+libwnck=(){tag=40.0 src=gnome:%s μ=Meson}
+
+# qemu < sdl sdl-image
+qemu=(){tag=6.1.0 src=download.qemu.org/%s-$tag.tar.xz μ=Configure}
+sdl-image=(){tag=release-2.0.5 src=gh:libsdl-org/%s μ=Autotools}
+sdl=(){tag=release-2.0.16 src=gh:libsdl-org/%s μ=CMake}
+
+#dupeguru
+dupeguru=(){tag=4.1.1 src=gh:arsenetar/%s μ=GMake}
+python-sip=(){src=http://www.riverbankcomputing.com/hg/sip/archive/8583e2bb1b32.tar.gz μ=Python}
+python-hsaudiotag=(){src=gh:hsoft/hsaudiotag μ=Python}
+pyqt=(){src=gh:baoboa/pyqt5 μ=(eval 'python3 ./configure.py;Make') LD_LIBRARY_PATH=./sip}
+
+#eth
+libkeccak=(){src=gh:maandree/%s μ=GMake}
+sha3sum=(){src=gh:maandree/%s μ=GMake}
+
+# dynare
+dynare=(){src='https://www.dynare.org/release/source/dynare-5.0.tar.xz' μ=Autotools flags=(disable-doc disable-dynare++ disable-matlab disable-mex-dynare++ disable-mex-ms-sbvar disable-mex-kalman-steady-state)}
+octave=(){src='https://ftpmirror.gnu.org/octave/octave-6.4.0.tar.gz' μ=Autotools}
+
+# wg
+wireguard=(){tag=v1.0.20210914 src='http://git.zx2c4.com/wireguard-tools' μ=GMake}
+
+# neovim
+neovim=(){tag=v0.6.1 src=gh:%s/%s μ=CMake flags=('PREFER_LUA=ON')}
+tree-sitter=(){tag=v0.20.6 src=gh:%s/%s μ=GMake}
+libluv=(){tag=1.43.0-0 src=gh:luvit/luv μ=CMake}
+msgpack-c=(){tag=c-4.0.0 src=gh:msgpack/%s μ=CMake}

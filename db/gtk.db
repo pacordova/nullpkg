@@ -1,0 +1,66 @@
+#!/bin/rc
+
+
+########
+# Glib #
+########
+gobject-introspection=(){tag=1.72.0 src=gnome:%s μ=Meson}
+glibmm=(){tag=2.66.2 src=gnome:%s μ=Meson flags=('build-documentation=false' 'build-examples=false')}
+mm-common=(){tag=1.0.3 src=gnome:%s μ=Meson flags=('use-network=true')}
+dbus-glib=(){tag=dbus-glib-0.112 src=freedesktop:dbus/%s μ=Autotools}
+json-glib=(){tag=1.6.6 src=gnome:%s μ=Meson}
+glib-networking=(){tag=2.70.1 src=gnome:%s μ=Meson}
+appstream-glib=(){tag=master src=gh:hughsie/%s μ=Meson flags=('rpm' 'stemmer' 'man')^'=false'}
+
+
+########
+# GTK+ #
+########
+gsettings-desktop-schemas=(){tag=40.0 src=gnome:%s μ=Meson}
+gtk2=(){tag=2.24.33 src=gnome:gtk μ=Autotools flags=($dirflags 'disable-gtk-doc' 'disable-gtk-doc-html' 'disable-glibtest')}
+gtk3=(){tag=3.24.33 src=gnome:gtk μ=Meson flags=('tests' 'demos' 'examples' 'win32_backend' 'quartz_backend')^'=false'}
+adwaita-icon-theme=(){tag=41.0 src=gnome:%s μ=Autotools}
+gtk-engine-murrine=(){src='http://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz' μ=Autotools}
+gtk-doc=(){tag=1.33.2 src=gnome:%s μ=Meson}
+babl=(){tag=master src=gnome:%s μ=Meson}
+gegl=(){tag=master src=gnome:%s μ=Meson}
+libhandy=(){tag=1.6.2 src=gnome:%s μ=Meson flags=('vapi=false' 'examples=false' 'tests=false')}
+
+
+#########
+# Cairo #
+#########
+libspectre=(){tag=0.2.9 src=freedesktop:%s/%s μ=Autotools}
+cairo=(){src=freedesktop:%s/%s μ=Meson flags=('spectre=disabled')}
+pango=(){tag=1.48.10 src=gnome:%s μ=Meson}
+
+
+##############
+# GTK+ progs #
+##############
+ahoviewer=(){tag=master src=gh:ahodesuka/%s μ=Meson}
+evince=(){tag=42.2 src=gnome:%s μ=Meson flags=('systemduserunitdir=no' 'nautilus=false' 'user_doc=false' 'gtk_doc=false')}
+file-roller=(){tag=3.40.0 src=gnome:%s μ=Meson}
+leafpad=(){tag=master src=gh:tarot231/%s μ=Autotools}
+transmission=(){tag=3.00 src=gh:%s/%s μ=CMake flags=('ENABLE_QT=OFF')}
+pavucontrol=(){tag=v5.0 src=freedesktop:pulseaudio/%s μ=Autotools}
+
+
+########
+# Gimp #
+########
+# need exiv2/gexiv
+libmypaint=(){tag=v1.6.0 src=gh:mypaint/%s μ=Autotools}
+mypaint-brushes=(){tag=v1.3.x src=gh:mypaint/%s μ=Autotools}
+gimp=(){tag=gimp-2-10 src=gnome:%s μ=Autotools flags=('enable-python=no' 'enable-glibtest=no')}
+
+
+########
+# Misc #
+########
+# not gtk but no better place to put them
+mpv=(){tag=master src=gh:mpv-player/%s μ=Meson}
+feh=(){tag=3.8 src=gh:derf/%s μ=GMake}
+bspwm=(){tag=0.9.10 src=gh:baskerville/%s μ=GMake}
+sxhkd=(){tag=0.6.2 src=gh:baskerville/%s μ=GMake}
+dmenu=(){tag=5.1 src='http://git.suckless.org/dmenu' μ=GMake}

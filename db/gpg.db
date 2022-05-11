@@ -10,4 +10,4 @@ libassuan=(){tag=2.5.5 src=gpg:%s-$tag.tar.bz2 μ=Configure}
 libksba=(){tag=1.6.0 src=gpg:%s-$tag.tar.bz2 μ=Configure}
 libgcrypt=(){tag=1.9.4 src=gpg:%s-$tag.tar.bz2 μ=Configure}
 libgpg-error=(){tag=1.43 src=gpg:%s-$tag.tar.bz2 μ=Configure}
-gnupg=(){tag=2.3.4 src=gpg:gpg/%s-$tag.tar.bz2 μ=Configure}
+gnupg=(){tag=2.3.4 src=gpg:%s-$tag.tar.bz2 μ=Configure}

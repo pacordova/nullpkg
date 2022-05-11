@@ -90,7 +90,8 @@ dbus=(){tag=dbus-1.13.22 src=freedesktop:dbus/%s μ=CMake flags=('with-systemdus
 
 # connman < libnftnl libmnl
 iptables=(){tag=1.8.7 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure}
-connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-curses' 'with-systemdunitdir=no' 'disable-wispr')}
+# connman needs -lncurses
+connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdunitdir=no')}
 
 # elogind < gperf
 elogind=(){tag=v246.10 src=gh:elogind/%s μ=Meson}

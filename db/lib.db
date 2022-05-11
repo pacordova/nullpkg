@@ -5,7 +5,7 @@
 #######
 acl=(){src='http://download.savannah.gnu.org/releases/acl/acl-2.3.1.tar.xz' μ=Configure flags=('disable-static' $dirflags)}
 alsa=(){src='http://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.6.1.tar.bz2' μ=Configure flags=('disable-static' $dirflags)}
-argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake}
+argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
 attr=(){src='http://download.savannah.nongnu.org/releases/attr/attr-2.5.1.tar.xz' μ=Configure flags=('disable-static' $dirflags)}
 c-ares=(){src='http://c-ares.haxx.se/download/c-ares-1.18.1.tar.gz' μ=CMake}
 gdbm=(){tag=1.23 src=gnu:%s-$tag.tar.gz μ=Configure flags=('disable-static' $dirflags)}

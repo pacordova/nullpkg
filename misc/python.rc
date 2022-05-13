@@ -18,7 +18,7 @@ fn rm_tests {
         'unittest/test' \
     )
     for(Test in $TestList)
-        rm -r @root/usr/lib64/python*/$Test
+        rm -r _root/usr/lib64/python*/$Test
 }
 
 # redefine mpkg

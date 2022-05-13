@@ -129,13 +129,13 @@ fn _git {
         --recurse-submodules \
         --shallow-submodules \
         $MAKEOPTS \
-        $src @$1
+        $src _$1
 }
 
 fn _curl {
     curl --anyauth -LOk $src
 
-    tar -C @$1 \
+    tar -C _$1 \
         --strip-components 1 \
         -xf `{basename $src} &&
     rm `{basename $src}
@@ -143,7 +143,7 @@ fn _curl {
 
 fn _query {
     tag=() src=() μ=() flags=()
-    destdir=/usr/nullpkg/cache/@$1/@root
+    destdir=/usr/nullpkg/cache/_$1/_root
 
     eval `{cat $db | grep '^'$1=}
     if(~ $#src 0)
@@ -155,7 +155,7 @@ fn snarf {
 
     _query $1
 
-    rm -rf @$1 && mkdir -p @$1
+    rm -rf _$1 && mkdir -p _$1
 
     src=`{
         echo $src |
@@ -182,13 +182,13 @@ fn snarf {
             _curl $1
     }
 
-    chown -R root:root @$1
+    chown -R root:root _$1
 
     true
 }
 
 fn emerge {
-    builtin cd /usr/nullpkg/cache/@$1
+    builtin cd /usr/nullpkg/cache/_$1
 
     _query $1
 
@@ -210,7 +210,7 @@ fn purge {
 
     >[2=] {
         sort -r index/$1.txt | sed 's|^|rm -d ''|;s|$|''|g' | rc
-        rm -rf cache/@$1 index/$1.txt
+        rm -rf cache/_$1 index/$1.txt
     }
 
     true

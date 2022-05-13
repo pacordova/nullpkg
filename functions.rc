@@ -221,12 +221,11 @@ fn purge {
 # Extra #
 #########
 fn _chroot {
-    builtin cd /
-
     >[2=] {
         mkdir -p $1/dev $1/boot
         for(m in (dev boot sys proc)) {
-            mount -o ro --rbind $m $1/$m
+            mkdir -p $1/$m
+            mount -o ro --rbind /$m $1/$m
         }
     }
 

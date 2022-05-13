@@ -73,8 +73,7 @@ fn Python {
 fn Cargo {
     CARGO_HOME=./.cargo \
     cargo install --path . \
-        --root $destdir/usr \
-        --features $*
+        --root $destdir/usr
 }
 
 fn QMake{

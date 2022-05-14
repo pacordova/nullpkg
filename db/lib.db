@@ -26,7 +26,7 @@ libtirpc=(){src='http://downloads.sourceforge.net/libtirpc/libtirpc-1.3.2.tar.bz
 libunwind=(){tag=v1.6.2 src=gh:%s/%s μ=Autotools flags=('disable-static')}
 libusb=(){src='https://github.com/libusb/libusb/releases/download/v1.0.25/libusb-1.0.25.tar.bz2' μ=Configure flags=($dirflags 'disable-static')}
 lvm=(){src='http://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
-ncurses=(){tag=6.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-shared' 'without-normal' 'with-cxx=no' 'disable-static')}
+ncurses=(){tag=6.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-shared' 'without-normal' 'with-cxx=no' 'disable-static' 'with-termlib=tinfo')}
 openssh=(){tag=V_8_8 src=gh:%s/%s-portable μ=Autotools flags=('disable-static')}
 pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=CMake flags=('PCRE2_BUILD_PCRE2_16=ON' 'PCRE2_BUILD_PCRE2_32=ON' 'PCRE2_BUILD_TESTS=OFF' 'PCRE2_BUILD_PCRE2GREP=OFF')}
 pcre=(){src='http://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2' flags=('PCRE_SUPPORT_UNICODE_PROPERTIES=ON' 'PCRE_SUPPORT_JIT=ON' 'PCRE_BUILD_PCREGREP=OFF' 'PCRE_BUILD_TESTS=OFF') μ=CMake}

@@ -210,7 +210,6 @@ tinytex=(){src='http://yihui.org/tinytex/TinyTeX-1.tar.gz' μ=(eval '>[2=]{mkdir
 ruby=(){src='http://cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.3.tar.gz' μ=Configure}
 editline=(){tag=1.17.1 src=gh:troglobit/%s μ=Autotools}
 libedit=(){tag=20210910-3.1 src=www.thrysoee.dk/editline/%s-$tag.tar.gz μ=Configure}
-gnutls=(){src='http://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz' μ=Configure flags=('with-included-libtasn1')}
 pnmixer=(){tag=master src=gh:nicklan/%s μ=CMake flags=('WITH_GTK3=OFF')}
 runit=(){src=gh:void-linux/runit μ=GMake}
 

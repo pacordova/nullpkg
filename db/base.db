@@ -90,14 +90,18 @@ which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 vim=(){tag=v8.2.4383 src=gh:%s/%s μ=Configure flags=('disable-gui' 'without-x')}
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
-util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s}
+util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($dirflags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'disable-static' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
 shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
 sudo=(){src='https://www.sudo.ws/dist/sudo-1.9.9.tar.gz' μ=Configure flags=$dirflags}
 
 dbus=(){tag=dbus-1.13.22 src=freedesktop:dbus/%s μ=CMake flags=('with-systemduserunitdir=no')}
 
 # connman < libnftnl libmnl
-iptables=(){tag=1.8.7 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure}
+iptables=(){tag=1.8.7 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'enable-shared')}
+gmp=(){tag=6.2.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+nettle=(){tag=3.7 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-shared')}
+gnutls=(){src='http://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz' μ=Configure flags=('with-included-libtasn1')}
+
 # connman needs -lncurses
 connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdunitdir=no')}
 
@@ -114,9 +118,8 @@ efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake}
 # GNU Extra #
 #############
 gperf=(){tag=3.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-gmp=(){tag=6.2.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 mpc=(){tag=1.2.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 #libiconv=(){tag=1.16 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-pic=no' 'enable-static=yes' 'enable-shared=no' 'enable-relocatable')}
 gdb=(){tag=11.1 src=gnu:%s-$tag.tar.xz μ=Autotools flags=($dirflags 'with-guile=no' 'with-system-readline' 'with-python=no')}
 guile=(){tag=3.0.7 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-nettle=(){tag=3.7 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-shared')}
+

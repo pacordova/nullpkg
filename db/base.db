@@ -8,9 +8,9 @@
 ############
 # Layer:01 #
 ############
-gcc=(){tag=11.2.0 src=gnu:%s-$tag/%s-$tag.tar.gz flags=($dirflags 'enable-multilib=no' 'enable-languages=c c++ fortran' 'disable-nls' 'disable-bootstrap') μ=Configure}
+# kernel headers before glibc
 glibc=(){tag=2.35 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-# kernel headers, terminfo, aaa_libs?
+gcc=(){tag=11.2.0 src=gnu:%s-$tag/%s-$tag.tar.gz flags=($dirflags 'enable-multilib=no' 'enable-languages=c c++ fortran' 'disable-nls' 'disable-bootstrap' 'enable-shared') μ=Configure}
 perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
 
 
@@ -24,11 +24,11 @@ make=(){tag=4.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-guile
 bash=(){tag=5.1.16 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-bash-malloc=no')}
 coreutils=(){tag=9.0 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 grep=(){tag=3.7 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+ed=(){tag=1.4 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 sed=(){tag=4.8 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-#gawk=(){tag=5.1.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-readline=no')}
-nawk=(){tag=master src=gh:onetrueawk/awk μ=Gmake}
 
 # net
+libressl=(){tag=v3.5.2 src=gh:libressl-portable/portable μ=Autotools}
 openssl=(){tag=OpenSSL_1_1_1n src=gh:%s/%s μ=GMake}
 curl=(){tag=curl-7_81_0 src=gh:%s/%s μ=CMake flags=('ENABLE_THREADED_RESOLVER=ON')}
 git=(){tag=v2.35.1 src=gh:%s/%s μ=Autotools flags=('with-gitconfig=/etc/gitconfig')}
@@ -52,6 +52,9 @@ flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}
 m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 automake=(){tag=1.16.5 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+
+# bootstrap gawk with nawk: gh:onetrueawk/awk, glibc needs gawk
+gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-readline=no')}
 
 texinfo=(){tag=6.8 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 bison=(){tag=3.8.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}

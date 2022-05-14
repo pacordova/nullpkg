@@ -25,7 +25,8 @@ bash=(){tag=5.1.16 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-ba
 coreutils=(){tag=9.0 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 grep=(){tag=3.7 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 sed=(){tag=4.8 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-gawk=(){tag=5.1.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-readline=no')}
+#gawk=(){tag=5.1.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-readline=no')}
+nawk=(){tag=master src=gh:onetrueawk/awk μ=Gmake}
 
 # net
 openssl=(){tag=OpenSSL_1_1_1n src=gh:%s/%s μ=GMake}

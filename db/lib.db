@@ -37,12 +37,12 @@ readline=(){tag=8.1.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with
 ########
 # Libs #
 ########
-libnftnl=(){tag=1.2.1 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
+pkg-config=(){src='https://pkgconfig.freedesktop.org/releases/pkg-config-0.29.2.tar.gz' μ=Configure flags=($dirflags 'with-internal-glib')}
 libmnl=(){tag=1.0.4 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
+libnftnl=(){tag=1.2.1 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
 libxml2=(){tag=v2.9.13 src=gnome:%s μ=Autotools}
 #icu4c=(){src='https://github.com/unicode-org/icu/releases/download/release-69-1/icu4c-69_1-src.tgz' μ=Configure}
 libuv=(){tag=v1.44.1 src=gh:%s/%s μ=CMake}
-pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=('with-internal-glib')}
 libconfig=(){tag=v1.7.3 src=gh:hyperrealm/%s μ=Autotools}
 double-conversion=(){tag=v3.2.0 src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
 uthash=(){tag=v2.3.0 src=gh:troydhanson/%s μ=Headers}

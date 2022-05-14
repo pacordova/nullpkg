@@ -11,7 +11,6 @@
 # kernel headers before glibc
 glibc=(){tag=2.35 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 gcc=(){tag=11.2.0 src=gnu:%s-$tag/%s-$tag.tar.gz flags=($dirflags 'enable-multilib=no' 'enable-languages=c c++ fortran' 'disable-nls' 'disable-bootstrap' 'enable-shared') μ=Configure}
-perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
 
 
 ############
@@ -49,12 +48,15 @@ flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}
 ############
 # Layer:03 #
 ############
+# bootstrap gawk with nawk: gh:onetrueawk/awk, glibc needs gawk
+gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-readline=no')}
+
+# manually configure
+perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
+
 m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 automake=(){tag=1.16.5 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-
-# bootstrap gawk with nawk: gh:onetrueawk/awk, glibc needs gawk
-gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-readline=no')}
 
 texinfo=(){tag=6.8 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 bison=(){tag=3.8.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
@@ -71,6 +73,13 @@ help2man=(){tag=1.49.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 #autobuild=(){src='http://download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz' μ=Configure flags=$dirflags}
 libtool=(){tag=2.4.6 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
+# python
+python=(){tag=v3.9.10 src=gh:python/cpython μ=Configure flags=($dirflags 'with-platlibdir=lib64' 'without-ensurepip' 'enable-optimizations' 'enable-shared')}
+python-setuptools=(){tag=v62.1.0 src=gh:pypa/setuptools μ=Python}
+python-pip=(){tag=22.0.4 src=gh:pypa/pip μ=Python}
+# alternatively use pip for meson/ninja
+meson=(){tag=0.62.1 src=gh:mesonbuild/%s μ=Python}
+ninja=(){tag=v1.10.2 src=gh:ninja-build/%s μ=CMake}
 
 
 ############
@@ -80,11 +89,6 @@ less=(){tag=590 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 vim=(){tag=v8.2.4383 src=gh:%s/%s μ=Configure flags=('disable-gui' 'without-x')}
-python=(){tag=v3.9.10 src=gh:python/cpython μ=Configure flags=($dirflags 'with-platlibdir=lib64' 'without-ensurepip' 'enable-optimizations' 'enable-shared')}
-python-setuptools=(){tag=v62.1.0 src=gh:pypa/setuptools μ=Python}
-python-pip=(){tag=22.0.4 src=gh:pypa/pip μ=Python}
-meson=(){tag=0.62.1 src=gh:mesonbuild/%s μ=Python}
-ninja=(){tag=v1.10.2 src=gh:ninja-build/%s μ=CMake}
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
 util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s}
 shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}

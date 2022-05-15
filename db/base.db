@@ -49,6 +49,15 @@ patch=(){tag=2.7.6 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 # manually configure
 perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
 
+# python
+python=(){tag=v3.9.10 src=gh:python/cpython μ=Configure flags=($dirflags 'with-platlibdir=lib64' 'without-ensurepip' 'enable-optimizations' 'enable-shared')}
+python-setuptools=(){tag=v62.1.0 src=gh:pypa/setuptools μ=Python}
+python-pip=(){tag=22.0.4 src=gh:pypa/pip μ=Python}
+# alternatively use pip for meson
+meson=(){tag=0.62.1 src=gh:mesonbuild/%s μ=Python}
+ninja=(){tag=v1.10.2 src=gh:ninja-build/%s μ=CMake}
+
+
 m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 automake=(){tag=1.16.5 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
@@ -65,28 +74,20 @@ help2man=(){tag=1.49.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 libtool=(){tag=2.4.6 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 gmp=(){tag=6.2.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 
-# python
-python=(){tag=v3.9.10 src=gh:python/cpython μ=Configure flags=($dirflags 'with-platlibdir=lib64' 'without-ensurepip' 'enable-optimizations' 'enable-shared')}
-python-setuptools=(){tag=v62.1.0 src=gh:pypa/setuptools μ=Python}
-python-pip=(){tag=22.0.4 src=gh:pypa/pip μ=Python}
-# alternatively use pip for meson/ninja
-meson=(){tag=0.62.1 src=gh:mesonbuild/%s μ=Python}
-ninja=(){tag=v1.10.2 src=gh:ninja-build/%s μ=CMake}
-
 
 ############
 # Layer:03 #
 ############
-less=(){tag=590 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
-util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($dirflags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'disable-static' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
 shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
+which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($dirflags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'disable-static' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
+e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
 sudo=(){src='https://www.sudo.ws/dist/sudo-1.9.9.tar.gz' μ=Configure flags=$dirflags}
 lvm=(){src='http://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
 openssh=(){tag=V_8_8 src=gh:%s/%s-portable μ=Autotools flags=('disable-static')}
 dbus=(){tag=dbus-1.13.22 src=freedesktop:dbus/%s μ=CMake flags=('with-systemduserunitdir=no')}
+less=(){tag=590 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 # connman < libnftnl libmnl
 libmnl=(){tag=1.0.4 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
@@ -94,19 +95,17 @@ libnftnl=(){tag=1.2.1 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirfl
 iptables=(){tag=1.8.7 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'enable-shared')}
 nettle=(){tag=3.7 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-shared')}
 gnutls=(){src='http://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz' μ=Configure flags=('with-included-libtasn1' 'without-p11-kit' 'enable-shared' $dirflags)}
-# connman needs -lncurses
-connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdunitdir=no')}
+connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdunitdir=no') CFLAGS=$CFLAGS^'-lncurses '}
 
 # efibootmgr
 mandoc=(){src='https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz' μ=Configure}
 efivar=(){tag=38 src=gh:rhboot/efivar μ=GMake}
-efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake}
+efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake EFIDIR=/boot}
 
 
 #############
 # GNU Extra #
 #############
-gperf=(){tag=3.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 mpc=(){tag=1.2.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 #libiconv=(){tag=1.16 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-pic=no' 'enable-static=yes' 'enable-shared=no' 'enable-relocatable')}
 gdb=(){tag=11.1 src=gnu:%s-$tag.tar.xz μ=Autotools flags=($dirflags 'with-guile=no' 'with-system-readline' 'with-python=no')}

@@ -1,0 +1,98 @@
+#!/bin/rc
+
+################
+# after chroot #
+################
+# start with bzip2, installs directly to root...
+nullpkg -S bzip2
+
+nullpkg -S diffutils findutils patch
+
+# these packages have manual configurations
+#mkdir -p /usr/nullpkg/cache/_python-setuptools/build/
+
+# perl
+nullpkg snarf perl
+cd /usr/nullpkg/cache/_perl
+cp /usr/nullpkg/patches/perl* .
+for(f in (perl*diff perl*patch))
+    patch -p1 <$f
+sh Configure -des \
+    -Dprefix=/usr \
+    -Dvendorprefix=/usr \
+    -Dprivlib=/usr/lib64/perl5/5.34/core_perl \
+    -Darchlib=/usr/lib64/perl5/5.34/core_perl \
+    -Dsitelib=/usr/lib64/perl5/5.34/site_perl \
+    -Dsitearch=/usr/lib64/perl5/5.34/site_perl \
+    -Dvendorlib=/usr/lib64/perl5/5.34/vendor_perl \
+    -Dvendorarch=/usr/lib64/perl5/5.34/vendor_perl \
+    -Dman1dir=/usr/share/man/man1 \
+    -Dman3dir=/usr/share/man/man3 \
+    -Duseshrplib \
+    -Dusethreads
+nullpkg emerge perl
+
+# python
+nullpkg snarf python
+cd /usr/nullpkg/cache/_python
+cp /usr/nullpkg/patches/python* .
+for(f in (python*.diff python*.patch))
+    patch -p1 <$f
+nullpkg emerge python
+
+nullpkg snarf python-setuptools
+mkdir -p /usr/nullpkg/cache/_python-setuptools/build/scripts-3.9
+nullpkg emerge python-setuptools
+
+# rebuild layers
+layer02=(m4 autoconf automake texinfo bison bc cmake gettext help2man libtool gmp)
+aaa_lib=(acl alsa argon attr c-ares gdbm json libaio libcap libexpat libffi libjpeg-turbo libnsl libpng libpsl libsigsegv libtiff libtirpc libunwind ncurses pcre2 pcre pkg-config popt readline)
+layer01=(gcc binutils make bash coreutils grep ed sed vim libressl curl git rc zlib gzip tar xz)
+layer03=(which util-linux e2fsprogs sudo lvm openssh less time dbus)
+connman=(libmnl libnftnl iptables nettle gnutls connman)
+
+nullpkg -S $layer02
+
+########
+# libs #
+########
+nullpkg snarf glibc
+cd /usr/nullpkg/cache/_glibc
+mkdir -p build/root
+cd build
+sh ../configure \
+    --prefix=/usr \
+    --libdir=/usr/lib64 \
+    --disable-werror                         \
+    --enable-kernel=3.2                      \
+    --enable-stack-protector=strong          \
+    --with-headers=/usr/include              \
+    libc_cv_slibdir=/usr/lib64
+make -j5
+make install DESTDIR=`pwd`/root PREFIX=/usr
+nullpkg makepkg root
+mv root.tar.xz /usr/nullpkg/cache/gcc.tar.xz
+
+nullpkg snarf $aaa_lib
+nullpkg emerge $aaa_lib
+
+
+###########
+# layer01 #
+###########
+nullpkg snarf gcc
+cd /usr/nullpkg/cache/_glibc
+sh ./contrib/download*
+nullpkg emerge gcc
+
+nullpkg -S $layer01
+
+
+###########
+# layer03 #
+###########
+nullpkg -S shadow
+groupadd tty wheel
+useradd -m -G wheel root
+nullpkg -S $layer03
+nullpkg -S $connman

@@ -1,0 +1,43 @@
+#!/bin/rc
+
+# manual stuff:
+#  * extract the kernel headers
+#  * build glibc against the kernel headers
+#  * extract kernel headers and glibc into chroot
+#  * bootstrap gawk (from onetrueawk) if using a fresh glibc
+
+target=/home/base
+pkgcache=/usr/nullpkg/cache/fresh2
+
+
+#################
+# before chroot #
+#################
+# prepare the target
+mkdir -p $target
+cd $target
+mkdir -p usr/bin usr/lib64 lib
+ln -sf usr/bin   bin
+ln -sf usr/lib64 lib64
+
+# aaa_libs
+for(f in ($pkgcache/aaa_libs/*.tar.xz))
+    tar -C $target -xhf $f
+
+# layer01
+for(f in ($pkgcache/layer01/*.tar.xz))
+    tar -C $target -xhf $f
+
+cd bin
+ln -sf bash sh
+ln -sf vim  vi
+ln -sf gcc  cc
+
+# install ca-certs, resolv.conf
+install -D /etc/ssl/certs/ca-certificates.crt $target/etc/ssl/certs/ca-certificates.crt
+install -D /etc/resolv.conf $target/etc/resolv.conf
+
+cp -r /usr/nullpkg $target/usr/nullpkg
+rm $target/nullpkg/cache
+mkdir $target/nullpkg/cache
+

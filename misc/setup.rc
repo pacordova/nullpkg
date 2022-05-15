@@ -16,7 +16,7 @@ pkgcache=/usr/nullpkg/cache/fresh2
 # prepare the target
 mkdir -p $target
 cd $target
-mkdir -p usr/bin usr/lib64 lib
+mkdir -p usr/bin usr/lib64 tmp
 ln -sf usr/bin   bin
 ln -sf usr/lib64 lib64
 

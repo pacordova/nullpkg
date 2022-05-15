@@ -38,5 +38,5 @@ install -D /etc/ssl/certs/ca-certificates.crt $target/etc/ssl/certs/ca-certifica
 install -D /etc/resolv.conf $target/etc/resolv.conf
 
 cp -r /usr/nullpkg $target/usr/nullpkg
-cd $target/nullpkg && rm cache && mkdir cache
+cd $target/usr/nullpkg && rm cache && mkdir cache
 

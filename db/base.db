@@ -28,7 +28,6 @@ sed=(){tag=4.8 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 # net
 libressl=(){tag=v3.5.2 src=gh:libressl-portable/portable μ=Autotools}
-openssl=(){tag=OpenSSL_1_1_1n src=gh:%s/%s μ=GMake}
 curl=(){tag=curl-7_81_0 src=gh:%s/%s μ=CMake flags=('ENABLE_THREADED_RESOLVER=ON')}
 git=(){tag=v2.35.1 src=gh:%s/%s μ=Autotools flags=('with-gitconfig=/etc/gitconfig')}
 rc=(){tag=master src=gh:pacordova/rc μ=GMake}
@@ -96,8 +95,6 @@ shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
 sudo=(){src='https://www.sudo.ws/dist/sudo-1.9.9.tar.gz' μ=Configure flags=$dirflags}
 lvm=(){src='http://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
 openssh=(){tag=V_8_8 src=gh:%s/%s-portable μ=Autotools flags=('disable-static')}
-
-
 dbus=(){tag=dbus-1.13.22 src=freedesktop:dbus/%s μ=CMake flags=('with-systemduserunitdir=no')}
 
 # connman < libnftnl libmnl
@@ -109,8 +106,6 @@ gnutls=(){src='http://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz'
 # connman needs -lncurses
 connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdunitdir=no')}
 
-# elogind < gperf
-elogind=(){tag=v246.10 src=gh:elogind/%s μ=Meson}
 
 # efibootmgr
 mandoc=(){src='https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz' μ=Configure}

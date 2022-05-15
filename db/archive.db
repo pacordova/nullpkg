@@ -284,3 +284,9 @@ neovim=(){tag=v0.6.1 src=gh:%s/%s μ=CMake flags=('PREFER_LUA=ON')}
 tree-sitter=(){tag=v0.20.6 src=gh:%s/%s μ=GMake}
 libluv=(){tag=1.43.0-0 src=gh:luvit/luv μ=CMake}
 msgpack-c=(){tag=c-4.0.0 src=gh:msgpack/%s μ=CMake}
+
+# elogind < gperf
+elogind=(){tag=v246.10 src=gh:elogind/%s μ=Meson}
+
+# openssl
+openssl=(){tag=OpenSSL_1_1_1n src=gh:%s/%s μ=GMake}

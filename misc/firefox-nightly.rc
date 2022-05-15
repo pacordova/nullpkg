@@ -2,7 +2,6 @@
 
 nightly_url='https://download.mozilla.org/?product=firefox-nightly-latest-ssl&os=linux64&lang=en-US'
 
-rm -rf /usr/lib64/firefox
 curl -Lko /tmp/nightly.tar.bz2 $nightly_url
-tar -C /usr/lib64 -xf /tmp/nightly.tar.bz2
+tar -C /usr/lib64 -xhf /tmp/nightly.tar.bz2
 rm /tmp/nightly.tar.bz2

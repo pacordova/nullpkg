@@ -3,13 +3,14 @@
 ################
 # after chroot #
 ################
+pkgcache=/usr/nullpkg/cache
 nullpkg -S diffutils findutils patch bzip2
 
 # perl
 nullpkg snarf perl
-cd /usr/nullpkg/cache/_perl
+cd $pkgcache/_perl
 cp /usr/nullpkg/patches/perl* .
-for(f in (perl*diff perl*patch))
+for(f in (perl*.patch))
     patch -p1 <$f
 sh Configure -des \
     -Dprefix=/usr \
@@ -28,14 +29,14 @@ nullpkg emerge perl
 
 # python
 nullpkg snarf python
-cd /usr/nullpkg/cache/_python
+cd $pkgcache/_python
 cp /usr/nullpkg/patches/python* .
-for(f in (python*.diff python*.patch))
+for(f in (python*.diff))
     patch -p1 <$f
 nullpkg emerge python
 
 nullpkg snarf python-setuptools
-mkdir -p /usr/nullpkg/cache/_python-setuptools/build/scripts-3.9
+mkdir -p $pkgcache/_python-setuptools/build/scripts-3.9
 nullpkg emerge python-setuptools
 
 # rebuild layers
@@ -52,7 +53,7 @@ nullpkg -S $layer02
 # libs #
 ########
 nullpkg snarf glibc
-cd /usr/nullpkg/cache/_glibc
+cd $pkgcache/_glibc
 mkdir -p build/root
 cd build
 sh ../configure \
@@ -64,19 +65,22 @@ sh ../configure \
     --with-headers=/usr/include              \
     libc_cv_slibdir=/usr/lib64
 make -j5
-make install DESTDIR=`pwd`/root PREFIX=/usr
+make install DESTDIR=`{pwd}/root PREFIX=/usr
 nullpkg makepkg root
-mv root.tar.xz /usr/nullpkg/cache/gcc.tar.xz
+mv root.tar.xz $pkgcache/gcc.tar.xz
 
+nullpkg -i gcc
 nullpkg snarf $aaa_lib
 nullpkg emerge $aaa_lib
+mv $pkgcache/_libexpat/libexpat.tar.xz $pkgcache/libexpat.tar.xz
+nullpkg -i libexpat
 
 
 ###########
 # layer01 #
 ###########
 nullpkg snarf gcc
-cd /usr/nullpkg/cache/_glibc
+cd $pkgcache/_glibc
 sh ./contrib/download*
 nullpkg emerge gcc
 
@@ -93,7 +97,7 @@ nullpkg -S $libextra
 nullpkg -S $layer03
 nullpkg -S $connman
 nullpkg snarf mandoc
-cd /usr/nullpkg/cache/_mandoc
+cd $pkgcache/_mandoc
 sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
 sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
 nullpkg emerge mandoc

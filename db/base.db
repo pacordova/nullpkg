@@ -8,17 +8,7 @@
 ############
 # Layer:01 #
 ############
-# kernel headers before glibc
-glibc=(){tag=2.35 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 gcc=(){tag=11.2.0 src=gnu:%s-$tag/%s-$tag.tar.gz flags=($dirflags 'enable-multilib=no' 'enable-languages=c c++ fortran' 'disable-nls' 'disable-bootstrap' 'enable-shared') μ=Configure}
-# manually configure
-perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
-
-
-############
-# Layer:02 #
-############
-# layer02 utils
 binutils=(){tag=2.38 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-deterministic-archives')}
 make=(){tag=4.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-guile=no')}
 bash=(){tag=5.1.16 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-bash-malloc=no')}
@@ -26,8 +16,9 @@ coreutils=(){tag=9.0 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 grep=(){tag=3.7 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 ed=(){tag=1.4 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 sed=(){tag=4.8 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+vim=(){tag=v8.2.4383 src=gh:%s/%s μ=Configure flags=('disable-gui' 'without-x')}
 
-# net
+# network
 libressl=(){tag=v3.5.2 src=gh:libressl-portable/portable μ=Autotools}
 curl=(){tag=curl-7_81_0 src=gh:%s/%s μ=CMake flags=('ENABLE_THREADED_RESOLVER=ON')}
 git=(){tag=v2.35.1 src=gh:%s/%s μ=Autotools flags=('with-gitconfig=/etc/gitconfig')}
@@ -49,8 +40,15 @@ gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-rea
 
 
 ############
-# Layer:03 #
+# Layer:02 #
 ############
+diffutils=(){tag=3.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+findutils=(){tag=4.9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+patch=(){tag=2.7.6 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+
+# manually configure
+perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
+
 m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 automake=(){tag=1.16.5 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
@@ -60,10 +58,6 @@ bison=(){tag=3.8.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 bc=(){tag=1.07.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 cmake=(){tag=v3.22.2 src=gh:kitware/%s μ=Configure}
-
-diffutils=(){tag=3.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-findutils=(){tag=4.9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-patch=(){tag=2.7.6 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 gettext=(){tag=0.21 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 help2man=(){tag=1.49.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
@@ -81,12 +75,11 @@ ninja=(){tag=v1.10.2 src=gh:ninja-build/%s μ=CMake}
 
 
 ############
-# Layer:04 #
+# Layer:03 #
 ############
 less=(){tag=590 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-vim=(){tag=v8.2.4383 src=gh:%s/%s μ=Configure flags=('disable-gui' 'without-x')}
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
 util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($dirflags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'disable-static' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
 shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
@@ -103,7 +96,6 @@ nettle=(){tag=3.7 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-s
 gnutls=(){src='http://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz' μ=Configure flags=('with-included-libtasn1' 'without-p11-kit' 'enable-shared' $dirflags)}
 # connman needs -lncurses
 connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdunitdir=no')}
-
 
 # efibootmgr
 mandoc=(){src='https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz' μ=Configure}

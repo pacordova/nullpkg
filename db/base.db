@@ -11,12 +11,13 @@
 # kernel headers before glibc
 glibc=(){tag=2.35 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 gcc=(){tag=11.2.0 src=gnu:%s-$tag/%s-$tag.tar.gz flags=($dirflags 'enable-multilib=no' 'enable-languages=c c++ fortran' 'disable-nls' 'disable-bootstrap' 'enable-shared') μ=Configure}
+# manually configure
+perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
 
 
 ############
 # Layer:02 #
 ############
-
 # layer02 utils
 binutils=(){tag=2.38 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-deterministic-archives')}
 make=(){tag=4.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-guile=no')}
@@ -50,10 +51,6 @@ gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-rea
 ############
 # Layer:03 #
 ############
-
-# manually configure
-perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
-
 m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 automake=(){tag=1.16.5 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}

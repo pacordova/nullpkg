@@ -94,6 +94,9 @@ e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'en
 util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($dirflags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'disable-static' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
 shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
 sudo=(){src='https://www.sudo.ws/dist/sudo-1.9.9.tar.gz' μ=Configure flags=$dirflags}
+lvm=(){src='http://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
+openssh=(){tag=V_8_8 src=gh:%s/%s-portable μ=Autotools flags=('disable-static')}
+
 
 dbus=(){tag=dbus-1.13.22 src=freedesktop:dbus/%s μ=CMake flags=('with-systemduserunitdir=no')}
 

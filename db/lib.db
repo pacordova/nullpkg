@@ -11,6 +11,7 @@ attr=(){src='http://download.savannah.nongnu.org/releases/attr/attr-2.5.1.tar.xz
 c-ares=(){src='http://c-ares.haxx.se/download/c-ares-1.18.1.tar.gz' μ=CMake}
 gdbm=(){tag=1.23 src=gnu:%s-$tag.tar.gz μ=Configure flags=('disable-static' $dirflags)}
 glibc=(){tag=2.35 src=gnu:%s-$tag.tar.gz μ=GMake}
+gmp=(){tag=6.2.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 json=(){src='http://s3.amazonaws.com/json-c_releases/releases/json-c-0.15.tar.gz' μ=CMake}
 libaio=(){src='https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_0.3.112.orig.tar.xz' μ=GMake flags=('libdir=/usr/lib64')}
 libcap=(){tag=v1.2.62 src=kernel:libs/libcap/%s μ=GMake}

@@ -3,13 +3,7 @@
 ################
 # after chroot #
 ################
-# start with bzip2, installs directly to root...
-nullpkg -S bzip2
-
-nullpkg -S diffutils findutils patch
-
-# these packages have manual configurations
-#mkdir -p /usr/nullpkg/cache/_python-setuptools/build/
+nullpkg -S diffutils findutils patch bzip2
 
 # perl
 nullpkg snarf perl
@@ -45,10 +39,11 @@ mkdir -p /usr/nullpkg/cache/_python-setuptools/build/scripts-3.9
 nullpkg emerge python-setuptools
 
 # rebuild layers
-layer02=(m4 autoconf automake texinfo bison bc cmake gettext help2man libtool gmp)
-aaa_lib=(acl alsa argon attr c-ares gdbm json libaio libcap libexpat libffi libjpeg-turbo libnsl libpng libpsl libsigsegv libtiff libtirpc libunwind ncurses pcre2 pcre pkg-config popt readline)
+layer02=(m4 autoconf automake texinfo bison bc cmake gettext help2man libtool)
+aaa_lib=(acl alsa argon attr c-ares gdbm gmp json libaio libcap libexpat libffi libjpeg-turbo libnsl libpng libpsl libsigsegv libtiff libtirpc libunwind ncurses pcre2 pcre pkg-config popt readline)
 layer01=(gcc binutils make bash coreutils grep ed sed vim libressl curl git rc zlib gzip tar xz)
 layer03=(which util-linux e2fsprogs sudo lvm openssh less time dbus)
+libextra=(gperf libeudev libfuse libusb glib libunistring)
 connman=(libmnl libnftnl iptables nettle gnutls connman)
 
 nullpkg -S $layer02
@@ -94,5 +89,12 @@ nullpkg -S $layer01
 nullpkg -S shadow
 groupadd tty wheel
 useradd -m -G wheel root
+nullpkg -S $libextra
 nullpkg -S $layer03
 nullpkg -S $connman
+nullpkg snarf mandoc
+cd /usr/nullpkg/cache/_mandoc
+sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
+sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
+nullpkg emerge mandoc
+nullpkg -S efivar efibootmgr

@@ -72,7 +72,6 @@ gettext=(){tag=0.21 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 help2man=(){tag=1.49.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 #autobuild=(){src='http://download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz' μ=Configure flags=$dirflags}
 libtool=(){tag=2.4.6 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-gmp=(){tag=6.2.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 
 
 ############

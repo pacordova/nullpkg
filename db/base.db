@@ -9,6 +9,7 @@
 # Layer:01 #
 ############
 gcc=(){tag=11.2.0 src=gnu:%s-$tag/%s-$tag.tar.gz flags=($dirflags 'enable-multilib=no' 'enable-languages=c c++ fortran' 'disable-nls' 'disable-bootstrap' 'enable-shared') μ=Configure}
+perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
 binutils=(){tag=2.38 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-deterministic-archives')}
 make=(){tag=4.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-guile=no')}
 bash=(){tag=5.1.16 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-bash-malloc=no')}
@@ -42,12 +43,13 @@ gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-rea
 ############
 # Layer:02 #
 ############
+m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+automake=(){tag=1.16.5 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+
 diffutils=(){tag=3.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 findutils=(){tag=4.9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 patch=(){tag=2.7.6 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-
-# manually configure
-perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
 
 # python
 python=(){tag=v3.9.10 src=gh:python/cpython μ=Configure flags=($dirflags 'with-platlibdir=lib64' 'without-ensurepip' 'enable-optimizations' 'enable-shared')}
@@ -56,11 +58,6 @@ python-pip=(){tag=22.0.4 src=gh:pypa/pip μ=Python}
 # alternatively use pip for meson
 meson=(){tag=0.62.1 src=gh:mesonbuild/%s μ=Python}
 ninja=(){tag=v1.10.2 src=gh:ninja-build/%s μ=CMake}
-
-
-m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-automake=(){tag=1.16.5 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 texinfo=(){tag=6.8 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 bison=(){tag=3.8.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}

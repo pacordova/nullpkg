@@ -8,25 +8,6 @@
 pkgcache=/usr/nullpkg/cache
 nullpkg emerge diffutils findutils patch bzip2
 
-# perl
-cd $pkgcache/_perl
-cp /usr/nullpkg/patches/perl* .
-for(f in (perl*.patch))
-    patch -p1 <$f
-sh Configure -des \
-    -Dprefix=/usr \
-    -Dvendorprefix=/usr \
-    -Dprivlib=/usr/lib64/perl5/5.34/core_perl \
-    -Darchlib=/usr/lib64/perl5/5.34/core_perl \
-    -Dsitelib=/usr/lib64/perl5/5.34/site_perl \
-    -Dsitearch=/usr/lib64/perl5/5.34/site_perl \
-    -Dvendorlib=/usr/lib64/perl5/5.34/vendor_perl \
-    -Dvendorarch=/usr/lib64/perl5/5.34/vendor_perl \
-    -Dman1dir=/usr/share/man/man1 \
-    -Dman3dir=/usr/share/man/man3 \
-    -Duseshrplib \
-    -Dusethreads
-nullpkg emerge perl
 
 # python
 cd $pkgcache/_python
@@ -41,7 +22,7 @@ nullpkg emerge python-setuptools
 # rebuild layers
 layer02=(m4 autoconf automake texinfo bison bc cmake gettext help2man libtool)
 aaa_lib=(acl alsa argon attr c-ares gdbm gmp gperf json libaio libcap libexpat libffi libjpeg-turbo libnsl libpng libpsl libsigsegv libtiff libtirpc libunwind ncurses pcre2 pcre pkg-config popt readline)
-layer01=(gcc binutils make bash coreutils grep ed sed vim libressl curl git rc zlib gzip tar xz)
+layer01=(binutils make bash coreutils grep ed sed vim libressl curl git rc zlib gzip tar xz)
 layer03=(which util-linux e2fsprogs sudo lvm openssh less time dbus)
 libextra=(libeudev libfuse libusb glib libunistring)
 connman=(libmnl libnftnl iptables nettle gnutls connman)
@@ -75,6 +56,28 @@ nullpkg -i     $pkgcache/_libexpat/libexpat.tar.xz
 ###########
 # layer01 #
 ###########
+nullpkg emerge gcc
+
+# perl
+cd $pkgcache/_perl
+cp /usr/nullpkg/patches/perl* .
+for(f in (perl*.patch))
+    patch -p1 <$f
+sh Configure -des \
+    -Dprefix=/usr \
+    -Dvendorprefix=/usr \
+    -Dprivlib=/usr/lib64/perl5/5.34/core_perl \
+    -Darchlib=/usr/lib64/perl5/5.34/core_perl \
+    -Dsitelib=/usr/lib64/perl5/5.34/site_perl \
+    -Dsitearch=/usr/lib64/perl5/5.34/site_perl \
+    -Dvendorlib=/usr/lib64/perl5/5.34/vendor_perl \
+    -Dvendorarch=/usr/lib64/perl5/5.34/vendor_perl \
+    -Dman1dir=/usr/share/man/man1 \
+    -Dman3dir=/usr/share/man/man3 \
+    -Duseshrplib \
+    -Dusethreads
+nullpkg emerge perl
+
 nullpkg emerge $layer01
 
 

@@ -40,4 +40,4 @@ install -D /etc/resolv.conf $target/etc/resolv.conf
 
 cp -r /usr/nullpkg $target/usr/nullpkg
 cd $target/usr/nullpkg && rm cache && mkdir cache
-cp -r $pkgcache/sources/_* $target/$pkgcache
+cp -r $pkgcache/sources.tar.xz $target/$pkgcache

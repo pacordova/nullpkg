@@ -13,14 +13,14 @@ layer01=( \
     gcc perl binutils make bash coreutils \
     grep ed sed vim libressl \
     curl git rc zlib gzip \
-    tar xz bzip2 zstd m4 flex \
+    tar xz bzip2 zstd flex \
     gawk \
 )
 
 layer02=( \
     diffutils findutils patch python \
-    python-setuptools python-pip ninja autoconf \
-    automake texinfo bison bc cmake \
+    python-setuptools python-pip ninja \
+    texinfo bison bc cmake \
     gettext help2man libtool \
 )
 

@@ -35,6 +35,7 @@ zstd=(){tag=v1.5.2 src=gh:facebook/zstd μ=GMake}
 
 # need perl modules XML::Parser, Locale::gettext, libtool, intltool + circular
 flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}
+m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 # if new glibc, bootstrap gawk with nawk: gh:onetrueawk/awk, glibc needs gawk
 gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-readline=no')}
@@ -43,7 +44,6 @@ gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-rea
 ############
 # Layer:02 #
 ############
-m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 automake=(){tag=1.16.5 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 

@@ -8,9 +8,9 @@
 pkgcache=/usr/nullpkg/cache
 
 # rebuild layers
-layer02=(m4 autoconf automake diffutils findutils patch texinfo bison bc cmake gettext help2man libtool)
+layer02=(autoconf automake diffutils findutils patch texinfo bison bc cmake gettext help2man libtool)
 aaa_lib=(acl alsa argon attr c-ares gdbm gmp gperf json libaio libcap libexpat libffi libjpeg-turbo libnsl libpng libpsl libsigsegv libtiff libtirpc libunwind ncurses pcre2 pcre pkg-config popt readline)
-layer01=(binutils make bash coreutils grep ed sed vim libressl curl git rc zlib gzip tar xz)
+layer01=(binutils make bash coreutils grep ed sed vim libressl curl git rc zlib gzip tar xz m4 flex gawk)
 layer03=(which util-linux e2fsprogs sudo lvm openssh less time dbus)
 libextra=(libeudev libfuse libusb glib libunistring)
 connman=(libmnl libnftnl iptables nettle gnutls connman)

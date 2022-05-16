@@ -7,7 +7,7 @@
 #  * bootstrap gawk (from onetrueawk) if using a fresh glibc
 
 target=/home/base
-bootstrap=fresh2
+bootstrap=fresh
 pkgcache=/usr/nullpkg/cache
 
 

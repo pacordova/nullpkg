@@ -2,7 +2,7 @@
 
 aaa_libs=( \
     acl alsa argon attr c-ares \
-    gdbm glibc gmp json libaio \
+    gdbm glibc gmp gperf json libaio \
     libcap libexpat libffi libjpeg-turbo libnsl \
     libpng libpsl libsigsegv libtiff libtirpc \
     libunwind ncurses pcre2 pcre pkg-config \
@@ -25,7 +25,7 @@ layer02=( \
 )
 
 layer03=( \
-    which less time shadow gperf \
+    which less time shadow \
     libeudev libfuse libusb glib libunistring \
     util-linux e2fsprogs sudo lvm openssh \
     dbus libmnl libnftnl iptables nettle \

@@ -12,6 +12,7 @@ c-ares=(){src='http://c-ares.haxx.se/download/c-ares-1.18.1.tar.gz' μ=CMake}
 gdbm=(){tag=1.23 src=gnu:%s-$tag.tar.gz μ=Configure flags=('disable-static' $dirflags)}
 glibc=(){tag=2.35 src=gnu:%s-$tag.tar.gz μ=GMake}
 gmp=(){tag=6.2.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+gperf=(){tag=3.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 json=(){src='http://s3.amazonaws.com/json-c_releases/releases/json-c-0.15.tar.gz' μ=CMake}
 libaio=(){src='https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_0.3.112.orig.tar.xz' μ=GMake flags=('libdir=/usr/lib64')}
 libcap=(){tag=v1.2.62 src=kernel:libs/libcap/%s μ=GMake}
@@ -33,10 +34,10 @@ popt=(){tag=popt-1.18-release src=gh:rpm-software-management/%s μ=Autotools fla
 readline=(){tag=8.1.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-curses' 'disable-static')}
 
 
+
 ########
 # Libs #
 ########
-gperf=(){tag=3.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 libeudev=(){tag=v3.2.11 src=gh:eudev-project/eudev μ=Autotools flags=('disable-static')}
 libfuse=(){tag=fuse-3.10.5 src=gh:%s/%s μ=Meson}
 libusb=(){src='https://github.com/libusb/libusb/releases/download/v1.0.25/libusb-1.0.25.tar.bz2' μ=Configure flags=($dirflags 'disable-static')}

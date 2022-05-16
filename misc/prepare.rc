@@ -7,7 +7,8 @@
 #  * bootstrap gawk (from onetrueawk) if using a fresh glibc
 
 target=/home/base
-pkgcache=/usr/nullpkg/cache/fresh2
+bootstrap=fresh2
+pkgcache=/usr/nullpkg/cache
 
 
 #################
@@ -21,11 +22,11 @@ ln -sf usr/bin   bin
 ln -sf usr/lib64 lib64
 
 # aaa_libs
-for(f in ($pkgcache/aaa_libs/*.tar.xz))
+for(f in ($pkgcache/$bootstrap/aaa_libs/*.tar.xz))
     tar -C $target -xhf $f
 
 # layer01
-for(f in ($pkgcache/layer01/*.tar.xz))
+for(f in ($pkgcache/$bootstrap/layer01/*.tar.xz))
     tar -C $target -xhf $f
 
 cd bin
@@ -39,4 +40,4 @@ install -D /etc/resolv.conf $target/etc/resolv.conf
 
 cp -r /usr/nullpkg $target/usr/nullpkg
 cd $target/usr/nullpkg && rm cache && mkdir cache
-
+cp -r $pkgcache/sources/_* $target/$pkgcache

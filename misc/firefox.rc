@@ -1,0 +1,7 @@
+#!/bin/rc
+
+ffurl='https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US'
+
+curl -Lko /tmp/nightly.tar.bz2 $ffurl
+tar -C /usr/lib64 -xhf /tmp/nightly.tar.bz2
+rm /tmp/nightly.tar.bz2

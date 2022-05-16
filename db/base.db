@@ -52,7 +52,7 @@ perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
 
 m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-automake=(){tag=1.16.5 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+automake=(){tag=1.15.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 texinfo=(){tag=6.8 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 bison=(){tag=3.8.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}

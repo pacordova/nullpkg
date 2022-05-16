@@ -1,0 +1,11 @@
+#!/bin/rc
+
+aaa_libs=(acl alsa argon attr c-ares gdbm glibc gmp json libaio libcap libexpat libffi libjpeg-turbo libnsl libpng libpsl libsigsegv libtiff libtirpc libunwind ncurses pcre2 pcre pkg-config popt readline)
+layer01=(gcc binutils make bash coreutils grep ed sed vim libressl curl git rc zlib gzip tar xz bzip2 zstd flex gawk)
+layer02=(diffutils findutils patch perl python python-setuptools python-pip ninja m4 autoconf automake texinfo bison bc cmake gettext help2man libtool)
+layer03=(which less time shadow gperf libeudev libfuse libusb glib libunistring util-linux e2fsprogs sudo lvm openssh dbus libmnl libnftnl iptables nettle gnutls connman mandoc efivar efibootmgr)
+
+nullpkg snarf $aaa_libs
+nullpkg snarf $layer01
+nullpkg snarf $layer02
+nullpkg snarf $layer03

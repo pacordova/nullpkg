@@ -71,11 +71,10 @@ make install DESTDIR=`{pwd}/root PREFIX=/usr
 nullpkg makepkg root
 mv root.tar.xz $pkgcache/glibc.tar.xz
 
-nullpkg -i glibc
-nullpkg snarf $aaa_lib
+nullpkg -i     glibc
+nullpkg snarf  $aaa_lib
 nullpkg emerge $aaa_lib
-mv $pkgcache/_libexpat/libexpat.tar.xz $pkgcache/libexpat.tar.xz
-nullpkg -i libexpat
+nullpkg -i     $pkgcache/_libexpat/libexpat.tar.xz
 
 
 ###########
@@ -86,7 +85,9 @@ cd $pkgcache/_gcc
 sh ./contrib/download_prerequisites
 nullpkg emerge gcc
 
-nullpkg -S $layer01
+nullpkg snarf  $layer01
+nullpkg emerge $layer01
+
 
 
 ###########

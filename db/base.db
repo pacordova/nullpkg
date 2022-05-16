@@ -51,14 +51,6 @@ diffutils=(){tag=3.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 findutils=(){tag=4.9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 patch=(){tag=2.7.6 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
-# python
-python=(){tag=v3.9.10 src=gh:python/cpython μ=Configure flags=($dirflags 'with-platlibdir=lib64' 'without-ensurepip' 'enable-optimizations' 'enable-shared')}
-python-setuptools=(){tag=v62.1.0 src=gh:pypa/setuptools μ=Python}
-python-pip=(){tag=22.0.4 src=gh:pypa/pip μ=Python}
-# alternatively use pip for meson
-meson=(){tag=0.62.1 src=gh:mesonbuild/%s μ=Python}
-ninja=(){tag=v1.10.2 src=gh:ninja-build/%s μ=CMake}
-
 texinfo=(){tag=6.8 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 bison=(){tag=3.8.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 bc=(){tag=1.07.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
@@ -69,6 +61,14 @@ gettext=(){tag=0.21 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 help2man=(){tag=1.49.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 #autobuild=(){src='http://download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz' μ=Configure flags=$dirflags}
 libtool=(){tag=2.4.6 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+
+# python
+python=(){tag=v3.9.10 src=gh:python/cpython μ=Configure flags=($dirflags 'with-platlibdir=lib64' 'without-ensurepip' 'enable-optimizations' 'enable-shared')}
+python-setuptools=(){tag=v62.1.0 src=gh:pypa/setuptools μ=Python}
+python-pip=(){tag=22.0.4 src=gh:pypa/pip μ=Python}
+# alternatively use pip for meson
+meson=(){tag=0.62.1 src=gh:mesonbuild/%s μ=Python}
+ninja=(){tag=v1.10.2 src=gh:ninja-build/%s μ=CMake}
 
 
 ############

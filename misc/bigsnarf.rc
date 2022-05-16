@@ -40,6 +40,8 @@ nullpkg snarf $layer03
 cd /usr/nullpkg/cache/_gcc
 ./contrib/download_prerequisites
 
+mkdir -p /usr/nullpkg/cache/_python-setuptools/build/scripts-3.9
+
 cd ..
 mkdir sources
 mv _* sources

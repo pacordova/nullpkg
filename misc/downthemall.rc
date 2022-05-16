@@ -10,7 +10,7 @@ aaa_libs=( \
 )
 
 layer01=( \
-    gcc perl binutils make bash coreutils \
+    gcc  binutils make bash coreutils \
     grep ed sed vim libressl \
     curl git rc zlib gzip \
     tar xz bzip2 zstd flex \
@@ -18,7 +18,8 @@ layer01=( \
 )
 
 layer02=( \
-    diffutils findutils patch python \
+    diffutils findutils patch perl python \
+    m4 autoconf automake
     python-setuptools python-pip ninja \
     texinfo bison bc cmake \
     gettext help2man libtool \

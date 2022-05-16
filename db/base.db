@@ -45,7 +45,7 @@ gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-rea
 # Layer:02 #
 ############
 autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-automake=(){tag=1.16.5 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+automake=(){tag=1.15.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 diffutils=(){tag=3.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 findutils=(){tag=4.9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}

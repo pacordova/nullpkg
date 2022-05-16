@@ -8,7 +8,7 @@
 ############
 # Layer:01 #
 ############
-gcc=(){tag=11.2.0 src=gnu:%s-$tag/%s-$tag.tar.gz flags=($dirflags 'enable-multilib=no' 'enable-languages=c c++ fortran' 'disable-nls' 'disable-bootstrap' 'enable-shared') μ=Configure}
+gcc=(){tag=11.2.0 src=gnu:%s-$tag/%s-$tag.tar.gz flags=($dirflags 'disable-multilib' 'enable-languages=c c++ fortran' 'disable-nls' 'disable-bootstrap' 'enable-shared') μ=Configure}
 binutils=(){tag=2.38 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-deterministic-archives')}
 make=(){tag=4.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-guile=no')}
 bash=(){tag=5.1.16 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-bash-malloc=no')}

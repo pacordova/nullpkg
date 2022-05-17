@@ -52,7 +52,7 @@ for(f in (python*.diff))
 nullpkg emerge python
 nullpkg emerge python-setuptools python-pip ninja
 
-python3 -m pip install meson
+sleep 6 && python3 -m pip install meson
 
 
 ########
@@ -103,3 +103,9 @@ sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
 sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
 nullpkg emerge mandoc
 nullpkg emerge efivar efibootmgr
+
+cd $pkgcache/_sysvinit
+cp /usr/nullpkg/patches/sysvinit* .
+for(f in (sysvinit*.patch))
+    patch -p1 <$f
+nullpkg emerge sysvinit

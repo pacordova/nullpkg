@@ -101,6 +101,7 @@ mandoc=(){src='https://mandoc.bsd.lv/snapshots/mandoc-1.14.6.tar.gz' μ=Configur
 efivar=(){tag=38 src=gh:rhboot/efivar μ=GMake}
 efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake EFIDIR=/boot}
 
+sysvinit=(){src='https://download.savannah.gnu.org/releases/sysvinit/sysvinit-3.01.tar.xz' μ=GMake}
 
 #############
 # GNU Extra #

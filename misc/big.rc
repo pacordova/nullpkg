@@ -11,7 +11,7 @@ cd $pkgcache
 tar -xhf sources.tar.xz
 
 # rebuild layers
-layer02=(m4 autoconf automake texinfo bison bc cmake gettext help2man libtool)
+layer02=(m4 autoconf automake texinfo bison bc cmake gettext help2man libtool python python-setuptools python-pip ninja)
 aaa_lib=(acl alsa argon attr c-ares gdbm gmp gperf json libaio libcap libexpat libffi libjpeg-turbo libnsl libpng libpsl libsigsegv libtiff libtirpc libunwind ncurses pcre2 pcre pkg-config popt readline)
 layer01=(gcc binutils make bash coreutils grep ed sed vim libressl curl git rc zlib gzip tar xz zstd flex gawk)
 layer03=(which util-linux e2fsprogs sudo lvm openssh less time dbus)
@@ -23,9 +23,6 @@ nullpkg emerge diffutils findutils patch
 
 # perl
 cd $pkgcache/_perl
-cp /usr/nullpkg/patches/perl* .
-for(f in (perl*.patch))
-    patch -p1 <$f
 sh Configure -des \
     -Dprefix=/usr \
     -Dvendorprefix=/usr \
@@ -43,15 +40,6 @@ nullpkg emerge perl
 
 # layer02
 nullpkg emerge $layer02
-
-# python
-cd $pkgcache/_python
-cp /usr/nullpkg/patches/python* .
-for(f in (python*.diff))
-    patch -p1 <$f
-nullpkg emerge python
-nullpkg emerge python-setuptools python-pip ninja
-
 sleep 6 && python3 -m pip install meson
 
 

@@ -94,7 +94,7 @@ fn Headers{
 # Package Managment Functions #
 ###############################
 fn _patch {
-    builtin cd /usr/nullpkg/cache/$1
+    builtin cd /usr/nullpkg/cache/_$1
     patches=/usr/nullpkg/patches/$1^*
 
     if(test -f $patches(1))

@@ -91,9 +91,4 @@ sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
 sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
 nullpkg emerge mandoc
 nullpkg emerge efivar efibootmgr
-
-cd $pkgcache/_sysvinit
-cp /usr/nullpkg/patches/sysvinit* .
-for(f in (sysvinit*.patch))
-    patch -p1 <$f
 nullpkg emerge sysvinit

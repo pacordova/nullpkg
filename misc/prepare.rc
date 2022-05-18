@@ -6,7 +6,7 @@
 #  * extract kernel headers and glibc into chroot
 #  * bootstrap gawk (from onetrueawk) if using a fresh glibc
 
-target=/home/base
+target=/mnt
 bootstrap=pass1
 pkgcache=/usr/nullpkg/cache
 

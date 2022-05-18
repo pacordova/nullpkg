@@ -290,3 +290,12 @@ elogind=(){tag=v246.10 src=gh:elogind/%s μ=Meson}
 
 # openssl
 openssl=(){tag=OpenSSL_1_1_1n src=gh:%s/%s μ=GMake}
+
+
+#############
+# GNU Extra #
+#############
+mpc=(){tag=1.2.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+#libiconv=(){tag=1.16 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-pic=no' 'enable-static=yes' 'enable-shared=no' 'enable-relocatable')}
+guile=(){tag=3.0.7 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+#autobuild=(){src='http://download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz' μ=Configure flags=$dirflags}

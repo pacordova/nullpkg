@@ -62,7 +62,6 @@ cmake=(){tag=v3.22.2 src=gh:kitware/%s μ=Configure}
 
 gettext=(){tag=0.21 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 help2man=(){tag=1.49.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-#autobuild=(){src='http://download.savannah.gnu.org/releases/autobuild/autobuild-5.3.tar.gz' μ=Configure flags=$dirflags}
 libtool=(){tag=2.4.6 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 # python
@@ -103,10 +102,4 @@ efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake EFIDIR=/boot}
 
 sysvinit=(){src='https://download.savannah.gnu.org/releases/sysvinit/sysvinit-3.01.tar.xz' μ=GMake}
 
-#############
-# GNU Extra #
-#############
-mpc=(){tag=1.2.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-#libiconv=(){tag=1.16 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-pic=no' 'enable-static=yes' 'enable-shared=no' 'enable-relocatable')}
-gdb=(){tag=11.1 src=gnu:%s-$tag.tar.xz μ=Autotools flags=($dirflags 'with-guile=no' 'with-system-readline' 'with-python=no')}
-guile=(){tag=3.0.7 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+# non-reproducible packages: ncurses, flex, libtool, perl, python

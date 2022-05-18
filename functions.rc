@@ -93,6 +93,17 @@ fn Headers{
 ###############################
 # Package Managment Functions #
 ###############################
+fn _patch {
+    builtin cd /usr/nullpkg/cache/$1
+    patches=/usr/nullpkg/patches/$1^*
+
+    if(test -f $patches(1))
+        for(p in $patches)
+            patch -p1 <$p
+
+    true
+}
+
 fn _makepkg {
     # remove slash from arg
     *=`{echo $1 | sed 's|/$||g'}
@@ -184,6 +195,8 @@ fn snarf {
     }
 
     chown -R root:root _$1
+
+    _patch $1
 
     true
 }

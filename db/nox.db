@@ -19,3 +19,4 @@ ghostscript=(){tag=ghostpdl-9.55.0 src=gh:ArtifexSoftware/ghostpdl μ=Autotools}
 ag=(){tag=master src=gh:ggreer/the_silver_searcher μ=Autotools}
 optipng=(){src='http://prdownloads.sourceforge.net/optipng/optipng-0.7.7.tar.gz' μ=Configure}
 pngquant=(){tag=2.17.0 src=gh:kornelski/%s μ=Cargo}
+gdb=(){tag=11.1 src=gnu:%s-$tag.tar.xz μ=Autotools flags=($dirflags 'with-guile=no' 'with-system-readline' 'with-python=no')}

@@ -19,7 +19,7 @@ layer01=( \
 
 layer02=( \
     diffutils findutils patch perl python \
-    m4 autoconf automake
+    m4 autoconf automake \
     python-setuptools python-pip ninja \
     texinfo bison bc cmake \
     gettext help2man libtool \

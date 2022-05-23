@@ -4,16 +4,16 @@
 # aaa #
 #######
 # static kheaders
-acl=(){tag=2.3.1 src=http://download.savannah.gnu.org/releases/acl/acl-$tag.tar.xz μ=Configure flags=('disable-static' $dirflags)}
-alsa=(){src='http://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.6.1.tar.bz2' μ=Configure flags=('disable-static' $dirflags)}
+acl=(){tag=2.3.1 src=https://download.savannah.gnu.org/releases/acl/acl-$tag.tar.xz μ=Configure flags=('disable-static' $dirflags)}
+alsa=(){src='https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.6.1.tar.bz2' μ=Configure flags=('disable-static' $dirflags)}
 argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
-attr=(){tag=2.5.1 src=http://download.savannah.nongnu.org/releases/attr/attr-$tag.tar.xz μ=Configure flags=('disable-static' $dirflags)}
-c-ares=(){tag=1.18.1 src=http://c-ares.haxx.se/download/c-ares-1.18.1.tar.gz μ=CMake}
+attr=(){tag=2.5.1 src=https://download.savannah.nongnu.org/releases/attr/attr-$tag.tar.xz μ=Configure flags=('disable-static' $dirflags)}
+c-ares=(){tag=1.18.1 src=https://c-ares.haxx.se/download/c-ares-1.18.1.tar.gz μ=CMake}
 gdbm=(){tag=1.23 src=gnu:%s-$tag.tar.gz μ=Configure flags=('disable-static' $dirflags)}
 glibc=(){tag=2.35 src=gnu:%s-$tag.tar.gz μ=GMake}
 gmp=(){tag=6.2.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 gperf=(){tag=3.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-json=(){tag=0.15 src=http://s3.amazonaws.com/json-c_releases/releases/json-c-$tag.tar.gz μ=CMake}
+json=(){tag=0.15 src=https://s3.amazonaws.com/json-c_releases/releases/json-c-$tag.tar.gz μ=CMake}
 libaio=(){tag=0.3.112 src=https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_$tag.orig.tar.xz μ=GMake flags=('libdir=/usr/lib64')}
 libcap=(){tag=v1.2.62 src=kernel:libs/libcap/%s μ=GMake}
 libexpat=(){tag=2.4.6 src=https://prdownloads.sourceforge.net/expat/expat-$tag.tar.xz μ=(eval 'cd expat;CMake')}
@@ -28,9 +28,9 @@ libtirpc=(){tag=1.3.2 src=https://downloads.sourceforge.net/libtirpc/libtirpc-$t
 libunwind=(){tag=v1.6.2 src=gh:%s/%s μ=Autotools flags=('disable-static')}
 ncurses=(){tag=6.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-shared' 'without-normal' 'with-cxx=no' 'disable-static' 'with-termlib=tinfo')}
 pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=CMake flags=('PCRE2_BUILD_PCRE2_16=ON' 'PCRE2_BUILD_PCRE2_32=ON' 'PCRE2_BUILD_TESTS=OFF' 'PCRE2_BUILD_PCRE2GREP=OFF')}
-pcre=(){src='http://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2' flags=('PCRE_SUPPORT_UNICODE_PROPERTIES=ON' 'PCRE_SUPPORT_JIT=ON' 'PCRE_BUILD_PCREGREP=OFF' 'PCRE_BUILD_TESTS=OFF') μ=CMake}
+pcre=(){src='https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2' flags=('PCRE_SUPPORT_UNICODE_PROPERTIES=ON' 'PCRE_SUPPORT_JIT=ON' 'PCRE_BUILD_PCREGREP=OFF' 'PCRE_BUILD_TESTS=OFF') μ=CMake}
 pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=('with-internal-glib')}
-popt=(){src='http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
+popt=(){src='https://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
 readline=(){tag=8.1.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-curses' 'disable-static')}
 
 
@@ -49,20 +49,20 @@ libuv=(){tag=v1.44.1 src=gh:%s/%s μ=CMake}
 libconfig=(){tag=v1.7.3 src=gh:hyperrealm/%s μ=Autotools}
 double-conversion=(){tag=v3.2.0 src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
 uthash=(){tag=v2.3.0 src=gh:troydhanson/%s μ=Headers}
-libev=(){src='http://dist.schmorp.de/libev/%s-4.33.tar.gz' μ=Autotools}
+libev=(){src='https://dist.schmorp.de/libev/%s-4.33.tar.gz' μ=Autotools}
 openblas=(){tag=v0.3.20 src=gh:xianyi/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
 sqlite=(){src='https://sqlite.org/2022/sqlite-autoconf-3380400.tar.gz' μ=Autotools}
-intltool=(){src='http://launchpad.net/intltool/trunk/0.51.0/+download/%s-0.51.0.tar.gz' μ=Configure flags=$dirflags}
+intltool=(){src='https://launchpad.net/intltool/trunk/0.51.0/+download/%s-0.51.0.tar.gz' μ=Configure flags=$dirflags}
 
 
 ##############
 # Multimedia #
 ##############
-x264=(){tag=master src='http://code.videolan.org/videolan/x264.git' μ=Configure flags=($dirflags 'enable-shared' 'disable-cli' 'bit-depth=10')}
+x264=(){tag=master src='https://code.videolan.org/videolan/x264.git' μ=Configure flags=($dirflags 'enable-shared' 'disable-cli' 'bit-depth=10')}
 libass=(){tag=0.15.2 src=gh:%s/%s μ=Autotools}
 gstreamer=(){src=gh:GStreamer/gst-build μ=Meson}
 ffmpeg=(){tag=n4.4.1 src=gh:%s/%s μ=Configure flags=('libdir='$LIBDIR 'enable-shared' 'enable-libvpx' 'enable-gpl' 'enable-libx264')}
 pipewire=(){tag=0.3.39 src=freedesktop:%s/%s μ=Meson}
-imlib2=(){tag=master src='http://downloads.sourceforge.net/enlightenment/imlib2-1.8.0.tar.xz' μ=Autotools}
+imlib2=(){tag=master src='https://downloads.sourceforge.net/enlightenment/imlib2-1.8.0.tar.xz' μ=Autotools}
 poppler=(){tag=poppler-22.02.0 src=freedesktop:poppler/%s μ=CMake flags=('ENABLE_QT5=OFF' 'ENABLE_BOOST=OFF')}
 poppler-data=(){tag=POPPLER_DATA_0_4_11 src=freedesktop:poppler/%s μ=CMake}

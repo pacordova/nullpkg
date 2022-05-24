@@ -147,6 +147,9 @@ fn _git {
 fn _curl {
     curl --anyauth -LOk $src
 
+    # log checksum
+    md5sum `{basename $src} >> /usr/nullpkg/log.txt
+
     tar -C _$1 \
         --strip-components 1 \
         -xf `{basename $src} &&
@@ -186,8 +189,6 @@ fn snarf {
 
     }
     switch($src) {
-        case *release*
-            _curl $1
         case *git*
             _git $1
         case *

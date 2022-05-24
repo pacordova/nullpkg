@@ -9,6 +9,7 @@ pkgcache=/usr/nullpkg/cache
 
 cd $pkgcache
 tar -xhf sources.tar.xz
+mv sources/* .
 
 # rebuild layers
 layer02=(m4 autoconf automake texinfo bison bc cmake gettext help2man libtool python python-setuptools python-pip ninja)
@@ -91,4 +92,3 @@ sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
 sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
 nullpkg emerge mandoc
 nullpkg emerge efivar efibootmgr
-nullpkg emerge sysvinit

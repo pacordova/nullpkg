@@ -146,7 +146,8 @@ fn _git {
     # log checksum
     cd _$1
     _hash=`{git rev-parse HEAD}
-    echo $1 $_hash >> /usr/nullpkg/log.txt
+    echo $_hash $1 >> /usr/nullpkg/log.txt
+    cd ..
 }
 
 fn _curl {
@@ -181,16 +182,16 @@ fn snarf {
         echo $src |
         sed '
             s|%s|'$1'|g;
-            s|gnu:|http://mirrors.kernel.org/gnu/'$1'/|g;
-            s|gpg:|http://gnupg.org/ftp/gcrypt/'$1'/|g;
-            s|kernel:|http://git.kernel.org/pub/scm/|g;
-            s|gh:|http://github.com/|g;
-            s|gitlab:|http://gitlab.com/|g;
-            s|freedesktop:|http://gitlab.freedesktop.org/|g;
-            s|gpg:|http://gnupg.org/ftp/gcrypt/'$1'/|g;
-            s|netfilter:|http://www.netfilter.org/pub/|g;
-            s|qt:|http://invent.kde.org/qt/qt/|g;
-            s|gnome:|http://gitlab.gnome.org/gnome/|g'
+            s|gnu:|https://mirrors.kernel.org/gnu/'$1'/|g;
+            s|gpg:|https://gnupg.org/ftp/gcrypt/'$1'/|g;
+            s|kernel:|https://git.kernel.org/pub/scm/|g;
+            s|gh:|https://github.com/|g;
+            s|gitlab:|https://gitlab.com/|g;
+            s|freedesktop:|https://gitlab.freedesktop.org/|g;
+            s|gpg:|https://gnupg.org/ftp/gcrypt/'$1'/|g;
+            s|netfilter:|https://www.netfilter.org/pub/|g;
+            s|qt:|https://invent.kde.org/qt/qt/|g;
+            s|gnome:|https://gitlab.gnome.org/gnome/|g'
 
     }
     switch($src) {

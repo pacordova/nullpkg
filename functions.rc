@@ -142,6 +142,11 @@ fn _git {
         --shallow-submodules \
         $MAKEOPTS \
         $src _$1
+
+    # log checksum
+    cd _$1
+    _hash=`{git rev-parse HEAD}
+    echo $1 $_hash >> /usr/nullpkg/log.txt
 }
 
 fn _curl {

@@ -48,7 +48,7 @@ findutils=(){tag=4.9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 patch=(){tag=2.7.6 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 # manually configure
-perl=(){tag=v5.34.0 src=https://www.cpan.org/src/5.0/perl-$tag.tar.xz μ=GMake}
+perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
 
 m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}

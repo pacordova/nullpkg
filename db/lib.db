@@ -30,7 +30,7 @@ ncurses=(){tag=6.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-sh
 pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=CMake flags=('PCRE2_BUILD_PCRE2_16=ON' 'PCRE2_BUILD_PCRE2_32=ON' 'PCRE2_BUILD_TESTS=OFF' 'PCRE2_BUILD_PCRE2GREP=OFF')}
 pcre=(){src='https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2' flags=('PCRE_SUPPORT_UNICODE_PROPERTIES=ON' 'PCRE_SUPPORT_JIT=ON' 'PCRE_BUILD_PCREGREP=OFF' 'PCRE_BUILD_TESTS=OFF') μ=CMake}
 pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=('with-internal-glib')}
-popt=(){src='https://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
+popt=(){src='http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
 readline=(){tag=8.1.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-curses' 'disable-static')}
 
 

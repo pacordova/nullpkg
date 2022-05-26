@@ -100,4 +100,4 @@ mandoc=(){tag=1.14.6 src=https://mandoc.bsd.lv/snapshots/mandoc-$tag.tar.gz μ=C
 efivar=(){tag=38 src=gh:rhboot/efivar μ=GMake}
 efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake EFIDIR=/boot}
 
-# non-reproducible packages: ncurses, flex, libtool, perl, python
+# non-reproducible packages: ncurses, flex, gcc, perl, python

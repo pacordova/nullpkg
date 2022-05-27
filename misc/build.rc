@@ -5,7 +5,10 @@
 fn emerge++ {
     for(i in $*) {
         nullpkg emerge $i
-        nullpkg -i     $i || exit
+        if(test -f /usr/nullpkg/cache/$i.tar.xz)
+            nullpkg -i $i
+        if not
+            exit
     }
 }
 ################

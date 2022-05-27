@@ -4,7 +4,7 @@
 
 fn emerge++ {
     for(i in $*) {
-        nullpkg emerge $i || exit
+        nullpkg emerge $i
         nullpkg -i     $i || exit
     }
 }
@@ -25,7 +25,6 @@ layer03=(which util-linux e2fsprogs sudo lvm openssh less time dbus sysvinit)
 libextra=(libeudev libfuse libusb glib libunistring)
 connman=(libmnl libnftnl iptables nettle gnutls connman)
 
-# for some reason only works when downloading?
 emerge++ diffutils findutils patch
 
 # perl

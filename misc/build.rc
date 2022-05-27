@@ -2,6 +2,12 @@
 
  . /etc/make.conf
 
+fn emerge++ {
+    for(i in $*) {
+        nullpkg emerge $i
+        nullpkg -i     $i
+    }
+}
 ################
 # after chroot #
 ################
@@ -20,7 +26,7 @@ libextra=(libeudev libfuse libusb glib libunistring)
 connman=(libmnl libnftnl iptables nettle gnutls connman)
 
 # for some reason only works when downloading?
-nullpkg emerge diffutils findutils patch
+emerge++ diffutils findutils patch
 
 # perl
 cd $pkgcache/_perl
@@ -37,10 +43,10 @@ sh Configure -des \
     -Dman3dir=/usr/share/man/man3 \
     -Duseshrplib \
     -Dusethreads
-nullpkg emerge perl
+emerge++ perl
 
 # layer02
-nullpkg emerge $layer02
+emerge++ $layer02
 sleep 6 && python3 -m pip install meson
 
 
@@ -64,8 +70,7 @@ nullpkg makepkg root
 mv root.tar.xz $pkgcache/glibc.tar.xz
 
 nullpkg -i     glibc
-nullpkg emerge $aaa_lib
-nullpkg -i     $pkgcache/_libexpat/libexpat.tar.xz
+emerge++ $aaa_lib
 
 
 ###########
@@ -73,22 +78,22 @@ nullpkg -i     $pkgcache/_libexpat/libexpat.tar.xz
 ###########
 # BUG: gcc needs /usr/lib to exist
 mkdir /usr/lib
-nullpkg emerge $layer01
+emerge++ $layer01
 
 
 
 ###########
 # layer03 #
 ###########
-nullpkg emerge shadow
+emerge++ shadow
 groupadd tty
 groupadd wheel
 useradd -m -G wheel root
-nullpkg emerge $libextra
-nullpkg emerge $layer03
-nullpkg emerge $connman
+emerge++ $libextra
+emerge++ $layer03
+emerge++ $connman
 cd $pkgcache/_mandoc
 sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
 sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
-nullpkg emerge mandoc
-nullpkg emerge efivar efibootmgr
+emerge++ mandoc
+emerge++ efivar efibootmgr

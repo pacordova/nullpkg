@@ -7,7 +7,7 @@
 #  * bootstrap gawk (from onetrueawk) if using a fresh glibc
 
 target=/mnt
-bootstrap=pass3
+foundation=pass1
 pkgcache=/usr/nullpkg/cache
 
 
@@ -16,28 +16,20 @@ pkgcache=/usr/nullpkg/cache
 #################
 # prepare the target
 mkdir -p $target
-cd $target
-mkdir -p usr/bin usr/lib64 tmp
-ln -sf usr/bin   bin
-ln -sf usr/lib64 lib64
 
-# aaa_libs
-for(f in ($pkgcache/$bootstrap/aaa_libs/*.tar.xz))
+# copy the static packages
+tar -C $target -xhf $pkgcache/$foundation/foundation.tar.xz
+tar -C $target -xhf $pkgcache/$foundation/kheaders.tar.xz
+
+# libs
+for(f in ($pkgcache/$foundation/layer00/*.tar.xz))
     tar -C $target -xhf $f
 
 # layer01
-for(f in ($pkgcache/$bootstrap/layer01/*.tar.xz))
+for(f in ($pkgcache/$foundation/layer01/*.tar.xz))
     tar -C $target -xhf $f
 
-cd bin
-ln -sf bash sh
-ln -sf vim  vi
-ln -sf gcc  cc
-
-# install ca-certs, resolv.conf
-install -D /etc/ssl/certs/ca-certificates.crt $target/etc/ssl/certs/ca-certificates.crt
-install -D /etc/resolv.conf $target/etc/resolv.conf
-
+# copy over current version of nullpkg
 cp -r /usr/nullpkg $target/usr/nullpkg
 cd $target/usr/nullpkg && rm cache && mkdir cache
 cp -r $pkgcache/sources.tar.xz $target/$pkgcache

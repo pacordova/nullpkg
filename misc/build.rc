@@ -88,7 +88,7 @@ emerge++ $layer01
 emerge++ shadow
 groupadd tty
 groupadd wheel
-useradd -m -G wheel root
+useradd -m -G wheel root -u 0
 emerge++ $libextra
 emerge++ $layer03
 emerge++ $connman

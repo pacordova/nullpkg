@@ -4,8 +4,8 @@
 
 fn emerge++ {
     for(i in $*) {
-        nullpkg emerge $i
-        nullpkg -i     $i
+        nullpkg emerge $i || exit
+        nullpkg -i     $i || exit
     }
 }
 ################

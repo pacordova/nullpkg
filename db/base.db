@@ -100,4 +100,6 @@ mandoc=(){tag=1.14.6 src=https://mandoc.bsd.lv/snapshots/mandoc-$tag.tar.gz μ=C
 efivar=(){tag=38 src=gh:rhboot/efivar μ=GMake}
 efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake EFIDIR=/boot}
 
+sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/sysvinit/sysvinit-$tag.tar.xz μ=GMake flags=(ROOT=$destdir)}
+
 # non-reproducible packages: ncurses, flex, gcc, perl, python

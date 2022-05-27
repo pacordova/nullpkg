@@ -220,7 +220,6 @@ fn emerge {
 
     _makepkg $destdir &&
     mv $destdir.tar.xz ../$1.tar.xz &&
-    _install ../$1.tar.xz
 }
 
 fn purge {

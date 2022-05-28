@@ -28,8 +28,8 @@ rc=(){tag=master src=gh:pacordova/rc μ=GMake}
 zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
 gzip=(){tag=1.11 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 tar=(){tag=1.34 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-xz=(){tag=5.2.5 src=https://tukaani.org/xz/xz-$tag.tar.xz μ=Configure flags=$dirflags}
-bzip2=(){tag=1.0.8 src=https://sourceware.org/pub/bzip2/bzip2-$tag.tar.gz μ=GMake flags=$dirflags}
+xz=(){tag=5.2.5 src=https://tukaani.org/%s/%s-$tag.tar.xz μ=Configure flags=$dirflags}
+bzip2=(){tag=1.0.8 src=https://sourceware.org/pub/%s/%s-$tag.tar.gz μ=GMake flags=$dirflags}
 zstd=(){tag=v1.5.2 src=gh:facebook/zstd μ=GMake}
 
 # need perl modules XML::Parser, Locale::gettext, libtool, intltool + circular
@@ -58,7 +58,7 @@ texinfo=(){tag=6.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 bison=(){tag=3.8.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 bc=(){tag=1.07.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
-cmake=(){tag=3.22.2 src=https://cmake.org/files/v3.22/cmake-$tag.tar.gz μ=Configure}
+cmake=(){src='https://cmake.org/files/v3.22/cmake-3.22.2.tar.gz' μ=Configure}
 
 gettext=(){tag=0.21 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 help2man=(){tag=1.49.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
@@ -80,7 +80,7 @@ shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
 which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($dirflags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'disable-static' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
-sudo=(){tag=1.9.9 src=https://www.sudo.ws/dist/sudo-$tag.tar.gz μ=Configure flags=$dirflags}
+sudo=(){tag=1.9.9 src=https://www.sudo.ws/dist/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 lvm=(){src='https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
 openssh=(){src='https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.8p1.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
 dbus=(){tag=dbus-1.13.22 src=freedesktop:%s/%s μ=CMake flags=('with-systemduserunitdir=no')}
@@ -96,10 +96,17 @@ gnutls=(){src='https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz
 connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdunitdir=no') CFLAGS=$CFLAGS^'-lncurses '}
 
 # efibootmgr
-mandoc=(){tag=1.14.6 src=https://mandoc.bsd.lv/snapshots/mandoc-$tag.tar.gz μ=Configure}
+mandoc=(){tag=1.14.6 src=https://mandoc.bsd.lv/snapshots/%s-$tag.tar.gz μ=Configure}
 efivar=(){tag=38 src=gh:rhboot/efivar μ=GMake}
 efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake EFIDIR=/boot}
 
 sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/sysvinit/sysvinit-$tag.tar.xz μ=GMake flags=(ROOT=$destdir)}
+
+kmod=(){tag=29 src=kernel:utils/kernel/%s/%s μ=Configure flags=$dirflags}
+file=(){tag=5.41 src=https://astron.com/pub/%s/%s-$tag.tar.gz
+# iproute2 depends on berkeley db?
+iproute2=(){tag=5.16.0 src=kernel:utils/net/%s μ=GMake}
+sysklogd=(){tag=1.5.1 src=https://www.infodrom.org/projects/%s/download/%s-$tag.tar.gz μ=GMake}
+procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=$dirflags}
 
 # non-reproducible packages: ncurses, flex, gcc, perl, python

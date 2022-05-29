@@ -83,6 +83,16 @@ emerge++ $layer00
 mkdir /usr/lib
 emerge++ $layer01
 
+# make bzip2 manually
+cd /usr/nullpkg/cache/_bzip2
+make -j5 -f Makefile-libbz2_so
+make -j5
+make install PREFIX=`{pwd}/_root/usr
+mv _root/usr/lib _root/usr/lib64
+cp -av libbz2.so.* _root/usr/lib64
+rm _root/usr/lib64/libbz2.a
+nullpkg makepkg _root
+mv _root.tar.xz ../bzip2.tar.xz
 
 
 ###########

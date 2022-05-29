@@ -20,6 +20,7 @@ mkdir -p $target
 # copy the static packages
 tar -C $target -xhf $pkgcache/$foundation/foundation.tar.xz
 tar -C $target -xhf $pkgcache/$foundation/kheaders.tar.xz
+tar -C $target -xhf $pkgcache/$foundation/bzip2.tar.xz
 
 # libs
 for(f in ($pkgcache/$foundation/layer00/*.tar.xz))

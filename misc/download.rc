@@ -10,7 +10,7 @@ layer00=( \
 )
 
 layer01=( \
-    gcc  binutils make bash coreutils \
+    gcc binutils make bash coreutils \
     grep ed sed vim libressl \
     curl git rc zlib gzip \
     tar xz bzip2 zstd flex \

@@ -102,11 +102,8 @@ efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake EFIDIR=/boot}
 
 sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/sysvinit/sysvinit-$tag.tar.xz μ=GMake flags=(ROOT=$destdir)}
 
-kmod=(){tag=29 src=kernel:utils/kernel/%s/%s μ=Configure flags=$dirflags}
-file=(){tag=5.41 src=https://astron.com/pub/%s/%s-$tag.tar.gz
-# iproute2 depends on berkeley db?
-iproute2=(){tag=5.16.0 src=kernel:utils/net/%s μ=GMake}
-sysklogd=(){tag=1.5.1 src=https://www.infodrom.org/projects/%s/download/%s-$tag.tar.gz μ=GMake}
-procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=$dirflags}
+kmod=(){tag=v29 src=kernel:utils/kernel/%s/%s μ=Autotools flags=('disable-manpages')}
+file=(){tag=5.41 src=https://astron.com/pub/%s/%s-$tag.tar.gz μ=Configure flags=$dirflags}
+inetutils=(){tag=2.2 src=gnu:%s-$tag.xz Configure flags=$dirflags}
 
 # non-reproducible packages: ncurses, flex, gcc, perl, python

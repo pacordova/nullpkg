@@ -1,7 +1,7 @@
 #!/bin/rc
 
-aaa_libs=( \
-    acl alsa argon attr c-ares \
+layer00=( \
+    acl alsa argon attr c-ares file \
     gdbm glibc gmp gperf json libaio \
     libcap libexpat libffi libjpeg-turbo libnsl \
     libpng libpsl libsigsegv libtiff libtirpc \
@@ -33,7 +33,7 @@ layer03=( \
     gnutls connman mandoc efivar efibootmgr \
 )
 
-nullpkg snarf $aaa_libs
+nullpkg snarf $layer00
 nullpkg snarf $layer01
 nullpkg snarf $layer02
 nullpkg snarf $layer03

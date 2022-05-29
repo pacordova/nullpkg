@@ -24,9 +24,10 @@ mv sources/* .
 layer02=(m4 autoconf automake texinfo bison bc cmake gettext help2man libtool python python-setuptools python-pip ninja)
 layer00=(acl alsa argon attr c-ares file gdbm gmp gperf json libaio libcap libexpat libffi libjpeg-turbo libnsl libpng libpsl libsigsegv libtiff libtirpc libunwind ncurses pcre2 pcre pkg-config popt readline)
 layer01=(gcc binutils make bash coreutils grep ed sed vim libressl curl git rc zlib gzip tar xz zstd flex gawk)
-layer03=(which util-linux e2fsprogs sudo lvm openssh less time dbus sysvinit kmod inetutils procps-ng sysklogd)
+layer03=(which util-linux e2fsprogs sudo lvm openssh less time dbus sysvinit kmod inetutils procps-ng)
 libextra=(libeudev libfuse libusb glib libunistring)
 connman=(libmnl libnftnl iptables nettle gnutls connman)
+rsyslog=(libestr libfastjson rsyslog)
 
 emerge++ diffutils findutils patch
 
@@ -99,3 +100,4 @@ sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
 sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
 emerge++ mandoc
 emerge++ efivar efibootmgr
+emerge++ $rsyslog

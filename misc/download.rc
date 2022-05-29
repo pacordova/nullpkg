@@ -31,7 +31,8 @@ layer03=( \
     util-linux e2fsprogs sudo lvm openssh \
     dbus libmnl libnftnl iptables nettle \
     gnutls connman mandoc efivar efibootmgr \
-    kmod inetutils procps-ng sysklogd \
+    kmod inetutils procps-ng \
+    libestr libfastjson rsyslog \
 )
 
 nullpkg snarf $layer00

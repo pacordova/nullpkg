@@ -103,7 +103,11 @@ efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake EFIDIR=/boot}
 sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/sysvinit/sysvinit-$tag.tar.xz μ=GMake flags=(ROOT=$destdir)}
 
 kmod=(){tag=v29 src=kernel:utils/kernel/%s/%s μ=Autotools flags=('disable-manpages')}
-inetutils=(){tag=2.2 src=gnu:%s-$tag.tar.xz μ=Configure CFLAGS=$CFLAGS^'-ltinfo '}
-procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=('disable-kill')}
-sysklogd=(){tag=1.5.1 src=https://www.infodrom.org/projects/%s/download/%s-$tag.tar.gz μ=GMake}
+inetutils=(){tag=2.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags CFLAGS=$CFLAGS^'-ltinfo '}
+procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-kill') CFLAGS=$CFLAGS^'-ltinfo '}
+
+libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
+libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
+rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
+
 # non-reproducible packages: ncurses, flex, gcc, perl, python

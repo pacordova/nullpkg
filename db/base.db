@@ -16,7 +16,6 @@ coreutils=(){tag=9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 grep=(){tag=3.7 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 ed=(){tag=1.4 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 sed=(){tag=4.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-vim=(){tag=v8.2.4383 src=gh:%s/%s μ=Configure flags=('disable-gui' 'without-x')}
 
 # network
 libressl=(){tag=v3.5.2 src=gh:libressl-portable/portable μ=Autotools}
@@ -31,6 +30,7 @@ tar=(){tag=1.34 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 xz=(){tag=5.2.5 src=https://tukaani.org/%s/%s-$tag.tar.xz μ=Configure flags=$dirflags}
 bzip2=(){tag=1.0.8 src=https://sourceware.org/pub/%s/%s-$tag.tar.gz}
 zstd=(){tag=v1.5.2 src=gh:facebook/zstd μ=GMake}
+unzip=(){tag=60 src=https://downloads.sourceforge.net/infozip/%s$tag.tar.gz μ=GMake flags=('--file=unix/Makefile' 'prefix='$destdir/$PREFIX 'generic')}
 
 # need perl modules XML::Parser, Locale::gettext, libtool, intltool + circular
 flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}
@@ -110,3 +110,5 @@ procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production
 libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
 libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
 rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
+
+neovim=(){tag=v0.7.0 src=gh:%s/%s μ=GMake flags=('CMAKE_INSTALL_PREFIX='$PREFIX)}

@@ -291,6 +291,9 @@ elogind=(){tag=v246.10 src=gh:elogind/%s μ=Meson}
 # openssl
 openssl=(){tag=OpenSSL_1_1_1n src=gh:%s/%s μ=GMake}
 
+# vim
+vim=(){tag=v8.2.4383 src=gh:%s/%s μ=Configure flags=('disable-gui' 'without-x')}
+
 
 #############
 # GNU Extra #

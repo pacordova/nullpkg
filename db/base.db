@@ -110,5 +110,3 @@ procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production
 libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
 libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
 rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
-
-# non-reproducible packages: ncurses, flex, gcc, perl, python

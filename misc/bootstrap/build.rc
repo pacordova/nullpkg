@@ -1,0 +1,72 @@
+#!/bin/rc
+
+ . /etc/make.conf
+
+fn _emerge {
+    for(i in $*) {
+        nullpkg emerge $i
+        if(test -f /usr/nullpkg/cache/$i.tar.xz)
+            nullpkg -i /usr/nullpkg/cache/$i.tar.xz
+        if not
+            exit
+    }
+}
+
+LIB=( \
+    acl alsa argon attr c-ares file \
+    gdbm gmp gperf json libaio \
+    libcap libexpat libffi libjpeg-turbo libnsl \
+    libpng libpsl libsigsegv libtiff libtirpc \
+    libunwind ncurses pcre2 pcre pkg-config \
+    popt readline \
+)
+
+LIBSYS=(libeudev libfuse libusb glib libunistring)
+
+
+BASE=( \
+    gcc \
+    bash bc binutils bison \
+    coreutils diffutils ed findutils \
+    flex grep m4 make patch rc sed time \
+    gawk \
+    zlib bzip2 gzip tar unzip xz zstd \
+    libressl curl git \
+)
+
+DEV=( \
+    autoconf automake cmake gettext \
+    help2man libtool ninja texinfo \
+)
+
+SYS=( \
+    libeudev libfuse libusb glib libunistring \
+    dbus e2fsprogs inetutils kmod less \
+    lvm mandoc neovim openssh procps-ng \
+    sudo sysvinit util-linux which \
+    libmnl libnftnl iptables nettle gnutls connman \
+    efivar efibootmgr \
+    libestr libfastjson rsyslog \
+)
+
+cd /usr/nullpkgcache
+tar -xhf sources.tar.xz
+mv sources/* .
+
+_emerge $DEV
+
+sleep 6 &&
+python3 -m pip install meson &&
+python3 -m pip install docutils
+
+_emerge $LIB
+_emerge $BASE
+
+# create users for sys
+_emerge shadow
+groupadd tty
+groupadd wheel
+useradd -m -G wheel root -u 0
+useradd messagebus
+
+_emerge $SYS

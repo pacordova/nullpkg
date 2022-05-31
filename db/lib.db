@@ -3,6 +3,7 @@
 ########
 # base #
 ########
+glibc=(){tag=2.35 src=gnu:%s-$tag.tar.xz μ=GMake}
 acl=(){tag=2.3.1 src=https://download.savannah.gnu.org/releases/acl/acl-$tag.tar.xz μ=Configure flags=('disable-static' $dirflags)}
 alsa=(){src='https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.6.1.tar.bz2' μ=Configure flags=('disable-static' $dirflags)}
 argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
@@ -10,7 +11,6 @@ attr=(){tag=2.5.1 src=https://download.savannah.nongnu.org/releases/attr/attr-$t
 c-ares=(){tag=1.18.1 src=https://c-ares.haxx.se/download/c-ares-1.18.1.tar.gz μ=CMake}
 file=(){tag=5.41 src=https://astron.com/pub/%s/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 gdbm=(){tag=1.23 src=gnu:%s-$tag.tar.gz μ=Configure flags=('disable-static' $dirflags)}
-glibc=(){tag=2.35 src=gnu:%s-$tag.tar.xz μ=GMake}
 gmp=(){tag=6.2.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 gperf=(){tag=3.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 json=(){tag=0.15 src=https://s3.amazonaws.com/json-c_releases/releases/json-c-$tag.tar.gz μ=CMake}

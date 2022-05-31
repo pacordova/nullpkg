@@ -1,0 +1,66 @@
+#!/bin/rc
+
+LIB=( \
+    acl alsa argon attr c-ares file \
+    gdbm gmp gperf json libaio \
+    libcap libexpat libffi libjpeg-turbo libnsl \
+    libpng libpsl libsigsegv libtiff libtirpc \
+    libunwind ncurses pcre2 pcre pkg-config \
+    popt readline \
+)
+
+
+BASE=( \
+    gcc \
+    bash bc binutils bison \
+    coreutils diffutils ed findutils \
+    flex grep m4 make patch rc sed time \
+    gawk \
+    zlib bzip2 gzip tar unzip xz zstd \
+    libressl curl git \
+)
+
+DEV=( \
+    autoconf automake cmake gettext \
+    help2man libtool ninja texinfo \
+)
+
+SYS=( \
+    shadow \
+    libeudev libfuse libusb glib libunistring \
+    dbus e2fsprogs inetutils kmod less \
+    lvm mandoc neovim openssh procps-ng \
+    sudo sysvinit util-linux which \
+    libmnl libnftnl iptables nettle gnutls connman \
+    efivar efibootmgr \
+    libestr libfastjson rsyslog \
+)
+
+nullpkg snarf $LIB
+nullpkg snarf $BASE
+nullpkg snarf $DEV
+nullpkg snarf $SYS
+
+##############
+# misc fixes #
+##############
+cd /usr/nullpkg/cache
+
+# download gcc prereqs
+cd _gcc
+./contrib/download_prerequisites
+cd ..
+
+# make missing directory for python-setuptools
+cd _python
+mkdir -p _python-setuptools/build/scripts-3.9
+cd ..
+
+# manually edit configure for mandoc
+cd _mandoc
+sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
+sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
+cd ..
+
+mkdir sources
+mv _* sources

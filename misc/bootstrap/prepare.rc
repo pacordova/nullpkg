@@ -17,15 +17,15 @@ cd /usr/nullpkg/cache/pass1
 mkdir -p $target
 
 # copy the static packages
-tar -C $target -xhf etc.tar.xz
-tar -C $target -xhf kheaders.tar.xz
-
-# libs
-for(f in (layer00/*.tar.xz))
+for(f in (static/*.tar.xz))
     tar -C $target -xhf $f
 
-# layer01
-for(f in (layer01/*.tar.xz))
+# libs
+for(f in (lib/*.tar.xz))
+    tar -C $target -xhf $f
+
+# base
+for(f in (base/*.tar.xz))
     tar -C $target -xhf $f
 
 # copy over current version of nullpkg

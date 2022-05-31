@@ -30,7 +30,7 @@ zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
 gzip=(){tag=1.11 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 tar=(){tag=1.34 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 xz=(){tag=5.2.5 src=https://tukaani.org/%s/%s-$tag.tar.xz μ=Configure flags=$dirflags}
-bzip2=(){tag=1.0.8 src=https://sourceware.org/pub/%s/%s-$tag.tar.gz}
+bzip2=(){tag=master src=gitlab:%s/%s μ=CMake flags=('ENABLE_SHARED_LIB=ON' 'ENABLE_STATIC_LIB=OFF')}
 zstd=(){tag=v1.5.2 src=gh:facebook/zstd μ=GMake}
 unzip=(){tag=60 src=https://downloads.sourceforge.net/infozip/%s$tag.tar.gz μ=GMake flags=('--file=unix/Makefile' 'prefix='$destdir/$PREFIX 'generic')}
 

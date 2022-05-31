@@ -1,9 +1,8 @@
 #!/bin/rc
 
-#######
-# aaa #
-#######
-# static kheaders
+########
+# base #
+########
 acl=(){tag=2.3.1 src=https://download.savannah.gnu.org/releases/acl/acl-$tag.tar.xz μ=Configure flags=('disable-static' $dirflags)}
 alsa=(){src='https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.6.1.tar.bz2' μ=Configure flags=('disable-static' $dirflags)}
 argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
@@ -37,7 +36,7 @@ readline=(){tag=8.1.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with
 
 
 ########
-# Libs #
+# libs #
 ########
 libeudev=(){tag=v3.2.11 src=gh:eudev-project/eudev μ=Autotools flags=('disable-static')}
 libfuse=(){tag=fuse-3.10.5 src=gh:%s/%s μ=Meson}

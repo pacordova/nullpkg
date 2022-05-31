@@ -102,6 +102,7 @@ emerge++ shadow
 groupadd tty
 groupadd wheel
 useradd -m -G wheel root -u 0
+useradd messagebus
 emerge++ $libextra
 emerge++ $layer03
 emerge++ $connman

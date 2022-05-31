@@ -83,7 +83,7 @@ e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'en
 sudo=(){tag=1.9.9 src=https://www.sudo.ws/dist/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 lvm=(){src='https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
 openssh=(){src='https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.8p1.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
-dbus=(){tag=dbus-1.13.22 src=freedesktop:%s/%s μ=CMake flags=('with-systemduserunitdir=no')}
+dbus=(){src='https://dbus.freedesktop.org/releases/dbus/dbus-1.12.20.tar.gz' μ=Configure flags=($dirflags 'enable-user-session' 'disable-static' 'with-systemduserunitdir=no' 'with-systemdsystemunitdir=no' 'with-console-auth-dir=/run/console' 'with-system-pid-file=/run/dbus/pid' 'with-system-socket=/run/dbus/system_bus_socket')}
 less=(){tag=590 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 

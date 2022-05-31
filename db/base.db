@@ -1,9 +1,9 @@
 #!/bin/rc
 
 
-############
-# Layer:01 #
-############
+########
+# base #
+########
 gcc=(){tag=11.2.0 src=gnu:%s-$tag/%s-$tag.tar.xz flags=($dirflags 'disable-multilib' 'enable-languages=c c++ fortran' 'disable-nls' 'disable-bootstrap' 'enable-shared') μ=Configure}
 binutils=(){tag=2.38 src=gnu:%s-$tag.tar.xz μ=Configure flags=($dirflags 'enable-deterministic-archives')}
 make=(){tag=4.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-guile=no')}
@@ -12,12 +12,18 @@ coreutils=(){tag=9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 grep=(){tag=3.7 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 ed=(){tag=1.4 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 sed=(){tag=4.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-
-# network
-libressl=(){tag=v3.5.2 src=gh:libressl-portable/portable μ=Autotools}
-curl=(){tag=curl-7_81_0 src=gh:%s/%s μ=CMake flags=('ENABLE_THREADED_RESOLVER=ON')}
-git=(){tag=v2.35.1 src=gh:%s/%s μ=Autotools flags=('with-gitconfig=/etc/gitconfig')}
 rc=(){tag=master src=gh:pacordova/rc μ=GMake}
+flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}
+bison=(){tag=3.8.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+findutils=(){tag=4.9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+diffutils=(){tag=3.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+patch=(){tag=2.7.6 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+bc=(){tag=1.07.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+
+# if new glibc, bootstrap gawk with nawk: gh:onetrueawk/awk, glibc needs gawk
+gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=($dirflags 'with-readline=no')}
 
 # compression
 zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
@@ -28,37 +34,25 @@ bzip2=(){tag=1.0.8 src=https://sourceware.org/pub/%s/%s-$tag.tar.gz}
 zstd=(){tag=v1.5.2 src=gh:facebook/zstd μ=GMake}
 unzip=(){tag=60 src=https://downloads.sourceforge.net/infozip/%s$tag.tar.gz μ=GMake flags=('--file=unix/Makefile' 'prefix='$destdir/$PREFIX 'generic')}
 
-# need perl modules XML::Parser, Locale::gettext, libtool, intltool + circular
-flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}
-
-# if new glibc, bootstrap gawk with nawk: gh:onetrueawk/awk, glibc needs gawk
-gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=($dirflags 'with-readline=no')}
-
+# network
+libressl=(){tag=v3.5.2 src=gh:libressl-portable/portable μ=Autotools}
+curl=(){tag=7.81.0 src=https://curl.se/download/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static' 'with-ca-path=/etc/ssl/certs' 'enable-threaded-resolver')}
+git=(){tag=v2.35.1 src=kernel:%s/%s μ=Autotools flags=('with-gitconfig=/etc/gitconfig')}
 
 
-############
-# Layer:02 #
-############
-diffutils=(){tag=3.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-findutils=(){tag=4.9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-patch=(){tag=2.7.6 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-
-# manually configure
-perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
-
-m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+#######
+# dev #
+#######
+cmake=(){src='https://cmake.org/files/v3.22/cmake-3.22.2.tar.gz' μ=Configure}
 autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 automake=(){tag=1.15.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-
 texinfo=(){tag=6.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-bison=(){tag=3.8.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-bc=(){tag=1.07.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-
-cmake=(){src='https://cmake.org/files/v3.22/cmake-3.22.2.tar.gz' μ=Configure}
-
 gettext=(){tag=0.21 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 help2man=(){tag=1.49.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 libtool=(){tag=2.4.6 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+
+# manually configure
+perl=(){tag=v5.34.1 src=gh:perl/perl5 μ=GMake}
 
 # python
 python=(){tag=v3.9.10 src=gh:python/cpython μ=Configure flags=($dirflags 'with-platlibdir=lib64' 'without-ensurepip' 'enable-optimizations' 'enable-shared')}
@@ -69,21 +63,25 @@ meson=(){tag=0.62.1 src=gh:mesonbuild/%s μ=Python}
 ninja=(){tag=v1.10.2 src=gh:ninja-build/%s μ=CMake}
 
 
-############
-# Layer:03 #
-############
-shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
-which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+#######
+# sys #
+#######
 util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($dirflags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'disable-static' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
+procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-kill') CFLAGS=$CFLAGS^'-ltinfo '}
+neovim=(){tag=v0.7.0 src=gh:%s/%s μ=GMake flags=('CMAKE_INSTALL_PREFIX='$PREFIX)}
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
+less=(){tag=590 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
 sudo=(){tag=1.9.9 src=https://www.sudo.ws/dist/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 lvm=(){src='https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
 openssh=(){src='https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.8p1.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
 dbus=(){src='https://dbus.freedesktop.org/releases/dbus/dbus-1.12.20.tar.gz' μ=Configure flags=($dirflags 'enable-user-session' 'disable-static' 'with-systemduserunitdir=no' 'with-systemdsystemunitdir=no' 'with-console-auth-dir=/run/console' 'with-system-pid-file=/run/dbus/pid' 'with-system-socket=/run/dbus/system_bus_socket')}
-less=(){tag=590 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/sysvinit/sysvinit-$tag.tar.xz μ=GMake flags=(ROOT=$destdir)}
+kmod=(){tag=v29 src=kernel:utils/kernel/%s/%s μ=Autotools flags=('disable-manpages')}
+inetutils=(){tag=2.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags CFLAGS=$CFLAGS^'-ltinfo '}
 
-# connman < libnftnl libmnl
+# connman
 libmnl=(){tag=1.0.4 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
 libnftnl=(){tag=1.2.1 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
 iptables=(){tag=1.8.7 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'enable-shared')}
@@ -96,15 +94,7 @@ mandoc=(){tag=1.14.6 src=https://mandoc.bsd.lv/snapshots/%s-$tag.tar.gz μ=Confi
 efivar=(){tag=38 src=gh:rhboot/efivar μ=GMake}
 efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake EFIDIR=/boot}
 
-sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/sysvinit/sysvinit-$tag.tar.xz μ=GMake flags=(ROOT=$destdir)}
-
-kmod=(){tag=v29 src=kernel:utils/kernel/%s/%s μ=Autotools flags=('disable-manpages')}
-inetutils=(){tag=2.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags CFLAGS=$CFLAGS^'-ltinfo '}
-procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-kill') CFLAGS=$CFLAGS^'-ltinfo '}
-
 # syslogs
 libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
 libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
 rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
-
-neovim=(){tag=v0.7.0 src=gh:%s/%s μ=GMake flags=('CMAKE_INSTALL_PREFIX='$PREFIX)}

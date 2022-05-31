@@ -7,9 +7,8 @@
 #  * bootstrap gawk (from onetrueawk) if using a fresh glibc
 
 target=/mnt
-foundation=pass1
-pkgcache=/usr/nullpkg/cache
 
+cd /usr/nullpkg/cache/pass1
 
 #################
 # before chroot #
@@ -18,18 +17,18 @@ pkgcache=/usr/nullpkg/cache
 mkdir -p $target
 
 # copy the static packages
-tar -C $target -xhf $pkgcache/$foundation/foundation.tar.xz
-tar -C $target -xhf $pkgcache/$foundation/kheaders.tar.xz
+tar -C $target -xhf etc.tar.xz
+tar -C $target -xhf kheaders.tar.xz
 
 # libs
-for(f in ($pkgcache/$foundation/layer00/*.tar.xz))
+for(f in (layer00/*.tar.xz))
     tar -C $target -xhf $f
 
 # layer01
-for(f in ($pkgcache/$foundation/layer01/*.tar.xz))
+for(f in (layer01/*.tar.xz))
     tar -C $target -xhf $f
 
 # copy over current version of nullpkg
 cp -r /usr/nullpkg $target/usr/nullpkg
 cd $target/usr/nullpkg && rm cache && mkdir cache
-cp -r $pkgcache/sources.tar.xz $target/$pkgcache
+cp -r sources.tar.xz $target/usr/nullpkg/cache/

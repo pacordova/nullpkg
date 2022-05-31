@@ -23,6 +23,7 @@ BASE=( \
 DEV=( \
     autoconf automake cmake gettext \
     help2man libtool ninja texinfo \
+    python python-setuptools python-pip \
 )
 
 SYS=( \

@@ -21,8 +21,6 @@ LIB=( \
     popt readline \
 )
 
-LIBSYS=(libeudev libfuse libusb glib libunistring)
-
 
 BASE=( \
     gcc \
@@ -37,6 +35,7 @@ BASE=( \
 DEV=( \
     autoconf automake cmake gettext \
     help2man libtool ninja texinfo \
+    python python-setuptools python-pip \
 )
 
 SYS=( \
@@ -55,7 +54,7 @@ mv sources/* .
 
 _emerge $DEV
 
-sleep 6 &&
+sleep &&
 python3 -m pip install meson &&
 python3 -m pip install docutils
 

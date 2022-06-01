@@ -13,6 +13,7 @@ diffutils=(){tag=3.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 ed=(){tag=1.4 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 findutils=(){tag=4.9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}
+gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=($dirflags 'with-readline=no')}
 grep=(){tag=3.7 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 make=(){tag=4.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-guile=no')}
@@ -20,9 +21,6 @@ patch=(){tag=2.7.6 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 rc=(){tag=master src=gh:pacordova/rc μ=GMake}
 sed=(){tag=4.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-
-# if new glibc, bootstrap gawk with nawk: gh:onetrueawk/awk, glibc needs gawk
-gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=($dirflags 'with-readline=no')}
 
 # compression
 zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}

@@ -21,13 +21,11 @@ LIB=( \
     popt readline \
 )
 
-
 BASE=( \
     gcc \
-    bash bc binutils bison \
-    coreutils diffutils ed findutils \
-    flex grep m4 make patch rc sed time \
-    gawk \
+    bash bc binutils bison coreutils\
+    diffutils ed findutils flex gawk \
+    grep m4 make patch rc sed time \
     zlib bzip2 gzip tar unzip xz zstd \
     libressl curl git \
 )

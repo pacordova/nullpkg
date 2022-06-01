@@ -1,6 +1,5 @@
 #!/bin/rc
 
-
 ########
 # base #
 ########
@@ -38,7 +37,6 @@ zstd=(){tag=v1.5.2 src=gh:facebook/zstd μ=GMake}
 curl=(){tag=7.81.0 src=https://curl.se/download/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static' 'with-ca-path=/etc/ssl/certs' 'enable-threaded-resolver')}
 git=(){tag=v2.35.1 src=kernel:%s/%s μ=Autotools flags=('with-gitconfig=/etc/gitconfig')}
 libressl=(){tag=v3.5.2 src=gh:libressl-portable/portable μ=Autotools}
-
 
 #######
 # dev #

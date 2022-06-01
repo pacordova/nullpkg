@@ -26,12 +26,12 @@ time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=($dirflags 'with-readline=no')}
 
 # compression
+zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
 bzip2=(){tag=master src=gitlab:%s/%s μ=CMake flags=('ENABLE_SHARED_LIB=ON' 'ENABLE_STATIC_LIB=OFF')}
 gzip=(){tag=1.11 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 tar=(){tag=1.34 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 unzip=(){tag=60 src=https://downloads.sourceforge.net/infozip/%s$tag.tar.gz μ=GMake flags=('--file=unix/Makefile' 'prefix='$destdir/$PREFIX 'generic')}
 xz=(){tag=5.2.5 src=https://tukaani.org/%s/%s-$tag.tar.xz μ=Configure flags=$dirflags}
-zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
 zstd=(){tag=v1.5.2 src=gh:facebook/zstd μ=GMake}
 
 # network

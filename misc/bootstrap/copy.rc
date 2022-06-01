@@ -1,16 +1,7 @@
 #!/bin/rc
 
- . /etc/make.conf
-
-fn _emerge {
-    for(i in $*) {
-        nullpkg emerge $i
-        if(test -f /usr/nullpkg/cache/$i.tar.xz)
-            nullpkg -i /usr/nullpkg/cache/$i.tar.xz
-        if not
-            exit
-    }
-}
+passdir=pass2
+chrootdir=/mnt
 
 LIB=( \
     acl alsa argon attr c-ares file \
@@ -39,6 +30,7 @@ DEV=( \
 )
 
 SYS=( \
+    shadow \
     libeudev libfuse libusb glib libunistring \
     dbus e2fsprogs inetutils kmod less \
     lvm mandoc neovim openssh procps-ng \
@@ -48,24 +40,11 @@ SYS=( \
     libestr libfastjson rsyslog \
 )
 
-cd /usr/nullpkg/cache
-tar -xhf sources.tar.xz
-mv sources/* .
 
-_emerge $DEV
+mkdir -p /usr/nullpkg/cache/$passdir/^(lib base dev sys)
 
-sleep &&
-python3 -m pip install meson &&
-python3 -m pip install docutils
-
-_emerge $LIB
-_emerge $BASE
-
-# create users for sys
-_emerge shadow
-groupadd tty
-groupadd wheel
-useradd -m -G wheel root -u 0
-useradd messagebus
-
-_emerge $SYS
+cd $chrootdir/usr/nullpkg/cache
+mv $LIB^.tar.xz /usr/nullpkg/cache/$passdir/lib
+mv $BASE^.tar.xz /usr/nullpkg/cache/$passdir/base
+mv $DEV^.tar.xz /usr/nullpkg/cache/$passdir/dev
+mv $SYS^.tar.xz /usr/nullpkg/cache/$passdir/sys

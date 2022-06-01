@@ -32,7 +32,7 @@ xz=(){tag=5.2.5 src=https://tukaani.org/%s/%s-$tag.tar.xz μ=Configure flags=$di
 zstd=(){tag=v1.5.2 src=gh:facebook/zstd μ=GMake}
 
 # network
-libressl=(){tag=3.5.3 src=https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/%s-$tag.tar.gz μ=Configure}
+libressl=(){tag=3.5.3 src=https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 curl=(){tag=7.81.0 src=https://curl.se/download/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static' 'with-openssl' 'with-ca-path=/etc/ssl/certs' 'enable-threaded-resolver')}
 git=(){tag=v2.35.1 src=kernel:%s/%s μ=Autotools flags=('with-gitconfig=/etc/gitconfig')}
 

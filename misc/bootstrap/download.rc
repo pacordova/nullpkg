@@ -52,8 +52,8 @@ cd _gcc
 cd ..
 
 # make missing directory for python-setuptools
-cd _python
-mkdir -p _python-setuptools/build/scripts-3.9
+cd _python-setuptools
+mkdir -p build/scripts-3.9
 cd ..
 
 # manually edit configure for mandoc

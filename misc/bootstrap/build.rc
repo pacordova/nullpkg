@@ -46,6 +46,7 @@ SYS=( \
     libestr libfastjson rsyslog \
 )
 
+/usr/nullpkg/misc/locale.rc
 cd /usr/nullpkg/cache
 tar -xhf sources.tar.xz
 mv sources/* .

@@ -14,7 +14,7 @@ BASE=( \
     gcc \
     bash bc binutils bison coreutils\
     diffutils ed findutils flex gawk \
-    grep m4 make patch rc sed time \
+    grep m4 make patch rc sed time vim \
     zlib bzip2 gzip tar unzip xz zstd \
     libressl curl git \
 )
@@ -29,7 +29,7 @@ SYS=( \
     shadow \
     libeudev libfuse libusb glib libunistring \
     dbus e2fsprogs inetutils kmod less \
-    lvm mandoc neovim openssh procps-ng \
+    lvm mandoc openssh procps-ng \
     sudo sysvinit util-linux which \
     libmnl libnftnl iptables nettle gnutls connman \
     efivar efibootmgr \

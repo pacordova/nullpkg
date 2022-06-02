@@ -15,7 +15,7 @@ gmp=(){tag=6.2.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 gperf=(){tag=3.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 json=(){tag=0.15 src=https://s3.amazonaws.com/json-c_releases/releases/json-c-$tag.tar.gz μ=CMake}
 libaio=(){tag=0.3.112 src=https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_$tag.orig.tar.xz μ=GMake flags=('libdir=/usr/lib64')}
-libcap=(){tag=v1.2.62 src=kernel:libs/libcap/%s μ=GMake}
+libcap=(){tag=v1.2.62 src=kernel:libs/libcap/%s μ=GMake flags=('LIBDIR='$LIBDIR)}
 libexpat=(){tag=2.4.6 src=https://prdownloads.sourceforge.net/expat/expat-$tag.tar.xz μ=(eval 'cd expat;CMake')}
 libffi=(){tag=v3.4.2 src=gh:%s/%s μ=Autotools flags=('disable-static')}
 libjpeg-turbo=(){tag=2.1.2 src=https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$tag.tar.gz μ=CMake}

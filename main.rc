@@ -8,13 +8,13 @@ while(~ $#1 1) {
         case emerge purge snarf
             $(λ) $(1)
         case -S
-            purge $1 && snarf $1 && emerge $1 && _install /usr/nullpkg/cache/$1.tar.xz
+            purge $1 && snarf $1 && emerge $1 && __install /usr/nullpkg/cache/$1.tar.xz
         case -i
-            _install $1
+            __install $1
         case makepkg
-            _makepkg $1
+            __makepkg $1
         case chroot
-            _chroot $1
+            __chroot $1
         case backup
             /usr/nullpkg/misc/backup.rc
         case -h *

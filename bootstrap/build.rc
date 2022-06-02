@@ -2,7 +2,7 @@
 
  . /etc/make.conf
 
-fn _emerge {
+fn __emerge {
     for(i in $*) {
         nullpkg emerge $i
         if(test -f /usr/nullpkg/cache/$i.tar.xz)
@@ -52,12 +52,12 @@ cd /usr/nullpkg/cache
 tar -xhf sources.tar.xz
 mv sources/* .
 
-_emerge $DEV
+__emerge $DEV
 
 sleep 3 &&
 python3 -m pip install meson &&
 python3 -m pip install docutils
 
-_emerge $LIB
-_emerge $BASE
-_emerge $SYS
+__emerge $LIB
+__emerge $BASE
+__emerge $SYS

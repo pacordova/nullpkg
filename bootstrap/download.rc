@@ -47,20 +47,20 @@ nullpkg snarf $SYS
 cd /usr/nullpkg/cache
 
 # download gcc prereqs
-cd _gcc
+cd __gcc
 ./contrib/download_prerequisites
 cd ..
 
 # make missing directory for python-setuptools
-cd _python-setuptools
+cd __python-setuptools
 mkdir -p build/scripts-3.9
 cd ..
 
 # manually edit configure for mandoc
-cd _mandoc
+cd __mandoc
 sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
 sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
 cd ..
 
 mkdir sources
-mv _* sources
+mv __* sources

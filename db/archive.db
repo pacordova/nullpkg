@@ -280,20 +280,13 @@ octave=(){src='https://ftpmirror.gnu.org/octave/octave-6.4.0.tar.gz' μ=Autotool
 wireguard=(){tag=v1.0.20210914 src='http://git.zx2c4.com/wireguard-tools' μ=GMake}
 
 # neovim
-neovim=(){tag=v0.6.1 src=gh:%s/%s μ=CMake flags=('PREFER_LUA=ON')}
-tree-sitter=(){tag=v0.20.6 src=gh:%s/%s μ=GMake}
-libluv=(){tag=1.43.0-0 src=gh:luvit/luv μ=CMake}
-msgpack-c=(){tag=c-4.0.0 src=gh:msgpack/%s μ=CMake}
+neovim=(){tag=v0.7.0 src=gh:%s/%s μ=GMake flags=('CMAKE_INSTALL_PREFIX='$PREFIX)}
 
 # elogind < gperf
 elogind=(){tag=v246.10 src=gh:elogind/%s μ=Meson}
 
 # openssl
 openssl=(){tag=OpenSSL_1_1_1n src=gh:%s/%s μ=GMake}
-
-# vim
-vim=(){tag=v8.2.4383 src=gh:%s/%s μ=Configure flags=('disable-gui' 'without-x')}
-
 
 #############
 # GNU Extra #

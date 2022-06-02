@@ -50,7 +50,8 @@ SYS=( \
 cd /usr/nullpkg && make
 cd cache
 
-/usr/nullpkg/misc/locale.rc
+ldconfig && /usr/nullpkg/misc/locale.rc
+
 tar -xhf sources.tar.xz
 mv sources/* .
 

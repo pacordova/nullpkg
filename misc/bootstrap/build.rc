@@ -37,6 +37,7 @@ DEV=( \
 )
 
 SYS=( \
+    shadow \
     libeudev libfuse libusb glib libunistring \
     dbus e2fsprogs inetutils kmod less \
     lvm mandoc neovim openssh procps-ng \
@@ -59,12 +60,4 @@ python3 -m pip install docutils
 
 _emerge $LIB
 _emerge $BASE
-
-# create users for sys
-_emerge shadow
-groupadd tty
-groupadd wheel
-useradd -m -G wheel root -u 0
-useradd messagebus
-
 _emerge $SYS

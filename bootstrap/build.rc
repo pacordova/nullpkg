@@ -1,6 +1,7 @@
 #!/bin/rc
 
- . /etc/make.conf
+cd /usr/nullpkg && make
+. /etc/make.conf
 
 fn __emerge {
     for(i in $*) {
@@ -47,7 +48,6 @@ SYS=( \
     libestr libfastjson rsyslog \
 )
 
-cd /usr/nullpkg && make
 cd cache
 
 ldconfig && /usr/nullpkg/misc/locale.rc

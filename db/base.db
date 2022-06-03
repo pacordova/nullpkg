@@ -21,7 +21,7 @@ patch=(){tag=2.7.6 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 rc=(){tag=master src=gh:pacordova/rc μ=GMake}
 sed=(){tag=4.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-vim=(){tag=v8.2.4383 src=gh:%s/%s μ=Configure flags=('disable-gui' 'without-x' 'disable-nls' 'disable-canberra')}
+vim=(){tag=v8.2.4383 src=gh:%s/%s μ=Configure flags=($dirflags 'disable-gui' 'without-x' 'disable-nls' 'disable-canberra')}
 
 # compression
 zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}

@@ -30,7 +30,6 @@ for(f in (base/*.tar.xz))
 
 # copy over current version of nullpkg
 cp -r /usr/nullpkg $target/usr/nullpkg
-cp sources.tar.xz $target/usr/nullpkg/cache/
 
 rm $target/usr/nullpkg/cache
 mkdir $target/usr/nullpkg/cache

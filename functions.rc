@@ -249,12 +249,7 @@ fn __chroot {
         }
     }
 
-    chroot --user=root $1 /usr/bin/env -i \
-        HOME=/root \
-        TERM=xterm-256color \
-        PS1='(chroot)# ' \
-        PATH=/usr/bin:/usr/sbin:/bin:/sbin \
-        /bin/bash --login
+    PS1='(chroot)# ' { chroot --user=root $1 }
 }
 
 fn __timesync {

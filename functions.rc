@@ -191,7 +191,8 @@ fn snarf {
             s|gpg:|https://gnupg.org/ftp/gcrypt/'$1'/|g;
             s|netfilter:|https://www.netfilter.org/pub/|g;
             s|qt:|https://invent.kde.org/qt/qt/|g;
-            s|gnome:|https://gitlab.gnome.org/gnome/|g'
+            s|gnome:|https://gitlab.gnome.org/gnome/|g;
+            s|xorg:|https://www.x.org/pub/individual/|g'
 
     }
     switch($src) {

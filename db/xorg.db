@@ -1,0 +1,11 @@
+#!/bin/rc
+
+util-macros=(){tag=1.19.3 src=xorg:util/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xorgproto=(){tag=xorgproto-2021.5 src=freedesktop:xorg/proto/%s μ=Autotools flags=($dirflags 'disable-static')}
+libXau=(){tag=1.0.9 src=xorg:lib/%s-$tag.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXdmcp=(){tag=1.1.3 src=xorg:lib/%s-$tag.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xcbproto=(){tag=xcb-proto-1.14.1 src=freedesktop:xorg/proto/%s μ=Autotools flags=($dirflags 'disable-static')}
+libxcb=(){tag=1.14 src=xorg:lib/%s-$tag.xz μ=Configure flags=($dirflags 'disable-static')}
+
+
+

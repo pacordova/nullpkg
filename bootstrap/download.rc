@@ -62,5 +62,11 @@ sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
 sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
 cd ..
 
+# fix sharutils
+sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c &&
+sed -i '/program_name/s/^/extern /' src/*opts.ha
+sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
+echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
+
 mkdir sources
 mv __* sources

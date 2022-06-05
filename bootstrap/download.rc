@@ -1,7 +1,7 @@
 #!/bin/rc
 
 LIB=( \
-    acl alsa argon attr c-ares file \
+    acl alsa argon attr c-ares \
     gdbm gmp gperf json libaio \
     libcap libexpat libffi libjpeg-turbo libnsl \
     libpng libpsl libsigsegv libtiff libtirpc \
@@ -9,19 +9,19 @@ LIB=( \
     popt readline \
 )
 
-
 BASE=( \
     gcc \
     bash bc binutils bison coreutils\
-    diffutils ed findutils flex gawk \
-    grep m4 make patch rc sed time vim \
+    diffutils ed file findutils flex \
+    gawk grep m4 make patch rc \
+    sed vim \
     zlib bzip2 gzip tar unzip xz zstd \
     libressl curl git \
 )
 
 DEV=( \
-    autoconf automake cmake gettext \
-    help2man libtool ninja texinfo \
+    autoconf automake cmake gettext help2man \
+    libtool ninja texinfo \
     python python-setuptools python-pip \
 )
 
@@ -29,12 +29,13 @@ SYS=( \
     shadow \
     libeudev libfuse libusb glib libunistring \
     dbus e2fsprogs inetutils kmod less \
-    lvm mandoc openssh procps-ng \
-    sudo sysvinit util-linux which \
+    lvm mandoc openssh procps-ng sudo \
+    sysvinit util-linux which \
+    libestr libfastjson rsyslog \
     libmnl libnftnl iptables nettle gnutls connman \
     efivar efibootmgr \
-    libestr libfastjson rsyslog \
 )
+
 
 nullpkg snarf $LIB
 nullpkg snarf $BASE
@@ -62,11 +63,6 @@ sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
 sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
 cd ..
 
-# fix sharutils
-sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c &&
-sed -i '/program_name/s/^/extern /' src/*opts.ha
-sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
-echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
 
 mkdir sources
 mv __* sources

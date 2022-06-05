@@ -11,6 +11,7 @@ bison=(){tag=3.8.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 coreutils=(){tag=9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 diffutils=(){tag=3.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 ed=(){tag=1.4 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+file=(){tag=5.41 src=https://astron.com/pub/%s/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 findutils=(){tag=4.9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}
 gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=($dirflags 'with-readline=no')}
@@ -20,8 +21,6 @@ make=(){tag=4.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-guile
 patch=(){tag=2.7.6 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 rc=(){tag=master src=gh:pacordova/rc μ=GMake}
 sed=(){tag=4.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-sharutils=(){tag=4.15.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 vim=(){tag=v8.2.4383 src=gh:%s/%s μ=Configure flags=($dirflags 'disable-gui' 'without-x' 'disable-nls' 'disable-canberra')}
 
 # compression
@@ -73,6 +72,11 @@ sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/sysvinit/sys
 util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($dirflags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'disable-static' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
 which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
+# syslogs
+libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
+libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
+rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
+
 # connman
 libmnl=(){tag=1.0.4 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
 libnftnl=(){tag=1.2.1 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
@@ -84,8 +88,3 @@ connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdun
 # efibootmgr
 efivar=(){tag=38 src=gh:rhboot/efivar μ=GMake}
 efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake EFIDIR=/boot}
-
-# syslogs
-libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
-libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
-rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}

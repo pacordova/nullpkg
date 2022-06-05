@@ -58,6 +58,7 @@ python-pip=(){tag=22.1.2 src=gh:pypa/pip μ=Python}
 # sys #
 #######
 shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
+cryptsetup=(){tag=v2.4.3 src=gitlab:%s/%s μ=Autotools flags=('disable-ssh-token')}
 dbus=(){src='https://dbus.freedesktop.org/releases/dbus/dbus-1.12.20.tar.gz' μ=Configure flags=($dirflags 'enable-user-session' 'disable-static' 'with-systemduserunitdir=no' 'with-systemdsystemunitdir=no' 'with-console-auth-dir=/run/console' 'with-system-pid-file=/run/dbus/pid' 'with-system-socket=/run/dbus/system_bus_socket')}
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
 inetutils=(){tag=2.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags CFLAGS=$CFLAGS^'-ltinfo '}
@@ -66,9 +67,11 @@ less=(){tag=590 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 lvm=(){src='https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
 mandoc=(){tag=1.14.6 src=https://mandoc.bsd.lv/snapshots/%s-$tag.tar.gz μ=Configure}
 openssh=(){src='https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.8p1.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
+parted=(){tag=3.5 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-kill') CFLAGS=$CFLAGS^'-ltinfo '}
 sudo=(){tag=1.9.9 src=https://www.sudo.ws/dist/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/sysvinit/sysvinit-$tag.tar.xz μ=GMake flags=(ROOT=$destdir)}
+time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($dirflags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'disable-static' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
 which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 

@@ -8,15 +8,15 @@ acl=(){tag=2.3.1 src=https://download.savannah.gnu.org/releases/acl/acl-$tag.tar
 alsa=(){src='https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.6.1.tar.bz2' μ=Configure flags=('disable-static' $dirflags)}
 argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
 attr=(){tag=2.5.1 src=https://download.savannah.nongnu.org/releases/attr/attr-$tag.tar.gz μ=Configure flags=('disable-static' $dirflags)}
-c-ares=(){tag=1.18.1 src=https://c-ares.haxx.se/download/c-ares-1.18.1.tar.gz μ=CMake}
+c-ares=(){tag=1.18.1 src=https://c-ares.haxx.se/download/c-ares-1.18.1.tar.gz μ=Configure flags=($dirflags 'disable-static')}
 gdbm=(){tag=1.23 src=gnu:%s-$tag.tar.gz μ=Configure flags=('disable-static' $dirflags)}
 gmp=(){tag=6.2.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 gperf=(){tag=3.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 json=(){tag=0.15 src=https://s3.amazonaws.com/json-c_releases/releases/json-c-$tag.tar.gz μ=CMake}
 libaio=(){tag=0.3.112 src=https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_$tag.orig.tar.xz μ=GMake flags=('libdir=/usr/lib64')}
 libcap=(){tag=v1.2.62 src=kernel:libs/libcap/%s μ=GMake flags=('LIBDIR='$LIBDIR)}
-libevent=(){tag=master src=gh:%s/%s μ=CMake flags=('EVENT__DISABLE_MBEDTLS=ON')}
-libexpat=(){tag=2.4.6 src=https://prdownloads.sourceforge.net/expat/expat-$tag.tar.xz μ=(eval 'cd expat;CMake')}
+libevent=(){tag=master src=gh:%s/%s μ=Autotools}
+libexpat=(){tag=2.4.6 src=https://prdownloads.sourceforge.net/expat/expat-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
 libffi=(){tag=v3.4.2 src=gh:%s/%s μ=Autotools flags=('disable-static')}
 libjpeg-turbo=(){tag=2.1.2 src=https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$tag.tar.gz μ=CMake}
 libnsl=(){tag=v2.0.0 src=gh:thkukuk/%s μ=Autotools flags=('disable-static')}
@@ -27,8 +27,8 @@ libtiff=(){tag=v4.3.0 src=gitlab:%s/%s μ=Autotools flags=('disable-static')}
 libtirpc=(){tag=1.3.2 src=https://downloads.sourceforge.net/libtirpc/libtirpc-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-gssapi' 'disable-static')}
 libunwind=(){tag=v1.6.2 src=gh:%s/%s μ=Autotools flags=('disable-static')}
 ncurses=(){tag=6.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-shared' 'without-normal' 'with-cxx=no' 'disable-static' 'with-termlib=tinfo')}
-pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=CMake flags=('PCRE2_BUILD_PCRE2_16=ON' 'PCRE2_BUILD_PCRE2_32=ON' 'PCRE2_BUILD_TESTS=OFF' 'PCRE2_BUILD_PCRE2GREP=OFF')}
-pcre=(){src='https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2' flags=('PCRE_SUPPORT_UNICODE_PROPERTIES=ON' 'PCRE_SUPPORT_JIT=ON' 'PCRE_BUILD_PCREGREP=OFF' 'PCRE_BUILD_TESTS=OFF') μ=CMake}
+pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=Autotools flags=('enable-unicode' 'enable-jit' 'enable-pcre2-16' 'enable-pcre2-32' 'disable-static')}
+pcre=(){src='https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2' μ=Autotools flags=('enable-unicode-properties' 'enable-pcre16' 'enable-pcre32' 'disable-static')}
 pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=('with-internal-glib')}
 popt=(){src='http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
 readline=(){tag=8.1.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-curses' 'disable-static')}

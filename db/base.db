@@ -16,12 +16,16 @@ findutils=(){tag=4.9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}
 gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=($dirflags 'with-readline=no')}
 grep=(){tag=3.7 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+less=(){tag=590 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 m4=(){tag=1.4.19 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 make=(){tag=4.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-guile=no')}
 patch=(){tag=2.7.6 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 rc=(){tag=master src=gh:pacordova/rc μ=GMake}
 sed=(){tag=4.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+sharutils=(){tag=4.15.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 vim=(){tag=v8.2.4383 src=gh:%s/%s μ=Configure flags=($dirflags 'disable-gui' 'without-x' 'disable-nls' 'disable-canberra')}
+which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+
 
 # compression
 zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
@@ -54,31 +58,45 @@ python=(){tag=v3.9.13 src=gh:python/cpython μ=Configure flags=($dirflags 'with-
 python-setuptools=(){tag=v62.3.2 src=gh:pypa/setuptools μ=Python}
 python-pip=(){tag=22.1.2 src=gh:pypa/pip μ=Python}
 
+
 #######
 # sys #
 #######
 shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
-cryptsetup=(){tag=v2.4.3 src=gitlab:%s/%s μ=Autotools flags=('disable-ssh-token')}
-dbus=(){src='https://dbus.freedesktop.org/releases/dbus/dbus-1.12.20.tar.gz' μ=Configure flags=($dirflags 'enable-user-session' 'disable-static' 'with-systemduserunitdir=no' 'with-systemdsystemunitdir=no' 'with-console-auth-dir=/run/console' 'with-system-pid-file=/run/dbus/pid' 'with-system-socket=/run/dbus/system_bus_socket')}
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
 inetutils=(){tag=2.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags CFLAGS=$CFLAGS^'-ltinfo '}
 kmod=(){tag=v29 src=kernel:utils/kernel/%s/%s μ=Autotools flags=('disable-manpages')}
-less=(){tag=590 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
-lvm=(){src='https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
-mandoc=(){tag=1.14.6 src=https://mandoc.bsd.lv/snapshots/%s-$tag.tar.gz μ=Configure}
-openssh=(){src='https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.8p1.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
-parted=(){tag=3.5 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-kill') CFLAGS=$CFLAGS^'-ltinfo '}
-sudo=(){tag=1.9.9 src=https://www.sudo.ws/dist/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/sysvinit/sysvinit-$tag.tar.xz μ=GMake flags=(ROOT=$destdir)}
-time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($dirflags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'disable-static' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
-which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 # syslogs
 libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
 libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
 rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
+
+# extra system
+acpid=(){tag=2.0.33 src=https://downloads.sourceforge.net/acpid2/%s-$tag.tar.xz μ=Configure flags=$dirflags}
+cryptsetup=(){tag=v2.4.3 src=gitlab:%s/%s μ=Autotools flags=('disable-ssh-token')}
+dbus=(){src='https://dbus.freedesktop.org/releases/dbus/dbus-1.12.20.tar.gz' μ=Configure flags=($dirflags 'enable-user-session' 'disable-static' 'with-systemduserunitdir=no' 'with-systemdsystemunitdir=no' 'with-console-auth-dir=/run/console' 'with-system-pid-file=/run/dbus/pid' 'with-system-socket=/run/dbus/system_bus_socket')}
+dosfstools=(){tag=v4.2 src=gh:%s/%s μ=Autotools}
+fcron=(){tag=3.2.1 src=http://fcron.free.fr/archives/%s-$tag.src.tar.gz μ=Configure flags=($dirflags 'without-sendmail')}
+lm-sensors=(){tag=V3-6-0 src=gh:%s/%s μ=GMake flags=('LIBDIR=/usr/lib64')}
+logrotate=(){tag=3.19.0 src=gh:%s/%s μ=Autotools}
+lua=(){src='http://www.lua.org/ftp/lua-5.4.4.tar.gz' μ=GMake flags=('INSTALL_TOP='$destdir/$PREFIX 'INSTALL_LIB=$(INSTALL_TOP)/lib64' 'INSTALL_CMOD=$(INSTALL_LIB)/lua/$V')}
+lvm=(){src='https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
+mandoc=(){tag=1.14.6 src=https://mandoc.bsd.lv/snapshots/%s-$tag.tar.gz μ=Configure}
+nano=(){tag=6.3 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+openssh=(){src='https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.8p1.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
+parted=(){tag=3.5 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+pciutils=(){tag=v3.7.0 src=kernel:utils/%s/%s μ=GMake flags=('LIBDIR=/usr/lib64')}
+rsync=(){tag=v3.2.3 src=gh:wayned/%s μ=Configure flags=('disable-lz4' 'disable-xxhash' 'disable-md2man')}
+sudo=(){tag=1.9.9 src=https://www.sudo.ws/dist/%s-$tag.tar.gz μ=Configure flags=$dirflags}
+sqlite=(){src='https://sqlite.org/2022/sqlite-autoconf-3380400.tar.gz' μ=Autotools}
+tcsh=(){tag=6.24.00 src=https://astron.com/pub/%s/%s-$tag.tar.gz μ=Configure flags=$dirflags}
+time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+tmux=(){tag=3.2 src=gh:%s/%s μ=Autotools}
+xorriso=(){tag=1.5.4 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 # connman
 libmnl=(){tag=1.0.4 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}

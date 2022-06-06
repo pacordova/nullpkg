@@ -3,18 +3,18 @@
 LIB=( \
     acl alsa argon attr c-ares \
     gdbm gmp gperf json libaio \
-    libcap libexpat libffi libjpeg-turbo libnsl \
-    libpng libpsl libsigsegv libtiff libtirpc \
-    libunwind ncurses pcre2 pcre pkg-config \
-    popt readline \
+    libcap libevent libexpat libffi libjpeg-turbo \
+    libnsl libpng libpsl libsigsegv libtiff \
+    libtirpc libunwind ncurses pcre2 pcre \
+    pkg-config popt readline \
 )
 
 BASE=( \
     gcc \
     bash bc binutils bison coreutils\
     diffutils ed file findutils flex \
-    gawk grep m4 make patch rc \
-    sed vim \
+    gawk grep less m4 make patch \
+    rc sed sharutils vim which \
     zlib bzip2 gzip tar unzip xz zstd \
     libressl curl git \
 )
@@ -27,11 +27,14 @@ DEV=( \
 
 SYS=( \
     shadow \
-    libeudev libfuse libusb glib libunistring \
-    dbus e2fsprogs inetutils kmod less \
-    lvm mandoc openssh procps-ng sudo \
-    sysvinit util-linux which \
+    libeudev libfuse libusb glib libunistring sqlite \
+    e2fsprogs inetutils kmod procps-ng sysvinit \
+    util-linux \
     libestr libfastjson rsyslog \
+    acpid cryptsetup dbus dosfstools lm-sensors \
+    logrotate lua lvm mandoc nano \
+    openssh parted pciutils rsync sudo \
+    sqlite tcsh time tmux xorriso \
     libmnl libnftnl iptables nettle gnutls connman \
     efivar efibootmgr \
 )
@@ -63,6 +66,13 @@ sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
 sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
 cd ..
 
+# sharutils
+cd __sharutils
+sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c
+sed -i '/program_name/s/^/extern /' src/*opts.h
+sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
+echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
+cd ..
 
 mkdir sources
 mv __* sources

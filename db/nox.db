@@ -4,19 +4,15 @@
 #########
 # Langs #
 #########
-# Manually patch/configure for multilib
-lua=(){src='http://www.lua.org/ftp/lua-5.4.4.tar.gz' μ=GMake}
 R=(){src='http://cran.r-project.org/src/base/R-4/R-4.2.0.tar.gz' μ=Configure flags=('with-blas=-lopenblas' 'disable-java' 'enable-R-shlib' 'without-recommended-packages' 'without-ICU' 'disable-nls')}
-
 
 ########
 # misc #
 ########
-firejail=(){tag=0.9.68 src=gh:netblue30/%s μ=Autotools}
-rsync=(){tag=v3.2.3 src=gh:wayned/%s μ=Configure flags=('disable-lz4' 'disable-xxhash' 'disable-md2man')}
-tmux=(){tag=3.2 src=gh:%s/%s μ=Autotools}
-ghostscript=(){tag=ghostpdl-9.55.0 src=gh:ArtifexSoftware/ghostpdl μ=Autotools}
 ag=(){tag=master src=gh:ggreer/the_silver_searcher μ=Autotools}
+firejail=(){tag=0.9.68 src=gh:netblue30/%s μ=Autotools}
+gdb=(){tag=11.1 src=gnu:%s-$tag.tar.xz μ=Autotools flags=($dirflags 'with-guile=no' 'with-system-readline' 'with-python=no')}
+ghostscript=(){tag=ghostpdl-9.55.0 src=gh:ArtifexSoftware/ghostpdl μ=Autotools}
+imagemagick=(){tag=7.1.0-25 src=https://www.imagemagick.org/download/releases/ImageMagick-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static' 'enable-hdri' 'with-modules')}
 optipng=(){src='http://prdownloads.sourceforge.net/optipng/optipng-0.7.7.tar.gz' μ=Configure}
 pngquant=(){tag=2.17.0 src=gh:kornelski/%s μ=Cargo}
-gdb=(){tag=11.1 src=gnu:%s-$tag.tar.xz μ=Autotools flags=($dirflags 'with-guile=no' 'with-system-readline' 'with-python=no')}

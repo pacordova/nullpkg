@@ -15,6 +15,7 @@ gperf=(){tag=3.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 json=(){tag=0.15 src=https://s3.amazonaws.com/json-c_releases/releases/json-c-$tag.tar.gz μ=CMake}
 libaio=(){tag=0.3.112 src=https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_$tag.orig.tar.xz μ=GMake flags=('libdir=/usr/lib64')}
 libcap=(){tag=v1.2.62 src=kernel:libs/libcap/%s μ=GMake flags=('LIBDIR='$LIBDIR)}
+libevent=(){tag=master src=gh:%s/%s μ=CMake flags=('EVENT__DISABLE_MBEDTLS=ON')}
 libexpat=(){tag=2.4.6 src=https://prdownloads.sourceforge.net/expat/expat-$tag.tar.xz μ=(eval 'cd expat;CMake')}
 libffi=(){tag=v3.4.2 src=gh:%s/%s μ=Autotools flags=('disable-static')}
 libjpeg-turbo=(){tag=2.1.2 src=https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$tag.tar.gz μ=CMake}
@@ -48,9 +49,8 @@ libuv=(){tag=v1.44.1 src=gh:%s/%s μ=CMake}
 libconfig=(){tag=v1.7.3 src=gh:hyperrealm/%s μ=Autotools}
 double-conversion=(){tag=v3.2.0 src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
 uthash=(){tag=v2.3.0 src=gh:troydhanson/%s μ=Headers}
-libev=(){src='https://dist.schmorp.de/libev/%s-4.33.tar.gz' μ=Autotools}
+libev=(){tag=4.33 src=http://dist.schmorp.de/libev/%s-$tag.tar.gz μ=Autotools}
 openblas=(){tag=v0.3.20 src=gh:xianyi/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
-sqlite=(){src='https://sqlite.org/2022/sqlite-autoconf-3380400.tar.gz' μ=Autotools}
 intltool=(){src='https://launchpad.net/intltool/trunk/0.51.0/+download/%s-0.51.0.tar.gz' μ=Configure flags=$dirflags}
 
 

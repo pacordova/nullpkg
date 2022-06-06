@@ -23,6 +23,7 @@ DEV=( \
     autoconf automake cmake gettext help2man \
     libtool ninja texinfo \
     python python-setuptools python-pip \
+    lua tcsh \
 )
 
 SYS=( \
@@ -32,9 +33,9 @@ SYS=( \
     util-linux \
     libestr libfastjson rsyslog \
     acpid cryptsetup dbus dosfstools lm-sensors \
-    logrotate lua lvm mandoc nano \
-    openssh parted pciutils rsync sudo \
-    sqlite tcsh time tmux xorriso \
+    lvm mandoc nano openssh parted \
+    pciutils rsync sudo time tmux \
+    xorriso \
     libmnl libnftnl iptables nettle gnutls connman \
     efivar efibootmgr \
 )

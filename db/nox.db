@@ -9,7 +9,6 @@ R=(){src='http://cran.r-project.org/src/base/R-4/R-4.2.0.tar.gz' μ=Configure fl
 ########
 # misc #
 ########
-cmake=(){src='https://cmake.org/files/v3.22/cmake-3.22.2.tar.gz' μ=Configure}
 firejail=(){tag=0.9.68 src=gh:netblue30/%s μ=Autotools}
 gdb=(){tag=11.1 src=gnu:%s-$tag.tar.xz μ=Autotools flags=($dirflags 'with-guile=no' 'with-system-readline' 'with-python=no')}
 ghostscript=(){tag=ghostpdl-9.55.0 src=gh:ArtifexSoftware/ghostpdl μ=Autotools}

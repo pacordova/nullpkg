@@ -14,18 +14,19 @@ fn __emerge {
 }
 
 LIB=( \
-    acl alsa argon attr c-ares gdbm gmp gperf libaio libcap libestr \
-    libeudev libevent libexpat libfastjson libffi libfuse libmnl libnftnl \
-    libnsl libpng libpsl libsigsegv libtiff libtirpc libunistring libusb \
-    libunwind lvm ncurses pcre2 pcre pkg-config popt readline \
+    acl alsa argon attr c-ares gdbm gmp gperf json-c libaio libcap \
+    libestr libeudev libevent libexpat libfastjson libffi libfuse \
+    libmnl libnftnl libnsl libpng libpsl libressl libsigsegv \
+    libtiff libtirpc libunistring libusb libunwind lvm \
+    ncurses pcre2 pcre pkg-config popt readline \
 )
 
 BASE=( \
-    autoconf automake bash bc binutils bison coreutils diffutils ed file \
-    findutils flex gawk gcc gettext grep help2man less libtool m4 make patch \
-    rc sed sharutils texinfo vim which \
+    autoconf automake bash bc binutils bison cmake coreutils curl \
+    diffutils ed file findutils flex gawk gcc gettext git grep \
+    help2man less libtool m4 make ninja patch rc sed \
+    sharutils texinfo vim which \
     zlib bzip2 gzip tar unzip xz zstd \
-    libressl curl git \
 )
 
 SYS=( \

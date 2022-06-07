@@ -1,36 +1,26 @@
 #!/bin/rc
 
 LIB=( \
-    acl alsa argon attr c-ares \
-    gdbm gmp gperf libaio libcap \
-    libevent libexpat libffi libnsl libpng \
-    libpsl libsigsegv libtiff libtirpc libunwind \
-    ncurses pcre2 pcre pkg-config popt \
-    readline \
+    acl alsa argon attr c-ares gdbm glib gmp gperf libaio libcap libestr \
+    libevent libexpat libfastjson libffi libmnl libnftnl libnsl libpng \
+    libpsl libsigsegv libtiff libtirpc libunwind ncurses pcre2 pcre \
+    pkg-config popt readline \
 )
 
 BASE=( \
-    autoconf automake bash bc binutils \
-    bison coreutils diffutils ed file \
-    findutils flex gawk gcc gettext \
-    grep help2man less libtool m4 \
-    make patch rc sed sharutils \
-    texinfo vim which \
+    autoconf automake bash bc binutils bison coreutils diffutils ed file \
+    findutils flex gawk gcc gettext grep help2man less libtool m4 make patch \
+    rc sed sharutils texinfo vim which \
     zlib bzip2 gzip tar unzip xz zstd \
     libressl curl git \
 )
 
 SYS=( \
-    shadow \
-    libeudev libfuse libusb glib libunistring libxml2 sqlite \
-    e2fsprogs inetutils kmod procps-ng sysvinit \
-    util-linux \
-    libestr libfastjson rsyslog \
-    acpid cryptsetup dbus dosfstools lm-sensors \
-    lua lvm mandoc nano openssh \
-    parted pciutils rsync sudo tcsh \
-    time tmux xorriso \
-    libmnl libnftnl iptables nettle gnutls connman \
+    shadow libeudev libfuse libusb libunistring lvm \
+    e2fsprogs inetutils kmod procps-ng sysvinit util-linux rsyslog \
+    acpid cryptsetup dbus dosfstools lm-sensors lua mandoc nano openssh \
+    parted pciutils rsync sudo sqlite tcsh time tmux xorriso \
+    iptables nettle gnutls connman \
     efivar efibootmgr \
 )
 

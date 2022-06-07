@@ -20,8 +20,7 @@ flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}
 gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=($dirflags 'with-readline=no')}
 gcc=(){tag=11.2.0 src=gnu:%s-$tag/%s-$tag.tar.xz flags=($dirflags 'disable-multilib' 'enable-languages=c c++ fortran' 'disable-nls' 'disable-bootstrap' 'enable-shared') μ=Configure}
 gettext=(){tag=0.21 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-git=(){tag=v2.35.1 src=kernel:%s/%s μ=Autotools flags=('with-gitconfig=/etc/gitconfig')}
-grep=(){tag=3.7 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+git=(){tag=v2.35.1 src=kernel:%s/%s μ=Autotools flags=('with-gitconfig=/etc/gitconfig')} grep=(){tag=3.7 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 help2man=(){tag=1.49.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 less=(){tag=590 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 libtool=(){tag=2.4.6 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
@@ -54,18 +53,14 @@ python-pip=(){tag=22.1.2 src=gh:pypa/pip μ=Python}
 #######
 # sys #
 #######
-shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
 inetutils=(){tag=2.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags CFLAGS=$CFLAGS^'-ltinfo '}
 kmod=(){tag=v29 src=kernel:utils/kernel/%s/%s μ=Autotools flags=('disable-manpages')}
 procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-kill') CFLAGS=$CFLAGS^'-ltinfo '}
+rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
+shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
 sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/sysvinit/sysvinit-$tag.tar.xz μ=GMake flags=(ROOT=$destdir)}
 util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($dirflags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'disable-static' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
-
-# syslogs
-libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
-libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
-rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
 
 # extra system
 acpid=(){tag=2.0.33 src=https://downloads.sourceforge.net/acpid2/%s-$tag.tar.xz μ=Configure flags=$dirflags}
@@ -83,6 +78,7 @@ openssh=(){src='https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.8
 parted=(){tag=3.5 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 pciutils=(){tag=v3.7.0 src=kernel:utils/%s/%s μ=GMake flags=('LIBDIR=/usr/lib64')}
 rsync=(){tag=v3.2.3 src=gh:wayned/%s μ=Configure flags=('disable-lz4' 'disable-xxhash' 'disable-md2man')}
+sqlite=(){src='https://sqlite.org/2022/sqlite-autoconf-3380400.tar.gz' μ=Autotools}
 sudo=(){tag=1.9.9 src=https://www.sudo.ws/dist/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 tcsh=(){tag=6.24.00 src=https://astron.com/pub/%s/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
@@ -90,8 +86,7 @@ tmux=(){tag=3.2 src=gh:%s/%s μ=Autotools}
 xorriso=(){tag=1.5.4 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 # connman
-libmnl=(){tag=1.0.4 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
-libnftnl=(){tag=1.2.1 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
+glib=(){tag=2.70.4 src=gnome:%s μ=Meson flags=('tests=false')}
 iptables=(){tag=1.8.7 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'enable-shared')}
 nettle=(){tag=3.7 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-shared')}
 gnutls=(){src='https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz' μ=Configure flags=('with-included-libtasn1' 'without-p11-kit' 'enable-shared' $dirflags)}

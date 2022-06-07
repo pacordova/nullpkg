@@ -19,7 +19,7 @@ libexpat=(){tag=2.4.6 src=https://prdownloads.sourceforge.net/expat/expat-$tag.t
 libffi=(){tag=v3.4.2 src=gh:%s/%s μ=Autotools flags=('disable-static')}
 libnsl=(){tag=v2.0.0 src=gh:thkukuk/%s μ=Autotools flags=('disable-static')}
 libpng=(){tag=1.6.37 src=https://downloads.sourceforge.net/libpng/libpng-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
-libpsl=(){tag=0.21.1 src=gh:rockdaboot/%s μ=Autotools}
+libpsl=(){tag=0.21.1 src=gh:rockdaboot/%s μ=Meson}
 libsigsegv=(){tag=2.14 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'disable-static' 'enable-shared')}
 libtiff=(){tag=v4.3.0 src=gitlab:%s/%s μ=Autotools flags=('disable-static')}
 libtirpc=(){tag=1.3.2 src=https://downloads.sourceforge.net/libtirpc/libtirpc-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-gssapi' 'disable-static')}

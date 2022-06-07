@@ -72,3 +72,6 @@ cd ..
 
 mkdir sources
 mv __* sources
+tar -cf sources.tar sources
+xz -T0 sources.tar
+rm -rf sources/

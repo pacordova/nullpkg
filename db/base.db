@@ -20,7 +20,8 @@ flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}
 gawk=(){tag=5.1.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=($dirflags 'with-readline=no')}
 gcc=(){tag=11.2.0 src=gnu:%s-$tag/%s-$tag.tar.xz flags=($dirflags 'disable-multilib' 'enable-languages=c c++ fortran' 'disable-nls' 'disable-bootstrap' 'enable-shared') μ=Configure}
 gettext=(){tag=0.21 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-git=(){tag=v2.35.1 src=kernel:%s/%s μ=Autotools flags=('with-gitconfig=/etc/gitconfig')} grep=(){tag=3.7 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+git=(){tag=v2.35.1 src=kernel:%s/%s μ=Autotools flags=('with-gitconfig=/etc/gitconfig')}
+grep=(){tag=3.7 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 help2man=(){tag=1.49.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 less=(){tag=590 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 libtool=(){tag=2.4.6 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}

@@ -157,7 +157,6 @@ libgxps=(){tag=0.3.2 src=gnome:%s μ=Meson}
 # rust packages #
 #################
 rust=(){tag=1.57.0 src=static.rust-lang.org/dist/%s-$tag-x86_64-unknown-linux-gnu.tar.gz μ=(./install.sh '--prefix='$PREFIX '--destdir='$destdir)}
-rg=(){tag=13.0.0 src=gh:BurntSushi/ripgrep μ=Cargo}
 sk=(){src=gh:lotabout/skim μ=Cargo}
 tealdeer=(){src=gh:dbrgn/%s μ=Cargo}
 exa=(){src=gh:ogham/%s μ=Cargo}

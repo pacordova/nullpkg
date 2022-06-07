@@ -15,42 +15,38 @@ fn __emerge {
 
 LIB=( \
     acl alsa argon attr c-ares \
-    gdbm gmp gperf json libaio \
-    libcap libevent libexpat libffi libjpeg-turbo \
-    libnsl libpng libpsl libsigsegv libtiff \
-    libtirpc libunwind ncurses pcre2 pcre \
-    pkg-config popt readline \
+    gdbm gmp gperf libaio libcap \
+    libevent libexpat libffi libnsl libpng \
+    libpsl libsigsegv libtiff libtirpc libunwind \
+    ncurses pcre2 pcre pkg-config popt \
+    readline \
 )
 
 BASE=( \
-    gcc \
-    bash bc binutils bison coreutils\
-    diffutils ed file findutils flex \
-    gawk grep less m4 make patch \
-    rc sed sharutils vim which \
+    autoconf automake bash bc binutils \
+    bison coreutils diffutils ed file \
+    findutils flex gawk gcc gettext \
+    grep help2man less libtool m4 \
+    make patch rc sed sharutils \
+    texinfo vim which \
     zlib bzip2 gzip tar unzip xz zstd \
     libressl curl git \
 )
 
-DEV=( \
-    autoconf automake cmake gettext help2man \
-    libtool ninja texinfo \
-    python python-setuptools python-pip \
-)
-
 SYS=( \
     shadow \
-    libeudev libfuse libusb glib libunistring sqlite \
+    libeudev libfuse libusb glib libunistring libxml2 sqlite \
     e2fsprogs inetutils kmod procps-ng sysvinit \
     util-linux \
     libestr libfastjson rsyslog \
     acpid cryptsetup dbus dosfstools lm-sensors \
-    logrotate lua lvm mandoc nano \
-    openssh parted pciutils rsync sudo \
-    sqlite tcsh time tmux xorriso \
+    lua lvm mandoc nano openssh \
+    parted pciutils rsync sudo tcsh \
+    time tmux xorriso \
     libmnl libnftnl iptables nettle gnutls connman \
     efivar efibootmgr \
 )
+
 
 cd cache
 
@@ -59,8 +55,7 @@ ldconfig && /usr/nullpkg/misc/locale.rc
 tar -xhf sources.tar.xz
 mv sources/* .
 
-__emerge $DEV
-
+nullpkg emerge python python-setuptools python-pip &&
 sleep 3 &&
 python3 -m pip install meson &&
 python3 -m pip install docutils

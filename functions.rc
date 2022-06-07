@@ -73,7 +73,8 @@ fn Python {
 
 fn Cargo {
     CARGO_HOME=./.cargo \
-    cargo install --path . \
+    cargo install \
+        --path . \
         --root $destdir/usr
 }
 

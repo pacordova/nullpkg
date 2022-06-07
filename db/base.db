@@ -46,11 +46,9 @@ git=(){tag=v2.35.1 src=kernel:%s/%s μ=Autotools flags=('with-gitconfig=/etc/git
 #######
 autoconf=(){tag=2.69 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 automake=(){tag=1.15.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-cmake=(){src='https://cmake.org/files/v3.22/cmake-3.22.2.tar.gz' μ=Configure}
 gettext=(){tag=0.21 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 help2man=(){tag=1.49.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 libtool=(){tag=2.4.6 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-ninja=(){tag=v1.10.2 src=gh:ninja-build/%s μ=CMake}
 texinfo=(){tag=6.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 
 # python
@@ -92,7 +90,6 @@ parted=(){tag=3.5 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 pciutils=(){tag=v3.7.0 src=kernel:utils/%s/%s μ=GMake flags=('LIBDIR=/usr/lib64')}
 rsync=(){tag=v3.2.3 src=gh:wayned/%s μ=Configure flags=('disable-lz4' 'disable-xxhash' 'disable-md2man')}
 sudo=(){tag=1.9.9 src=https://www.sudo.ws/dist/%s-$tag.tar.gz μ=Configure flags=$dirflags}
-sqlite=(){src='https://sqlite.org/2022/sqlite-autoconf-3380400.tar.gz' μ=Autotools}
 tcsh=(){tag=6.24.00 src=https://astron.com/pub/%s/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 time=(){tag=1.9 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 tmux=(){tag=3.2 src=gh:%s/%s μ=Autotools}

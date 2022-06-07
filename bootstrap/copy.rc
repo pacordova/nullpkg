@@ -1,52 +1,46 @@
 #!/bin/rc
 
-passdir=pass2
 chrootdir=/mnt
 
 LIB=( \
     acl alsa argon attr c-ares \
-    gdbm gmp gperf json libaio \
-    libcap libevent libexpat libffi libjpeg-turbo \
-    libnsl libpng libpsl libsigsegv libtiff \
-    libtirpc libunwind ncurses pcre2 pcre \
-    pkg-config popt readline \
+    gdbm gmp gperf libaio libcap \
+    libevent libexpat libffi libnsl libpng \
+    libpsl libsigsegv libtiff libtirpc libunwind \
+    ncurses pcre2 pcre pkg-config popt \
+    readline \
 )
 
 BASE=( \
-    gcc \
-    bash bc binutils bison coreutils\
-    diffutils ed file findutils flex \
-    gawk grep less m4 make patch \
-    rc sed sharutils vim which \
+    autoconf automake bash bc binutils \
+    bison coreutils diffutils ed file \
+    findutils flex gawk gcc gettext \
+    grep help2man less libtool m4 \
+    make patch rc sed sharutils \
+    texinfo vim which \
     zlib bzip2 gzip tar unzip xz zstd \
     libressl curl git \
 )
 
-DEV=( \
-    autoconf automake cmake gettext help2man \
-    libtool ninja texinfo \
-    python python-setuptools python-pip \
-)
-
 SYS=( \
     shadow \
-    libeudev libfuse libusb glib libunistring sqlite \
+    libeudev libfuse libusb glib libunistring libxml2 sqlite \
     e2fsprogs inetutils kmod procps-ng sysvinit \
     util-linux \
     libestr libfastjson rsyslog \
     acpid cryptsetup dbus dosfstools lm-sensors \
-    logrotate lua lvm mandoc nano \
-    openssh parted pciutils rsync sudo \
-    sqlite tcsh time tmux xorriso \
+    lua lvm mandoc nano openssh \
+    parted pciutils rsync sudo tcsh \
+    time tmux xorriso \
     libmnl libnftnl iptables nettle gnutls connman \
     efivar efibootmgr \
 )
 
 
-mkdir -p /usr/nullpkg/cache/$passdir/^(lib base dev sys)
+mkdir -p /usr/nullpkg/cache/new/^(lib base sys)
 
 cd $chrootdir/usr/nullpkg/cache
-mv $LIB^.tar.xz /usr/nullpkg/cache/$passdir/lib
-mv $BASE^.tar.xz /usr/nullpkg/cache/$passdir/base
-mv $DEV^.tar.xz /usr/nullpkg/cache/$passdir/dev
-mv $SYS^.tar.xz /usr/nullpkg/cache/$passdir/sys
+mv $LIB^.tar.xz /usr/nullpkg/cache/new/lib
+mv $BASE^.tar.xz /usr/nullpkg/cache/new/base
+mv $SYS^.tar.xz /usr/nullpkg/cache/new/sys
+mv py*.tar.xz /usr/nullpkg/cache/new/base

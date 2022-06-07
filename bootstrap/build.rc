@@ -14,10 +14,10 @@ fn __emerge {
 }
 
 LIB=( \
-    acl alsa argon attr c-ares gdbm glib gmp gperf libaio libcap libestr \
-    libevent libexpat libfastjson libffi libmnl libnftnl libnsl libpng \
-    libpsl libsigsegv libtiff libtirpc libunwind ncurses pcre2 pcre \
-    pkg-config popt readline \
+    acl alsa argon attr c-ares gdbm gmp gperf libaio libcap libestr \
+    libeudev libevent libexpat libfastjson libffi libfuse libmnl libnftnl \
+    libnsl libpng libpsl libsigsegv libtiff libtirpc libunistring libusb \
+    libunwind lvm ncurses pcre2 pcre pkg-config popt readline \
 )
 
 BASE=( \
@@ -29,11 +29,10 @@ BASE=( \
 )
 
 SYS=( \
-    shadow libeudev libfuse libusb libunistring lvm \
-    e2fsprogs inetutils kmod procps-ng sysvinit util-linux rsyslog \
+    e2fsprogs inetutils kmod procps-ng rsyslog shadow sysvinit util-linux \
     acpid cryptsetup dbus dosfstools lm-sensors lua mandoc nano openssh \
     parted pciutils rsync sudo sqlite tcsh time tmux xorriso \
-    iptables nettle gnutls connman \
+    glib iptables nettle gnutls connman \
     efivar efibootmgr \
 )
 

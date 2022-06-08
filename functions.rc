@@ -111,9 +111,17 @@ fn __makepkg {
 
     # strip binaries & gzip manpages
     >[2=] {
-    strip -S $1/usr/lib*/*
-    strip -s $1/usr/bin/* $1/bin/*
-    gzip -n $1/usr/man/man?/*.? $1/usr/share/man/man?/*.?
+        strip -S $1/usr/lib*/*
+        strip -s $1/usr/bin/* $1/bin/*
+        gzip -n $1/usr/man/man?/*.? $1/usr/share/man/man?/*.?
+    }
+
+    # remove pyc for reproducible builds
+    >[2=] {
+        du -ax $1 |
+        grep '\.pyc$' |
+        awk '{print "rm " $2}' |
+        rc
     }
 
     tar -C $1 \

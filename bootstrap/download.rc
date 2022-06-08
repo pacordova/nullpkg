@@ -60,6 +60,11 @@ sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
 echo '#define _IO_IN_BACKUP 0x100' >> lib/stdio-impl.h
 cd ..
 
+# make ncurses reproducible
+cd __ncurses
+sed -i 's|curvU|curv|g' configure
+cd ..
+
 mkdir sources
 mv __* sources
 tar -cf sources.tar sources

@@ -34,6 +34,7 @@ libunistring=(){tag=1.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 libunwind=(){tag=v1.6.2 src=gh:%s/%s μ=Autotools flags=('disable-static')}
 libusb=(){tag=v1.0.25 src=gh:%s/%s μ=Autotools flags=('disable-static')}
 libuv=(){tag=v1.43.0 src=https://dist.libuv.org/dist/$tag/%s-$tag.tar.gz μ=Autotools}
+lvm=(){src='https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
 ncurses=(){tag=6.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'disable-static' 'with-shared' 'without-normal' 'with-cxx=no' 'enable-pc-files' 'enable-widec' 'with-termlib=tinfo')}
 pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=Autotools flags=('enable-unicode' 'enable-jit' 'enable-pcre2-16' 'enable-pcre2-32' 'disable-static')}
 pcre=(){src='https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2' μ=Autotools flags=('enable-unicode-properties' 'enable-pcre16' 'enable-pcre32' 'disable-static')}

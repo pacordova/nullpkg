@@ -116,12 +116,6 @@ fn __makepkg {
         gzip -n $1/usr/man/man?/*.? $1/usr/share/man/man?/*.?
     }
 
-    # remove docdir for reproducible builds
-    >[2=] {
-        rm -rf $1/usr/doc
-        rm -rf $1/usr/share/doc
-    }
-
     # remove pyc for reproducible builds
     >[2=] {
         du -ax $1 |

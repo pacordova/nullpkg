@@ -72,7 +72,6 @@ fcron=(){tag=3.2.1 src=http://fcron.free.fr/archives/%s-$tag.src.tar.gz μ=Confi
 lm-sensors=(){tag=V3-6-0 src=gh:%s/%s μ=GMake flags=('LIBDIR=/usr/lib64')}
 logrotate=(){tag=3.19.0 src=gh:%s/%s μ=Autotools}
 lua=(){src='http://www.lua.org/ftp/lua-5.4.4.tar.gz' μ=GMake flags=('INSTALL_TOP='$destdir/$PREFIX 'INSTALL_LIB=$(INSTALL_TOP)/lib64' 'INSTALL_CMOD=$(INSTALL_LIB)/lua/$V')}
-lvm=(){src='https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
 mandoc=(){tag=1.14.6 src=https://mandoc.bsd.lv/snapshots/%s-$tag.tar.gz μ=Configure}
 nano=(){tag=6.3 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 openssh=(){src='https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.8p1.tar.gz' μ=Configure flags=($dirflags 'disable-static')}

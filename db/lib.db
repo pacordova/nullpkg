@@ -33,7 +33,8 @@ libtirpc=(){tag=1.3.2 src=https://downloads.sourceforge.net/libtirpc/libtirpc-$t
 libunistring=(){tag=1.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 libunwind=(){tag=v1.6.2 src=gh:%s/%s μ=Autotools flags=('disable-static')}
 libusb=(){tag=v1.0.25 src=gh:%s/%s μ=Autotools flags=('disable-static')}
-ncurses=(){tag=6.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-shared' 'without-normal' 'with-cxx=no' 'disable-static' 'with-termlib=tinfo')}
+libuv=(){tag=v1.43.0 src=https://dist.libuv.org/dist/$tag/%s-$tag.tar.gz μ=Autotools}
+ncurses=(){tag=6.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'disable-static' 'with-shared' 'without-normal' 'with-cxx=no' 'enable-pc-files' 'enable-widec' 'with-termlib=tinfo')}
 pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=Autotools flags=('enable-unicode' 'enable-jit' 'enable-pcre2-16' 'enable-pcre2-32' 'disable-static')}
 pcre=(){src='https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2' μ=Autotools flags=('enable-unicode-properties' 'enable-pcre16' 'enable-pcre32' 'disable-static')}
 pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=('with-internal-glib')}
@@ -47,7 +48,6 @@ readline=(){tag=8.1.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with
 ########
 libxml2=(){tag=v2.9.13 src=gnome:%s μ=Autotools}
 libjpeg-turbo=(){tag=2.1.2 src=https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$tag.tar.gz μ=CMake}
-libuv=(){tag=v1.44.1 src=gh:%s/%s μ=CMake}
 libconfig=(){tag=v1.7.3 src=gh:hyperrealm/%s μ=Autotools}
 double-conversion=(){tag=v3.2.0 src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
 uthash=(){tag=v2.3.0 src=gh:troydhanson/%s μ=Headers}

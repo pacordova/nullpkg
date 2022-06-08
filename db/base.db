@@ -55,9 +55,9 @@ python-pip=(){tag=22.1.2 src=gh:pypa/pip μ=Python}
 # sys #
 #######
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
-inetutils=(){tag=2.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags CFLAGS=$CFLAGS^'-ltinfo '}
+inetutils=(){tag=2.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 kmod=(){tag=v29 src=kernel:utils/kernel/%s/%s μ=Autotools flags=('disable-manpages')}
-procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-kill') CFLAGS=$CFLAGS^'-ltinfo '}
+procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-kill' 'without-ncurses')}
 rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
 shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
 sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/sysvinit/sysvinit-$tag.tar.xz μ=GMake flags=(ROOT=$destdir)}
@@ -74,7 +74,7 @@ logrotate=(){tag=3.19.0 src=gh:%s/%s μ=Autotools}
 lua=(){src='http://www.lua.org/ftp/lua-5.4.4.tar.gz' μ=GMake flags=('INSTALL_TOP='$destdir/$PREFIX 'INSTALL_LIB=$(INSTALL_TOP)/lib64' 'INSTALL_CMOD=$(INSTALL_LIB)/lua/$V')}
 lvm=(){src='https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
 mandoc=(){tag=1.14.6 src=https://mandoc.bsd.lv/snapshots/%s-$tag.tar.gz μ=Configure}
-nano=(){tag=6.3 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags CFLAGS=$CFLAGS^'-ltinfo -lncurses '}
+nano=(){tag=6.3 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 openssh=(){src='https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.8p1.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
 parted=(){tag=3.5 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 pciutils=(){tag=v3.7.0 src=kernel:utils/%s/%s μ=GMake flags=('LIBDIR=/usr/lib64')}
@@ -91,7 +91,7 @@ glib=(){tag=2.70.4 src=gnome:%s μ=Meson flags=('tests=false')}
 iptables=(){tag=1.8.7 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'enable-shared')}
 nettle=(){tag=3.7 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-shared')}
 gnutls=(){src='https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz' μ=Configure flags=('with-included-libtasn1' 'without-p11-kit' 'enable-shared' $dirflags)}
-connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdunitdir=no') CFLAGS=$CFLAGS^'-lncurses '}
+connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdunitdir=no')}
 
 # efibootmgr
 efivar=(){tag=38 src=gh:rhboot/efivar μ=GMake}

@@ -39,7 +39,7 @@ pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=Autotools flags=('enable-unico
 pcre=(){src='https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2' μ=Autotools flags=('enable-unicode-properties' 'enable-pcre16' 'enable-pcre32' 'disable-static')}
 pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=('with-internal-glib')}
 popt=(){src='http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
-readline=(){tag=8.1.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'with-curses' 'disable-static')}
+readline=(){tag=8.1.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'disable-static')}
 
 
 

@@ -46,9 +46,10 @@ xz=(){tag=5.2.5 src=https://tukaani.org/%s/%s-$tag.tar.xz μ=Configure flags=$di
 zstd=(){tag=v1.5.2 src=gh:facebook/zstd μ=GMake}
 
 # python
-python=(){tag=v3.9.13 src=gh:python/cpython μ=Configure flags=($dirflags 'with-platlibdir=lib64' 'without-ensurepip' 'enable-optimizations' 'enable-shared')}
-python-setuptools=(){tag=v62.3.2 src=gh:pypa/setuptools μ=Python}
+python=(){tag=v3.10.5 src=gh:python/cpython μ=Configure flags=($dirflags 'with-platlibdir=lib64' 'without-ensurepip' 'enable-optimizations' 'enable-shared')}
+python-setuptools=(){tag=v57.5.0 src=gh:pypa/setuptools μ=Python}
 python-pip=(){tag=22.1.2 src=gh:pypa/pip μ=Python}
+meson=(){tag=0.59.4 src=gh:mesonbuild/%s μ=Python}
 
 
 #######

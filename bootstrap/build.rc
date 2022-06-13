@@ -14,11 +14,11 @@ fn __emerge {
 }
 
 LIB=( \
-    acl alsa argon attr c-ares gdbm gmp gperf json-c libaio libcap \
+    acl alsa argon attr c-ares gdbm gmp gperf inih json-c libaio libcap \
     libestr libeudev libevent libexpat libfastjson libffi libfuse \
     libmnl libnftnl libnsl libpng libpsl libressl libsigsegv \
-    libtiff libtirpc libunistring libusb libunwind lvm \
-    ncurses pcre2 pcre pkg-config popt readline \
+    libtiff libtirpc libunistring liburcu libusb libunwind \
+    lvm ncurses pcre2 pcre pkg-config popt readline zlib \
 )
 
 BASE=( \
@@ -26,11 +26,12 @@ BASE=( \
     diffutils ed file findutils flex gawk gcc gettext git grep \
     help2man less libtool m4 make ninja patch rc sed \
     sharutils texinfo vim which \
-    zlib bzip2 gzip tar unzip xz zstd \
+    bzip2 gzip lzo tar unzip xz zstd \
 )
 
 SYS=( \
-    e2fsprogs inetutils kmod procps-ng rsyslog shadow sysvinit util-linux \
+    btrfsprogs e2fsprogs inetutils jfsutils kmod procps-ng rsyslog shadow \
+    sysvinit util-linux xfsprogs \
     acpid cryptsetup dbus dosfstools lm-sensors lua mandoc nano openssh \
     parted pciutils rsync sqlite sudo tcsh time tmux xorriso \
     glib iptables nettle gnutls connman \

@@ -37,9 +37,9 @@ vim=(){tag=v8.2.4383 src=gh:%s/%s μ=Configure flags=($dirflags 'disable-gui' 'w
 which=(){tag=2.21 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
 # compression
-zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
 bzip2=(){tag=master src=gitlab:%s/%s μ=Meson}
 gzip=(){tag=1.11 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
+lzo=(){tag=2.10 src=https://www.oberhumer.com/opensource/%s/download/%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-shared' 'disable-static')}
 tar=(){tag=1.34 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 unzip=(){tag=60 src=https://downloads.sourceforge.net/infozip/%s$tag.tar.gz μ=GMake flags=('--file=unix/Makefile' 'prefix='$destdir/$PREFIX 'generic')}
 xz=(){tag=5.2.5 src=https://tukaani.org/%s/%s-$tag.tar.xz μ=Configure flags=$dirflags}
@@ -55,17 +55,17 @@ meson=(){tag=0.61.5 src=gh:mesonbuild/%s μ=Python}
 #######
 # sys #
 #######
-btrfs-progs=(){tag=v5.16.2 src=gh:kdave/%s μ=Configure}
+btrfs-progs=(){tag=v5.16.2 src=gh:kdave/%s μ=Autotools flags=('disable-documentation' 'disable-python')}
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
 inetutils=(){tag=2.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-jfsutils=(){tag=1.1.15 src=http://jfs.sourceforge.net/project/pub/%s-$tag.tar.gz μ=Configure}
+jfsutils=(){tag=1.1.15 src=http://jfs.sourceforge.net/project/pub/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 kmod=(){tag=v29 src=kernel:utils/kernel/%s/%s μ=Autotools flags=('disable-manpages')}
 procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-kill' 'without-ncurses')}
 rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
 shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
 sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/sysvinit/sysvinit-$tag.tar.xz μ=GMake flags=(ROOT=$destdir)}
 util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($dirflags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'disable-static' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
-xfsprogs=(){tag=v5.14.2 src=kernel:fs/xfs/xfsprogs-dev μ=Autotools}
+xfsprogs=(){tag=v5.14.2 src=kernel:fs/xfs/xfsprogs-dev μ=GMake}
 
 # extra system
 acpid=(){tag=2.0.33 src=https://downloads.sourceforge.net/acpid2/%s-$tag.tar.xz μ=Configure flags=$dirflags}

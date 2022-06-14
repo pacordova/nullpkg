@@ -97,3 +97,13 @@ connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdun
 # efibootmgr
 efivar=(){tag=38 src=gh:rhboot/efivar μ=GMake}
 efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake EFIDIR=/boot}
+
+# gpg
+libgpg-error=(){tag=1.45 src=gpg:%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
+libgcrypt=(){tag=1.10.1 src=gpg:%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
+libksba=(){tag=1.6.0 src=gpg:%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
+libassuan=(){tag=2.5.5 src=gpg:%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
+ntbtls=(){tag=0.3.1 src=gpg:%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
+npth=(){tag=1.6 src=gpg:%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
+pinentry=(){tag=1.2.0 src=gpg:%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
+gnupg=(){tag=2.3.6 src=gpg:%s-$tag.tar.bz2 μ=Configure flags=$dirflags}

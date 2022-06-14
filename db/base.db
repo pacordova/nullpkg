@@ -92,9 +92,7 @@ xorriso=(){tag=1.5.4 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 # connman
 glib=(){tag=2.70.4 src=gnome:%s μ=Meson flags=('tests=false')}
 iptables=(){tag=1.8.7 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'enable-shared')}
-nettle=(){tag=3.7 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-shared')}
-gnutls=(){src='https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz' μ=Configure flags=('with-included-libtasn1' 'without-p11-kit' 'enable-shared' $dirflags)}
-connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdunitdir=no') LIBS='-ltinfo'}
+connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=('with-systemdunitdir=no' 'disable-wispr') LIBS='-ltinfo'}
 
 # efibootmgr
 efivar=(){tag=38 src=gh:rhboot/efivar μ=GMake}

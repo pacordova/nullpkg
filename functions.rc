@@ -172,7 +172,7 @@ fn __curl {
 }
 
 fn __query {
-    tag=() src=() μ=() flags=()
+    tag=() src=() μ=() flags=() LIBS=()
     destdir=/usr/nullpkg/cache/__$1/__root
 
     eval `{cat $db | grep '^'$1=}

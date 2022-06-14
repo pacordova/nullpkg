@@ -1,6 +1,6 @@
 #!/bin/rc
 
-. ./pkgs.rc
+. /usr/nullpkg/bootstrap/functions.rc
 
 nullpkg snarf $LIB
 nullpkg snarf $BASE

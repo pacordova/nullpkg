@@ -1,6 +1,6 @@
 #!/bin/rc
 
-. ./pkgs.rc
+. /usr/nullpkg/bootstrap/functions.rc
 
 cachedir=/usr/nullpkg/cache
 cd /mnt/$cachedir

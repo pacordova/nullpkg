@@ -30,10 +30,11 @@ BASE=( \
 )
 
 SYS=( \
-    btrfs-progs e2fsprogs inetutils jfsutils kmod procps-ng rsyslog shadow \
-    sysvinit util-linux xfsprogs \
-    acpid cryptsetup dbus dosfstools lm-sensors lua mandoc nano openssh \
-    parted pciutils rsync sqlite sudo tcsh time tmux xorriso \
+    e2fsprogs btrfs-progs jfsutils xfsprogs \
+    inetutils kmod procps-ng rsyslog shadow sysvinit util-linux \
+    acpid cryptsetup dbus dosfstools lm-sensors lua mandoc nano \
+    openssh lm-sensors lua mandoc nano openssh parted pciutils \
+    rsync sqlite sudo tcsh time tmux xorriso \
     glib iptables nettle gnutls connman \
     efivar efibootmgr \
 )

@@ -1,6 +1,6 @@
 #!/bin/rc
 
-. functions.rc
+. ./pkgs.rc
 
 cachedir=/usr/nullpkg/cache
 cd /mnt/$cachedir

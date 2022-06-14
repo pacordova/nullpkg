@@ -1,0 +1,28 @@
+#!/bin/rc
+
+
+LIB=( \
+    acl alsa argon attr c-ares gdbm gmp gperf inih json-c libaio libcap \
+    libestr libeudev libevent libexpat libfastjson libffi libfuse \
+    libmnl libnftnl libnsl libpng libpsl libressl libsigsegv \
+    libtiff libtirpc libunistring liburcu libusb libunwind \
+    lvm ncurses pcre2 pcre pkg-config popt readline zlib \
+)
+
+BASE=( \
+    autoconf automake bash bc binutils bison cmake coreutils curl \
+    diffutils ed file findutils flex gawk gcc gettext git grep \
+    help2man less libtool m4 make ninja patch rc sed \
+    sharutils texinfo vim which \
+    bzip2 gzip lzo tar unzip xz zstd \
+)
+
+SYS=( \
+    e2fsprogs inetutils kmod procps-ng rsyslog shadow sysvinit util-linux \
+    acpid btrfs-progs cryptsetup dbus dosfstools jfsutils lm-sensors lua \
+    mandoc nano openssh lm-sensors lua mandoc nano openssh parted \
+    pciutils rsync sqlite sudo tcsh time tmux xfsprogs xorriso \
+    glib iptables connman \
+    efivar efibootmgr \
+    libgpg-error libgcrypt libksba libassuan ntbtls npth pinentry gnupg \
+)

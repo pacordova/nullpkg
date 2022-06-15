@@ -29,8 +29,8 @@ BASE=( \
 SYS=( \
     e2fsprogs inetutils kmod procps-ng rsyslog shadow sysvinit util-linux \
     acpid btrfs-progs cryptsetup dbus dosfstools jfsutils lm-sensors lua \
-    mandoc nano openssh lm-sensors lua mandoc nano openssh parted \
-    pciutils rsync sqlite sudo tcsh time tmux xfsprogs xorriso \
+    mandoc nano openssh parted pciutils rsync sqlite sudo tcsh time tmux \
+    xfsprogs xorriso \
     glib iptables connman \
     efivar efibootmgr \
     libgpg-error libgcrypt libksba libassuan ntbtls npth pinentry gnupg \

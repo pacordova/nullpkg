@@ -5,7 +5,7 @@
 cd /usr/src/linux
 
 # for reproducible builds
-make mrproper && cp KCONFIG .config
+make mrproper && cp NULL .config
 
 make clean
 make -j5 bzImage modules

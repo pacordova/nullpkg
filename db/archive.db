@@ -297,3 +297,5 @@ guile=(){tag=3.0.7 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
 nettle=(){tag=3.7 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'enable-shared')}
 gnutls=(){src='https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz' μ=Configure flags=('with-included-libtasn1' 'without-p11-kit' 'enable-shared' $dirflags)}
 
+jfsutils=(){tag=1.1.15 src=http://jfs.sourceforge.net/project/pub/%s-$tag.tar.gz μ=Configure flags=$dirflags}
+

@@ -58,7 +58,6 @@ meson=(){tag=0.61.5 src=gh:mesonbuild/%s μ=Python}
 btrfs-progs=(){tag=v5.16.2 src=gh:kdave/%s μ=Autotools flags=('disable-documentation' 'disable-python')}
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($dirflags 'enable-elf-shlibs')}
 inetutils=(){tag=2.2 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-jfsutils=(){tag=1.1.15 src=http://jfs.sourceforge.net/project/pub/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 kmod=(){tag=v29 src=kernel:utils/kernel/%s/%s μ=Autotools flags=('disable-manpages')}
 procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-kill' 'without-ncurses')}
 rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}

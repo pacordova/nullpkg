@@ -1,13 +1,14 @@
 #!/bin/rc
 
-. ../*.conf
+. /etc/make.conf
 
 cd /usr/src/linux
 
 # for reproducible builds
-make mrproper && cp NULL .config
+make clean &&
+make mrproper &&
+cp __config .config
 
-make clean
 make -j5 bzImage modules
 make modules_install
 

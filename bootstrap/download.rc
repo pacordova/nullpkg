@@ -38,11 +38,6 @@ sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
 echo '#define _IO_IN_BACKUP 0x100' >> lib/stdio-impl.h
 cd ..
 
-# jfsutils
-cd __jfsutils
-sed -i '/unistd.h/a#include <sys/types.h>' fscklog/extract.c
-sed -i '/ioctl.h/a#include <sys/sysmacros.h>' libfs/devices.c
-cd ..
 
 mkdir sources
 mv __* sources

@@ -1,16 +1,45 @@
 #!/bin/rc
 
+########
+# xorg #
+########
+libxcvt=(){tag=0.1.1 src=xorg:lib/%s-$tag.tar.xz μ=Meson}
+pixman=(){tag=0.40.0 src=https://www.cairographics.org/releases/%s-$tag.tar.gz μ=Meson}
+font-util=(){tag=1.3.2 src=xorg:font/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xkeyboard-config=(){tag=2.35.1 src=xorg:data/%s/%s-$tag.tar.xz μ=Meson}
+
+freetype=(){tag=2.11.1 src=https://downloads.sourceforge.net/%s/%s-$tag.tar.xz μ=Configure flags=$dirflags}
+libevdev=(){tag=libevdev-1.12.1 src=freedesktop:%s/%s μ=Autotools flags=($dirflags 'disable-static')}
+fontconfig=(){tag=2.14.0 src=freedesktop:%s/%s μ=Meson}
+
 util-macros=(){tag=1.19.3 src=xorg:util/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 xorgproto=(){tag=xorgproto-2021.5 src=freedesktop:xorg/proto/%s μ=Autotools flags=($dirflags 'disable-static')}
-libXau=(){tag=1.0.9 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXdmcp=(){tag=1.1.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-xcbproto=(){tag=xcb-proto-1.14.1 src=freedesktop:xorg/proto/%s μ=Autotools flags=($dirflags 'disable-static')}
-libxcb=(){tag=1.14 src=xorg:lib/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
-
-# libs
 xtrans=(){tag=1.4.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xcbproto=(){tag=xcb-proto-1.14.1 src=freedesktop:xorg/proto/%s μ=Autotools flags=($dirflags 'disable-static')}
+libXau=(){tag=1.0.9 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libxcb=(){tag=1.14 src=xorg:lib/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
 libX11=(){tag=1.7.3.1 src=xorg:lib/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
+libxkbfile=(){tag=1.1.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libfontenc=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXfont2=(){tag=2.0.5 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static' 'disable-devel-docs')}
+libXdmcp=(){tag=1.1.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libepoxy=(){tag=1.5.9 src=gh:anholt/%s μ=Meson}
+libpciaccess=(){tag=0.16 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libdrm=(){tag=2.4.110 src=https://dri.freedesktop.org/%s/%s-$tag.tar.xz μ=Meson}
 libXext=(){tag=1.3.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXfixes=(){tag=6.0.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libxshmfence=(){tag=1.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXxf86vm=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXrender=(){tag=0.9.10 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXrandr=(){tag=1.5.2 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXft=(){tag=2.3.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+mesa=(){tag=mesa-21.3.6 src=freedesktop:%s/%s μ=Meson flags=('llvm=disabled' 'dri-drivers=i965' 'gallium-drivers=r600,virgl,svga,iris,crocus' 'gallium-nine=false' 'glx=dri' 'valgrind=disabled' 'vulkan-drivers=amd,intel' 'platforms=x11')}
+xorg-server=(){tag=21.1.3 src=xorg:xserver/%s-$tag.tar.xz μ=Meson}
+
+
+#########
+# extra #
+#########
 libFS=(){tag=1.0.8 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libICE=(){tag=1.0.10 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libSM=(){tag=1.2.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
@@ -19,28 +48,17 @@ libXt=(){tag=1.2.1 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'd
 libXmu=(){tag=1.1.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libXpm=(){tag=3.5.13 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libXaw=(){tag=1.0.14 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXfixes=(){tag=6.0.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libXcomposite=(){tag=0.4.5 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXrender=(){tag=0.9.10 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libXcursor=(){tag=1.2.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libXdamage=(){tag=1.1.5 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libfontenc=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXfont2=(){tag=2.0.5 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static' 'disable-devel-docs')}
-libXft=(){tag=2.3.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libXi=(){tag=1.8 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libXinerama=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXrandr=(){tag=1.5.2 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libXres=(){tag=1.2.1 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libXtst=(){tag=1.2.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libXv=(){tag=1.0.11 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libXvMC=(){tag=1.0.12 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libXxf86dga=(){tag=1.1.5 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXxf86vm=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libdmx=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libpciaccess=(){tag=0.16 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libxkbfile=(){tag=1.1.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libxshmfence=(){tag=1.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-
 libxcvt=(){tag=0.1.1 src=xorg:lib/%s-$tag.tar.xz μ=Meson}
 xcb-util=(){tag=0.4.0 }
 xcb-util-image=(){tag=0.4.0 }
@@ -48,7 +66,6 @@ xcb-util-keysyms(){tag=0.4.0 }
 xcb-util-renderutil{tag=0.3.9 }
 xcb-util-wm(){tag=0.4.1 }
 xcb-util-cursor(){tag=0.1.3 }
-mesa=(){tag=21.3.6 }
 xbitmaps=(){tag=1.1.2 }
 
 # apps

@@ -14,6 +14,7 @@ coreutils=(){tag=9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 curl=(){tag=7.81.0 src=https://curl.se/download/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static' 'with-openssl' 'with-ca-path=/etc/ssl/certs' 'with-ca-bundle=/etc/ssl/certs/ca-certificates.crt' 'enable-threaded-resolver')}
 diffutils=(){tag=3.8 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 ed=(){tag=1.4 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+elfutils=(){tag=0.186 src=https://sourceware.org/ftp/%s/$tag/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static' 'disable-debuginfod')}
 file=(){tag=5.41 src=https://astron.com/pub/%s/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 findutils=(){tag=4.9.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
 flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}

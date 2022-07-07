@@ -6,6 +6,7 @@
 # Environment #
 ###############
 path=(/usr/sbin /usr/bin /sbin /bin)
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
 CXXFLAGS=$CFLAGS
 SOURCE_DATE_EPOCH=1000000000
 KBUILD_BUILD_TIMESTAMP=1000000000
@@ -15,7 +16,7 @@ FORCE_UNSAFE_CONFIGURE=1
 # Build Routines #
 ##################
 fn GMake {
-    *=($MAKEOPTS 'PREFIX='$PREFIX $*)
+    *=($MAKEOPTS 'PREFIX='$PREFIX 'path=' $*)
     make $* &&
     make install $* 'DESTDIR='$destdir
 }

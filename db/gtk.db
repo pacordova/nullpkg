@@ -26,8 +26,11 @@ gtk3=(){tag=3.24.33 src=gnome:gtk μ=Meson flags=('tests' 'demos' 'examples' 'wi
 adwaita-icon-theme=(){tag=42.0 src=gnome:%s μ=Autotools}
 intltool=(){src='https://launchpad.net/intltool/trunk/0.51.0/+download/%s-0.51.0.tar.gz' μ=Configure flags=$dirflags}
 gtk-engine-murrine=(){src='http://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz' μ=Configure flags=$dirflags}
+
 dbus-glib=(){tag=0.112 src=https://dbus.freedesktop.org/releases/%s/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 libwnck=(){tag=2.31.0 src=https://download.gnome.org/sources/libwnck/2.31/libwnck-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
+libnotify=(){tag=0.7.12 src=gnome:%s μ=Meson flags=('gtk_doc=false' 'man=false' 'tests=false')}
+upower=(){tag=v0.99.19 src=freedesktop:%s/%s μ=Meson flags=('systemdsystemunitdir=no' 'gtk-doc=false' 'man=false')}
 
 # rust deps
 #librsvg=(){tag=2.52.9 src=https://download.gnome.org/sources/%s/2.52/%s-$tag.tar.xz μ=Configure flags=$dirflags}

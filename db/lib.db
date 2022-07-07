@@ -51,7 +51,6 @@ zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
 ########
 # libs #
 ########
-libxml2=(){tag=v2.9.13 src=gnome:%s μ=Autotools}
 libjpeg-turbo=(){tag=2.1.2 src=https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$tag.tar.gz μ=CMake}
 libconfig=(){tag=v1.7.3 src=gh:hyperrealm/%s μ=Autotools}
 double-conversion=(){tag=v3.2.0 src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}

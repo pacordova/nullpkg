@@ -4,25 +4,41 @@
 ########
 # Glib #
 ########
+# need python-pygments python-lxml python-libxml2
+libgudev=(){tag=237 src=gnome:%s μ=Meson}
 gobject-introspection=(){tag=1.72.0 src=gnome:%s μ=Meson}
+atk=(){tag=2.38.0 src=gnome:%s μ=Meson}
+at-spi2-core=(){tag=AT_SPI2_CORE_2_45_1 src=gnome:%s μ=Meson}
+at-spi2-atk=(){tag=AT_SPI2_ATK_2_38_0 src=gnome:%s μ=Meson}
+pango=(){tag=1.50.4 src=gnome:%s μ=Meson}
+cairo=(){tag=1.17.4 src=https://www.cairographics.org/snapshots/%s-$tag.tar.xz μ=Meson flags=('spectre=disabled')}
+
+shared-mime-info=(){tag=2.2 src=freedesktop:xdg/%s μ=Meson}
+gdk-pixbuf=(){tag=2.42.8 src=gnome:%s μ=Meson flags=('gio_sniffing=false' 'installed_tests=false')}
+libxkbcommon=(){tag=1.4.0 src=https://xkbcommon.org/download/%s-$tag.tar.xz μ=Meson flags=('enable-wayland=false' 'enable-docs=false')}
+
+
+libxml2=(){tag=v2.9.13 src=gnome:%s μ=Autotools flags=('with-python')}
+libxslt=(){tag=v1.1.35 src=gnome:%s μ=Autotools}
+itstool=(){tag=2.0.7 src=http://files.itstool.org/%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
+gtk-doc=(){tag=1.33.2 src=gnome:%s μ=Meson}
+
 glibmm=(){tag=2.66.2 src=gnome:%s μ=Meson flags=('build-documentation=false' 'build-examples=false')}
 mm-common=(){tag=1.0.3 src=gnome:%s μ=Meson flags=('use-network=true')}
 dbus-glib=(){tag=dbus-glib-0.112 src=freedesktop:dbus/%s μ=Autotools}
 json-glib=(){tag=1.6.6 src=gnome:%s μ=Meson}
 glib-networking=(){tag=2.70.1 src=gnome:%s μ=Meson}
 appstream-glib=(){tag=master src=gh:hughsie/%s μ=Meson flags=('rpm' 'stemmer' 'man')^'=false'}
-libgudev=(){tag=237 src=gnome:%s μ=Meson}
 
 
 ########
 # GTK+ #
 ########
 gsettings-desktop-schemas=(){tag=40.0 src=gnome:%s μ=Meson}
-gtk2=(){tag=2.24.33 src=gnome:gtk μ=Autotools flags=($dirflags 'disable-gtk-doc' 'disable-gtk-doc-html' 'disable-glibtest')}
-gtk3=(){tag=3.24.33 src=gnome:gtk μ=Meson flags=('tests' 'demos' 'examples' 'win32_backend' 'quartz_backend')^'=false'}
+gtk2=(){tag=2.24.33 src=https://download.gnome.org/sources/gtk+/2.24/gtk+-$tag.tar.xz μ=Configure flags=($dirflags 'disable-gtk-doc' 'disable-gtk-doc-html' 'disable-glibtest')}
+gtk3=(){tag=3.24.33 src=gnome:gtk μ=Meson flags=('tests' 'demos' 'examples' 'win32_backend' 'quartz_backend' 'wayland_backend')^'=false'}
 adwaita-icon-theme=(){tag=41.0 src=gnome:%s μ=Autotools}
 gtk-engine-murrine=(){src='http://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz' μ=Autotools}
-gtk-doc=(){tag=1.33.2 src=gnome:%s μ=Meson}
 babl=(){tag=master src=gnome:%s μ=Meson}
 gegl=(){tag=master src=gnome:%s μ=Meson}
 libhandy=(){tag=1.6.2 src=gnome:%s μ=Meson flags=('vapi=false' 'examples=false' 'tests=false')}
@@ -32,8 +48,6 @@ libhandy=(){tag=1.6.2 src=gnome:%s μ=Meson flags=('vapi=false' 'examples=false'
 # Cairo #
 #########
 libspectre=(){tag=0.2.9 src=freedesktop:%s/%s μ=Autotools}
-cairo=(){tag=1.17.6 src=freedesktop:%s/%s μ=Meson flags=('spectre=disabled')}
-pango=(){tag=1.48.10 src=gnome:%s μ=Meson}
 
 
 ##############

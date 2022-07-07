@@ -1,8 +1,8 @@
 #!/bin/rc
 
-#######
-# aaa #
-#######
+#############
+# base libs #
+#############
 acl=(){tag=2.3.1 src=https://download.savannah.gnu.org/releases/acl/acl-$tag.tar.xz μ=Configure flags=('disable-static' $dirflags)}
 alsa=(){src='https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.6.1.tar.bz2' μ=Configure flags=('disable-static' $dirflags)}
 argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
@@ -46,9 +46,15 @@ readline=(){tag=8.1.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'disa
 zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
 
 
-############
-# gtk/deps #
-############
+#########
+# extra #
+#########
+libepoxy=(){tag=1.5.9 src=gh:anholt/%s μ=Meson}
+libdrm=(){tag=2.4.110 src=https://dri.freedesktop.org/%s/%s-$tag.tar.xz μ=Meson}
+mtdev=(){tag=1.1.6 src=https://bitmath.org/code/%s/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+pixman=(){tag=0.40.0 src=https://www.cairographics.org/releases/%s-$tag.tar.gz μ=Meson}
+freetype=(){tag=2.11.1 src=https://downloads.sourceforge.net/%s/%s-$tag.tar.xz μ=Configure flags=$dirflags}
+fontconfig=(){tag=2.14.0 src=freedesktop:%s/%s μ=Meson}
 libjpeg-turbo=(){tag=2.1.2 src=https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$tag.tar.gz μ=CMake}
 libconfig=(){tag=v1.7.3 src=gh:hyperrealm/%s μ=Autotools}
 double-conversion=(){tag=v3.2.0 src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
@@ -76,6 +82,62 @@ dbus-glib=(){tag=0.112 src=https://dbus.freedesktop.org/releases/%s/%s-$tag.tar.
 libwnck=(){tag=2.31.0 src=https://download.gnome.org/sources/libwnck/2.31/libwnck-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
 libnotify=(){tag=0.7.12 src=gnome:%s μ=Meson flags=('gtk_doc=false' 'man=false' 'tests=false')}
 upower=(){tag=v0.99.19 src=freedesktop:%s/%s μ=Meson flags=('systemdsystemunitdir=no' 'gtk-doc=false' 'man=false')}
+
+
+########
+# xorg #
+########
+util-macros=(){tag=1.19.3 src=xorg:util/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xorgproto=(){tag=xorgproto-2021.5 src=freedesktop:xorg/proto/%s μ=Autotools flags=($dirflags 'disable-static')}
+libXau=(){tag=1.0.9 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXdmcp=(){tag=1.1.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xcbproto=(){tag=xcb-proto-1.14.1 src=freedesktop:xorg/proto/%s μ=Autotools flags=($dirflags 'disable-static')}
+libxcb=(){tag=1.14 src=xorg:lib/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
+xtrans=(){tag=1.4.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libX11=(){tag=1.7.3.1 src=xorg:lib/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
+libXext=(){tag=1.3.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libICE=(){tag=1.0.10 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libSM=(){tag=1.2.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXfixes=(){tag=6.0.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXrender=(){tag=0.9.10 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libfontenc=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXfont2=(){tag=2.0.5 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static' 'disable-devel-docs')}
+libXft=(){tag=2.3.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXi=(){tag=1.8 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXinerama=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXrandr=(){tag=1.5.2 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXtst=(){tag=1.2.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXxf86vm=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libpciaccess=(){tag=0.16 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libxkbfile=(){tag=1.1.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libxshmfence=(){tag=1.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libxcvt=(){tag=0.1.1 src=xorg:lib/%s-$tag.tar.xz μ=Meson}
+font-util=(){tag=1.3.2 src=xorg:font/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xkeyboard-config=(){tag=2.35.1 src=xorg:data/%s/%s-$tag.tar.xz μ=Meson}
+mesa=(){tag=mesa-21.3.6 src=freedesktop:%s/%s μ=Meson flags=('llvm=disabled' 'dri-drivers=i965' 'gallium-drivers=r600,virgl,svga,iris,crocus' 'gallium-nine=false' 'glx=dri' 'valgrind=disabled' 'vulkan-drivers=amd,intel' 'platforms=x11')}
+xorg-server=(){tag=21.1.3 src=xorg:xserver/%s-$tag.tar.xz μ=Meson}
+
+# xcb utils
+xcb-util=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xcb-util-image=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xcb-util-keysyms=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xcb-util-renderutil=(){tag=0.3.9 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xcb-util-wm=(){tag=0.4.1 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+
+# xorg drivers
+libevdev=(){tag=libevdev-1.12.1 src=freedesktop:%s/%s μ=Autotools flags=($dirflags 'disable-static')}
+xf86-input-evdev=(){tag=2.10.6 src=xorg:driver/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libwacom=(){tag=libwacom-2.3.0 src=gh:linuxwacom/libwacom μ=Meson flags=('tests=disabled')}
+libinput=(){tag=1.21.0 src=freedesktop:%s/%s μ=Meson}
+xf86-input-libinput=(){tag=1.2.1 src=xorg:driver/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
+xf86-input-synaptics=(){tag=1.9.1 src=xorg:driver/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xf86-input-wacom=(){tag=xf86-input-wacom-1.0.0 src=gh:linuxwacom/%s μ=Meson}
+
+# xorg applications
+xinit=(){tag=1.4.1 src=xorg:app/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xrandr=(){tag=1.5.1 src=xorg:app/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
+iceauth=(){tag=1.0.8 src=xorg:app/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+
 
 
 ##############

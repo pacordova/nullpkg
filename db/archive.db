@@ -317,3 +317,32 @@ babl=(){tag=master src=gnome:%s μ=Meson}
 gegl=(){tag=master src=gnome:%s μ=Meson}
 libhandy=(){tag=1.6.2 src=gnome:%s μ=Meson flags=('vapi=false' 'examples=false' 'tests=false')}
 libspectre=(){tag=0.2.9 src=freedesktop:%s/%s μ=Autotools}
+
+
+
+# xorg extra
+############
+libFS=(){tag=1.0.8 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXScrnSaver=(){tag=1.2.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXt=(){tag=1.2.1 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static' 'with-appdefaultdir=/etc/X11/app-defaults')}
+libXmu=(){tag=1.1.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXpm=(){tag=3.5.13 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXaw=(){tag=1.0.14 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXcomposite=(){tag=0.4.5 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXcursor=(){tag=1.2.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXdamage=(){tag=1.1.5 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXres=(){tag=1.2.1 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXv=(){tag=1.0.11 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXvMC=(){tag=1.0.12 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libXxf86dga=(){tag=1.1.5 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libdmx=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libxcvt=(){tag=0.1.1 src=xorg:lib/%s-$tag.tar.xz μ=Meson}
+xcb-util-cursor(){tag=0.1.3 }
+xbitmaps=(){tag=1.1.2 }
+
+# apps
+luit=(){tag=1.1.1 }
+mkfontscale=(){tag=1.2.1 }
+sessreg=(){tag=1.1.2 }
+
+xcursor-themes=(){tag=1.0.6 }

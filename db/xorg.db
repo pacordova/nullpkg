@@ -41,7 +41,9 @@ font-util=(){tag=1.3.2 src=xorg:font/%s-$tag.tar.bz2 μ=Configure flags=($dirfla
 xkeyboard-config=(){tag=2.35.1 src=xorg:data/%s/%s-$tag.tar.xz μ=Meson}
 
 xcb-util=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xcb-util-image=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 xcb-util-keysyms=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xcb-util-renderutil=(){tag=0.3.9 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 xcb-util-wm=(){tag=0.4.1 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 
 
@@ -89,9 +91,6 @@ libXvMC=(){tag=1.0.12 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags
 libXxf86dga=(){tag=1.1.5 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libdmx=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
 libxcvt=(){tag=0.1.1 src=xorg:lib/%s-$tag.tar.xz μ=Meson}
-xcb-util-image=(){tag=0.4.0 }
-xcb-util-renderutil{tag=0.3.9 }
-xcb-util-wm(){tag=0.4.1 }
 xcb-util-cursor(){tag=0.1.3 }
 xbitmaps=(){tag=1.1.2 }
 

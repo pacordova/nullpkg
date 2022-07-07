@@ -6,7 +6,6 @@
 # Environment #
 ###############
 path=(/usr/sbin /usr/bin /sbin /bin)
-PATH=/usr/sbin:/usr/bin:/sbin:/bin
 CXXFLAGS=$CFLAGS
 SOURCE_DATE_EPOCH=1000000000
 KBUILD_BUILD_TIMESTAMP=1000000000

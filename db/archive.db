@@ -299,3 +299,21 @@ gnutls=(){src='https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.16.tar.xz
 
 jfsutils=(){tag=1.1.15 src=http://jfs.sourceforge.net/project/pub/%s-$tag.tar.gz μ=Configure flags=$dirflags}
 
+
+# GTK LIBS
+##########
+# rust deps
+#librsvg=(){tag=2.52.9 src=https://download.gnome.org/sources/%s/2.52/%s-$tag.tar.xz μ=Configure flags=$dirflags}
+
+# extra
+itstool=(){tag=2.0.7 src=http://files.itstool.org/%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
+gtk-doc=(){tag=1.33.2 src=gnome:%s μ=Meson}
+glibmm=(){tag=2.66.2 src=gnome:%s μ=Meson flags=('build-documentation=false' 'build-examples=false')}
+mm-common=(){tag=1.0.3 src=gnome:%s μ=Meson flags=('use-network=true')}
+json-glib=(){tag=1.6.6 src=gnome:%s μ=Meson}
+glib-networking=(){tag=2.70.1 src=gnome:%s μ=Meson}
+appstream-glib=(){tag=master src=gh:hughsie/%s μ=Meson flags=('rpm' 'stemmer' 'man')^'=false'}
+babl=(){tag=master src=gnome:%s μ=Meson}
+gegl=(){tag=master src=gnome:%s μ=Meson}
+libhandy=(){tag=1.6.2 src=gnome:%s μ=Meson flags=('vapi=false' 'examples=false' 'tests=false')}
+libspectre=(){tag=0.2.9 src=freedesktop:%s/%s μ=Autotools}

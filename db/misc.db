@@ -1,0 +1,55 @@
+#!/bin/rc
+
+#####
+# R #
+#####
+R=(){src='http://cran.r-project.org/src/base/R-4/R-4.2.0.tar.gz' μ=Configure flags=('with-blas=-lopenblas' 'disable-java' 'enable-R-shlib' 'without-recommended-packages' 'without-ICU' 'disable-nls')}
+openblas=(){tag=v0.3.20 src=gh:xianyi/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
+
+
+########
+# GIMP #
+########
+gimp=(){tag=gimp-2-10 src=gnome:%s μ=Autotools flags=('enable-python=no' 'enable-glibtest=no')}
+mypaint-brushes=(){tag=v1.3.x src=gh:mypaint/%s μ=Autotools}
+libmypaint=(){tag=v1.6.0 src=gh:mypaint/%s μ=Autotools}
+
+
+#############
+# keepassxc #
+#############
+libqrencode=(){tag=v4.1.1 src=gh:fukuchi/%s μ=CMake flags=('BUILD_SHARED_LIBS=YES')}
+keepassxc=(){tag=2.7.1 src=gh:keepassxreboot/%s μ=CMake flags=('WITH_XC_DOCS=OFF' 'WITH_APP_BUNDLE=OFF')}
+
+
+#######
+# CLI #
+#######
+firejail=(){tag=0.9.68 src=gh:netblue30/%s μ=Autotools}
+gdb=(){tag=11.1 src=gnu:%s-$tag.tar.xz μ=Autotools flags=($dirflags 'with-guile=no' 'with-system-readline' 'with-python=no')}
+ghostscript=(){tag=ghostpdl-9.55.0 src=gh:ArtifexSoftware/ghostpdl μ=Autotools}
+imagemagick=(){tag=7.1.0-25 src=https://www.imagemagick.org/download/releases/ImageMagick-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static' 'enable-hdri' 'with-modules')}
+optipng=(){src='http://prdownloads.sourceforge.net/optipng/optipng-0.7.7.tar.gz' μ=Configure}
+pngquant=(){tag=2.17.0 src=gh:kornelski/%s μ=Cargo}
+rg=(){tag=13.0.0 src=gh:BurntSushi/ripgrep μ=Cargo}
+
+
+#######
+# GUI #
+#######
+mpv=(){tag=master src=gh:mpv-player/%s μ=Meson}
+feh=(){tag=3.8 src=gh:derf/%s μ=GMake}
+bspwm=(){tag=0.9.10 src=gh:baskerville/%s μ=GMake}
+sxhkd=(){tag=0.6.2 src=gh:baskerville/%s μ=GMake}
+dmenu=(){tag=5.1 src='http://git.suckless.org/dmenu' μ=GMake}
+
+
+#######
+# GTK #
+#######
+ahoviewer=(){tag=master src=gh:ahodesuka/%s μ=Meson}
+evince=(){tag=42.2 src=gnome:%s μ=Meson flags=('systemduserunitdir=no' 'nautilus=false' 'user_doc=false' 'gtk_doc=false')}
+file-roller=(){tag=3.40.0 src=gnome:%s μ=Meson}
+leafpad=(){tag=master src=gh:tarot231/%s μ=Autotools}
+transmission=(){tag=3.00 src=gh:%s/%s μ=CMake flags=('ENABLE_QT=OFF')}
+pavucontrol=(){tag=v5.0 src=freedesktop:pulseaudio/%s μ=Autotools}

@@ -89,7 +89,6 @@ libcroco=(){src=gl:inkscape/%s μ=Autotools}
 ########
 # XFCE #
 ########
-ristretto=(){src='http://archive.xfce.org/src/apps/ristretto/0.8/ristretto-0.8.1.tar.bz2' μ=Configure}
 xfce4-pulseaudio-plugin=(){src='http://archive.xfce.org/src/panel-plugins/xfce4-pulseaudio-plugin/0.1/xfce4-pulseaudio-plugin-0.1.0.tar.bz2' μ=Configure}
 
 # mousepad < gtksourceview < gnome-common

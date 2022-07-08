@@ -26,6 +26,7 @@ xfce4-session=(){src='http://archive.xfce.org/src/xfce/xfce4-session/4.12/xfce4-
 ###########
 #xfce4-battery-plugin=(){tag=1.0.5 src=gh:xfce-mirror/xfce4-battery-plugin μ=Configure flags=$dirflags}
 #catfish=(){src='https://archive.xfce.org/src/apps/catfish/4.15/catfish-4.15.0.tar.bz2' μ=Python flags=$dirflags}
+ristretto=(){src='http://archive.xfce.org/src/apps/ristretto/0.8/ristretto-0.8.1.tar.bz2' μ=Configure}
 xfce4-screenshooter=(){src='http://archive.xfce.org/src/apps/xfce4-screenshooter/1.8/xfce4-screenshooter-1.8.2.tar.bz2' μ=Configure flags=$dirflags}
 thunar-archive-plugin=(){src='https://archive.xfce.org/src/thunar-plugins/thunar-archive-plugin/0.3/thunar-archive-plugin-0.3.1.tar.bz2' μ=Configure flags=$dirflags}
 picom=(){tag=v9.1 src=gh:yshui/%s μ=Meson flags=('regex=false')}

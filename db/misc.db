@@ -47,7 +47,6 @@ dmenu=(){tag=5.1 src='http://git.suckless.org/dmenu' μ=GMake}
 #######
 # GTK #
 #######
-ahoviewer=(){tag=master src=gh:ahodesuka/%s μ=Meson}
 evince=(){tag=42.2 src=gnome:%s μ=Meson flags=('systemduserunitdir=no' 'nautilus=false' 'user_doc=false' 'gtk_doc=false')}
 file-roller=(){tag=3.40.0 src=gnome:%s μ=Meson}
 leafpad=(){tag=master src=gh:tarot231/%s μ=Autotools}

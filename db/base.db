@@ -14,7 +14,6 @@ coreutils=(){tag=9.0 src=gnu:%txz μ=Configure}
 curl=(){tag=7.81.0 src=https://curl.se/download/%txz μ=Configure flags=($flags 'with-openssl' 'with-ca-path=/etc/ssl/certs' 'with-ca-bundle=/etc/ssl/certs/ca-certificates.crt' 'enable-threaded-resolver')}
 diffutils=(){tag=3.8 src=gnu:%txz μ=Configure}
 ed=(){tag=1.4 src=gnu:%tgz μ=Configure}
-elfutils=(){src='https://sourceware.org/ftp/elfutils/0.186/elfutils-0.186.tar.bz2' μ=Configure flags=($flags 'disable-debuginfod')}
 file=(){tag=5.41 src=https://astron.com/pub/%s/%tgz μ=Configure}
 findutils=(){tag=4.9.0 src=gnu:%txz μ=Configure}
 flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}

@@ -8,6 +8,7 @@ alsa=(){src='https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.6.1.tar.bz2
 argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
 attr=(){tag=2.5.1 src=https://download.savannah.nongnu.org/releases/%s/%tgz μ=Configure}
 c-ares=(){tag=1.18.1 src=https://c-ares.haxx.se/download/%tgz μ=Configure}
+elfutils=(){src='https://sourceware.org/ftp/elfutils/0.186/elfutils-0.186.tar.bz2' μ=Configure flags=($flags 'disable-debuginfod')}
 expat=(){tag=2.4.6 src=https://prdownloads.sourceforge.net/%s/%txz μ=Configure}
 gdbm=(){tag=1.23 src=gnu:%tgz μ=Configure}
 gmp=(){tag=6.2.1 src=gnu:%txz μ=Configure}

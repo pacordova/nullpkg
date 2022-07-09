@@ -33,7 +33,7 @@ rc=(){tag=master src=gh:pacordova/rc μ=GMake}
 sed=(){tag=4.8 src=gnu:%txz μ=Configure}
 sharutils=(){tag=4.15.2 src=gnu:%txz μ=Configure}
 texinfo=(){tag=6.8 src=gnu:%txz μ=Configure}
-vim=(){tag=v9.0.0011 src=gh:%s/%s μ=Configure flags=($flags 'disable-gui' 'without-x' 'disable-nls' 'disable-canberra')}
+vim=(){tag=v9.0.0048 src=gh:%s/%s μ=Configure flags=($flags 'disable-gui' 'without-x' 'disable-nls' 'disable-canberra')}
 which=(){tag=2.21 src=gnu:%tgz μ=Configure}
 
 # compression

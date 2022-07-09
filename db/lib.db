@@ -4,18 +4,18 @@
 # base libs #
 #############
 acl=(){tag=2.3.1 src=https://download.savannah.gnu.org/releases/%s/%txz μ=Configure}
-alsa=(){src='https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.6.1.tar.bz2' μ=Configure}
+alsa-lib=(){tag=1.2.6.1 src=https://www.alsa-project.org/files/pub/lib/%tbz2 μ=Configure}
 argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
 attr=(){tag=2.5.1 src=https://download.savannah.nongnu.org/releases/%s/%tgz μ=Configure}
 c-ares=(){tag=1.18.1 src=https://c-ares.haxx.se/download/%tgz μ=Configure}
-elfutils=(){src='https://sourceware.org/ftp/elfutils/0.186/elfutils-0.186.tar.bz2' μ=Configure flags=($flags 'disable-debuginfod')}
+elfutils=(){tag=0.186 src=https://sourceware.org/ftp/%s/$tag/%tbz2 μ=Configure flags=($flags 'disable-debuginfod')}
 expat=(){tag=2.4.6 src=https://prdownloads.sourceforge.net/%s/%txz μ=Configure}
 gdbm=(){tag=1.23 src=gnu:%tgz μ=Configure}
 gmp=(){tag=6.2.1 src=gnu:%txz μ=Configure}
 gperf=(){tag=3.1 src=gnu:%tgz μ=Configure}
 inih=(){tag=r53 src=gh:benhoyt/%s μ=Meson}
 json-c=(){tag=json-c-0.16-20220414 src=gh:%s/%s μ=CMake}
-libaio=(){src='https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_0.3.112.orig.tar.xz' μ=GMake flags=('libdir='$LIBDIR)}
+libaio=(){tag=0.3.112 src='https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_0.3.112.orig.tar.xz' μ=GMake flags=('libdir='$LIBDIR)}
 libcap=(){tag=v1.2.62 src=kernel:libs/%s/%s μ=GMake flags=('LIBDIR='$LIBDIR)}
 libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools}
 libeudev=(){tag=v3.2.11 src=gh:eudev-project/eudev μ=Autotools}
@@ -34,16 +34,16 @@ libtiff=(){tag=v4.3.0 src=gitlab:%s/%s μ=Autotools}
 libtirpc=(){tag=1.3.2 src=https://downloads.sourceforge.net/%s/%tbz2 μ=Configure flags=($flags 'disable-gssapi')}
 libunistring=(){tag=1.0 src=gnu:%txz μ=Configure}
 libunwind=(){tag=v1.6.2 src=gh:%s/%s μ=Autotools}
-liburcu=(){src='https://lttng.org/files/urcu/userspace-rcu-0.13.1.tar.bz2' μ=Configure}
 libusb=(){tag=v1.0.25 src=gh:%s/%s μ=Autotools}
-libuv=(){src='https://dist.libuv.org/dist/v1.43.0/libuv-v1.43.0.tar.gz' μ=Autotools}
-lvm=(){src='https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure}
+libuv=(){tag=v1.43.0 src=https://dist.libuv.org/dist/$tag/%tgz μ=Autotools}
+lvm=(){tag=2.03.15 src=https://sourceware.org/ftp/lvm2/LVM2.$tag.tgz μ=Configure}
 ncurses=(){tag=6.3 src=gnu:%tgz μ=Configure flags=($flags 'with-shared' 'without-normal' 'with-cxx=no' 'enable-pc-files' 'enable-widec' 'with-termlib=tinfo')}
 pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=Autotools flags=($flags 'enable-unicode' 'enable-jit' 'enable-pcre2-16' 'enable-pcre2-32')}
-pcre=(){src='https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2' μ=Autotools flags=($flags 'enable-unicode-properties' 'enable-pcre16' 'enable-pcre32')}
+pcre=(){tag=8.45 src=https://sourceforge.net/projects/pcre/files/pcre/$tag/%tbz2 μ=Autotools flags=($flags 'enable-unicode-properties' 'enable-pcre16' 'enable-pcre32')}
 pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=($flags 'with-internal-glib')}
-popt=(){src='http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz' μ=Configure}
+popt=(){tag=1.18 src=http://ftp.rpm.org/popt/releases/%s-1.x/%tgz μ=Configure}
 readline=(){tag=8.1.2 src=gnu:%tgz μ=Configure}
+userspace-rcu=(){tag=0.13.1 src=https://lttng.org/files/urcu/%tbz2 μ=Configure}
 zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
 
 

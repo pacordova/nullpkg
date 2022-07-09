@@ -11,11 +11,11 @@ fn __emerge {
 }
 
 LIB=( \
-    acl alsa argon attr c-ares elfutils expat gdbm gmp gperf inih json-c \
+    acl alsa-lib argon attr c-ares elfutils expat gdbm gmp gperf inih json-c \
     libaio libcap libestr libeudev libevent libfastjson libffi libfuse \
     libmnl libnftnl libnsl libpng libpsl libressl libsigsegv libtiff \
-    libtirpc libunistring liburcu libusb libunwind lvm ncurses pcre2 \
-    pcre pkg-config popt readline zlib \
+    libtirpc libunistring libusb libunwind lvm ncurses pcre2 \
+    pcre pkg-config popt readline userspace-rcu zlib \
 )
 
 BASE=( \

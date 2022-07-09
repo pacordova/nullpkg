@@ -9,7 +9,7 @@ bash=(){tag=5.1.16 src=gnu:%tgz μ=Configure flags=($flags 'with-bash-malloc=no'
 bc=(){tag=1.07.1 src=gnu:%tgz μ=Configure}
 binutils=(){tag=2.38 src=gnu:%txz μ=Configure flags=($flags 'enable-deterministic-archives')}
 bison=(){tag=3.8.2 src=gnu:%txz μ=Configure}
-cmake=(){src='https://cmake.org/files/v3.22/cmake-3.22.2.tar.gz' μ=Configure}
+cmake=(){tag=3.22.2 src=https://cmake.org/files/v3.22/%tgz μ=Configure}
 coreutils=(){tag=9.0 src=gnu:%txz μ=Configure}
 curl=(){tag=7.81.0 src=https://curl.se/download/%txz μ=Configure flags=($flags 'with-openssl' 'with-ca-path=/etc/ssl/certs' 'with-ca-bundle=/etc/ssl/certs/ca-certificates.crt' 'enable-threaded-resolver')}
 diffutils=(){tag=3.8 src=gnu:%txz μ=Configure}
@@ -41,7 +41,7 @@ bzip2=(){tag=master src=gitlab:%s/%s μ=Meson}
 gzip=(){tag=1.11 src=gnu:%txz μ=Configure}
 lzo=(){tag=2.10 src=https://www.oberhumer.com/opensource/%s/download/%tgz μ=Configure flags=($flags 'enable-shared')}
 tar=(){tag=1.34 src=gnu:%txz μ=Configure}
-unzip=(){tag=60 src='https://downloads.sourceforge.net/infozip/unzip60.tar.gz' μ=GMake flags=('--file=unix/Makefile' 'prefix='$destdir/$PREFIX 'generic')}
+unzip=(){tag=60 src=https://downloads.sourceforge.net/infozip/%s$tag.tar.gz μ=GMake flags=('--file=unix/Makefile' 'prefix='$destdir/$PREFIX 'generic')}
 xz=(){tag=5.2.5 src=https://tukaani.org/%s/%txz μ=Configure}
 zstd=(){tag=v1.5.2 src=gh:facebook/zstd μ=GMake}
 
@@ -69,19 +69,19 @@ xfsprogs=(){tag=v5.14.2 src=kernel:fs/xfs/xfsprogs-dev μ=GMake}
 # extra system
 acpid=(){tag=2.0.33 src=https://downloads.sourceforge.net/acpid2/%txz μ=Configure}
 cryptsetup=(){tag=v2.4.3 src=gitlab:%s/%s μ=Autotools flags=($flags 'disable-ssh-token')}
-dbus=(){src='https://dbus.freedesktop.org/releases/dbus/dbus-1.12.20.tar.gz' μ=Configure flags=($flags 'enable-user-session' 'with-systemduserunitdir=no' 'with-systemdsystemunitdir=no' 'with-console-auth-dir=/run/console' 'with-system-pid-file=/run/dbus/pid' 'with-system-socket=/run/dbus/system_bus_socket')}
+dbus=(){tag=1.12.20 src=https://dbus.freedesktop.org/releases/%s/%tgz μ=Configure flags=($flags 'enable-user-session' 'with-systemduserunitdir=no' 'with-systemdsystemunitdir=no' 'with-console-auth-dir=/run/console' 'with-system-pid-file=/run/dbus/pid' 'with-system-socket=/run/dbus/system_bus_socket')}
 dosfstools=(){tag=v4.2 src=gh:%s/%s μ=Autotools}
-fcron=(){src='http://fcron.free.fr/archives/fcron-3.2.1.src.tar.gz' μ=Configure flags=($flags 'without-sendmail')}
+fcron=(){tag=3.2.1 src=http://fcron.free.fr/archives/%s-$tag.src.tar.gz μ=Configure flags=($flags 'without-sendmail')}
 lm-sensors=(){tag=V3-6-0 src=gh:%s/%s μ=GMake flags=('LIBDIR=/usr/lib64')}
 logrotate=(){tag=3.19.0 src=gh:%s/%s μ=Autotools}
 lua=(){tag=5.4.4 src=http://www.lua.org/ftp/%tgz μ=GMake flags=('INSTALL_TOP='$destdir/$PREFIX 'INSTALL_LIB=$(INSTALL_TOP)/lib64' 'INSTALL_CMOD=$(INSTALL_LIB)/lua/$V')}
 mandoc=(){tag=1.14.6 src=https://mandoc.bsd.lv/snapshots/%tgz μ=Configure}
 nano=(){tag=6.3 src=gnu:%txz μ=Configure}
-openssh=(){src='https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.8p1.tar.gz' μ=Configure}
+openssh=(){tag=8.8p1 src=https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/%tgz μ=Configure}
 parted=(){tag=3.5 src=gnu:%txz μ=Configure}
 pciutils=(){tag=v3.7.0 src=kernel:utils/%s/%s μ=GMake flags=('LIBDIR=/usr/lib64')}
 rsync=(){tag=v3.2.3 src=gh:wayned/%s μ=Configure flags=($flags 'disable-lz4' 'disable-xxhash' 'disable-md2man')}
-sqlite=(){src='https://sqlite.org/2022/sqlite-autoconf-3380400.tar.gz' μ=Autotools}
+sqlite=(){tag=3380400 src=https://sqlite.org/2022/%s-autoconf-$tag.tar.gz μ=Autotools}
 sudo=(){tag=1.9.9 src=https://www.sudo.ws/dist/%tgz μ=Configure}
 tcsh=(){tag=6.24.00 src=https://astron.com/pub/%s/%tgz μ=Configure}
 time=(){tag=1.9 src=gnu:%tgz μ=Configure}

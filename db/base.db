@@ -92,7 +92,7 @@ xorriso=(){tag=1.5.4 src=gnu:%tgz μ=Configure}
 # connman
 glib=(){tag=2.70.4 src=gnome:%s μ=Meson flags=('tests=false')}
 iptables=(){tag=1.8.7 src=netfilter:%s/%tbz2 μ=Configure flags=($flags 'enable-shared')}
-connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=($flags 'with-systemdunitdir=no' 'disable-wispr')} LIBS='-ltinfo'}
+connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=($flags 'with-systemdunitdir=no' 'disable-wispr') LIBS='-ltinfo'}
 
 # efibootmgr
 efivar=(){tag=38 src=gh:rhboot/efivar μ=GMake}

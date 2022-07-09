@@ -3,46 +3,46 @@
 #############
 # base libs #
 #############
-acl=(){tag=2.3.1 src=https://download.savannah.gnu.org/releases/acl/acl-$tag.tar.xz μ=Configure flags=('disable-static' $dirflags)}
-alsa=(){src='https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.6.1.tar.bz2' μ=Configure flags=('disable-static' $dirflags)}
+acl=(){tag=2.3.1 src=https://download.savannah.gnu.org/releases/%s/%txz μ=Configure}
+alsa=(){src='https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.6.1.tar.bz2' μ=Configure}
 argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
-attr=(){tag=2.5.1 src=https://download.savannah.nongnu.org/releases/attr/attr-$tag.tar.gz μ=Configure flags=('disable-static' $dirflags)}
-c-ares=(){tag=1.18.1 src=https://c-ares.haxx.se/download/c-ares-1.18.1.tar.gz μ=Configure flags=($dirflags 'disable-static')}
-gdbm=(){tag=1.23 src=gnu:%s-$tag.tar.gz μ=Configure flags=('disable-static' $dirflags)}
-gmp=(){tag=6.2.1 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-gperf=(){tag=3.1 src=gnu:%s-$tag.tar.gz μ=Configure flags=$dirflags}
+attr=(){tag=2.5.1 src=https://download.savannah.nongnu.org/releases/%s/%tgz μ=Configure}
+c-ares=(){tag=1.18.1 src=https://c-ares.haxx.se/download/%tgz μ=Configure}
+expat=(){tag=2.4.6 src=https://prdownloads.sourceforge.net/%s/%txz μ=Configure}
+gdbm=(){tag=1.23 src=gnu:%tgz μ=Configure}
+gmp=(){tag=6.2.1 src=gnu:%txz μ=Configure}
+gperf=(){tag=3.1 src=gnu:%tgz μ=Configure}
 inih=(){tag=r53 src=gh:benhoyt/%s μ=Meson}
 json-c=(){tag=json-c-0.16-20220414 src=gh:%s/%s μ=CMake}
-libaio=(){tag=0.3.112 src=https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_$tag.orig.tar.xz μ=GMake flags=('libdir=/usr/lib64')}
-libcap=(){tag=v1.2.62 src=kernel:libs/libcap/%s μ=GMake flags=('LIBDIR='$LIBDIR)}
-libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
-libeudev=(){tag=v3.2.11 src=gh:eudev-project/eudev μ=Autotools flags=('disable-static')}
+libaio=(){src='https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_0.3.112.orig.tar.xz' μ=GMake flags=('libdir='$LIBDIR)}
+libcap=(){tag=v1.2.62 src=kernel:libs/%s/%s μ=GMake flags=('LIBDIR='$LIBDIR)}
+libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools}
+libeudev=(){tag=v3.2.11 src=gh:eudev-project/eudev μ=Autotools}
 libevent=(){tag=master src=gh:%s/%s μ=Autotools}
-libexpat=(){tag=2.4.6 src=https://prdownloads.sourceforge.net/expat/expat-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
-libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools flags=('disable-static')}
-libffi=(){tag=v3.4.2 src=gh:%s/%s μ=Autotools flags=('disable-static')}
+libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools}
+libffi=(){tag=v3.4.2 src=gh:%s/%s μ=Autotools}
 libfuse=(){tag=fuse-3.10.5 src=gh:%s/%s μ=Meson}
-libmnl=(){tag=1.0.4 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
-libnftnl=(){tag=1.2.1 src=netfilter:%s/%s-$tag.tar.bz2 μ=Configure flags=$dirflags}
-libnsl=(){tag=v2.0.0 src=gh:thkukuk/%s μ=Autotools flags=('disable-static')}
-libpng=(){tag=1.6.37 src=https://downloads.sourceforge.net/libpng/libpng-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
+libmnl=(){tag=1.0.4 src=netfilter:%s/%tbz2 μ=Configure}
+libnftnl=(){tag=1.2.1 src=netfilter:%s/%tbz2 μ=Configure}
+libnsl=(){tag=v2.0.0 src=gh:thkukuk/%s μ=Autotools}
+libpng=(){tag=1.6.37 src=https://downloads.sourceforge.net/%s/%txz μ=Configure}
 libpsl=(){tag=0.21.1 src=gh:rockdaboot/%s μ=Meson}
-libressl=(){tag=3.5.3 src=https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/%s-$tag.tar.gz μ=Configure flags=$dirflags}
-libsigsegv=(){tag=2.14 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'disable-static' 'enable-shared')}
-libtiff=(){tag=v4.3.0 src=gitlab:%s/%s μ=Autotools flags=('disable-static')}
-libtirpc=(){tag=1.3.2 src=https://downloads.sourceforge.net/libtirpc/libtirpc-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-gssapi' 'disable-static')}
-libunistring=(){tag=1.0 src=gnu:%s-$tag.tar.xz μ=Configure flags=$dirflags}
-libunwind=(){tag=v1.6.2 src=gh:%s/%s μ=Autotools flags=('disable-static')}
-liburcu=(){tag=0.13.1 src=https://lttng.org/files/urcu/userspace-rcu-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libusb=(){tag=v1.0.25 src=gh:%s/%s μ=Autotools flags=('disable-static')}
-libuv=(){tag=v1.43.0 src=https://dist.libuv.org/dist/$tag/%s-$tag.tar.gz μ=Autotools}
-lvm=(){src='https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure flags=($dirflags 'disable-static')}
-ncurses=(){tag=6.3 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'disable-static' 'with-shared' 'without-normal' 'with-cxx=no' 'enable-pc-files' 'enable-widec' 'with-termlib=tinfo')}
-pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=Autotools flags=('enable-unicode' 'enable-jit' 'enable-pcre2-16' 'enable-pcre2-32' 'disable-static')}
-pcre=(){src='https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2' μ=Autotools flags=('enable-unicode-properties' 'enable-pcre16' 'enable-pcre32' 'disable-static')}
-pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=('with-internal-glib')}
-popt=(){src='http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz' μ=Configure flags=($dirflags 'disable-static')}
-readline=(){tag=8.1.2 src=gnu:%s-$tag.tar.gz μ=Configure flags=($dirflags 'disable-static')}
+libressl=(){tag=3.5.3 src=https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/%tgz μ=Configure}
+libsigsegv=(){tag=2.14 src=gnu:%tgz μ=Configure flags=($flags 'enable-shared')}
+libtiff=(){tag=v4.3.0 src=gitlab:%s/%s μ=Autotools}
+libtirpc=(){tag=1.3.2 src=https://downloads.sourceforge.net/%s/%tbz2 μ=Configure flags=($flags 'disable-gssapi')}
+libunistring=(){tag=1.0 src=gnu:%txz μ=Configure}
+libunwind=(){tag=v1.6.2 src=gh:%s/%s μ=Autotools}
+liburcu=(){src='https://lttng.org/files/urcu/userspace-rcu-0.13.1.tar.bz2' μ=Configure}
+libusb=(){tag=v1.0.25 src=gh:%s/%s μ=Autotools}
+libuv=(){src='https://dist.libuv.org/dist/v1.43.0/libuv-v1.43.0.tar.gz' μ=Autotools}
+lvm=(){src='https://sourceware.org/ftp/lvm2/LVM2.2.03.15.tgz' μ=Configure}
+ncurses=(){tag=6.3 src=gnu:%tgz μ=Configure flags=($flags 'with-shared' 'without-normal' 'with-cxx=no' 'enable-pc-files' 'enable-widec' 'with-termlib=tinfo')}
+pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=Autotools flags=($flags 'enable-unicode' 'enable-jit' 'enable-pcre2-16' 'enable-pcre2-32')}
+pcre=(){src='https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2' μ=Autotools flags=($flags 'enable-unicode-properties' 'enable-pcre16' 'enable-pcre32')}
+pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=($flags 'with-internal-glib')}
+popt=(){src='http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.18.tar.gz' μ=Configure}
+readline=(){tag=8.1.2 src=gnu:%tgz μ=Configure}
 zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
 
 
@@ -50,36 +50,36 @@ zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
 # extra #
 #########
 libepoxy=(){tag=1.5.9 src=gh:anholt/%s μ=Meson}
-libdrm=(){tag=2.4.110 src=https://dri.freedesktop.org/%s/%s-$tag.tar.xz μ=Meson}
-mtdev=(){tag=1.1.6 src=https://bitmath.org/code/%s/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-pixman=(){tag=0.40.0 src=https://www.cairographics.org/releases/%s-$tag.tar.gz μ=Meson}
-freetype=(){tag=2.11.1 src=https://downloads.sourceforge.net/%s/%s-$tag.tar.xz μ=Configure flags=$dirflags}
+libdrm=(){tag=2.4.110 src=https://dri.freedesktop.org/%s/%txz μ=Meson}
+mtdev=(){tag=1.1.6 src=https://bitmath.org/code/%s/%tbz2 μ=Configure}
+pixman=(){tag=0.40.0 src=https://www.cairographics.org/releases/%tgz μ=Meson}
+freetype=(){tag=2.11.1 src=https://downloads.sourceforge.net/%s/%txz μ=Configure}
 fontconfig=(){tag=2.14.0 src=freedesktop:%s/%s μ=Meson}
-libjpeg-turbo=(){tag=2.1.2 src=https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$tag.tar.gz μ=CMake}
+libjpeg-turbo=(){tag=2.1.2 src=https://downloads.sourceforge.net/%s/%tgz μ=CMake}
 libconfig=(){tag=v1.7.3 src=gh:hyperrealm/%s μ=Autotools}
 double-conversion=(){tag=v3.2.0 src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
 uthash=(){tag=v2.3.0 src=gh:troydhanson/%s μ=Headers}
-libev=(){tag=4.33 src=http://dist.schmorp.de/libev/%s-$tag.tar.gz μ=Autotools}
+libev=(){tag=4.33 src=http://dist.schmorp.de/libev/%tgz μ=Autotools}
 gobject-introspection=(){tag=1.72.0 src=gnome:%s μ=Meson}
 libgudev=(){tag=237 src=gnome:%s μ=Meson}
-libxml2=(){tag=v2.9.13 src=gnome:%s μ=Autotools flags=('with-python')}
+libxml2=(){tag=v2.9.13 src=gnome:%s μ=Autotools flags=($flags 'with-python')}
 libxslt=(){tag=v1.1.35 src=gnome:%s μ=Autotools}
 atk=(){tag=2.38.0 src=gnome:%s μ=Meson}
 at-spi2-core=(){tag=AT_SPI2_CORE_2_45_1 src=gnome:%s μ=Meson}
 at-spi2-atk=(){tag=AT_SPI2_ATK_2_38_0 src=gnome:%s μ=Meson}
 pango=(){tag=1.50.4 src=gnome:%s μ=Meson}
-cairo=(){tag=1.17.4 src=https://www.cairographics.org/snapshots/%s-$tag.tar.xz μ=Meson flags=('spectre=disabled')}
+cairo=(){tag=1.17.4 src=https://www.cairographics.org/snapshots/%txz μ=Meson flags=('spectre=disabled')}
 shared-mime-info=(){tag=2.2 src=freedesktop:xdg/%s μ=Meson}
 gdk-pixbuf=(){tag=2.42.8 src=gnome:%s μ=Meson flags=('gio_sniffing=false' 'installed_tests=false')}
-libxkbcommon=(){tag=1.4.0 src=https://xkbcommon.org/download/%s-$tag.tar.xz μ=Meson flags=('enable-wayland=false' 'enable-docs=false')}
+libxkbcommon=(){tag=1.4.0 src=https://xkbcommon.org/download/%txz μ=Meson flags=('enable-wayland=false' 'enable-docs=false')}
 gsettings-desktop-schemas=(){tag=40.0 src=gnome:%s μ=Meson}
-gtk2=(){tag=2.24.33 src=https://download.gnome.org/sources/gtk+/2.24/gtk+-$tag.tar.xz μ=Configure flags=($dirflags 'disable-gtk-doc' 'disable-gtk-doc-html' 'disable-glibtest')}
+gtk2=(){src='https://download.gnome.org/sources/gtk+/2.24/gtk+-2.24.33.tar.xz' μ=Configure flags=($flags 'disable-gtk-doc' 'disable-gtk-doc-html' 'disable-glibtest')}
 gtk3=(){tag=3.24.33 src=gnome:gtk μ=Meson flags=('tests' 'demos' 'examples' 'win32_backend' 'quartz_backend' 'wayland_backend')^'=false'}
 adwaita-icon-theme=(){tag=42.0 src=gnome:%s μ=Autotools}
-intltool=(){src='https://launchpad.net/intltool/trunk/0.51.0/+download/%s-0.51.0.tar.gz' μ=Configure flags=$dirflags}
-gtk-engine-murrine=(){src='http://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz' μ=Configure flags=$dirflags}
-dbus-glib=(){tag=0.112 src=https://dbus.freedesktop.org/releases/%s/%s-$tag.tar.gz μ=Configure flags=$dirflags}
-libwnck=(){tag=2.31.0 src=https://download.gnome.org/sources/libwnck/2.31/libwnck-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
+intltool=(){src='https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz' μ=Configure}
+gtk-engine-murrine=(){src='http://download.gnome.org/sources/murrine/0.98/murrine-0.98.2.tar.xz' μ=Configure}
+dbus-glib=(){tag=0.112 src=https://dbus.freedesktop.org/releases/%s/%tgz μ=Configure}
+libwnck=(){src='https://download.gnome.org/sources/libwnck/2.31/libwnck-2.31.0.tar.xz' μ=Configure}
 libnotify=(){tag=0.7.12 src=gnome:%s μ=Meson flags=('gtk_doc=false' 'man=false' 'tests=false')}
 upower=(){tag=v0.99.19 src=freedesktop:%s/%s μ=Meson flags=('systemdsystemunitdir=no' 'gtk-doc=false' 'man=false')}
 libexif=(){tag=v0.6.24 src=gh:%s/%s μ=Autotools}
@@ -88,66 +88,66 @@ libexif=(){tag=v0.6.24 src=gh:%s/%s μ=Autotools}
 ########
 # xorg #
 ########
-util-macros=(){tag=1.19.3 src=xorg:util/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-xorgproto=(){tag=xorgproto-2021.5 src=freedesktop:xorg/proto/%s μ=Autotools flags=($dirflags 'disable-static')}
-libXau=(){tag=1.0.9 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXdmcp=(){tag=1.1.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-xcbproto=(){tag=xcb-proto-1.14.1 src=freedesktop:xorg/proto/%s μ=Autotools flags=($dirflags 'disable-static')}
-libxcb=(){tag=1.14 src=xorg:lib/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
-xtrans=(){tag=1.4.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libX11=(){tag=1.7.3.1 src=xorg:lib/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
-libXext=(){tag=1.3.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libICE=(){tag=1.0.10 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libSM=(){tag=1.2.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXfixes=(){tag=6.0.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXrender=(){tag=0.9.10 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libfontenc=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXfont2=(){tag=2.0.5 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static' 'disable-devel-docs')}
-libXft=(){tag=2.3.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXi=(){tag=1.8 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXinerama=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXrandr=(){tag=1.5.2 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXtst=(){tag=1.2.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libXxf86vm=(){tag=1.1.4 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libpciaccess=(){tag=0.16 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libxkbfile=(){tag=1.1.0 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libxshmfence=(){tag=1.3 src=xorg:lib/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-libxcvt=(){tag=0.1.1 src=xorg:lib/%s-$tag.tar.xz μ=Meson}
-font-util=(){tag=1.3.2 src=xorg:font/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-xkeyboard-config=(){tag=2.35.1 src=xorg:data/%s/%s-$tag.tar.xz μ=Meson}
+util-macros=(){tag=1.19.3 src=xorg:util/%tbz2 μ=Configure}
+xorgproto=(){tag=xorgproto-2021.5 src=freedesktop:xorg/proto/%s μ=Autotools}
+libXau=(){tag=1.0.9 src=xorg:lib/%tbz2 μ=Configure}
+libXdmcp=(){tag=1.1.3 src=xorg:lib/%tbz2 μ=Configure}
+xcbproto=(){tag=xcb-proto-1.14.1 src=freedesktop:xorg/proto/%s μ=Autotools}
+libxcb=(){tag=1.14 src=xorg:lib/%txz μ=Configure}
+xtrans=(){tag=1.4.0 src=xorg:lib/%tbz2 μ=Configure}
+libX11=(){tag=1.7.3.1 src=xorg:lib/%txz μ=Configure}
+libXext=(){tag=1.3.4 src=xorg:lib/%tbz2 μ=Configure}
+libICE=(){tag=1.0.10 src=xorg:lib/%tbz2 μ=Configure}
+libSM=(){tag=1.2.3 src=xorg:lib/%tbz2 μ=Configure}
+libXfixes=(){tag=6.0.0 src=xorg:lib/%tbz2 μ=Configure}
+libXrender=(){tag=0.9.10 src=xorg:lib/%tbz2 μ=Configure}
+libfontenc=(){tag=1.1.4 src=xorg:lib/%tbz2 μ=Configure}
+libXfont2=(){tag=2.0.5 src=xorg:lib/%tbz2 μ=Configure flags=($flags 'disable-devel-docs')}
+libXft=(){tag=2.3.4 src=xorg:lib/%tbz2 μ=Configure}
+libXi=(){tag=1.8 src=xorg:lib/%tbz2 μ=Configure}
+libXinerama=(){tag=1.1.4 src=xorg:lib/%tbz2 μ=Configure}
+libXrandr=(){tag=1.5.2 src=xorg:lib/%tbz2 μ=Configure}
+libXtst=(){tag=1.2.3 src=xorg:lib/%tbz2 μ=Configure}
+libXxf86vm=(){tag=1.1.4 src=xorg:lib/%tbz2 μ=Configure}
+libpciaccess=(){tag=0.16 src=xorg:lib/%tbz2 μ=Configure}
+libxkbfile=(){tag=1.1.0 src=xorg:lib/%tbz2 μ=Configure}
+libxshmfence=(){tag=1.3 src=xorg:lib/%tbz2 μ=Configure}
+libxcvt=(){tag=0.1.1 src=xorg:lib/%txz μ=Meson}
+font-util=(){tag=1.3.2 src=xorg:font/%tbz2 μ=Configure}
+xkeyboard-config=(){tag=2.35.1 src=xorg:data/%s/%txz μ=Meson}
 mesa=(){tag=mesa-21.3.6 src=freedesktop:%s/%s μ=Meson flags=('llvm=disabled' 'dri-drivers=i965' 'gallium-drivers=r600,virgl,svga,iris,crocus' 'gallium-nine=false' 'glx=dri' 'valgrind=disabled' 'vulkan-drivers=amd,intel' 'platforms=x11')}
-xorg-server=(){tag=21.1.3 src=xorg:xserver/%s-$tag.tar.xz μ=Meson}
+xorg-server=(){tag=21.1.3 src=xorg:xserver/%txz μ=Meson}
 
 # xcb utils
-xcb-util=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-xcb-util-image=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-xcb-util-keysyms=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-xcb-util-renderutil=(){tag=0.3.9 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-xcb-util-wm=(){tag=0.4.1 src=https://xcb.freedesktop.org/dist/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xcb-util=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%tbz2 μ=Configure}
+xcb-util-image=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%tbz2 μ=Configure}
+xcb-util-keysyms=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%tbz2 μ=Configure}
+xcb-util-renderutil=(){tag=0.3.9 src=https://xcb.freedesktop.org/dist/%tbz2 μ=Configure}
+xcb-util-wm=(){tag=0.4.1 src=https://xcb.freedesktop.org/dist/%tbz2 μ=Configure}
 
 # xorg drivers
-libevdev=(){tag=libevdev-1.12.1 src=freedesktop:%s/%s μ=Autotools flags=($dirflags 'disable-static')}
-xf86-input-evdev=(){tag=2.10.6 src=xorg:driver/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+libevdev=(){tag=libevdev-1.12.1 src=freedesktop:%s/%s μ=Autotools}
+xf86-input-evdev=(){tag=2.10.6 src=xorg:driver/%tbz2 μ=Configure}
 libwacom=(){tag=libwacom-2.3.0 src=gh:linuxwacom/libwacom μ=Meson flags=('tests=disabled')}
 libinput=(){tag=1.21.0 src=freedesktop:%s/%s μ=Meson}
-xf86-input-libinput=(){tag=1.2.1 src=xorg:driver/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
-xf86-input-synaptics=(){tag=1.9.1 src=xorg:driver/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xf86-input-libinput=(){tag=1.2.1 src=xorg:driver/%txz μ=Configure}
+xf86-input-synaptics=(){tag=1.9.1 src=xorg:driver/%tbz2 μ=Configure}
 xf86-input-wacom=(){tag=xf86-input-wacom-1.0.0 src=gh:linuxwacom/%s μ=Meson}
 
 # xorg applications
-xinit=(){tag=1.4.1 src=xorg:app/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
-xrandr=(){tag=1.5.1 src=xorg:app/%s-$tag.tar.xz μ=Configure flags=($dirflags 'disable-static')}
-iceauth=(){tag=1.0.8 src=xorg:app/%s-$tag.tar.bz2 μ=Configure flags=($dirflags 'disable-static')}
+xinit=(){tag=1.4.1 src=xorg:app/%tbz2 μ=Configure }
+xrandr=(){tag=1.5.1 src=xorg:app/%txz μ=Configure }
+iceauth=(){tag=1.0.8 src=xorg:app/%tbz2 μ=Configure }
 
 
 
 ##############
 # Multimedia #
 ##############
-x264=(){tag=master src='https://code.videolan.org/videolan/x264.git' μ=Configure flags=($dirflags 'enable-shared' 'disable-cli' 'bit-depth=10')}
+x264=(){tag=master src='https://code.videolan.org/videolan/x264.git' μ=Configure flags=($flags 'enable-shared' 'disable-cli' 'bit-depth=10')}
 libass=(){tag=0.15.2 src=gh:%s/%s μ=Autotools}
 gstreamer=(){src=gh:GStreamer/gst-build μ=Meson}
-ffmpeg=(){tag=n4.4.1 src=gh:%s/%s μ=Configure flags=('libdir='$LIBDIR 'enable-shared' 'enable-libvpx' 'enable-gpl' 'enable-libx264')}
+ffmpeg=(){tag=n4.4.1 src=gh:%s/%s μ=Configure flags=($flags 'libdir='$LIBDIR 'enable-shared' 'enable-libvpx' 'enable-gpl' 'enable-libx264')}
 pipewire=(){tag=0.3.39 src=freedesktop:%s/%s μ=Meson}
 imlib2=(){tag=master src='https://downloads.sourceforge.net/enlightenment/imlib2-1.8.0.tar.xz' μ=Autotools}
 poppler=(){tag=poppler-22.02.0 src=freedesktop:poppler/%s μ=CMake flags=('ENABLE_QT5=OFF' 'ENABLE_BOOST=OFF')}

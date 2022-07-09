@@ -27,8 +27,8 @@ fn Configure {
 }
 
 fn Autotools {
-    *=($dirflags $*)
-    >[2=] {sh autogen.sh || autoreconf -fi} &&
+    *=($flags $*)
+    >[2=] {sh autogen.sh $* || autoreconf -fi} &&
     Configure $*
 }
 
@@ -190,6 +190,7 @@ fn snarf {
     src=`{
         echo $src |
         sed '
+            s|%t|'$1-$tag.tar.'|g;
             s|%s|'$1'|g;
             s|gnu:|https://mirrors.kernel.org/gnu/'$1'/|g;
             s|gpg:|https://gnupg.org/ftp/gcrypt/'$1'/|g;

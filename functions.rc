@@ -21,7 +21,7 @@ fn GMake {
 }
 
 fn Configure {
-    *=('prefix='$PREFIX $*)
+    *=('prefix='$PREFIX $dirflags $*)
     sh configure --$* &&
     GMake
 }

@@ -1,19 +1,5 @@
 #!/bin/rc
 
-. /etc/make.conf
-
-###############
-# Environment #
-###############
-path=(/usr/sbin /usr/bin /sbin /bin)
-CXXFLAGS=$CFLAGS
-SOURCE_DATE_EPOCH=1000000000
-KBUILD_BUILD_TIMESTAMP=1000000000
-FORCE_UNSAFE_CONFIGURE=1
-
-##################
-# Build Routines #
-##################
 fn GMake {
     *=($MAKEOPTS 'PREFIX='$PREFIX 'path=' $*)
     make $* &&
@@ -90,10 +76,6 @@ fn Headers{
     install -D include/* $*
 }
 
-
-###############################
-# Package Managment Functions #
-###############################
 fn __patch {
     builtin cd /usr/nullpkg/cache/__$1
     patches=/usr/nullpkg/patches/$1^*
@@ -172,7 +154,8 @@ fn __curl {
 }
 
 fn __query {
-    tag=() src=() μ=() flags=() LIBS=()
+    . /etc/make.conf
+    tag=() && src=() && μ=() && flags=() && LIBS=()
     destdir=/usr/nullpkg/cache/__$1/__root
 
     eval `{cat $db | grep '^'$1=}
@@ -248,9 +231,8 @@ fn purge {
 }
 
 
-#########
-# Extra #
-#########
+# extra funcs
+#############
 fn __chroot {
     >[2=] {
         mkdir -p $1/dev $1/boot

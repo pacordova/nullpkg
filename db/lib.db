@@ -1,8 +1,7 @@
 #!/bin/rc
 
-#############
-# base libs #
-#############
+# base libs
+############
 acl=(){tag=2.3.1 src=https://download.savannah.gnu.org/releases/%s/%txz μ=Configure}
 alsa-lib=(){tag=1.2.6.1 src=https://www.alsa-project.org/files/pub/lib/%tbz2 μ=Configure}
 argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
@@ -46,10 +45,8 @@ readline=(){tag=8.1.2 src=gnu:%tgz μ=Configure}
 userspace-rcu=(){tag=0.13.1 src=https://lttng.org/files/urcu/%tbz2 μ=Configure}
 zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
 
-
-#########
-# extra #
-#########
+# extra
+########
 libepoxy=(){tag=1.5.9 src=gh:anholt/%s μ=Meson}
 libdrm=(){tag=2.4.110 src=https://dri.freedesktop.org/%s/%txz μ=Meson}
 mtdev=(){tag=1.1.6 src=https://bitmath.org/code/%s/%tbz2 μ=Configure}
@@ -85,10 +82,8 @@ libnotify=(){tag=0.7.12 src=gnome:%s μ=Meson flags=('gtk_doc=false' 'man=false'
 upower=(){tag=v0.99.19 src=freedesktop:%s/%s μ=Meson flags=('systemdsystemunitdir=no' 'gtk-doc=false' 'man=false')}
 libexif=(){tag=v0.6.24 src=gh:%s/%s μ=Autotools}
 
-
-########
-# xorg #
-########
+# xorg
+#######
 util-macros=(){tag=1.19.3 src=xorg:util/%tbz2 μ=Configure}
 xorgproto=(){tag=xorgproto-2021.5 src=freedesktop:xorg/proto/%s μ=Autotools}
 libXau=(){tag=1.0.9 src=xorg:lib/%tbz2 μ=Configure}
@@ -120,6 +115,7 @@ mesa=(){tag=mesa-21.3.6 src=freedesktop:%s/%s μ=Meson flags=('llvm=disabled' 'd
 xorg-server=(){tag=21.1.3 src=xorg:xserver/%txz μ=Meson}
 
 # xcb utils
+############
 xcb-util=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%tbz2 μ=Configure}
 xcb-util-image=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%tbz2 μ=Configure}
 xcb-util-keysyms=(){tag=0.4.0 src=https://xcb.freedesktop.org/dist/%tbz2 μ=Configure}
@@ -127,6 +123,7 @@ xcb-util-renderutil=(){tag=0.3.9 src=https://xcb.freedesktop.org/dist/%tbz2 μ=C
 xcb-util-wm=(){tag=0.4.1 src=https://xcb.freedesktop.org/dist/%tbz2 μ=Configure}
 
 # xorg drivers
+###############
 libevdev=(){tag=libevdev-1.12.1 src=freedesktop:%s/%s μ=Autotools}
 xf86-input-evdev=(){tag=2.10.6 src=xorg:driver/%tbz2 μ=Configure}
 libwacom=(){tag=libwacom-2.3.0 src=gh:linuxwacom/libwacom μ=Meson flags=('tests=disabled')}
@@ -136,15 +133,13 @@ xf86-input-synaptics=(){tag=1.9.1 src=xorg:driver/%tbz2 μ=Configure}
 xf86-input-wacom=(){tag=xf86-input-wacom-1.0.0 src=gh:linuxwacom/%s μ=Meson}
 
 # xorg applications
+####################
 xinit=(){tag=1.4.1 src=xorg:app/%tbz2 μ=Configure }
 xrandr=(){tag=1.5.1 src=xorg:app/%txz μ=Configure }
 iceauth=(){tag=1.0.8 src=xorg:app/%tbz2 μ=Configure }
 
-
-
-##############
-# Multimedia #
-##############
+# video
+########
 x264=(){tag=master src='https://code.videolan.org/videolan/x264.git' μ=Configure flags=($flags 'enable-shared' 'disable-cli' 'bit-depth=10')}
 libass=(){tag=0.15.2 src=gh:%s/%s μ=Autotools}
 gstreamer=(){src=gh:GStreamer/gst-build μ=Meson}
@@ -154,10 +149,8 @@ imlib2=(){tag=master src='https://downloads.sourceforge.net/enlightenment/imlib2
 poppler=(){tag=poppler-22.02.0 src=freedesktop:poppler/%s μ=CMake flags=('ENABLE_QT5=OFF' 'ENABLE_BOOST=OFF')}
 poppler-data=(){tag=POPPLER_DATA_0_4_11 src=freedesktop:poppler/%s μ=CMake}
 
-
-######
-# Qt #
-######
+# qt
+#####
 qtbase=(){tag=kde/5.15 src=qt:%s.git μ=Configure flags=('extprefix='$destdir/$PREFIX 'libdir='$LIBDIR 'archdatadir='$LIBDIR/qt 'datadir='$PREFIX/share/qt 'docdir='$PREFIX/share/doc/qt 'opensource' 'confirm-license' 'optimize-size' 'nomake=examples' 'nomake=tests')}
 qtsvg=(){tag=kde/5.15 src=qt:%s.git μ=QMake}
 qttools=(){tag=kde/5.15 src=qt:%s.git μ=QMake}

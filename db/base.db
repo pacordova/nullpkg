@@ -1,8 +1,7 @@
 #!/bin/rc
 
-########
-# base #
-########
+# base
+#######
 autoconf=(){tag=2.69 src=gnu:%txz μ=Configure}
 automake=(){tag=1.15.1 src=gnu:%txz μ=Configure}
 bash=(){tag=5.1.16 src=gnu:%tgz μ=Configure flags=($flags 'with-bash-malloc=no')}
@@ -37,6 +36,7 @@ vim=(){tag=v9.0.0048 src=gh:%s/%s μ=Configure flags=($flags 'disable-gui' 'with
 which=(){tag=2.21 src=gnu:%tgz μ=Configure}
 
 # compression
+##############
 bzip2=(){tag=master src=gitlab:%s/%s μ=Meson}
 gzip=(){tag=1.11 src=gnu:%txz μ=Configure}
 lzo=(){tag=2.10 src=https://www.oberhumer.com/opensource/%s/download/%tgz μ=Configure flags=($flags 'enable-shared')}
@@ -46,15 +46,15 @@ xz=(){tag=5.2.5 src=https://tukaani.org/%s/%txz μ=Configure}
 zstd=(){tag=v1.5.2 src=gh:facebook/zstd μ=GMake}
 
 # python
+#########
 python=(){tag=v3.10.5 src=gh:python/cpython μ=Configure flags=($flags 'with-platlibdir=lib64' 'without-ensurepip' 'enable-optimizations' 'enable-shared')}
 python-setuptools=(){tag=v63.1.0 src=gh:pypa/setuptools μ=Python}
 python-pip=(){tag=22.1.2 src=gh:pypa/pip μ=Python}
 meson=(){tag=0.61.5 src=gh:mesonbuild/%s μ=Python}
 
 
-#######
-# sys #
-#######
+# sys
+######
 btrfs-progs=(){tag=v5.16.2 src=gh:kdave/%s μ=Autotools flags=($flags 'disable-documentation' 'disable-python')}
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=($flags 'enable-elf-shlibs')}
 inetutils=(){tag=2.2 src=gnu:%txz μ=Configure}
@@ -66,7 +66,8 @@ sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/%s/%txz μ=G
 util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=($flags 'disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
 xfsprogs=(){tag=v5.14.2 src=kernel:fs/xfs/xfsprogs-dev μ=GMake}
 
-# extra system
+# extra
+########
 acpid=(){tag=2.0.33 src=https://downloads.sourceforge.net/acpid2/%txz μ=Configure}
 cryptsetup=(){tag=v2.4.3 src=gitlab:%s/%s μ=Autotools flags=($flags 'disable-ssh-token')}
 dbus=(){tag=1.12.20 src=https://dbus.freedesktop.org/releases/%s/%tgz μ=Configure flags=($flags 'enable-user-session' 'with-systemduserunitdir=no' 'with-systemdsystemunitdir=no' 'with-console-auth-dir=/run/console' 'with-system-pid-file=/run/dbus/pid' 'with-system-socket=/run/dbus/system_bus_socket')}
@@ -90,15 +91,18 @@ wget=(){tag=1.21.2 src=gnu:%tgz μ=Configure flags=($flags 'with-ssl=openssl')}
 xorriso=(){tag=1.5.4 src=gnu:%tgz μ=Configure}
 
 # connman
+##########
 glib=(){tag=2.70.4 src=gnome:%s μ=Meson flags=('tests=false')}
 iptables=(){tag=1.8.7 src=netfilter:%s/%tbz2 μ=Configure flags=($flags 'enable-shared')}
 connman=(){tag=1.41 src=kernel:network/%s/%s μ=Autotools flags=($flags 'with-systemdunitdir=no' 'disable-wispr') LIBS='-ltinfo'}
 
 # efibootmgr
+#############
 efivar=(){tag=38 src=gh:rhboot/efivar μ=GMake}
 efibootmgr=(){tag=main src=gh:rhboot/efibootmgr μ=GMake EFIDIR=/boot}
 
 # gpg
+######
 libgpg-error=(){tag=1.45 src=gpg:%tbz2 μ=Configure}
 libgcrypt=(){tag=1.10.1 src=gpg:%tbz2 μ=Configure}
 libksba=(){tag=1.6.0 src=gpg:%tbz2 μ=Configure}

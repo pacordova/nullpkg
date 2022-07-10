@@ -1,9 +1,7 @@
 #!/bin/rc
 
-
-######################
-# xfce base packages #
-######################
+# xfce
+#######
 libxfce4util=(){src='http://archive.xfce.org/src/xfce/libxfce4util/4.12/libxfce4util-4.12.1.tar.bz2' μ=Configure}
 xfconf=(){src='http://archive.xfce.org/src/xfce/xfconf/4.12/xfconf-4.12.1.tar.bz2' μ=Configure}
 libxfce4ui=(){src='http://archive.xfce.org/src/xfce/libxfce4ui/4.12/libxfce4ui-4.12.1.tar.bz2' μ=Configure}
@@ -20,10 +18,8 @@ xfdesktop=(){src='http://archive.xfce.org/src/xfce/xfdesktop/4.12/xfdesktop-4.12
 xfwm4=(){src='http://archive.xfce.org/src/xfce/xfwm4/4.12/xfwm4-4.12.5.tar.bz2' μ=Configure}
 xfce4-session=(){src='http://archive.xfce.org/src/xfce/xfce4-session/4.12/xfce4-session-4.12.1.tar.bz2' μ=Configure}
 
-
-###########
-# Goodies #
-###########
+# goodies
+##########
 #xfce4-battery-plugin=(){tag=1.0.5 src=gh:xfce-mirror/xfce4-battery-plugin μ=Configure}
 #catfish=(){src='https://archive.xfce.org/src/apps/catfish/4.15/catfish-4.15.0.tar.bz2' μ=Python}
 ristretto=(){src='http://archive.xfce.org/src/apps/ristretto/0.8/ristretto-0.8.1.tar.bz2' μ=Configure}

@@ -52,3 +52,4 @@ file-roller=(){tag=3.40.0 src=gnome:%s μ=Meson}
 leafpad=(){tag=master src=gh:tarot231/%s μ=Autotools}
 transmission=(){tag=3.00 src=gh:%s/%s μ=CMake flags=('ENABLE_QT=OFF')}
 pavucontrol=(){tag=v5.0 src=freedesktop:pulseaudio/%s μ=Autotools}
+ahoviewer=(){tag=master src=gh:ahodesuka/%s μ=Meson}

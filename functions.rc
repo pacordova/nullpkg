@@ -230,9 +230,6 @@ fn purge {
     true
 }
 
-
-# extra funcs
-#############
 fn __chroot {
     >[2=] {
         mkdir -p $1/dev $1/boot

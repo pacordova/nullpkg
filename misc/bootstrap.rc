@@ -1,0 +1,160 @@
+#!/bin/rc
+
+. /etc/make.conf
+
+# package groups
+LIB=( \
+    acl alsa-lib argon attr c-ares elfutils expat gdbm gmp gperf inih json-c \
+    libaio libcap libestr libeudev libevent libfastjson libffi libfuse \
+    libmnl libnftnl libnsl libpng libpsl libressl libsigsegv libtiff \
+    libtirpc libunistring libusb libunwind lvm ncurses pcre2 \
+    pcre pkg-config popt readline userspace-rcu zlib \
+)
+
+BASE=( \
+    autoconf automake bash bc binutils bison cmake coreutils curl \
+    diffutils ed file findutils flex gawk gcc gettext git grep \
+    help2man less libtool m4 make ninja patch rc sed \
+    sharutils texinfo vim which \
+    bzip2 gzip lzo tar unzip xz zstd \
+)
+
+SYS=( \
+    e2fsprogs inetutils kmod procps-ng rsyslog shadow sysvinit util-linux \
+    acpid btrfs-progs cryptsetup dbus dosfstools lm-sensors lua mandoc \
+    nano openssh parted pciutils rsync sqlite sudo tcsh time tmux \
+    wget xfsprogs xorriso \
+    glib iptables connman \
+    efivar efibootmgr \
+    libgpg-error libgcrypt libksba libassuan ntbtls npth pinentry gnupg \
+)
+
+
+fn __emerge {
+    for(i in $*) {
+        nullpkg emerge $i
+        if(test -f /usr/nullpkg/cache/$i.tar.xz)
+            nullpkg -i /usr/nullpkg/cache/$i.tar.xz
+        if not
+            exit
+    }
+}
+
+
+fn download {
+    nullpkg snarf $LIB
+    nullpkg snarf $BASE
+    nullpkg snarf $SYS
+    nullpkg snarf python python-setuptools python-pip
+
+
+    ##############
+    # misc fixes #
+    ##############
+    cd /usr/nullpkg/cache
+
+    # download gcc prereqs
+    cd __gcc
+    ./contrib/download_prerequisites
+    cd ..
+
+    # make missing directory for python-setuptools
+    cd __python-setuptools
+    mkdir -p build/scripts-3.9
+    mkdir -p build/scripts-3.10
+    cd ..
+
+    # manually edit configure for mandoc
+    cd __mandoc
+    sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
+    sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
+    cd ..
+
+    # sharutils
+    cd __sharutils
+    sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c
+    sed -i '/program_name/s/^/extern /' src/*opts.h
+    sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
+    echo '#define _IO_IN_BACKUP 0x100' >> lib/stdio-impl.h
+    cd ..
+
+    mkdir sources
+    mv __* sources
+    tar -cf sources.tar sources
+    xz -T0 sources.tar
+    rm -rf sources/
+}
+
+fn prepare {
+    cd /usr/nullpkg/cache/pass1
+
+    #################
+    # before chroot #
+    #################
+    # prepare the 1
+    mkdir -p $1
+
+    # copy the static packages
+    for(f in (static/*.tar.xz))
+        tar -C $1 -xhf $f
+
+    # libs
+    for(f in (lib/*.tar.xz))
+        tar -C $1 -xhf $f
+
+    # base
+    for(f in (base/*.tar.xz))
+        tar -C $1 -xhf $f
+
+    # copy over current version of nullpkg
+    cp -r /usr/nullpkg $1/usr/nullpkg
+
+    rm $1/usr/nullpkg/cache
+    mkdir $1/usr/nullpkg/cache
+
+    cp sources.tar.xz $1/usr/nullpkg/cache/
+}
+
+
+fn build {
+    cd /usr/nullpkg/cache
+
+    make -C /usr/nullpkg
+
+    ldconfig && /usr/nullpkg/misc/locale.rc
+
+    tar -xhf sources.tar.xz
+    mv sources/* .
+
+    __emerge python python-setuptools python-pip;
+    sleep 3 &&
+    python3 -m pip install meson &&
+    python3 -m pip install docutils
+
+    __emerge $LIB
+    __emerge $BASE
+    __emerge $SYS
+}
+
+fn copy {
+    cd /mnt/usr/nullpkg/cache
+
+    mkdir -p /usr/nullpkg/cache/new/^(lib base sys)
+
+    mv $LIB^.tar.xz /usr/nullpkg/cache/new/lib
+    mv $BASE^.tar.xz /usr/nullpkg/cache/new/base
+    mv $SYS^.tar.xz /usr/nullpkg/cache/new/sys
+    mv py*.tar.xz /usr/nullpkg/cache/new/base
+}
+
+
+switch($1) {
+    case download
+        download
+    case prepare
+        prepare /mnt
+    case build
+        build
+    case copy
+        copy
+}

@@ -7,13 +7,14 @@
 switch($λ) {
     case emerge purge snarf
         while(~ $#1 1)
-            $(λ) $(1)
+            $(λ) $(1) && shift
     case -S
         while(~ $#1 1)
             purge $1 &&
             snarf $1 &&
             emerge $1 &&
-            __install /usr/nullpkg/cache/$1.tar.xz
+            __install /usr/nullpkg/cache/$1.tar.xz &&
+            shift
     case -i
         __install $1
     case makepkg

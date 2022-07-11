@@ -8,7 +8,7 @@ bash=(){tag=5.1.16 src=gnu:%tgz μ=Configure flags=($flags 'with-bash-malloc=no'
 bc=(){tag=1.07.1 src=gnu:%tgz μ=Configure}
 binutils=(){tag=2.38 src=gnu:%txz μ=Configure flags=($flags 'enable-deterministic-archives')}
 bison=(){tag=3.8.2 src=gnu:%txz μ=Configure}
-cmake=(){tag=3.22.2 src=https://cmake.org/files/v3.22/%tgz μ=Configure}
+cmake=(){tag=3.22.2 src=https://cmake.org/files/v3.22/%tgz μ=Configure dirflags=()}
 coreutils=(){tag=9.0 src=gnu:%txz μ=Configure}
 curl=(){tag=7.81.0 src=https://curl.se/download/%txz μ=Configure flags=($flags 'with-openssl' 'with-ca-path=/etc/ssl/certs' 'with-ca-bundle=/etc/ssl/certs/ca-certificates.crt' 'enable-threaded-resolver')}
 diffutils=(){tag=3.8 src=gnu:%txz μ=Configure}

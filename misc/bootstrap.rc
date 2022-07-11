@@ -137,7 +137,7 @@ fn build {
 }
 
 fn copy {
-    cd /mnt/usr/nullpkg/cache
+    cd /mnt/target/usr/nullpkg/cache
 
     mkdir -p /usr/nullpkg/cache/new/^(lib base sys)
 
@@ -152,7 +152,7 @@ switch($1) {
     case download
         download
     case prepare
-        prepare /mnt
+        prepare /mnt/target
     case build
         build
     case copy

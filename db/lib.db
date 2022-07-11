@@ -42,8 +42,8 @@ pcre=(){tag=8.45 src=https://sourceforge.net/projects/pcre/files/pcre/$tag/%tbz2
 pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=($flags 'with-internal-glib')}
 popt=(){tag=1.18 src=http://ftp.rpm.org/popt/releases/%s-1.x/%tgz μ=Configure}
 readline=(){tag=8.1.2 src=gnu:%tgz μ=Configure}
-userspace-rcu=(){tag=0.13.1 src=https://lttng.org/files/urcu/%tbz2 μ=Configure}
-zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure flags=('libdir='$LIBDIR)}
+userspace-rcu=(){tag=0.13.1 src=https://lttng.org/files/urcu/%tbz2 μ=Configure dirflags=('libdir='$LIBDIR)}
+zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure}
 
 # extra
 ########

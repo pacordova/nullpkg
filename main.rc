@@ -7,7 +7,8 @@
 switch($λ) {
     case emerge purge snarf
         while(~ $#1 1)
-            $(λ) $(1) && shift
+            $(λ) $(1) &&
+            shift
     case -S
         while(~ $#1 1)
             purge $1 &&

@@ -7,7 +7,7 @@ alsa-lib=(){tag=1.2.6.1 src=https://www.alsa-project.org/files/pub/lib/%tbz2 μ=
 argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
 attr=(){tag=2.5.1 src=https://download.savannah.nongnu.org/releases/%s/%tgz μ=Configure}
 c-ares=(){tag=1.18.1 src=https://c-ares.haxx.se/download/%tgz μ=Configure}
-elfutils=(){tag=0.186 src=https://sourceware.org/ftp/%s/$tag/%tbz2 μ=Configure flags=($flags 'disable-debuginfod')}
+elfutils=(){tag=0.186 src=https://sourceware.org/ftp/%s/$tag/%tbz2 μ=Configure flags=('disable-debuginfod')}
 expat=(){tag=2.4.6 src=https://prdownloads.sourceforge.net/%s/%txz μ=Configure}
 gdbm=(){tag=1.23 src=gnu:%tgz μ=Configure}
 gmp=(){tag=6.2.1 src=gnu:%txz μ=Configure}
@@ -28,18 +28,18 @@ libnsl=(){tag=v2.0.0 src=gh:thkukuk/%s μ=Autotools}
 libpng=(){tag=1.6.37 src=https://downloads.sourceforge.net/%s/%txz μ=Configure}
 libpsl=(){tag=0.21.1 src=gh:rockdaboot/%s μ=Meson}
 libressl=(){tag=3.5.3 src=https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/%tgz μ=Configure}
-libsigsegv=(){tag=2.14 src=gnu:%tgz μ=Configure flags=($flags 'enable-shared')}
+libsigsegv=(){tag=2.14 src=gnu:%tgz μ=Configure flags=('enable-shared')}
 libtiff=(){tag=v4.3.0 src=gitlab:%s/%s μ=Autotools}
-libtirpc=(){tag=1.3.2 src=https://downloads.sourceforge.net/%s/%tbz2 μ=Configure flags=($flags 'disable-gssapi')}
+libtirpc=(){tag=1.3.2 src=https://downloads.sourceforge.net/%s/%tbz2 μ=Configure flags=('disable-gssapi')}
 libunistring=(){tag=1.0 src=gnu:%txz μ=Configure}
 libunwind=(){tag=v1.6.2 src=gh:%s/%s μ=Autotools}
 libusb=(){tag=v1.0.25 src=gh:%s/%s μ=Autotools}
 libuv=(){tag=v1.43.0 src=https://dist.libuv.org/dist/$tag/%tgz μ=Autotools}
 lvm=(){tag=2.03.15 src=https://sourceware.org/ftp/lvm2/LVM2.$tag.tgz μ=Configure}
-ncurses=(){tag=6.3 src=gnu:%tgz μ=Configure flags=($flags 'with-shared' 'without-normal' 'with-cxx=no' 'enable-pc-files' 'enable-widec' 'with-termlib=tinfo')}
-pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=Autotools flags=($flags 'enable-unicode' 'enable-jit' 'enable-pcre2-16' 'enable-pcre2-32')}
-pcre=(){tag=8.45 src=https://sourceforge.net/projects/pcre/files/pcre/$tag/%tbz2 μ=Autotools flags=($flags 'enable-unicode-properties' 'enable-pcre16' 'enable-pcre32')}
-pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=($flags 'with-internal-glib')}
+ncurses=(){tag=6.3 src=gnu:%tgz μ=Configure flags=('with-shared' 'without-normal' 'with-cxx=no' 'enable-pc-files' 'enable-widec' 'with-termlib=tinfo')}
+pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=Autotools flags=('enable-unicode' 'enable-jit' 'enable-pcre2-16' 'enable-pcre2-32')}
+pcre=(){tag=8.45 src=https://sourceforge.net/projects/pcre/files/pcre/$tag/%tbz2 μ=Autotools flags=('enable-unicode-properties' 'enable-pcre16' 'enable-pcre32')}
+pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=('with-internal-glib')}
 popt=(){tag=1.18 src=http://ftp.rpm.org/popt/releases/%s-1.x/%tgz μ=Configure}
 readline=(){tag=8.1.2 src=gnu:%tgz μ=Configure}
 userspace-rcu=(){tag=0.13.1 src=https://lttng.org/files/urcu/%tbz2 μ=Configure}
@@ -60,7 +60,7 @@ uthash=(){tag=v2.3.0 src=gh:troydhanson/%s μ=Headers}
 libev=(){tag=4.33 src=http://dist.schmorp.de/libev/%tgz μ=Autotools}
 gobject-introspection=(){tag=1.72.0 src=gnome:%s μ=Meson}
 libgudev=(){tag=237 src=gnome:%s μ=Meson}
-libxml2=(){tag=v2.9.13 src=gnome:%s μ=Autotools flags=($flags 'with-python')}
+libxml2=(){tag=v2.9.13 src=gnome:%s μ=Autotools flags=('with-python')}
 libxslt=(){tag=v1.1.35 src=gnome:%s μ=Autotools}
 atk=(){tag=2.38.0 src=gnome:%s μ=Meson}
 at-spi2-core=(){tag=AT_SPI2_CORE_2_45_1 src=gnome:%s μ=Meson}
@@ -71,7 +71,7 @@ shared-mime-info=(){tag=2.2 src=freedesktop:xdg/%s μ=Meson}
 gdk-pixbuf=(){tag=2.42.8 src=gnome:%s μ=Meson flags=('gio_sniffing=false' 'installed_tests=false')}
 libxkbcommon=(){tag=1.4.0 src=https://xkbcommon.org/download/%txz μ=Meson flags=('enable-wayland=false' 'enable-docs=false')}
 gsettings-desktop-schemas=(){tag=40.0 src=gnome:%s μ=Meson}
-gtk2=(){src='https://download.gnome.org/sources/gtk+/2.24/gtk+-2.24.33.tar.xz' μ=Configure flags=($flags 'disable-gtk-doc' 'disable-gtk-doc-html' 'disable-glibtest')}
+gtk2=(){src='https://download.gnome.org/sources/gtk+/2.24/gtk+-2.24.33.tar.xz' μ=Configure flags=('disable-gtk-doc' 'disable-gtk-doc-html' 'disable-glibtest')}
 gtk3=(){tag=3.24.33 src=gnome:gtk μ=Meson flags=('tests' 'demos' 'examples' 'win32_backend' 'quartz_backend' 'wayland_backend')^'=false'}
 adwaita-icon-theme=(){tag=42.0 src=gnome:%s μ=Autotools}
 intltool=(){src='https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz' μ=Configure}
@@ -98,7 +98,7 @@ libSM=(){tag=1.2.3 src=xorg:lib/%tbz2 μ=Configure}
 libXfixes=(){tag=6.0.0 src=xorg:lib/%tbz2 μ=Configure}
 libXrender=(){tag=0.9.10 src=xorg:lib/%tbz2 μ=Configure}
 libfontenc=(){tag=1.1.4 src=xorg:lib/%tbz2 μ=Configure}
-libXfont2=(){tag=2.0.5 src=xorg:lib/%tbz2 μ=Configure flags=($flags 'disable-devel-docs')}
+libXfont2=(){tag=2.0.5 src=xorg:lib/%tbz2 μ=Configure flags=('disable-devel-docs')}
 libXft=(){tag=2.3.4 src=xorg:lib/%tbz2 μ=Configure}
 libXi=(){tag=1.8 src=xorg:lib/%tbz2 μ=Configure}
 libXinerama=(){tag=1.1.4 src=xorg:lib/%tbz2 μ=Configure}
@@ -140,10 +140,10 @@ iceauth=(){tag=1.0.8 src=xorg:app/%tbz2 μ=Configure }
 
 # video
 ########
-x264=(){tag=master src='https://code.videolan.org/videolan/x264.git' μ=Configure flags=($flags 'enable-shared' 'disable-cli' 'bit-depth=10')}
+x264=(){tag=master src='https://code.videolan.org/videolan/x264.git' μ=Configure flags=('enable-shared' 'disable-cli' 'bit-depth=10')}
 libass=(){tag=0.15.2 src=gh:%s/%s μ=Autotools}
 gstreamer=(){src=gh:GStreamer/gst-build μ=Meson}
-ffmpeg=(){tag=n4.4.1 src=gh:%s/%s μ=Configure flags=($flags 'libdir='$LIBDIR 'enable-shared' 'enable-libvpx' 'enable-gpl' 'enable-libx264')}
+ffmpeg=(){tag=n4.4.1 src=gh:%s/%s μ=Configure flags=('libdir='$LIBDIR 'enable-shared' 'enable-libvpx' 'enable-gpl' 'enable-libx264')}
 pipewire=(){tag=0.3.39 src=freedesktop:%s/%s μ=Meson}
 imlib2=(){tag=master src='https://downloads.sourceforge.net/enlightenment/imlib2-1.8.0.tar.xz' μ=Autotools}
 poppler=(){tag=poppler-22.02.0 src=freedesktop:poppler/%s μ=CMake flags=('ENABLE_QT5=OFF' 'ENABLE_BOOST=OFF')}

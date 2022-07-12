@@ -88,14 +88,14 @@ fn __patch {
 }
 
 fn __makepkg {
-    # remove slash from arg
+    # remove / from arg
     *=`{echo $1 | sed 's|/$||g'}
 
-    # strip binaries & gzip manpages
     >[2=] {
         strip -S $1/usr/lib64/*
         strip -s $1/usr/bin/* $1/bin/*
         gzip -n $1/usr/man/man?/*.? $1/usr/share/man/man?/*.?
+        rm -rf $1/usr/share/doc $1/usr/doc
     }
 
     # remove pyc for reproducible builds

@@ -108,7 +108,7 @@ fn __makepkg {
 
     tar -C $1 \
         --transform 's,^\./,/,' \
-        --mtime '1970-01-01 00:00' \
+        --mtime @$SOURCE_DATE_EPOCH \
         --sort=name \
         -cf $1.tar .
 

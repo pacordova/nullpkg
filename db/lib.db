@@ -36,7 +36,7 @@ libunwind=(){tag=v1.6.2 src=gh:%s/%s μ=Autotools}
 libusb=(){tag=v1.0.25 src=gh:%s/%s μ=Autotools}
 libuv=(){tag=v1.43.0 src=https://dist.libuv.org/dist/$tag/%tgz μ=Autotools}
 lvm=(){tag=2.03.15 src=https://sourceware.org/ftp/lvm2/LVM2.$tag.tgz μ=Configure}
-ncurses=(){tag=6.3 src=gnu:%tgz μ=Configure flags=('with-shared' 'without-normal' 'with-cxx=no' 'enable-pc-files' 'enable-widec' 'with-termlib=tinfo')}
+ncurses=(){tag=6.3 src=gnu:%tgz μ=Configure flags=('with-shared' 'without-normal' 'with-cxx=no' 'enable-pc-files' 'enable-widec' 'with-termlib=tinfo' 'without-manpages')}
 pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=Autotools flags=('enable-unicode' 'enable-jit' 'enable-pcre2-16' 'enable-pcre2-32')}
 pcre=(){tag=8.45 src=https://sourceforge.net/projects/pcre/files/pcre/$tag/%tbz2 μ=Autotools flags=('enable-unicode-properties' 'enable-pcre16' 'enable-pcre32')}
 pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=('with-internal-glib')}

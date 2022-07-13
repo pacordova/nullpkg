@@ -119,8 +119,6 @@ fn prepare {
 fn build {
     cd /usr/nullpkg/cache
 
-    make -C /usr/nullpkg
-
     ldconfig && /usr/nullpkg/misc/locale.rc
 
     tar -xhf sources.tar.xz

@@ -15,7 +15,7 @@ diffutils=(){tag=3.8 src=gnu:%txz μ=Configure}
 ed=(){tag=1.4 src=gnu:%tgz μ=Configure}
 file=(){tag=5.41 src=https://astron.com/pub/%s/%tgz μ=Configure}
 findutils=(){tag=4.9.0 src=gnu:%txz μ=Configure}
-flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools}
+flex=(){tag=v2.6.4 src=gh:westes/flex μ=Autotools flags=('disable-nls')}
 gawk=(){tag=5.1.0 src=gnu:%txz μ=Configure flags=('with-readline=no')}
 gcc=(){tag=11.2.0 src=gnu:gcc-11.2.0/%txz flags=('disable-multilib' 'enable-languages=c c++ fortran' 'disable-nls' 'disable-bootstrap' 'enable-shared') μ=Configure}
 gettext=(){tag=0.21 src=gnu:%txz μ=Configure}

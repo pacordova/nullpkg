@@ -1,0 +1,34 @@
+#!/bin/rc
+
+. /usr/nullpkg/functions.rc
+
+glibc=(){tag=2.35 src=gnu:%txz μ=custom}
+
+# override query
+fn __query {
+    destdir=/usr/nullpkg/cache/__$1/__root
+    dirflags=( \
+        'localstatedir=/var' \
+        'sysconfdir=/etc' \
+        'libdir='$LIBDIR \
+        'disable-static' \
+    )
+}
+
+fn custom {
+    mkdir build && cd build
+    ../configure --prefix=/usr                        \
+             --disable-werror                         \
+             --enable-kernel=3.2                      \
+             --enable-stack-protector=strong          \
+             --with-headers=/usr/include              \
+             --$dirflags                              \
+             libc_cv_slibdir=/usr/lib64
+
+    GMake
+    cd ..
+}
+
+snarf glibc &&
+emerge glibc &&
+nullpkg -i /usr/nullpkg/cache/glibc.tar.xz

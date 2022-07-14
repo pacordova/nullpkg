@@ -1,0 +1,39 @@
+#!/bin/rc
+
+. /usr/nullpkg/functions.rc
+
+perl=(){tag=5.36.0 src=https://www.cpan.org/src/5.0/perl-$tag.tar.gz μ=custom}
+
+# override query
+fn __query {
+    destdir=/usr/nullpkg/cache/__$1/__root
+    dirflags=( \
+        'localstatedir=/var' \
+        'sysconfdir=/etc' \
+        'libdir='$LIBDIR \
+        'disable-static' \
+    )
+}
+
+fn custom {
+    sh Configure -des                                       \
+             -Dprefix=/usr                                  \
+             -Dvendorprefix=/usr                            \
+             -Dprivlib=/usr/lib64/perl5/5.34/core_perl      \
+             -Darchlib=/usr/lib64/perl5/5.34/core_perl      \
+             -Dsitelib=/usr/lib64/perl5/5.34/site_perl      \
+             -Dsitearch=/usr/lib64/perl5/5.34/site_perl     \
+             -Dvendorlib=/usr/lib64/perl5/5.34/vendor_perl  \
+             -Dvendorarch=/usr/lib64/perl5/5.34/vendor_perl \
+             -Dman1dir=/usr/share/man/man1                  \
+             -Dman3dir=/usr/share/man/man3                  \
+             -Dpager="/usr/bin/less -isR"                   \
+             -Duseshrplib                                   \
+             -Dusethreads
+
+    GMake
+}
+
+snarf perl &&
+emerge perl &&
+nullpkg -i /usr/nullpkg/cache/perl.tar.xz

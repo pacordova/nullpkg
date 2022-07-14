@@ -18,7 +18,7 @@ BASE=( \
 )
 
 SYS=( \
-    e2fsprogs iproute2 kmod procps-ng psmisc rsyslog shadow sysvinit util-linux \
+    e2fsprogs iproute2 kmod procps-ng psmisc shadow sysvinit util-linux \
     acpid btrfs-progs cryptsetup dbus dosfstools lm-sensors lua mandoc \
     nano openssh parted pciutils rsync sqlite sudo tcsh time \
     wget xorriso \

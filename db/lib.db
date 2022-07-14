@@ -18,7 +18,7 @@ libffi=(){tag=v3.4.2 src=gh:%s/%s μ=Autotools flags=('disable-docs')}
 libmnl=(){tag=1.0.4 src=netfilter:%s/%tbz2 μ=Configure}
 libnftnl=(){tag=1.2.1 src=netfilter:%s/%tbz2 μ=Configure}
 libpsl=(){tag=0.21.1 src=gh:rockdaboot/%s μ=Meson}
-libressl=(){tag=3.5.3 src=https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/%tgz μ=Configure}
+libressl=(){tag=3.5.3 src=https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/%tgz μ=Configure flags=('enable-nc')}
 lvm=(){tag=2.03.15 src=https://sourceware.org/ftp/lvm2/LVM2.$tag.tgz μ=Configure}
 mpc=(){tag=1.2.1 src=gnu:%tgz μ=Configure}
 mpfr=(){tag=4.1.0 src=https://www.mpfr.org/%s-$tag/%txz μ=Configure}

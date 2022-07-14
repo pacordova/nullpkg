@@ -104,6 +104,9 @@ fn emerge {
     tar -xhf sources.tar.xz
     mv sources/* .
 
+    # tag build start time
+    touch /usr/nullpkg/cache/start.tar.xz
+
     # custom buildscripts
     /usr/nullpkg/misc/glibc.rc emerge
     /usr/nullpkg/misc/perl.rc emerge

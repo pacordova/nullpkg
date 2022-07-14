@@ -5,7 +5,7 @@
 autoconf=(){tag=2.69 src=gnu:%txz μ=Configure}
 automake=(){tag=1.15.1 src=gnu:%txz μ=Configure}
 bash=(){tag=5.1.16 src=gnu:%tgz μ=Configure flags=('with-bash-malloc=no')}
-bc=(){tag=1.07.1 src=gnu:%tgz μ=Configure}
+bc=(){tag=5.3.3 src=gh:gavinhoward/bc μ=Configure dirflags=('libdir='$LIBDIR) flags=('disable-generated-tests')}
 binutils=(){tag=2.38 src=gnu:%txz μ=Configure flags=('enable-deterministic-archives')}
 bison=(){tag=3.8.2 src=gnu:%txz μ=Configure}
 cmake=(){tag=3.22.2 src=https://cmake.org/files/v3.22/%tgz μ=Configure dirflags=()}

@@ -80,7 +80,6 @@ fn bootstrap {
 
     # copy nullpkg
     cp -r /usr/nullpkg $1/usr/nullpkg
-    cp sources.tar.xz $1/usr/nullpkg/cache/
 
     # prepare cache
     rm $1/usr/nullpkg/cache

@@ -3,7 +3,7 @@
 . /etc/make.conf
 
 fn GMake {
-    *=($MAKEOPTS 'PREFIX='$PREFIX 'MAKEINFO=true' 'path=' $*)
+    *=($MAKEOPTS 'PREFIX='$PREFIX 'path=' $*)
     make $* &&
     make install $* 'DESTDIR='$destdir
 }
@@ -96,7 +96,7 @@ fn __makepkg {
         strip -S $1/usr/lib64/*
         strip -s $1/usr/bin/* $1/bin/*
         gzip -n $1/usr/man/man?/*.? $1/usr/share/man/man?/*.?
-        rm -rf $1/usr/share/doc $1/usr/doc
+        rm -r $1/usr/share/doc $1/usr/doc $1/usr/share/info
     }
 
     # remove pyc for reproducible builds

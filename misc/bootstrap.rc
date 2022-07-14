@@ -12,7 +12,7 @@ LIB=( \
 BASE=( \
     autoconf automake bash bc binutils bison cmake coreutils curl \
     diffutils ed file findutils flex gawk gcc gettext git grep \
-    help2man less libtool m4 make ninja patch rc sed \
+    help2man less libtool m4 make ninja patch rc sed texinfo \
     vim which \
     bzip2 gzip lzo tar unzip xz zstd \
 )

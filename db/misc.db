@@ -46,6 +46,5 @@ ahoviewer=(){tag=master src=gh:ahodesuka/%s μ=Meson}
 
 # gnu
 ######
-texinfo=(){tag=6.8 src=gnu:%txz μ=Configure}
 sharutils=(){tag=4.15.2 src=gnu:%txz μ=Configure}
 inetutils=(){tag=2.2 src=gnu:%txz μ=Configure}

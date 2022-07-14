@@ -4,46 +4,61 @@
 ############
 acl=(){tag=2.3.1 src=https://download.savannah.gnu.org/releases/%s/%txz μ=Configure}
 alsa-lib=(){tag=1.2.6.1 src=https://www.alsa-project.org/files/pub/lib/%tbz2 μ=Configure}
-argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
 attr=(){tag=2.5.1 src=https://download.savannah.nongnu.org/releases/%s/%tgz μ=Configure}
-c-ares=(){tag=1.18.1 src=https://c-ares.haxx.se/download/%tgz μ=Configure}
 elfutils=(){tag=0.186 src=https://sourceware.org/ftp/%s/$tag/%tbz2 μ=Configure flags=('disable-debuginfod')}
 expat=(){tag=2.4.6 src=https://prdownloads.sourceforge.net/%s/%txz μ=Configure}
 gdbm=(){tag=1.23 src=gnu:%tgz μ=Configure}
 gmp=(){tag=6.2.1 src=gnu:%txz μ=Configure}
 gperf=(){tag=3.1 src=gnu:%tgz μ=Configure}
-inih=(){tag=r53 src=gh:benhoyt/%s μ=Meson}
 json-c=(){tag=json-c-0.16-20220414 src=gh:%s/%s μ=CMake}
-libaio=(){tag=0.3.112 src='https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_0.3.112.orig.tar.xz' μ=GMake flags=('libdir='$LIBDIR)}
 libcap=(){tag=v1.2.62 src=kernel:libs/%s/%s μ=GMake flags=('LIBDIR='$LIBDIR)}
 libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools}
 libeudev=(){tag=v3.2.11 src=gh:eudev-project/eudev μ=Autotools}
-libevent=(){tag=master src=gh:%s/%s μ=Autotools}
 libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools}
 libffi=(){tag=v3.4.2 src=gh:%s/%s μ=Autotools flags=('disable-docs')}
-libfuse=(){tag=fuse-3.10.5 src=gh:%s/%s μ=Meson}
 libmnl=(){tag=1.0.4 src=netfilter:%s/%tbz2 μ=Configure}
 libnftnl=(){tag=1.2.1 src=netfilter:%s/%tbz2 μ=Configure}
-libnsl=(){tag=v2.0.0 src=gh:thkukuk/%s μ=Autotools}
-libpng=(){tag=1.6.37 src=https://downloads.sourceforge.net/%s/%txz μ=Configure}
 libpsl=(){tag=0.21.1 src=gh:rockdaboot/%s μ=Meson}
 libressl=(){tag=3.5.3 src=https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/%tgz μ=Configure}
 libsigsegv=(){tag=2.14 src=gnu:%tgz μ=Configure flags=('enable-shared')}
-libtiff=(){tag=v4.3.0 src=gitlab:%s/%s μ=Autotools}
-libtirpc=(){tag=1.3.2 src=https://downloads.sourceforge.net/%s/%tbz2 μ=Configure flags=('disable-gssapi')}
-libunistring=(){tag=1.0 src=gnu:%txz μ=Configure}
-libunwind=(){tag=v1.6.2 src=gh:%s/%s μ=Autotools}
-libusb=(){tag=v1.0.25 src=gh:%s/%s μ=Autotools}
-libuv=(){tag=v1.43.0 src=https://dist.libuv.org/dist/$tag/%tgz μ=Autotools}
 lvm=(){tag=2.03.15 src=https://sourceware.org/ftp/lvm2/LVM2.$tag.tgz μ=Configure}
+mpc=(){tag=1.2.1 src=gnu:%tgz μ=Configure}
+mpfr=(){tag=4.1.0 src=https://www.mpfr.org/%s-$tag/%txz μ=Configure}
 ncurses=(){tag=6.3 src=gnu:%tgz μ=Configure flags=('with-shared' 'without-normal' 'with-cxx=no' 'enable-pc-files' 'enable-widec' 'with-termlib=tinfo' 'without-manpages')}
 pcre2=(){tag=pcre2-10.39 src=gh:philiphazel/%s μ=Autotools flags=('enable-unicode' 'enable-jit' 'enable-pcre2-16' 'enable-pcre2-32')}
 pcre=(){tag=8.45 src=https://sourceforge.net/projects/pcre/files/pcre/$tag/%tbz2 μ=Autotools flags=('enable-unicode-properties' 'enable-pcre16' 'enable-pcre32')}
 pkg-config=(){tag=pkg-config-0.29.2 src=freedesktop:%s/%s μ=Autotools flags=('with-internal-glib')}
 popt=(){tag=1.18 src=http://ftp.rpm.org/popt/releases/%s-1.x/%tgz μ=Configure}
 readline=(){tag=8.1.2 src=gnu:%tgz μ=Configure}
-userspace-rcu=(){tag=0.13.1 src=https://lttng.org/files/urcu/%tbz2 μ=Configure}
 zlib=(){tag=v1.2.11 src=gh:madler/%s μ=Configure dirflags=('libdir'=$LIBDIR)}
+
+
+# needed?
+argon=(){tag=20190702 src=gh:P-H-C/phc-winner-argon2 μ=GMake flags=('LIBRARY_REL=lib64')}
+c-ares=(){tag=1.18.1 src=https://c-ares.haxx.se/download/%tgz μ=Configure}
+libaio=(){tag=0.3.112 src='https://ftp.debian.org/debian/pool/main/liba/libaio/libaio_0.3.112.orig.tar.xz' μ=GMake flags=('libdir='$LIBDIR)}
+libevent=(){tag=master src=gh:%s/%s μ=Autotools}
+libfuse=(){tag=fuse-3.10.5 src=gh:%s/%s μ=Meson}
+libusb=(){tag=v1.0.25 src=gh:%s/%s μ=Autotools}
+libunistring=(){tag=1.0 src=gnu:%txz μ=Configure}
+libunwind=(){tag=v1.6.2 src=gh:%s/%s μ=Autotools}
+libtirpc=(){tag=1.3.2 src=https://downloads.sourceforge.net/%s/%tbz2 μ=Configure flags=('disable-gssapi')}
+
+
+# cmake?
+libuv=(){tag=v1.43.0 src=https://dist.libuv.org/dist/$tag/%tgz μ=Autotools}
+libnsl=(){tag=v2.0.0 src=gh:thkukuk/%s μ=Autotools}
+
+# only xfs?
+inih=(){tag=r53 src=gh:benhoyt/%s μ=Meson}
+userspace-rcu=(){tag=0.13.1 src=https://lttng.org/files/urcu/%tbz2 μ=Configure}
+
+# images
+libpng=(){tag=1.6.37 src=https://downloads.sourceforge.net/%s/%txz μ=Configure}
+libtiff=(){tag=v4.3.0 src=gitlab:%s/%s μ=Autotools}
+libjpeg-turbo=(){tag=2.1.2 src=https://downloads.sourceforge.net/%s/%tgz μ=CMake}
+
+
 
 # extra
 ########
@@ -53,7 +68,6 @@ mtdev=(){tag=1.1.6 src=https://bitmath.org/code/%s/%tbz2 μ=Configure}
 pixman=(){tag=0.40.0 src=https://www.cairographics.org/releases/%tgz μ=Meson}
 freetype=(){tag=2.11.1 src=https://downloads.sourceforge.net/%s/%txz μ=Configure}
 fontconfig=(){tag=2.14.0 src=freedesktop:%s/%s μ=Meson}
-libjpeg-turbo=(){tag=2.1.2 src=https://downloads.sourceforge.net/%s/%tgz μ=CMake}
 libconfig=(){tag=v1.7.3 src=gh:hyperrealm/%s μ=Autotools}
 double-conversion=(){tag=v3.2.0 src=gh:google/%s μ=CMake flags=('BUILD_SHARED_LIBS=ON')}
 uthash=(){tag=v2.3.0 src=gh:troydhanson/%s μ=Headers}

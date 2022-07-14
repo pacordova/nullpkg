@@ -30,8 +30,6 @@ ninja=(){tag=v1.10.2 src=gh:ninja-build/%s μ=CMake}
 patch=(){tag=2.7.6 src=gnu:%txz μ=Configure}
 rc=(){tag=master src=gh:pacordova/rc μ=GMake}
 sed=(){tag=4.8 src=gnu:%txz μ=Configure}
-sharutils=(){tag=4.15.2 src=gnu:%txz μ=Configure}
-texinfo=(){tag=6.8 src=gnu:%txz μ=Configure}
 vim=(){tag=v9.0.0048 src=gh:%s/%s μ=Configure flags=('disable-gui' 'without-x' 'disable-nls' 'disable-canberra')}
 which=(){tag=2.21 src=gnu:%tgz μ=Configure}
 
@@ -57,9 +55,10 @@ meson=(){tag=0.61.5 src=gh:mesonbuild/%s μ=Python}
 ######
 btrfs-progs=(){tag=v5.16.2 src=gh:kdave/%s μ=Autotools flags=('disable-documentation' 'disable-python')}
 e2fsprogs=(){tag=v1.46.5 src=kernel:fs/ext2/%s μ=Configure flags=('enable-elf-shlibs')}
-inetutils=(){tag=2.2 src=gnu:%txz μ=Configure}
+iproute2=(){tag=v5.18.0 src=kernel:network/%s/%s μ=Configure}
 kmod=(){tag=v29 src=kernel:utils/kernel/%s/%s μ=Autotools flags=('disable-manpages')}
 procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%txz μ=Configure flags=('disable-kill' 'without-ncurses')}
+psmisc=(){tag=v23.4 src=gitlab:%s/%s μ=Autotools}
 rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
 shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
 sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/%s/%txz μ=GMake flags=(ROOT=$destdir)}

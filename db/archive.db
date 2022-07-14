@@ -344,3 +344,6 @@ mkfontscale=(){tag=1.2.1 }
 sessreg=(){tag=1.1.2 }
 
 xcursor-themes=(){tag=1.0.6 }
+
+# won't build
+kbd=(){tag=v2.4.0 src=gh:legionus/%s μ=Autotools flags=('disable-vlock' 'disable-tests' 'disable-nls')}

@@ -54,11 +54,6 @@ fn download {
     ##############
     cd /usr/nullpkg/cache
 
-    # download gcc prereqs
-    cd __gcc
-    ./contrib/download_prerequisites
-    cd ..
-
     # make missing directory for python-setuptools
     cd __python-setuptools
     mkdir -p build/scripts-3.9
@@ -69,14 +64,6 @@ fn download {
     cd __mandoc
     sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
     sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
-    cd ..
-
-    # sharutils
-    cd __sharutils
-    sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c
-    sed -i '/program_name/s/^/extern /' src/*opts.h
-    sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
-    echo '#define _IO_IN_BACKUP 0x100' >> lib/stdio-impl.h
     cd ..
 
     mkdir sources

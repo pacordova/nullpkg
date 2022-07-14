@@ -1,5 +1,7 @@
 #!/bin/rc
 
+. /etc/make.conf
+
 fn GMake {
     *=($MAKEOPTS 'PREFIX='$PREFIX 'MAKEINFO=true' 'path=' $*)
     make $* &&
@@ -155,7 +157,6 @@ fn __curl {
 }
 
 fn __query {
-    . /etc/make.conf
     tag=() && src=() && μ=() && flags=() && LIBS=()
     destdir=/usr/nullpkg/cache/__$1/__root
 

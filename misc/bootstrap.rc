@@ -134,7 +134,7 @@ fn yank {
 
     # not in groups
     mv glibc.tar.xz /usr/nullpkg/cache/new/lib
-    mv perl.tar.xz /usr/nullpkg/cache/base
+    mv perl.tar.xz /usr/nullpkg/cache/new/base
     mv python*.tar.xz /usr/nullpkg/cache/new/base
 }
 

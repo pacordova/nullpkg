@@ -42,12 +42,13 @@ fn __emerge {
 }
 
 
-fn download {
+fn snarf {
     nullpkg snarf $LIB
     nullpkg snarf $BASE
     nullpkg snarf $SYS
     nullpkg snarf python python-setuptools python-pip
-
+    /usr/nullpkg/misc/glibc.rc snarf
+    /usr/nullpkg/misc/perl.rc snarf
 
     ##############
     # misc fixes #
@@ -73,18 +74,21 @@ fn download {
     rm -rf sources/
 }
 
-fn prepare {
+fn bootstrap {
     cd /usr/nullpkg/cache/pass1
 
-    #################
-    # before chroot #
-    #################
-    # prepare the 1
-    mkdir -p $1
+    # create base system
+    tar -C $1 -xhf static/etc.tar.xz
+    tar -C $1 -xhf static/headers.tar.xz
 
-    # copy the static packages
-    for(f in (static/*.tar.xz))
-        tar -C $1 -xhf $f
+    # copy nullpkg
+    cp -r /usr/nullpkg $1/usr/nullpkg
+    cp sources.tar.xz $1/usr/nullpkg/cache/
+
+    # prepare cache
+    rm $1/usr/nullpkg/cache
+    mkdir $1/usr/nullpkg/cache
+    cp static/sources.tar.xz $1/usr/nullpkg/cache/
 
     # libs
     for(f in (lib/*.tar.xz))
@@ -93,18 +97,10 @@ fn prepare {
     # base
     for(f in (base/*.tar.xz))
         tar -C $1 -xhf $f
-
-    # copy over current version of nullpkg
-    cp -r /usr/nullpkg $1/usr/nullpkg
-
-    rm $1/usr/nullpkg/cache
-    mkdir $1/usr/nullpkg/cache
-
-    cp sources.tar.xz $1/usr/nullpkg/cache/
 }
 
 
-fn build {
+fn emerge {
     cd /usr/nullpkg/cache
 
     ldconfig && /usr/nullpkg/misc/locale.rc
@@ -112,35 +108,44 @@ fn build {
     tar -xhf sources.tar.xz
     mv sources/* .
 
-    __emerge python python-setuptools python-pip;
+    # custom buildscripts
+    /usr/nullpkg/misc/glibc.rc emerge
+    /usr/nullpkg/misc/perl.rc emerge
+
+    __emerge python python-setuptools python-pip
     sleep 3 &&
     python3 -m pip install meson &&
     python3 -m pip install docutils
+
 
     __emerge $LIB
     __emerge $BASE
     __emerge $SYS
 }
 
-fn copy {
+fn yank {
     cd /mnt/target/usr/nullpkg/cache
 
     mkdir -p /usr/nullpkg/cache/new/^(lib base sys)
 
+    # copy groups
     mv $LIB^.tar.xz /usr/nullpkg/cache/new/lib
     mv $BASE^.tar.xz /usr/nullpkg/cache/new/base
     mv $SYS^.tar.xz /usr/nullpkg/cache/new/sys
-    mv py*.tar.xz /usr/nullpkg/cache/new/base
+
+    # not in groups
+    mv glibc.tar.xz /usr/nullpkg/cache/new/lib
+    mv perl.tar.xz /usr/nullpkg/cache/base
+    mv python*.tar.xz /usr/nullpkg/cache/new/base
 }
 
-
 switch($1) {
-    case download
-        download
-    case prepare
-        prepare /mnt/target
-    case build
-        build
-    case copy
-        copy
+    case snarf
+        snarf
+    case emerge
+        emerge
+    case yank
+        yank
+    case *
+        bootstrap /mnt/target
 }

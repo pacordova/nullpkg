@@ -29,6 +29,10 @@ fn custom {
     cd ..
 }
 
-snarf glibc &&
-emerge glibc &&
-nullpkg -i /usr/nullpkg/cache/glibc.tar.xz
+switch($1) {
+    case snarf
+        snarf glibc
+    case emerge
+        emerge glibc  &&
+        nullpkg -i /usr/nullpkg/cache/glibc.tar.xz
+}

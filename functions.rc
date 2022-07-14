@@ -157,9 +157,15 @@ fn __curl {
 }
 
 fn __query {
-    tag=() && src=() && μ=() && flags=() && LIBS=()
     destdir=/usr/nullpkg/cache/__$1/__root
+    dirflags=( \
+        'localstatedir=/var' \
+        'sysconfdir=/etc' \
+        'libdir='$LIBDIR \
+        'disable-static' \
+    )
 
+    {tag=() src=() μ=() LIBS=() flags=()} &&
     eval `{cat $db | grep '^'$1=}
     if(~ $#src 0)
         echo 'Error: $src is not defined' && exit

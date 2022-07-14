@@ -13,8 +13,7 @@ fn Configure {
 }
 
 fn Autotools {
-    *=($flags $*)
-    >[2=] {sh autogen.sh $* || autoreconf -fi} &&
+    >[2=] {sh autogen.sh || autoreconf -fi} &&
     Configure $*
 }
 

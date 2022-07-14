@@ -20,7 +20,7 @@ libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools}
 libeudev=(){tag=v3.2.11 src=gh:eudev-project/eudev μ=Autotools}
 libevent=(){tag=master src=gh:%s/%s μ=Autotools}
 libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools}
-libffi=(){tag=v3.4.2 src=gh:%s/%s μ=Autotools}
+libffi=(){tag=v3.4.2 src=gh:%s/%s μ=Autotools flags=('disable-docs')}
 libfuse=(){tag=fuse-3.10.5 src=gh:%s/%s μ=Meson}
 libmnl=(){tag=1.0.4 src=netfilter:%s/%tbz2 μ=Configure}
 libnftnl=(){tag=1.2.1 src=netfilter:%s/%tbz2 μ=Configure}

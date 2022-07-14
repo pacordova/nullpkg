@@ -43,17 +43,14 @@ fn __emerge {
 
 
 fn snarf {
+    cd /usr/nullpkg/cache
+
     nullpkg snarf $LIB
     nullpkg snarf $BASE
     nullpkg snarf $SYS
     nullpkg snarf python python-setuptools python-pip
     /usr/nullpkg/misc/glibc.rc snarf
     /usr/nullpkg/misc/perl.rc snarf
-
-    ##############
-    # misc fixes #
-    ##############
-    cd /usr/nullpkg/cache
 
     # make missing directory for python-setuptools
     cd __python-setuptools

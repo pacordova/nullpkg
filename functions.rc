@@ -1,7 +1,7 @@
 #!/bin/rc
 
 fn GMake {
-    *=($MAKEOPTS 'PREFIX='$PREFIX 'path=' $*)
+    *=($MAKEOPTS 'PREFIX='$PREFIX 'MAKEINFO=true' 'path=' $*)
     make $* &&
     make install $* 'DESTDIR='$destdir
 }

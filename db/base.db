@@ -59,11 +59,10 @@ iproute2=(){tag=v5.18.0 src=kernel:network/%s/%s μ=Configure}
 kmod=(){tag=v29 src=kernel:utils/kernel/%s/%s μ=Autotools flags=('disable-manpages')}
 procps-ng=(){tag=3.3.17 src=https://sourceforge.net/projects/%s/files/Production/%txz μ=Configure flags=('disable-kill' 'without-ncurses')}
 psmisc=(){tag=v23.4 src=gitlab:%s/%s μ=Autotools}
-rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
 shadow=(){tag=v4.11.1 src=gh:shadow-maint/%s μ=Autotools flags=('without-nls')}
 sysvinit=(){tag=3.01 src=https://download.savannah.gnu.org/releases/%s/%txz μ=GMake flags=(ROOT=$destdir)}
 util-linux=(){tag=v2.37.4 src=kernel:utils/%s/%s μ=Autotools flags=('disable-chfn-chsh' 'disable-login' 'disable-nologin' 'disable-su' 'disable-setpriv' 'disable-runuser' 'disable-pylibmount' 'without-python' 'without-systemd' 'without-systemdsystemunitdir')}
-xfsprogs=(){tag=v5.14.2 src=kernel:fs/xfs/xfsprogs-dev μ=GMake}
+
 
 # extra
 ########
@@ -71,7 +70,7 @@ acpid=(){tag=2.0.33 src=https://downloads.sourceforge.net/acpid2/%txz μ=Configu
 cryptsetup=(){tag=v2.4.3 src=gitlab:%s/%s μ=Autotools flags=('disable-ssh-token')}
 dbus=(){tag=1.12.20 src=https://dbus.freedesktop.org/releases/%s/%tgz μ=Configure flags=('enable-user-session' 'with-systemduserunitdir=no' 'with-systemdsystemunitdir=no' 'with-console-auth-dir=/run/console' 'with-system-pid-file=/run/dbus/pid' 'with-system-socket=/run/dbus/system_bus_socket')}
 dosfstools=(){tag=v4.2 src=gh:%s/%s μ=Autotools}
-fcron=(){tag=3.2.1 src=http://fcron.free.fr/archives/%s-$tag.src.tar.gz μ=Configure flags=('without-sendmail')}
+#fcron=(){tag=3.2.1 src=http://fcron.free.fr/archives/%s-$tag.src.tar.gz μ=Configure flags=('without-sendmail')}
 lm-sensors=(){tag=V3-6-0 src=gh:%s/%s μ=GMake flags=('LIBDIR=/usr/lib64')}
 logrotate=(){tag=3.19.0 src=gh:%s/%s μ=Autotools}
 lua=(){tag=5.4.4 src=http://www.lua.org/ftp/%tgz μ=GMake flags=('INSTALL_TOP='$destdir/$PREFIX 'INSTALL_LIB=$(INSTALL_TOP)/lib64' 'INSTALL_CMOD=$(INSTALL_LIB)/lua/$V')}
@@ -85,9 +84,26 @@ sqlite=(){tag=3380400 src=https://sqlite.org/2022/%s-autoconf-$tag.tar.gz μ=Aut
 sudo=(){tag=1.9.9 src=https://www.sudo.ws/dist/%tgz μ=Configure}
 tcsh=(){tag=6.24.00 src=https://astron.com/pub/%s/%tgz μ=Configure}
 time=(){tag=1.9 src=gnu:%tgz μ=Configure}
-tmux=(){tag=3.2 src=gh:%s/%s μ=Autotools}
 wget=(){tag=1.21.2 src=gnu:%tgz μ=Configure flags=('with-ssl=openssl')}
 xorriso=(){tag=1.5.4 src=gnu:%tgz μ=Configure}
+
+# syslog
+#########
+libestr=(){tag=v0.1.11 src=gh:rsyslog/%s μ=Autotools}
+libfastjson=(){tag=v0.99.9 src=gh:rsyslog/%s μ=Autotools}
+rsyslog=(){tag=v8.2204.1 src=gh:%s/%s μ=Autotools flags=('disable-libgcrypt' 'disable-generate-man-pages')}
+
+# tmux
+#######
+libevent=(){tag=master src=gh:%s/%s μ=Autotools}
+tmux=(){tag=3.2 src=gh:%s/%s μ=Autotools}
+
+# xfs
+######
+inih=(){tag=r53 src=gh:benhoyt/%s μ=Meson}
+userspace-rcu=(){tag=0.13.1 src=https://lttng.org/files/urcu/%tbz2 μ=Configure}
+xfsprogs=(){tag=v5.14.2 src=kernel:fs/xfs/xfsprogs-dev μ=GMake}
+
 
 # connman
 ##########
@@ -110,3 +126,5 @@ ntbtls=(){tag=0.3.1 src=gpg:%tbz2 μ=Configure}
 npth=(){tag=1.6 src=gpg:%tbz2 μ=Configure}
 pinentry=(){tag=1.2.0 src=gpg:%tbz2 μ=Configure}
 gnupg=(){tag=2.3.6 src=gpg:%tbz2 μ=Configure}
+
+

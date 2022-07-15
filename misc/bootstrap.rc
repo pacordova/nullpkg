@@ -45,6 +45,8 @@ fn __emerge {
 fn snarf {
     cd /usr/nullpkg/cache
 
+    rm /usr/nullpkg/log.txt
+
     nullpkg snarf $LIB
     nullpkg snarf $BASE
     nullpkg snarf $SYS
@@ -65,10 +67,10 @@ fn snarf {
     cd ..
 
     mkdir sources
-    mv __* sources
+    mv __* /usr/nullpkg/log.txt sources
     tar -cf sources.tar sources
     xz -T0 sources.tar
-    rm -rf sources/
+    rm -rf sources
 }
 
 fn bootstrap {

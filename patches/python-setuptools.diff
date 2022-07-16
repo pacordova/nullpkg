@@ -1,0 +1,11 @@
+--- ./setup.py	2022-07-16 18:13:56.656792540 -0000
++++ ./setup.py	2022-07-16 18:13:48.466791910 -0000
+@@ -9,6 +9,8 @@
+
+ here = os.path.dirname(__file__)
+
++fix = os.path.join(here, 'build/scripts-3.10')
++os.mkdir(fix)
+
+ package_data = dict(
+     setuptools=['script (dev).tmpl', 'script.tmpl', 'site-patch.py'],

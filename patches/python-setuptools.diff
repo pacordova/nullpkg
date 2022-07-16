@@ -4,8 +4,8 @@
 
  here = os.path.dirname(__file__)
 
-+fix = os.path.join(here, 'build/scripts-3.10')
-+os.mkdir(fix)
++os.mkdir('build')
++os.mkdir('build/scripts-3.10')
 
  package_data = dict(
      setuptools=['script (dev).tmpl', 'script.tmpl', 'site-patch.py'],

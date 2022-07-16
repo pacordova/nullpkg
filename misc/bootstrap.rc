@@ -54,18 +54,6 @@ fn snarf {
     /usr/nullpkg/misc/glibc.rc snarf
     /usr/nullpkg/misc/perl.rc snarf
 
-    # make missing directory for python-setuptools
-    cd __python-setuptools
-    mkdir -p build/scripts-3.9
-    mkdir -p build/scripts-3.10
-    cd ..
-
-    # manually edit configure for mandoc
-    cd __mandoc
-    sed -i configure -e 's|PREFIX="/usr/local"|PREFIX="/usr"|g'
-    sed -i configure -e 's|LIBDIR=|LIBDIR=/usr/lib64|g'
-    cd ..
-
     mkdir sources
     mv __* /usr/nullpkg/log.txt sources
     tar -cf sources.tar sources

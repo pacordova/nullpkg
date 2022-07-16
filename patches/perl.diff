@@ -1,9 +1,3 @@
-Submitted By: Ryan Oliver <ryan(dot)oliver(at)pha(dot)com(dot)au>
-Date: 2005-10-20
-Initial Package Version: 5.8.7
-Origin: Ryan Oliver
-Description: this patch allows perl to be installed in /usr/lib32 or /usr/lib64 instead of /usr/lib.
-
 --- perl-5.8.7/Configure-ORIG	2005-10-20 11:49:47.571389008 +1000
 +++ perl-5.8.7/Configure	2005-10-20 12:30:35.571236464 +1000
 @@ -5930,6 +5930,8 @@
@@ -33,3 +27,14 @@ Description: this patch allows perl to be installed in /usr/lib32 or /usr/lib64 
  		*)	     dflt=$vendorprefix/lib/vendor_$prog/$version ;;
  		esac
  		;;
+--- ./Configure	2022-07-14 22:44:51.991440562 +0000
++++ ./Configure	2022-07-14 22:47:16.013451652 +0000
+@@ -3889,7 +3889,7 @@
+ . ./posthint.sh
+
+ : who configured the system
+-cf_time=`LC_ALL=C; LANGUAGE=C; export LC_ALL; export LANGUAGE; $date 2>&1`
++cf_time=`date -d @$SOURCE_DATE_EPOCH`
+ case "$cf_by" in
+ "")
+ 	cf_by=`(logname) 2>/dev/null`

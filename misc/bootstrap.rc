@@ -103,8 +103,7 @@ fn emerge {
 
     make -C /usr/nullpkg
 
-    ldconfig && /usr/nullpkg/misc/locale.rc
-
+    ldconfig
     tar -xhf sources.tar.xz
     mv sources/* .
 

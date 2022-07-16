@@ -79,11 +79,10 @@ fn Headers{
 
 fn __patch {
     builtin cd /usr/nullpkg/cache/__$1
-    patches=/usr/nullpkg/patches/$1.diff
+    patch=/usr/nullpkg/patches/$1.diff
 
-    if(test -f $patches(1))
-        for(p in $patches)
-            patch -p1 <$p
+    if(test -f $patch)
+        patch -p1 <$p
 
     true
 }

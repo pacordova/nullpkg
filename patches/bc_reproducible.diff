@@ -1,0 +1,11 @@
+--- ./configure.sh	2022-07-16 17:14:32.017518034 -0000
++++ ./configure.sh	2022-07-16 17:14:46.050519115 -0000
+@@ -413,7 +413,7 @@
+
+ 	fi
+
+-	_find_src_files_files=$(find "$scriptdir/src/" -depth -name "*.c" -print)
++	_find_src_files_files=$(find "$scriptdir/src/" -depth -name "*.c" -print | sort)
+
+ 	_find_src_files_result=""
+

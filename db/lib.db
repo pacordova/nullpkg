@@ -146,7 +146,7 @@ iceauth=(){tag=1.0.8 src=xorg:app/%tbz2 μ=Configure }
 x264=(){tag=master src='https://code.videolan.org/videolan/x264.git' μ=Configure flags=('enable-shared' 'disable-cli' 'bit-depth=10')}
 libass=(){tag=0.15.2 src=gh:%s/%s μ=Autotools}
 gstreamer=(){src=gh:GStreamer/gst-build μ=Meson}
-ffmpeg=(){tag=n4.4.1 src=gh:%s/%s μ=Configure flags=('libdir='$LIBDIR 'enable-shared' 'enable-libvpx' 'enable-gpl' 'enable-libx264')}
+ffmpeg=(){tag=n4.4.2 src=gh:%s/%s μ=Configure dirflags=('libdir='$LIBDIR 'disable-static') flags=('libdir='$LIBDIR 'enable-shared' 'enable-libvpx' 'enable-gpl' 'enable-libx264')}
 pipewire=(){tag=0.3.39 src=freedesktop:%s/%s μ=Meson}
 imlib2=(){tag=master src='https://downloads.sourceforge.net/enlightenment/imlib2-1.8.0.tar.xz' μ=Autotools}
 poppler=(){tag=poppler-22.02.0 src=freedesktop:poppler/%s μ=CMake flags=('ENABLE_QT5=OFF' 'ENABLE_BOOST=OFF')}

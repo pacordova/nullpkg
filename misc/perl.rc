@@ -5,8 +5,8 @@
 perl=(){tag=5.36.0 src=https://www.cpan.org/src/5.0/%tgz μ=custom}
 
 # override query
-fn __query {
-    destdir=/usr/nullpkg/cache/__$1/__root
+fn _query {
+    destdir=/usr/nullpkg/cache/$1
     dirflags=( \
         'localstatedir=/var' \
         'sysconfdir=/etc' \

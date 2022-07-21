@@ -7,7 +7,7 @@ cd /usr/src/linux
 # for reproducible builds
 make clean &&
 make mrproper &&
-cp __config .config
+cp config.orig .config
 
 make -j5 bzImage modules
 make modules_install

@@ -77,8 +77,8 @@ fn Headers{
     install -D include/* $*
 }
 
-fn __patch {
-    builtin cd /usr/nullpkg/cache/__$1
+fn _patch {
+    builtin cd /usr/nullpkg/cache/sources/$1
     *=(/usr/nullpkg/patches/$1.diff)
 
     if(test -f $1)
@@ -87,7 +87,7 @@ fn __patch {
     true
 }
 
-fn __makepkg {
+fn _makepkg {
     # remove / from arg
     *=`{echo $1 | sed 's|/$||g'}
 
@@ -115,7 +115,7 @@ fn __makepkg {
     xz -f -T0 $1.tar
 }
 
-fn __install {
+fn _install {
     if(! test -f $1)
         *=/usr/nullpkg/cache/$1.tar.xz
 
@@ -126,37 +126,37 @@ fn __install {
     ldconfig
 }
 
-fn __git {
+fn _git {
     git clone \
         -b $tag \
         --depth 1\
         --recurse-submodules \
         --shallow-submodules \
         $MAKEOPTS \
-        $src __$1
+        $src $1
 
     # log checksum
-    cd __$1
-    __hash=`{git rev-parse HEAD}
-    echo $__hash $1 >> /usr/nullpkg/log.txt
-    cd ..
+    builtin cd $1
+    _hash=`{git rev-parse HEAD}
+    echo $_hash $1 >> /usr/nullpkg/log.txt
+    builtin cd ..
 }
 
-fn __curl {
+fn _curl {
     curl --anyauth -LO $src
 
     # log checksum
     md5sum `{basename $src} >> /usr/nullpkg/log.txt
 
-    tar -C __$1 \
+    tar -C $1 \
         --strip-components 1 \
         -xf `{basename $src}
 
     rm `{basename $src}
 }
 
-fn __query {
-    destdir=/usr/nullpkg/cache/__$1/__root
+fn _query {
+    destdir=/usr/nullpkg/cache/$1
     dirflags=( \
         'localstatedir=/var' \
         'sysconfdir=/etc' \
@@ -171,11 +171,12 @@ fn __query {
 }
 
 fn snarf {
-    builtin cd /usr/nullpkg/cache
+    builtin cd /usr/nullpkg/cache/sources
 
-    __query $1
+    _query $1
 
-    rm -rf __$1 && mkdir -p __$1
+    rm -r $1
+    mkdir $1
 
     src=`{
         echo $src |
@@ -197,47 +198,46 @@ fn snarf {
     }
     switch($src) {
         case *git*
-            __git $1
+            _git $1
         case *
-            __curl $1
+            _curl $1
     }
 
-    chown -R root:root __$1
+    chown -R root:root $1
 
-    __patch $1
+    _patch $1
 
     true
 }
 
 fn emerge {
-    builtin cd /usr/nullpkg/cache/__$1
+    builtin cd /usr/nullpkg/cache/sources/$1
 
-    __query $1
+    _query $1
 
-    rm -rf $destdir &&
-    mkdir -p $destdir
+    rm -r $destdir &&
+    mkdir $destdir
 
     $(μ) $(flags) || exit
 
-    __makepkg $destdir &&
-    mv $destdir.tar.xz ../$1.tar.xz &&
+    _makepkg $destdir &&
+    rm -r $destdir
 }
 
 fn purge {
     builtin cd /usr/nullpkg
 
-    if(~ $#1 0)
-        echo 'Error: purge: missing arg' && exit
+    _query $1
 
     >[2=] {
         sort -r index/$1.txt | sed 's|^|rm -d ''|;s|$|''|g' | rc
-        rm -rf cache/__$1 index/$1.txt
+        rm -r cache/sources/$1 index/$1.txt
     }
 
     true
 }
 
-fn __chroot {
+fn _chroot {
     >[2=] {
         mkdir -p $1/dev $1/boot
         for(m in (dev boot sys proc)) {
@@ -249,7 +249,7 @@ fn __chroot {
     PS1='(chroot)# ' { chroot --user=root $1 }
 }
 
-fn __timesync {
+fn _timesync {
     >[2=] >[1=] {
         date +'%y-%m-%d %H:%M:%S' \
             -u -s `{

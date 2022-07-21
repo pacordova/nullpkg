@@ -31,7 +31,7 @@ SYS=( \
 )
 
 
-fn __emerge {
+fn _emerge {
     for(i in $*) {
         nullpkg emerge $i
         if(test -f /usr/nullpkg/cache/$i.tar.xz)
@@ -54,8 +54,7 @@ fn snarf {
     /usr/nullpkg/misc/glibc.rc snarf
     /usr/nullpkg/misc/perl.rc snarf
 
-    mkdir sources
-    mv __* /usr/nullpkg/log.txt sources
+    mv /usr/nullpkg/log.txt sources
     tar -cf sources.tar sources
     xz -T0 sources.tar
     rm -rf sources
@@ -102,15 +101,15 @@ fn emerge {
     /usr/nullpkg/misc/glibc.rc emerge
     /usr/nullpkg/misc/perl.rc emerge
 
-    __emerge python python-setuptools python-pip
+    _emerge python python-setuptools python-pip
     sleep 3 &&
     python3 -m pip install meson &&
     python3 -m pip install docutils
 
 
-    __emerge $LIB
-    __emerge $BASE
-    __emerge $SYS
+    _emerge $LIB
+    _emerge $BASE
+    _emerge $SYS
 }
 
 fn yank {

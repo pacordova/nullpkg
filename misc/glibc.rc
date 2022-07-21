@@ -5,8 +5,8 @@
 glibc=(){tag=2.35 src=gnu:%txz μ=custom}
 
 # override query
-fn __query {
-    destdir=/usr/nullpkg/cache/__$1/__root
+fn _query {
+    destdir=/usr/nullpkg/cache/$1
     dirflags=( \
         'localstatedir=/var' \
         'sysconfdir=/etc' \

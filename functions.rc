@@ -175,8 +175,10 @@ fn snarf {
 
     _query $1
 
-    rm -r $1
-    mkdir $1
+    >[2=] {
+        rm -r $1
+        mkdir $1
+    }
 
     src=`{
         echo $src |
@@ -213,9 +215,7 @@ fn snarf {
 fn emerge {
     builtin cd /usr/nullpkg/cache/sources/$1
 
-    _query $1
-
-    rm -r $destdir &&
+    _query $1 &&
     mkdir $destdir
 
     $(μ) $(flags) || exit

@@ -128,11 +128,10 @@ fn _install {
 
 fn _git {
     git clone \
-        -b $tag \
-        --depth 1\
+        --branch $tag \
+        --depth 1 \
         --recurse-submodules \
         --shallow-submodules \
-        $MAKEOPTS \
         $src $1
 
     # log checksum
@@ -143,7 +142,7 @@ fn _git {
 }
 
 fn _curl {
-    curl --anyauth -LO $src
+    curl -LO $src
 
     # log checksum
     md5sum `{basename $src} >> /usr/nullpkg/log.txt

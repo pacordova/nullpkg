@@ -91,7 +91,6 @@ fn emerge {
 
     ldconfig
     tar -xhf sources.tar.xz
-    mv sources/* .
 
     # tag build start time
     touch /usr/nullpkg/cache/start.tar.xz

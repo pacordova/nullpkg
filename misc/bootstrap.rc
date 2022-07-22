@@ -57,11 +57,10 @@ fn snarf {
     mv /usr/nullpkg/log.txt sources
     tar -cf sources.tar sources
     xz -T0 sources.tar
-    rm -rf sources
 }
 
 fn bootstrap {
-    cd /usr/nullpkg/cache/pass1
+    cd /usr/nullpkg/cache/orig
 
     # create base system
     tar -C $1 -xhf static/etc.tar.xz

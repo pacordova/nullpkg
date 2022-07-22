@@ -106,33 +106,39 @@ fn _makepkg {
         rc
     }
 
-    tar -C $1 \
-        --transform 's,^\./,/,' \
+    tar --create \
+        --file $1.tar.xz \
+        --absolute-names \
+        --transform 's|'$1'||' \
         --mtime @$SOURCE_DATE_EPOCH \
-        --sort=name \
-        -cf $1.tar .
+        --sort name \
+        --xz \
+        $1/*
 
-    xz -f -T0 $1.tar
 }
 
 fn _install {
     if(! test -f $1)
         *=/usr/nullpkg/cache/$1.tar.xz
 
-    tar -C / \
-        --index-file /usr/nullpkg/index/`{basename $1 .tar.xz}.txt \
-        -xvhf $1
+    basename=`{basename $1 .tar.xz}
+
+    tar --absolute-names \
+        --extract \
+        --verbose \
+        --dereference \
+        --file $1 \
+        --index-file /usr/nullpkg/index/$basename.txt
 
     ldconfig
 }
 
 fn _git {
-    git clone \
+    git clone $src $1 \
         --branch $tag \
         --depth 1 \
         --recurse-submodules \
-        --shallow-submodules \
-        $src $1
+        --shallow-submodules
 
     # log checksum
     builtin cd $1
@@ -142,16 +148,18 @@ fn _git {
 }
 
 fn _curl {
+    basename=`{basename $src}
+
     curl -LO $src
 
-    # log checksum
-    md5sum `{basename $src} >> /usr/nullpkg/log.txt
+    md5sum $basename >> /usr/nullpkg/log.txt
 
-    tar -C $1 \
-        --strip-components 1 \
-        -xf `{basename $src}
+    tar --directory $1 \
+        --extract \
+        --file $basename \
+        --strip-components 1
 
-    rm `{basename $src}
+    rm $basename
 }
 
 fn _query {
@@ -250,11 +258,8 @@ fn _chroot {
 
 fn _timesync {
     >[2=] >[1=] {
-        date +'%y-%m-%d %H:%M:%S' \
-            -u -s `{
-                nc time.nist.gov 13 |
-                awk 'NR>1 {print $2 " " $3}'
-            }
+        date=`{ nc time.nist.gov 13 | awk 'NR>1 {print $2 " " $3}' }
+        date +'%y-%m-%d %H:%M:%S' -u -s $date
         hwclock --systohc
     }
 }
